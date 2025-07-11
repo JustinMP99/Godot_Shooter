@@ -1,9 +1,89 @@
-[gd_scene format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=6 format=3 uid="uid://b7eyggjoqoow4"]
+
+[ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Managers/SceneManager.cs" id="1_2yd7s"]
+[ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/Managers/UIManager.cs" id="2_xj7ar"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m0h58"]
+font_size = 37
+
+[sub_resource type="LabelSettings" id="LabelSettings_2yd7s"]
+font_size = 26
+
+[sub_resource type="Environment" id="Environment_2yd7s"]
+background_mode = 1
+background_color = Color(0.390101, 0.577969, 0.710765, 1)
 
 [node name="Main Scene" type="Node"]
 
 [node name="=== MANAGERS ===" type="Node" parent="."]
 
+[node name="Scene Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("UIManager")]
+script = ExtResource("1_2yd7s")
+UIManager = NodePath("../UI Manager")
+
+[node name="UI Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("mainUIGroup", "gameUIGroup", "startGameButton", "quitGameButton")]
+script = ExtResource("2_xj7ar")
+mainUIGroup = NodePath("../../=== UI ===/--- main ---")
+gameUIGroup = NodePath("../../=== UI ===/--- game ---")
+startGameButton = NodePath("../../=== UI ===/--- main ---/Start Button")
+quitGameButton = NodePath("../../=== UI ===/--- main ---/Quit Button")
+
 [node name="=== UI ===" type="Node" parent="."]
 
+[node name="--- main ---" type="CanvasGroup" parent="=== UI ==="]
+
+[node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
+anchors_preset = -1
+offset_left = 192.0
+offset_top = 32.0
+offset_right = 452.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Godot Shooter"
+label_settings = SubResource("LabelSettings_m0h58")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="=== UI ===/--- main ---"]
+offset_left = 72.0
+offset_top = 448.0
+offset_right = 568.0
+offset_bottom = 471.0
+text = "Micro game created by Justin Philie"
+horizontal_alignment = 1
+
+[node name="Start Button" type="Button" parent="=== UI ===/--- main ---"]
+offset_left = 240.0
+offset_top = 208.0
+offset_right = 392.0
+offset_bottom = 240.0
+text = "Start"
+
+[node name="Quit Button" type="Button" parent="=== UI ===/--- main ---"]
+offset_left = 240.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 296.0
+text = "Quit"
+
+[node name="--- game ---" type="CanvasGroup" parent="=== UI ==="]
+visible = false
+
+[node name="Score Label" type="Label" parent="=== UI ===/--- game ---"]
+offset_right = 184.0
+offset_bottom = 48.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_2yd7s")
+vertical_alignment = 1
+
 [node name="=== LEVEL ===" type="Node" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="=== LEVEL ==="]
+transform = Transform3D(1, 0, 0, 0, 0.805649, 0.592393, 0, -0.592393, 0.805649, 0, 4.34029, 0.911611)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="=== LEVEL ==="]
+environment = SubResource("Environment_2yd7s")
+
+[connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGERS ===/Scene Manager" method="StartGameFunction"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGERS ===/Scene Manager" method="QuitGameFunction"]
