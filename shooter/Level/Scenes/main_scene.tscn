@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b7eyggjoqoow4"]
+
+[node name="Main Scene" type="Node"]
+
+[node name="=== MANAGERS ===" type="Node" parent="."]
+
+[node name="=== UI ===" type="Node" parent="."]
+
+[node name="=== LEVEL ===" type="Node" parent="."]

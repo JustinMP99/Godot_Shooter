@@ -14,7 +14,7 @@ config/name="Godot Shooter"
 config/description="A simple top-down shooter made in the Godot engine "
 config/version="0.0.1"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Art/Sprites/icon.svg"
 
 [display]
 
@@ -24,3 +24,11 @@ window/size/viewport_height=480
 [dotnet]
 
 project/assembly_name="Shooter"
+
+[file_customization]
+
+folder_colors={
+"res://Art/": "red",
+"res://Code/": "green",
+"res://Level/": "blue"
+}
