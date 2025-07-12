@@ -4,6 +4,8 @@ using System;
 public partial class SceneManager
 {
 
+    #region Main UI Button Functions
+
     public void StartGameFunction()
     {
         
@@ -39,6 +41,50 @@ public partial class SceneManager
     {
         GetTree().Quit();
     }
+
+    #endregion
+
+    #region Game UI Button Functions
+
+    
+
+    #endregion
+
+    #region Pause UI Button Functions
+    
+    private void Pause_ResumeButtonFunction()
+    {
+        
+        //Set UI States
+        UIManager.SetPauseUIState(false);
+        UIManager.SetGameUIState(true);
+        gamePaused = false;
+
+    }
+
+    private void Pause_QuitButtonFunction()
+    {
+        
+        //Destroy Player Object
+        player.QueueFree();
+        
+        //Destroy all enemies
+        
+        //Set UI States
+        UIManager.SetPauseUIState(false);
+        UIManager.SetMainUIState(true);
+        
+        //Reset game data
+        gamePaused = false;
+        score = 0;
+
+    }
+    
+    
+    #endregion
+    
+    
+
 
 
 }

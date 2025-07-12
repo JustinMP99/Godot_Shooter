@@ -22,8 +22,13 @@ public partial class SceneManager : Node
 
     public void ActivatePause()
     {
+        
         UIManager.SetGameUIState(false);
+        
         UIManager.SetPauseUIState(true);
+
+        gamePaused = true;
+
     }
     
 }

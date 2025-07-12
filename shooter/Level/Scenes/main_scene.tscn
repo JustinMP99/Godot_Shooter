@@ -42,7 +42,6 @@ scoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
-anchors_preset = -1
 offset_left = 192.0
 offset_top = 32.0
 offset_right = 452.0
@@ -122,3 +121,5 @@ environment = SubResource("Environment_2yd7s")
 
 [connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGERS ===/Scene Manager" method="StartGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGERS ===/Scene Manager" method="QuitGameFunction"]
+[connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGERS ===/Scene Manager" method="Pause_ResumeButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGERS ===/Scene Manager" method="Pause_QuitButtonFunction"]
