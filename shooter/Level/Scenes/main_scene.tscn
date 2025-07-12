@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=9 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Managers/SceneManager.cs" id="1_2yd7s"]
+[ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/Managers/UIManager.cs" id="2_xj7ar"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m0h58"]
 font_size = 37
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2yd7s"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xj7ar"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2yd7s"]
 font_size = 26
@@ -17,20 +22,24 @@ background_color = Color(0.390101, 0.577969, 0.710765, 1)
 
 [node name="=== MANAGERS ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("UIManager")]
+[node name="Scene Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("UIManager", "levelNode")]
 script = ExtResource("1_2yd7s")
 UIManager = NodePath("../UI Manager")
+playerScene = ExtResource("2_73044")
+levelNode = NodePath("../../=== LEVEL ===")
 
-[node name="UI Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("mainUIGroup", "gameUIGroup", "startGameButton", "quitGameButton")]
+[node name="UI Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("mainUIGroup", "pauseUIGroup", "gameUIGroup", "main_StartGameButton", "main_QuitGameButton", "scoreLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
+pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
-startGameButton = NodePath("../../=== UI ===/--- main ---/Start Button")
-quitGameButton = NodePath("../../=== UI ===/--- main ---/Quit Button")
+main_StartGameButton = NodePath("../../=== UI ===/--- main ---/Start Button")
+main_QuitGameButton = NodePath("../../=== UI ===/--- main ---/Quit Button")
+scoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
 
 [node name="=== UI ===" type="Node" parent="."]
 
-[node name="--- main ---" type="CanvasGroup" parent="=== UI ==="]
+[node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
 anchors_preset = -1
@@ -67,7 +76,33 @@ offset_right = 392.0
 offset_bottom = 296.0
 text = "Quit"
 
-[node name="--- game ---" type="CanvasGroup" parent="=== UI ==="]
+[node name="--- pause ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
+
+[node name="Background" type="Sprite2D" parent="=== UI ===/--- pause ---"]
+material = SubResource("CanvasItemMaterial_2yd7s")
+position = Vector2(328, 241.4)
+rotation = 3.14159
+scale = Vector2(197.529, -114.796)
+texture = SubResource("PlaceholderTexture2D_xj7ar")
+
+[node name="Resume Button" type="Button" parent="=== UI ===/--- pause ---"]
+offset_left = 288.0
+offset_top = 200.0
+offset_right = 368.0
+offset_bottom = 231.0
+text = "Resume
+"
+
+[node name="Quit Button" type="Button" parent="=== UI ===/--- pause ---"]
+offset_left = 304.0
+offset_top = 248.0
+offset_right = 352.0
+offset_bottom = 279.0
+size_flags_horizontal = 0
+text = "Quit"
+
+[node name="--- game ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
 
 [node name="Score Label" type="Label" parent="=== UI ===/--- game ---"]
