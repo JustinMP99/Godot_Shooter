@@ -22,7 +22,9 @@ public partial class SceneManager
         //Create Player
         player = playerScene.Instantiate() as PlayerController;
         levelNode.AddChild(player);
-        player.Position = new Vector3(0.0f, 0.0f, 0.0f);
+        player.Position = startPosition.Position;
+        player.SetTakingInput(true);
+        player.SetSpeed(8.0f);
 
         if (player == null)
         {
@@ -45,8 +47,6 @@ public partial class SceneManager
     #endregion
 
     #region Game UI Button Functions
-
-    
 
     #endregion
 
@@ -80,11 +80,6 @@ public partial class SceneManager
 
     }
     
-    
     #endregion
     
-    
-
-
-
 }

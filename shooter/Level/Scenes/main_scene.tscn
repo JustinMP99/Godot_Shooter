@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=11 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Managers/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
@@ -16,17 +16,24 @@ font_size = 26
 
 [sub_resource type="Environment" id="Environment_2yd7s"]
 background_mode = 1
-background_color = Color(0.390101, 0.577969, 0.710765, 1)
+background_color = Color(0.611061, 0.759814, 0.868551, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xj7ar"]
+size = Vector3(1, 8.05054, 27.311)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_73044"]
+size = Vector3(15.0112, 8.05481, 1)
 
 [node name="Main Scene" type="Node"]
 
 [node name="=== MANAGERS ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("UIManager", "levelNode")]
+[node name="Scene Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("UIManager", "levelNode", "startPosition")]
 script = ExtResource("1_2yd7s")
 UIManager = NodePath("../UI Manager")
 playerScene = ExtResource("2_73044")
 levelNode = NodePath("../../=== LEVEL ===")
+startPosition = NodePath("../../=== LEVEL ===/Start Position")
 
 [node name="UI Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("mainUIGroup", "pauseUIGroup", "gameUIGroup", "main_StartGameButton", "main_QuitGameButton", "scoreLabel")]
 script = ExtResource("2_xj7ar")
@@ -114,10 +121,28 @@ vertical_alignment = 1
 [node name="=== LEVEL ===" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="=== LEVEL ==="]
-transform = Transform3D(1, 0, 0, 0, 0.805649, 0.592393, 0, -0.592393, 0.805649, 0, 4.34029, 0.911611)
+transform = Transform3D(1, 0, 0, 0, 0.805649, 0.592393, 0, -0.592393, 0.805649, 0, 6, 5)
+fov = 90.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="=== LEVEL ==="]
 environment = SubResource("Environment_2yd7s")
+
+[node name="Start Position" type="Node3D" parent="=== LEVEL ==="]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.43426)
+
+[node name="World Colliders" type="StaticBody3D" parent="=== LEVEL ==="]
+
+[node name="Right Wall" type="CollisionShape3D" parent="=== LEVEL ===/World Colliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.576782, -6.68945)
+shape = SubResource("BoxShape3D_xj7ar")
+
+[node name="Left Wall" type="CollisionShape3D" parent="=== LEVEL ===/World Colliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.577, -6.689)
+shape = SubResource("BoxShape3D_xj7ar")
+
+[node name="Back Wall" type="CollisionShape3D" parent="=== LEVEL ===/World Colliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00558472, 0.57462, 5.26506)
+shape = SubResource("BoxShape3D_73044")
 
 [connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGERS ===/Scene Manager" method="StartGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGERS ===/Scene Manager" method="QuitGameFunction"]

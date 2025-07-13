@@ -8,6 +8,8 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_n220g")
+speed = 8.0
+takingInput = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_mprxd")
