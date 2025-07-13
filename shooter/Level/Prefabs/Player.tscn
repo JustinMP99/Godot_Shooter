@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyraxlfot6oqf"]
+[gd_scene load_steps=6 format=3 uid="uid://dyraxlfot6oqf"]
 
 [ext_resource type="Script" uid="uid://6q2aq0nj86e3" path="res://Code/Scripts/PlayerController.cs" id="1_n220g"]
 [ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/Bullet.tscn" id="2_1gt8s"]
@@ -7,6 +7,8 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_n220g"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletPosition")]
 collision_mask = 10
 script = ExtResource("1_n220g")
@@ -14,6 +16,8 @@ speed = 8.0
 takingInput = true
 bulletPosition = NodePath("Bullet Position")
 bulletPrefab = ExtResource("2_1gt8s")
+currentHealth = 100
+maxHealth = 100
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_mprxd")
@@ -23,3 +27,11 @@ mesh = SubResource("BoxMesh_n220g")
 
 [node name="Bullet Position" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05704)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_1gt8s")
+
+[connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]

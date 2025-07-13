@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=15 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Managers/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/Managers/UIManager.cs" id="2_xj7ar"]
+[ext_resource type="Script" uid="uid://cywkt1mp5oa0w" path="res://Code/Scripts/EnemySpawner.cs" id="4_73044"]
+[ext_resource type="PackedScene" uid="uid://cbok5qannybiy" path="res://Level/Prefabs/Enemy.tscn" id="5_y7ox6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m0h58"]
 font_size = 37
@@ -14,6 +16,9 @@ font_size = 37
 [sub_resource type="LabelSettings" id="LabelSettings_2yd7s"]
 font_size = 26
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xj7ar"]
+bg_color = Color(0, 0.698039, 0, 1)
+
 [sub_resource type="Environment" id="Environment_2yd7s"]
 background_mode = 1
 background_color = Color(0.611061, 0.759814, 0.868551, 1)
@@ -24,18 +29,26 @@ size = Vector3(1, 8.05054, 27.311)
 [sub_resource type="BoxShape3D" id="BoxShape3D_73044"]
 size = Vector3(15.0112, 8.05481, 1)
 
+[sub_resource type="Curve3D" id="Curve3D_xj7ar"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
 [node name="Main Scene" type="Node"]
 
-[node name="=== MANAGERS ===" type="Node" parent="."]
+[node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("UIManager", "levelNode", "startPosition")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("UIManager", "enemySpawner", "levelNode", "startPosition")]
 script = ExtResource("1_2yd7s")
 UIManager = NodePath("../UI Manager")
+enemySpawner = NodePath("../Enemy Spawner")
 playerScene = ExtResource("2_73044")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 
-[node name="UI Manager" type="Node" parent="=== MANAGERS ===" node_paths=PackedStringArray("mainUIGroup", "pauseUIGroup", "gameUIGroup", "main_StartGameButton", "main_QuitGameButton", "scoreLabel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "pauseUIGroup", "gameUIGroup", "main_StartGameButton", "main_QuitGameButton", "scoreLabel", "healthBar")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
@@ -43,6 +56,16 @@ gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 main_StartGameButton = NodePath("../../=== UI ===/--- main ---/Start Button")
 main_QuitGameButton = NodePath("../../=== UI ===/--- main ---/Quit Button")
 scoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
+healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
+
+[node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
+script = ExtResource("4_73044")
+spawnTimer = NodePath("Timer")
+enemyPrefab = ExtResource("5_y7ox6")
+enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
+
+[node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
+wait_time = 0.5
 
 [node name="=== UI ===" type="Node" parent="."]
 
@@ -60,12 +83,20 @@ label_settings = SubResource("LabelSettings_m0h58")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="=== UI ===/--- main ---"]
+[node name="Sub-title Label" type="Label" parent="=== UI ===/--- main ---"]
 offset_left = 72.0
 offset_top = 448.0
 offset_right = 568.0
 offset_bottom = 471.0
 text = "Micro game created by Justin Philie"
+horizontal_alignment = 1
+
+[node name="Sub-title Label2" type="Label" parent="=== UI ===/--- main ---"]
+offset_left = 184.0
+offset_top = 328.0
+offset_right = 455.0
+offset_bottom = 376.0
+text = "Credits: 0"
 horizontal_alignment = 1
 
 [node name="Start Button" type="Button" parent="=== UI ===/--- main ---"]
@@ -118,6 +149,24 @@ text = "Score: 0"
 label_settings = SubResource("LabelSettings_2yd7s")
 vertical_alignment = 1
 
+[node name="Health Bar" type="ProgressBar" parent="=== UI ===/--- game ---"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_bottom = 27.0
+grow_horizontal = 0
+tooltip_text = "
+"
+theme_override_styles/fill = SubResource("StyleBoxFlat_xj7ar")
+show_percentage = false
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="=== UI ===/--- game ---"]
+offset_left = 160.0
+offset_top = 104.0
+offset_right = 368.0
+offset_bottom = 144.0
+
 [node name="=== LEVEL ===" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="=== LEVEL ==="]
@@ -131,6 +180,7 @@ environment = SubResource("Environment_2yd7s")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.43426)
 
 [node name="World Colliders" type="StaticBody3D" parent="=== LEVEL ==="]
+collision_layer = 8
 
 [node name="Right Wall" type="CollisionShape3D" parent="=== LEVEL ===/World Colliders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.576782, -6.68945)
@@ -141,10 +191,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.577, -6.689)
 shape = SubResource("BoxShape3D_xj7ar")
 
 [node name="Back Wall" type="CollisionShape3D" parent="=== LEVEL ===/World Colliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00558472, 0.57462, 5.26506)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00558472, 0.57462, 6.18657)
 shape = SubResource("BoxShape3D_73044")
 
-[connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGERS ===/Scene Manager" method="StartGameFunction"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGERS ===/Scene Manager" method="QuitGameFunction"]
-[connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGERS ===/Scene Manager" method="Pause_ResumeButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGERS ===/Scene Manager" method="Pause_QuitButtonFunction"]
+[node name="Enemy Spawn Path" type="Path3D" parent="=== LEVEL ==="]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -36.741)
+curve = SubResource("Curve3D_xj7ar")
+
+[node name="Enemy Container" type="Node3D" parent="=== LEVEL ==="]
+
+[connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="StartGameFunction"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="QuitGameFunction"]
+[connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]

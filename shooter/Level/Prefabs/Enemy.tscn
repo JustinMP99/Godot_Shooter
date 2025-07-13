@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbok5qannybiy"]
+
+[ext_resource type="Script" uid="uid://qtihgjyqwxdg" path="res://Code/Scripts/EnemyController.cs" id="1_npp7k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pbibn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_npp7k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npp7k"]
+
+[node name="Enemy" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 5
+freeze = true
+script = ExtResource("1_npp7k")
+speed = 8.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_pbibn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_npp7k")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_npp7k")

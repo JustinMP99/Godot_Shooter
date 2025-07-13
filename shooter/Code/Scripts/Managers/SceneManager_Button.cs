@@ -25,7 +25,8 @@ public partial class SceneManager
         player.Position = startPosition.Position;
         player.SetTakingInput(true);
         player.SetSpeed(8.0f);
-
+        
+        
         if (player == null)
         {
             GD.Print("Player is null");
@@ -33,9 +34,16 @@ public partial class SceneManager
         
         //Assign Signal Functions
         player.PauseSignal += ActivatePause;
+        //player.PlayerHit += UpdateGameUI;
+        
 
-
+        //Set UI Data
+        UIManager.SetHealthBarCurrent(player.GetCurrentHealth());
+        UIManager.SetHealthBarMax(player.GetMaxHealth());
+        
+        
         //Start Timer
+        enemySpawner.StartTimer();
 
     }
 

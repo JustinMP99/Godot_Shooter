@@ -18,6 +18,7 @@ public partial class UIManager : Node
     
     [ExportCategory("Game UI")] 
     [Export] private Label scoreLabel;
+    [Export] private ProgressBar healthBar;
     
     public override void _Ready()
     {
@@ -28,8 +29,9 @@ public partial class UIManager : Node
     {
         scoreLabel.Text = "Score: " + newScore.ToString();
     }
-    
-    
+
+    #region UI States
+
     public void SetMainUIState(bool state)
     {
         mainUIGroup.Visible = state;
@@ -44,5 +46,29 @@ public partial class UIManager : Node
     {
         gameUIGroup.Visible = state;
     }
+
+    #endregion
+
+    #region Getter
+
+    
+    
+
+    #endregion
+
+    #region Setter
+
+    public void SetHealthBarMax(int newMax)
+    {
+        healthBar.MaxValue = newMax;
+    }
+
+    public void SetHealthBarCurrent(int newCurrent)
+    {
+        healthBar.Value = newCurrent;
+    }
+
+    #endregion
+    
     
 }
