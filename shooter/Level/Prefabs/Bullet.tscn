@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://fdrgiae10hx8"]
+
+[ext_resource type="Script" uid="uid://b1yrkfdj44jly" path="res://Code/Scripts/Bullet.cs" id="1_gsyx3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hjwt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gsyx3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsyx3"]
+
+[node name="Bullet" type="RigidBody3D"]
+collision_mask = 4
+freeze = true
+script = ExtResource("1_gsyx3")
+maxLifetime = 55.0
+speed = 8.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_7hjwt")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_gsyx3")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+shape = SubResource("BoxShape3D_gsyx3")

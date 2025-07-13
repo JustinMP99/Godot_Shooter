@@ -59,6 +59,11 @@ public partial class PlayerController : CharacterBody3D
             {
                 direction.X += 1.0f;
             }
+
+            if (Input.IsActionJustPressed("Shoot"))
+            {
+                ShootFunction();
+            }
             
 
             if (direction !=  Vector3.Zero)
@@ -84,6 +89,22 @@ public partial class PlayerController : CharacterBody3D
         GD.Print("Emitting Pause Signal");
         //Emit Signal
         EmitSignal(SignalName.PauseSignal);
+
+    }
+
+    private void ShootFunction()
+    {
+        
+        GD.Print("Shooting");
+        //Instantiate Bullet
+        RigidBody3D bullet = bulletPrefab.Instantiate() as RigidBody3D;
+        
+        //Set Child
+        
+        //Set Position
+        bullet.Position = bulletPosition.GlobalPosition;
+        
+        GetTree().Root.AddChild(bullet);
 
     }
 

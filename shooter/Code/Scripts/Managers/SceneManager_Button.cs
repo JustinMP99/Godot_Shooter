@@ -59,6 +59,7 @@ public partial class SceneManager
         UIManager.SetPauseUIState(false);
         UIManager.SetGameUIState(true);
         gamePaused = false;
+        player.SetTakingInput(true);
 
     }
 

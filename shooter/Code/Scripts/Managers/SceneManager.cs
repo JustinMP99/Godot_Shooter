@@ -32,6 +32,8 @@ public partial class SceneManager : Node
         UIManager.SetPauseUIState(true);
 
         gamePaused = true;
+        
+        player.SetTakingInput(false);
 
     }
     
