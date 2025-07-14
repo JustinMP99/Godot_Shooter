@@ -83,14 +83,15 @@ public partial class PlayerController : CharacterBody3D
             {
                 
                 direction = direction.Normalized();
-
-                targetVelocity.X = direction.X * speed;
-                targetVelocity.Z = direction.Z * speed;
-
-                Velocity = targetVelocity;
-                MoveAndSlide();
-
+                
             }
+            
+            targetVelocity.X = direction.X * speed;
+            targetVelocity.Z = direction.Z * speed;
+
+            Velocity = targetVelocity;
+            
+            MoveAndSlide();
             
         }
         

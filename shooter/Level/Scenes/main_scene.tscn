@@ -71,6 +71,7 @@ script = ExtResource("4_73044")
 spawnTimer = NodePath("Timer")
 enemyPrefab = ExtResource("5_y7ox6")
 enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
+desiredEnemies = 150
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
 wait_time = 0.5

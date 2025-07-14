@@ -28,6 +28,9 @@ public partial class SceneManager : Node
         UIManager.SetPauseUIState(false);
         UIManager.SetGameUIState(false);
         UIManager.SetResultUIState(false);
+        
+        //Spawner Startup
+        enemySpawner.Startup();
 
     }
 
