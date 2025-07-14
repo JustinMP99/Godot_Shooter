@@ -53,18 +53,18 @@ playerScene = ExtResource("2_73044")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "main_CreditsLabel", "resultUIGroup", "result_ScoreLabel", "result_CreditsEarnedLabel", "result_TotalCreditsLabel", "pauseUIGroup", "gameUIGroup", "game_ScoreLabel", "healthBar")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "game_ScoreLabel", "healthBar", "mainUIGroup", "main_CreditsLabel", "pauseUIGroup", "resultUIGroup", "result_ScoreLabel", "result_CreditsEarnedLabel", "result_TotalCreditsLabel")]
 script = ExtResource("2_xj7ar")
+gameUIGroup = NodePath("../../=== UI ===/--- game ---")
+game_ScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
+healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 main_CreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
+pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
 resultUIGroup = NodePath("../../=== UI ===/--- result ---")
 result_ScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
 result_CreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
 result_TotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
-pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
-gameUIGroup = NodePath("../../=== UI ===/--- game ---")
-game_ScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
-healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
@@ -78,6 +78,7 @@ wait_time = 0.5
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
 offset_left = 192.0
@@ -176,6 +177,7 @@ offset_right = 368.0
 offset_bottom = 144.0
 
 [node name="--- result ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 
 [node name="Game Over Title" type="Label" parent="=== UI ===/--- result ---"]
 anchors_preset = 5
