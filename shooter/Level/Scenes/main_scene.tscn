@@ -26,7 +26,8 @@ font_size = 56
 
 [sub_resource type="Environment" id="Environment_2yd7s"]
 background_mode = 1
-background_color = Color(0.611061, 0.759814, 0.868551, 1)
+background_color = Color(0.733005, 0.733005, 0.733005, 1)
+ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xj7ar"]
 size = Vector3(1, 8.05054, 27.311)
@@ -71,7 +72,7 @@ script = ExtResource("4_73044")
 spawnTimer = NodePath("Timer")
 enemyPrefab = ExtResource("5_y7ox6")
 enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
-desiredEnemies = 150
+desiredEnemies = 200
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
 wait_time = 0.5

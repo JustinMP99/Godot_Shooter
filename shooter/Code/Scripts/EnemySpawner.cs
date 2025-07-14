@@ -38,10 +38,14 @@ public partial class EnemySpawner : Node
         GD.Print("Spawning Enemy!");
         
         //Setup the pooled enemy
-        enemyList[currentListIter].SetProcess(true);
-        enemyList[currentListIter].Visible = true;
-        enemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
+        if (!enemyList[currentListIter].GetNode<EnemyController>("res://Code/Scripts/EnemyController.cs").GetIsActive())
+        {
+            GD.Print("Enemy Not Active!");
+            //enemyList[currentListIter].SetProcess(true);
+            //enemyList[currentListIter].Visible = true;
+            //enemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
         
+        }
         
         currentListIter++;
         if (currentListIter <= maxListIter)

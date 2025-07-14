@@ -30,7 +30,9 @@ public partial class Bullet : RigidBody3D
     {
     
         GD.Print("Hit Enemy!");
-        node.QueueFree();
+        
+        //node.QueueFree();
+        
         this.QueueFree();
         
     }
