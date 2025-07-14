@@ -17,7 +17,7 @@ public partial class SceneManager
 
         score = 0;
         
-        UIManager.SetScoreText(score);
+        UIManager.Game_SetScoreText(score);
         
         //Create Player
         player = playerScene.Instantiate() as PlayerController;
@@ -34,12 +34,13 @@ public partial class SceneManager
         
         //Assign Signal Functions
         player.PauseSignal += ActivatePause;
-        //player.PlayerHit += UpdateGameUI;
+        player.PlayerHit += UpdateGameUI;
+        player.PlayerDied += GameOver;
         
 
         //Set UI Data
-        UIManager.SetHealthBarCurrent(player.GetCurrentHealth());
-        UIManager.SetHealthBarMax(player.GetMaxHealth());
+        UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
+        UIManager.Game_SetHealthBarMax(player.GetMaxHealth());
         
         
         //Start Timer
@@ -90,5 +91,32 @@ public partial class SceneManager
     }
     
     #endregion
+
+    #region Result UI Button Functions
+
+    private void Result_RestartButtonFunction()
+    {
+        
+    }
+
+    private void Result_MainMenuButtonFunction()
+    {
+        
+        UIManager.Main_SetCreditsText(credits);
+        
+        UIManager.SetResultUIState(false);
+        UIManager.SetMainUIState(true);
+        
+    }
+
+    private void Result_QuitButtonFunction()
+    {
+        //Save Data HERE!!!
+        
+        GetTree().Quit();
+    }
+
+    #endregion
+    
     
 }

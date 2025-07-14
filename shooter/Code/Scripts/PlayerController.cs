@@ -124,17 +124,25 @@ public partial class PlayerController : CharacterBody3D
     private void OnBodyEntered(Node3D body)
     {
 
-  
+        if (body.Name == "Back Wall")
+        {
+            GD.Print("Hit Back Wall");
+        }
         
         //Destroy Enemy
         body.QueueFree();
         
         //take damage
         currentHealth -= 10;
+        GD.Print("Current Health: " + currentHealth);
         
         //Check currentHealth
         if (currentHealth <= 0)
         {
+            
+            takingInput = false;
+            
+            this.QueueFree();
             //Game Over
             EmitSignal(SignalName.PlayerDied);
         }
@@ -147,7 +155,6 @@ public partial class PlayerController : CharacterBody3D
         }
         
     }
-    
 
     #region Getter
     

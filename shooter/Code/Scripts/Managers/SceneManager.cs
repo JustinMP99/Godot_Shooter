@@ -27,6 +27,7 @@ public partial class SceneManager : Node
         UIManager.SetMainUIState(true);
         UIManager.SetPauseUIState(false);
         UIManager.SetGameUIState(false);
+        UIManager.SetResultUIState(false);
 
     }
 
@@ -45,8 +46,27 @@ public partial class SceneManager : Node
 
     public void UpdateGameUI()
     {
-        UIManager.SetHealthBarCurrent(player.GetCurrentHealth());
+        UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
     }
-    
-    
+
+    public void GameOver()
+    {
+        
+        //Stop Spawning Enemies
+        enemySpawner.StopTimer();
+
+        int tempCredits = score / 10;
+        credits += tempCredits;
+        
+        //Update UI
+        UIManager.SetGameUIState(false);
+        UIManager.SetResultUIState(true);
+       
+        UIManager.Result_SetScoreText(score);
+        UIManager.Result_SetCreditsEarnedText(tempCredits);
+        UIManager.Result_SetTotalCreditsText(credits);
+        
+    }
+
+
 }

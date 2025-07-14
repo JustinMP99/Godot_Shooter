@@ -10,7 +10,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletPosition")]
-collision_mask = 10
+collision_mask = 8
 script = ExtResource("1_n220g")
 speed = 8.0
 takingInput = true
@@ -29,6 +29,7 @@ mesh = SubResource("BoxMesh_n220g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05704)
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)

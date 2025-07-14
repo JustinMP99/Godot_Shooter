@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=17 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Managers/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
@@ -18,6 +18,11 @@ font_size = 26
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xj7ar"]
 bg_color = Color(0, 0.698039, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y7ox6"]
+font_size = 56
+
+[sub_resource type="LabelSettings" id="LabelSettings_0o8l2"]
 
 [sub_resource type="Environment" id="Environment_2yd7s"]
 background_mode = 1
@@ -48,14 +53,17 @@ playerScene = ExtResource("2_73044")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "pauseUIGroup", "gameUIGroup", "main_StartGameButton", "main_QuitGameButton", "scoreLabel", "healthBar")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "main_CreditsLabel", "resultUIGroup", "result_ScoreLabel", "result_CreditsEarnedLabel", "result_TotalCreditsLabel", "pauseUIGroup", "gameUIGroup", "game_ScoreLabel", "healthBar")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
+main_CreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
+resultUIGroup = NodePath("../../=== UI ===/--- result ---")
+result_ScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
+result_CreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
+result_TotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
-main_StartGameButton = NodePath("../../=== UI ===/--- main ---/Start Button")
-main_QuitGameButton = NodePath("../../=== UI ===/--- main ---/Quit Button")
-scoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
+game_ScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
 healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
@@ -91,11 +99,11 @@ offset_bottom = 471.0
 text = "Micro game created by Justin Philie"
 horizontal_alignment = 1
 
-[node name="Sub-title Label2" type="Label" parent="=== UI ===/--- main ---"]
+[node name="Credits Label" type="Label" parent="=== UI ===/--- main ---"]
 offset_left = 184.0
 offset_top = 328.0
 offset_right = 455.0
-offset_bottom = 376.0
+offset_bottom = 352.0
 text = "Credits: 0"
 horizontal_alignment = 1
 
@@ -167,6 +175,91 @@ offset_top = 104.0
 offset_right = 368.0
 offset_bottom = 144.0
 
+[node name="--- result ---" type="CanvasLayer" parent="=== UI ==="]
+
+[node name="Game Over Title" type="Label" parent="=== UI ===/--- result ---"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 160.0
+grow_horizontal = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_y7ox6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score Label" type="Label" parent="=== UI ===/--- result ---"]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.417
+anchor_right = 0.7
+anchor_bottom = 0.465
+offset_top = -0.160019
+offset_right = -3.05176e-05
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_0o8l2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits Earned Label" type="Label" parent="=== UI ===/--- result ---"]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.417
+anchor_right = 0.7
+anchor_bottom = 0.465
+offset_top = 39.84
+offset_right = -3.05176e-05
+offset_bottom = 39.8
+grow_horizontal = 2
+grow_vertical = 2
+text = "Credits Earned: 0"
+label_settings = SubResource("LabelSettings_0o8l2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Total Credits Label" type="Label" parent="=== UI ===/--- result ---"]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.417
+anchor_right = 0.7
+anchor_bottom = 0.465
+offset_top = 79.84
+offset_right = -3.05176e-05
+offset_bottom = 79.8
+grow_horizontal = 2
+grow_vertical = 2
+text = "Total Credits: 0"
+label_settings = SubResource("LabelSettings_0o8l2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart Button" type="Button" parent="=== UI ===/--- result ---"]
+offset_left = 128.0
+offset_top = 416.0
+offset_right = 224.0
+offset_bottom = 448.0
+text = "Restart"
+
+[node name="Main Menu Button" type="Button" parent="=== UI ===/--- result ---"]
+offset_left = 288.0
+offset_top = 416.0
+offset_right = 384.0
+offset_bottom = 448.0
+text = "Main Menu"
+
+[node name="Quit Button" type="Button" parent="=== UI ===/--- result ---"]
+offset_left = 448.0
+offset_top = 416.0
+offset_right = 544.0
+offset_bottom = 448.0
+text = "Quit"
+
 [node name="=== LEVEL ===" type="Node" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="=== LEVEL ==="]
@@ -177,7 +270,7 @@ fov = 90.0
 environment = SubResource("Environment_2yd7s")
 
 [node name="Start Position" type="Node3D" parent="=== LEVEL ==="]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.43426)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84457)
 
 [node name="World Colliders" type="StaticBody3D" parent="=== LEVEL ==="]
 collision_layer = 8
@@ -205,3 +298,6 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- result ---/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- result ---/Main Menu Button" to="=== MANAGER ===/Scene Manager" method="Result_MainMenuButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- result ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Result_QuitButtonFunction"]

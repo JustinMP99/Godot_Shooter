@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class EnemySpawner : Node
 {
@@ -7,6 +8,7 @@ public partial class EnemySpawner : Node
     [Export] private Timer spawnTimer;
     [Export] private PackedScene enemyPrefab;
     [Export] private Node3D enemyContainer;
+    private List<RigidBody3D> enemyList;
 
     private void OnTimerTimeout()
     {
@@ -16,7 +18,8 @@ public partial class EnemySpawner : Node
 
         enemyContainer.AddChild(enemy);
         enemy.Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
-
+        
+        
     }
     
     public void StartTimer()
