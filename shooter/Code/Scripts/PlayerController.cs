@@ -22,9 +22,8 @@ public partial class PlayerController : CharacterBody3D
     [Export] private int currentHealth;
     [Export] private int maxHealth;
     
-    
     private Vector3 targetVelocity = Vector3.Zero;
-    
+    private Vector3 direction;
     
     public override void _Ready()
     {
@@ -33,15 +32,6 @@ public partial class PlayerController : CharacterBody3D
 
     public override void _Process(double delta)
     {
-        if (takingInput)
-        {
-            if (Input.IsActionJustPressed("Pause"))
-            {
-            
-                PauseFunction();
-            
-            }
-        }
         
     }
 
@@ -51,40 +41,7 @@ public partial class PlayerController : CharacterBody3D
         if (takingInput)
         {
             
-            Vector3 direction = Vector3.Zero;
-
-            // if (Input.IsActionPressed("Move_Forward"))
-            // {
-            //     GD.Print("Moving Forward");
-            //     
-            //     direction.Z -= 1.0f;
-            // }
-            // if (Input.IsActionPressed("Move_Down"))
-            // {
-            //     direction.Z += 1.0f;
-            // }
-
-            if (Input.IsActionPressed("Move_Left"))
-            {
-                direction.X -= 1.0f;
-            }
-            if (Input.IsActionPressed("Move_Right"))
-            {
-                direction.X += 1.0f;
-            }
-
-            if (Input.IsActionJustPressed("Shoot"))
-            {
-                ShootFunction();
-            }
-            
-
-            if (direction !=  Vector3.Zero)
-            {
-                
-                direction = direction.Normalized();
-                
-            }
+            CollectInput();
             
             targetVelocity.X = direction.X * speed;
             targetVelocity.Z = direction.Z * speed;
@@ -95,6 +52,33 @@ public partial class PlayerController : CharacterBody3D
             
         }
         
+    }
+
+
+    private void CollectInput()
+    {
+        direction = Vector3.Zero;
+        
+        if (Input.IsActionPressed("Move_Left"))
+        {
+            direction.X -= 1.0f;
+        }
+        if (Input.IsActionPressed("Move_Right"))
+        {
+            direction.X += 1.0f;
+        }
+        if (Input.IsActionJustPressed("Shoot"))
+        {
+            ShootFunction();
+        }
+        if (Input.IsActionJustPressed("Pause"))
+        {
+            PauseFunction();
+        }
+        if (direction !=  Vector3.Zero)
+        {
+            direction = direction.Normalized();
+        }
     }
     
     private void PauseFunction()
@@ -125,19 +109,19 @@ public partial class PlayerController : CharacterBody3D
     private void OnBodyEntered(Node3D body)
     {
 
-        if (body.Name == "Enemy")
+        if (body is EnemyController enemy)
         {
+            GD.Print("Collided with Enemy!");
+            enemy.DisableEnemy();
+            //enemy.Position = new Vector3(10.0f, 10.0f, 10.0f);
             
-            EnemyController temp = body as EnemyController;
-            temp.Release();
-        
             //take damage
             currentHealth -= 10;
-        
+            
             //Check currentHealth
             if (currentHealth <= 0)
             {
-            
+                GD.Print("Player has died");
                 takingInput = false;
             
                 this.QueueFree();
@@ -146,12 +130,11 @@ public partial class PlayerController : CharacterBody3D
             }
             else
             {
-            
+                GD.Print("Player has taken damage");
                 //Update UI
                 EmitSignal(SignalName.PlayerHit);
 
             }
-            
         }
         
     }

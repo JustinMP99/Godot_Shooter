@@ -29,13 +29,12 @@ public partial class Bullet : RigidBody3D
     public void OnBodyEntered(Node3D node)
     {
         
-        if (node.Name == "Enemy")
+        if (node is EnemyController enemy)
         {
             
             GD.Print("Hit Enemy!");
-            EnemyController temp = node as EnemyController;
-            temp.Release();
-            
+            enemy.DisableEnemy();
+
             this.QueueFree();
             
         }

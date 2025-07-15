@@ -23,12 +23,13 @@ public partial class EnemySpawner : Node
         
         for (int i = 0; i < desiredEnemies; i++)
         {
+            GD.Print("Instanced Enemy " + i);
             EnemyController enemy = enemyPrefab.Instantiate() as EnemyController;
             enemy.DisableEnemy();
-            
             enemyList.Add(enemy);
-            
-            enemyContainer.AddChild(enemy);
+            AddChild(enemy);
+            //GetTree().Root.AddChild(enemy);
+            //enemyContainer.AddChild(enemy);
         }
         
     }
@@ -36,13 +37,11 @@ public partial class EnemySpawner : Node
     private void OnTimerTimeout()
     {
         
-        //Setup the pooled enemy
         if (desiredEnemies > 0)
         {
             
             if (!enemyList[currentListIter].GetIsActive())
             {
-                GD.Print("Enemy Not Active!");
                 enemyList[currentListIter].EnableEnemy();
                 enemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
                 
@@ -51,7 +50,6 @@ public partial class EnemySpawner : Node
                 {
                     currentListIter = 0;
                 }
-                
             }
             
         }
