@@ -36,6 +36,7 @@ public partial class SceneManager
         player.PauseSignal += ActivatePause;
         player.PlayerHit += UpdateGameUI;
         player.PlayerDied += GameOver;
+        player.EnemyDefeated += DefeatedEnemy;
         
 
         //Set UI Data

@@ -12,6 +12,9 @@ public partial class PlayerController : CharacterBody3D
     [Signal]
     public delegate void PlayerDiedEventHandler();
     
+    [Signal]
+    public delegate void EnemyDefeatedEventHandler();
+    
     
     [Export] private float speed;
     [Export] private bool takingInput;
@@ -95,7 +98,9 @@ public partial class PlayerController : CharacterBody3D
         
         GD.Print("Shooting");
         //Instantiate Bullet
-        RigidBody3D bullet = bulletPrefab.Instantiate() as RigidBody3D;
+        //RigidBody3D bullet = bulletPrefab.Instantiate() as RigidBody3D;
+        Bullet bullet = bulletPrefab.Instantiate() as Bullet;
+        bullet.FinalShot += EnemyDefeat;
         
         //Set Child
         
@@ -104,6 +109,11 @@ public partial class PlayerController : CharacterBody3D
         
         GetTree().Root.AddChild(bullet);
 
+    }
+
+    private void EnemyDefeat()
+    {
+        EmitSignal(SignalName.EnemyDefeated);
     }
 
     private void OnBodyEntered(Node3D body)

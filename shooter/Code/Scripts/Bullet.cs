@@ -7,6 +7,9 @@ public partial class Bullet : RigidBody3D
     [Export] private float lifetime;
     [Export] private float maxLifetime;
     [Export] private float speed;
+    
+    [Signal]
+    public delegate void FinalShotEventHandler();
 
     public override void _Ready()
     {
@@ -34,7 +37,7 @@ public partial class Bullet : RigidBody3D
             
             GD.Print("Hit Enemy!");
             enemy.DisableEnemy();
-
+            EmitSignal(SignalName.FinalShot);
             this.QueueFree();
             
         }

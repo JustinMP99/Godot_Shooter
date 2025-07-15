@@ -71,5 +71,12 @@ public partial class SceneManager : Node
         
     }
 
-
+    public void DefeatedEnemy()
+    {
+        //Increase Score
+        score += 100;
+        //Update UI
+        UIManager.Game_SetScoreText(score);
+    }
+    
 }
