@@ -125,34 +125,33 @@ public partial class PlayerController : CharacterBody3D
     private void OnBodyEntered(Node3D body)
     {
 
-        if (body.Name == "Back Wall")
-        {
-            GD.Print("Hit Back Wall");
-        }
-        
-        //Destroy Enemy
-        body.QueueFree();
-        
-        //take damage
-        currentHealth -= 10;
-        GD.Print("Current Health: " + currentHealth);
-        
-        //Check currentHealth
-        if (currentHealth <= 0)
+        if (body.Name == "Enemy")
         {
             
-            takingInput = false;
+            EnemyController temp = body as EnemyController;
+            temp.Release();
+        
+            //take damage
+            currentHealth -= 10;
+        
+            //Check currentHealth
+            if (currentHealth <= 0)
+            {
             
-            this.QueueFree();
-            //Game Over
-            EmitSignal(SignalName.PlayerDied);
-        }
-        else
-        {
+                takingInput = false;
             
-            //Update UI
-            EmitSignal(SignalName.PlayerHit);
+                this.QueueFree();
+                //Game Over
+                EmitSignal(SignalName.PlayerDied);
+            }
+            else
+            {
+            
+                //Update UI
+                EmitSignal(SignalName.PlayerHit);
 
+            }
+            
         }
         
     }
