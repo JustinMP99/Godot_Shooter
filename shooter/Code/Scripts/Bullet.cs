@@ -19,12 +19,15 @@ public partial class Bullet : RigidBody3D
     public override void _PhysicsProcess(double delta)
     {
 
-        MoveAndCollide(-Transform.Basis.Z * (float)delta * speed);
-        lifetime += 0.1f;
-
-        if (lifetime >= maxLifetime)
+        if (!Global.gamePaused)
         {
-            this.QueueFree();
+            MoveAndCollide(-Transform.Basis.Z * (float)delta * speed);
+            lifetime += 0.1f;
+
+            if (lifetime >= maxLifetime)
+            {
+                this.QueueFree();
+            }   
         }
 
     }

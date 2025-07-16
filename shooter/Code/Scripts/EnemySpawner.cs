@@ -36,22 +36,24 @@ public partial class EnemySpawner : Node
     
     private void OnTimerTimeout()
     {
-        
-        if (desiredEnemies > 0)
+        if (!Global.gamePaused)
         {
-            
-            if (!enemyList[currentListIter].GetIsActive())
+            if (desiredEnemies > 0)
             {
-                enemyList[currentListIter].EnableEnemy();
-                enemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
-                
-                currentListIter++;
-                if (currentListIter >= maxListIter)
-                {
-                    currentListIter = 0;
-                }
-            }
             
+                if (!enemyList[currentListIter].GetIsActive())
+                {
+                    enemyList[currentListIter].EnableEnemy();
+                    enemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
+                
+                    currentListIter++;
+                    if (currentListIter >= maxListIter)
+                    {
+                        currentListIter = 0;
+                    }
+                }
+            
+            }   
         }
         
     }

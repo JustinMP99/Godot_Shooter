@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=20 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Managers/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cbok5qannybiy" path="res://Level/Prefabs/Enemy.tscn" id="5_y7ox6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m0h58"]
-font_size = 37
+font_size = 68
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2yd7s"]
 
@@ -19,10 +19,19 @@ font_size = 26
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xj7ar"]
 bg_color = Color(0, 0.698039, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_7j67u"]
+font_size = 135
+
 [sub_resource type="LabelSettings" id="LabelSettings_y7ox6"]
 font_size = 56
 
 [sub_resource type="LabelSettings" id="LabelSettings_0o8l2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nc8lr"]
+font_size = 68
+
+[sub_resource type="LabelSettings" id="LabelSettings_i5qe8"]
+font_size = 28
 
 [sub_resource type="Environment" id="Environment_2yd7s"]
 background_mode = 1
@@ -81,48 +90,83 @@ wait_time = 0.5
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
+follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
-offset_left = 192.0
-offset_top = 32.0
-offset_right = 452.0
-offset_bottom = 83.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.067
+anchor_right = 0.706
+anchor_bottom = 0.173
+offset_top = -0.16
+offset_right = 0.159973
+offset_bottom = -0.0400009
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "Godot Shooter"
 label_settings = SubResource("LabelSettings_m0h58")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sub-title Label" type="Label" parent="=== UI ===/--- main ---"]
-offset_left = 72.0
-offset_top = 448.0
-offset_right = 568.0
-offset_bottom = 471.0
+anchors_preset = -1
+anchor_left = 0.112
+anchor_top = 0.933
+anchor_right = 0.887
+anchor_bottom = 1.0
+offset_left = 0.32
+offset_top = 0.159973
+offset_right = 0.320007
+offset_bottom = -9.0
 text = "Micro game created by Justin Philie"
 horizontal_alignment = 1
 
 [node name="Credits Label" type="Label" parent="=== UI ===/--- main ---"]
-offset_left = 184.0
-offset_top = 328.0
-offset_right = 455.0
-offset_bottom = 352.0
+anchors_preset = -1
+anchor_left = 0.287
+anchor_top = 0.683
+anchor_right = 0.711
+anchor_bottom = 0.733
+offset_left = 0.320007
+offset_top = 0.159973
+offset_right = -0.0400085
+offset_bottom = 0.159973
 text = "Credits: 0"
 horizontal_alignment = 1
 
 [node name="Start Button" type="Button" parent="=== UI ===/--- main ---"]
-offset_left = 240.0
-offset_top = 208.0
-offset_right = 392.0
-offset_bottom = 240.0
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.433
+anchor_right = 0.612
+anchor_bottom = 0.5
+offset_left = -1.52588e-05
+offset_top = 0.159988
+offset_right = 0.319977
 text = "Start"
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- main ---"]
-offset_left = 240.0
-offset_top = 264.0
-offset_right = 392.0
-offset_bottom = 296.0
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.55
+anchor_right = 0.612
+anchor_bottom = 0.617
+offset_left = -1.52588e-05
+offset_right = 0.319977
+offset_bottom = -0.160034
 text = "Quit"
+
+[node name="Shop Button" type="Button" parent="=== UI ===/--- main ---"]
+anchors_preset = -1
+anchor_left = 0.456
+anchor_top = 0.778
+anchor_right = 0.544
+anchor_bottom = 0.844
+offset_left = 0.319946
+offset_top = -0.160034
+offset_right = -0.320068
+offset_bottom = 0.319946
+text = "Shop"
 
 [node name="--- pause ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -135,18 +179,25 @@ scale = Vector2(197.529, -114.796)
 texture = SubResource("PlaceholderTexture2D_xj7ar")
 
 [node name="Resume Button" type="Button" parent="=== UI ===/--- pause ---"]
-offset_left = 288.0
-offset_top = 200.0
-offset_right = 368.0
-offset_bottom = 231.0
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.417
+anchor_right = 0.575
+anchor_bottom = 0.481
+offset_top = -0.160019
+offset_right = -3.05176e-05
+offset_bottom = 0.11998
 text = "Resume
 "
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- pause ---"]
-offset_left = 304.0
-offset_top = 248.0
-offset_right = 352.0
-offset_bottom = 279.0
+anchors_preset = -1
+anchor_left = 0.475
+anchor_top = 0.517
+anchor_right = 0.55
+anchor_bottom = 0.581
+offset_top = -0.160004
+offset_bottom = 0.119995
 size_flags_horizontal = 0
 text = "Quit"
 
@@ -154,41 +205,54 @@ text = "Quit"
 visible = false
 
 [node name="Score Label" type="Label" parent="=== UI ===/--- game ---"]
-offset_right = 184.0
-offset_bottom = 48.0
+anchors_preset = -1
+anchor_right = 0.287
+anchor_bottom = 0.1
+offset_right = 0.320007
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_2yd7s")
 vertical_alignment = 1
 
 [node name="Health Bar" type="ProgressBar" parent="=== UI ===/--- game ---"]
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = -1
+anchor_left = 0.762
 anchor_right = 1.0
-offset_left = -152.0
-offset_bottom = 27.0
+anchor_bottom = 0.056
+offset_left = 0.319977
+offset_bottom = 0.119999
 grow_horizontal = 0
 tooltip_text = "
 "
 theme_override_styles/fill = SubResource("StyleBoxFlat_xj7ar")
 show_percentage = false
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="=== UI ===/--- game ---"]
-offset_left = 160.0
-offset_top = 104.0
-offset_right = 368.0
-offset_bottom = 144.0
+[node name="Countdown Label" type="Label" parent="=== UI ===/--- game ---"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.117
+anchor_right = 0.8
+anchor_bottom = 0.502
+offset_top = -0.160004
+offset_bottom = -42.96
+text = "0"
+label_settings = SubResource("LabelSettings_7j67u")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="--- result ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
 
 [node name="Game Over Title" type="Label" parent="=== UI ===/--- result ---"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -128.0
-offset_top = 64.0
-offset_right = 128.0
-offset_bottom = 160.0
+anchors_preset = -1
+anchor_left = 0.262
+anchor_top = 0.133
+anchor_right = 0.737
+anchor_bottom = 0.333
+offset_left = 24.32
+offset_top = 0.16
+offset_right = -23.68
+offset_bottom = 0.160004
 grow_horizontal = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_y7ox6")
@@ -214,12 +278,11 @@ vertical_alignment = 1
 [node name="Credits Earned Label" type="Label" parent="=== UI ===/--- result ---"]
 anchors_preset = -1
 anchor_left = 0.3
-anchor_top = 0.417
+anchor_top = 0.5
 anchor_right = 0.7
-anchor_bottom = 0.465
-offset_top = 39.84
-offset_right = -3.05176e-05
-offset_bottom = 39.8
+anchor_bottom = 0.548
+offset_right = -6.10352e-05
+offset_bottom = -0.0400085
 grow_horizontal = 2
 grow_vertical = 2
 text = "Credits Earned: 0"
@@ -230,12 +293,12 @@ vertical_alignment = 1
 [node name="Total Credits Label" type="Label" parent="=== UI ===/--- result ---"]
 anchors_preset = -1
 anchor_left = 0.3
-anchor_top = 0.417
+anchor_top = 0.583
 anchor_right = 0.7
-anchor_bottom = 0.465
-offset_top = 79.84
-offset_right = -3.05176e-05
-offset_bottom = 79.8
+anchor_bottom = 0.631
+offset_top = 0.160004
+offset_right = -6.10352e-05
+offset_bottom = 0.119995
 grow_horizontal = 2
 grow_vertical = 2
 text = "Total Credits: 0"
@@ -244,25 +307,69 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Restart Button" type="Button" parent="=== UI ===/--- result ---"]
-offset_left = 128.0
-offset_top = 416.0
-offset_right = 224.0
-offset_bottom = 448.0
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.867
+anchor_right = 0.35
+anchor_bottom = 0.933
+offset_top = -0.160034
+offset_right = -1.52588e-05
+offset_bottom = 0.159973
 text = "Restart"
 
 [node name="Main Menu Button" type="Button" parent="=== UI ===/--- result ---"]
-offset_left = 288.0
-offset_top = 416.0
-offset_right = 384.0
-offset_bottom = 448.0
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.867
+anchor_right = 0.6
+anchor_bottom = 0.933
+offset_top = -0.160034
+offset_bottom = 0.159973
 text = "Main Menu"
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- result ---"]
-offset_left = 448.0
-offset_top = 416.0
-offset_right = 544.0
-offset_bottom = 448.0
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.867
+anchor_right = 0.85
+anchor_bottom = 0.933
+offset_left = -3.05176e-05
+offset_top = -0.160034
+offset_bottom = 0.159973
 text = "Quit"
+
+[node name="--- shop ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
+
+[node name="Shop Title Label" type="Label" parent="=== UI ===/--- shop ---"]
+anchors_preset = -1
+anchor_left = 0.256
+anchor_top = 0.022
+anchor_right = 0.756
+anchor_bottom = 0.156
+offset_left = 0.319977
+offset_top = 0.159999
+offset_right = -7.68005
+offset_bottom = -32.32
+text = "Upgrade Shop"
+label_settings = SubResource("LabelSettings_nc8lr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health Label" type="Label" parent="=== UI ===/--- shop ---"]
+anchors_preset = -1
+anchor_left = 0.256
+anchor_top = 0.022
+anchor_right = 0.756
+anchor_bottom = 0.156
+offset_left = -263.68
+offset_top = 208.16
+offset_right = -712.68
+offset_bottom = 164.68
+text = "Health:"
+label_settings = SubResource("LabelSettings_i5qe8")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="=== LEVEL ===" type="Node" parent="."]
 
@@ -298,8 +405,9 @@ curve = SubResource("Curve3D_xj7ar")
 [node name="Enemy Container" type="Node3D" parent="=== LEVEL ==="]
 
 [connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="StartGameFunction"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="QuitGameFunction"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Shop Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]

@@ -22,8 +22,7 @@ public partial class EnemyController : RigidBody3D
     [ExportCategory("Enemy Components")]
     [Export] private Area3D area;
     [Export] private CollisionShape3D collider;
-
-
+    
     #region Constructors
 
     
@@ -43,11 +42,14 @@ public partial class EnemyController : RigidBody3D
     public override void _PhysicsProcess(double delta)
     {
 
-        MoveAndCollide(Transform.Basis.Z * (float)delta * speed);
-        if (Position.Z >= 5.0f)
+        if (!Global.gamePaused)
         {
-            Visible = false;
-            isActive = false;
+            MoveAndCollide(Transform.Basis.Z * (float)delta * speed);
+            if (Position.Z >= 5.0f)
+            {
+                Visible = false;
+                isActive = false;
+            }   
         }
        
     }
@@ -83,7 +85,6 @@ public partial class EnemyController : RigidBody3D
         return false;
     }
     
-
     #region Getter
 
     public bool GetIsActive()

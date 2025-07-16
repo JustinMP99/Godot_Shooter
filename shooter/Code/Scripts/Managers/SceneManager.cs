@@ -6,18 +6,13 @@ public partial class SceneManager : Node
 
     [Export] private UIManager UIManager;
     [Export] private EnemySpawner enemySpawner;
-    
     [Export] private PackedScene playerScene;
     [Export] private Node levelNode;
-    [Export] private bool gamePaused;
-
+    //[Export] private bool gamePaused;
     [Export] private Node3D startPosition;
-    
     [ExportCategory("Player Data")] 
     [Export] private int score;
-    
     private PlayerController player;
-
     private int credits;
     
     public override void _Ready()
@@ -31,6 +26,10 @@ public partial class SceneManager : Node
         
         //Spawner Startup
         enemySpawner.Startup();
+        
+        LoadGame();
+        
+        UIManager.Main_SetCreditsText(credits);
 
     }
 
@@ -41,10 +40,10 @@ public partial class SceneManager : Node
         
         UIManager.SetPauseUIState(true);
 
-        gamePaused = true;
+        Global.gamePaused = true;
         
         player.SetTakingInput(false);
-
+        
     }
 
     public void UpdateGameUI()
@@ -77,6 +76,27 @@ public partial class SceneManager : Node
         score += 100;
         //Update UI
         UIManager.Game_SetScoreText(score);
+    }
+
+    private void SaveGame()
+    {
+        
+        var save = FileAccess.Open("user://PlayerSave.txt", FileAccess.ModeFlags.Write);
+        save.StoreString(credits.ToString());
+        save.Close();
+
+    }
+
+    private void LoadGame()
+    {
+        
+        var save = FileAccess.Open("user://PlayerSave.txt", FileAccess.ModeFlags.Read);
+        if (save != null)
+        {
+            string content = save.GetAsText();
+            credits = content[0];
+        }
+        
     }
     
 }

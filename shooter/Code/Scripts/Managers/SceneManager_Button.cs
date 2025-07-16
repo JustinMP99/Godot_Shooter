@@ -6,7 +6,7 @@ public partial class SceneManager
 
     #region Main UI Button Functions
 
-    public void StartGameFunction()
+    public void Main_StartGameFunction()
     {
         
         //Disable Main UI
@@ -49,9 +49,15 @@ public partial class SceneManager
 
     }
 
-    public void QuitGameFunction()
+    public void Main_QuitGameFunction()
     {
+        SaveGame();
         GetTree().Quit();
+    }
+
+    public void Main_ShopButtonFunction()
+    {
+        
     }
 
     #endregion
@@ -68,7 +74,7 @@ public partial class SceneManager
         //Set UI States
         UIManager.SetPauseUIState(false);
         UIManager.SetGameUIState(true);
-        gamePaused = false;
+        Global.gamePaused = false;
         player.SetTakingInput(true);
 
     }
@@ -85,9 +91,12 @@ public partial class SceneManager
         UIManager.SetPauseUIState(false);
         UIManager.SetMainUIState(true);
         
+        enemySpawner.StopTimer();
+        
         //Reset game data
-        gamePaused = false;
+        Global.gamePaused = false;
         score = 0;
+        SaveGame();
 
     }
     
@@ -97,7 +106,7 @@ public partial class SceneManager
 
     private void Result_RestartButtonFunction()
     {
-        
+        SaveGame();
     }
 
     private void Result_MainMenuButtonFunction()
@@ -107,13 +116,14 @@ public partial class SceneManager
         
         UIManager.SetResultUIState(false);
         UIManager.SetMainUIState(true);
+        SaveGame();
         
     }
 
     private void Result_QuitButtonFunction()
     {
         //Save Data HERE!!!
-        
+        SaveGame();
         GetTree().Quit();
     }
 
