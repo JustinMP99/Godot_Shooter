@@ -17,6 +17,10 @@ run/main_scene="uid://b7eyggjoqoow4"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://Art/Sprites/icon.svg"
 
+[autoload]
+
+SaveManager="*res://Code/Scripts/Save System/SaveManager.cs"
+
 [display]
 
 window/size/viewport_width=1280

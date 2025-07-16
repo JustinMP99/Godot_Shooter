@@ -1,13 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=22 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Managers/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/Managers/UIManager.cs" id="2_xj7ar"]
 [ext_resource type="Script" uid="uid://cywkt1mp5oa0w" path="res://Code/Scripts/EnemySpawner.cs" id="4_73044"]
 [ext_resource type="PackedScene" uid="uid://cbok5qannybiy" path="res://Level/Prefabs/Enemy.tscn" id="5_y7ox6"]
+[ext_resource type="Script" uid="uid://dw0m4q34peuy6" path="res://Code/Scripts/Save System/SaveManager.cs" id="6_0o8l2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m0h58"]
 font_size = 68
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_y7ox6"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2yd7s"]
 
@@ -55,8 +58,9 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("UIManager", "enemySpawner", "levelNode", "startPosition")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition")]
 script = ExtResource("1_2yd7s")
+saveManager = NodePath("../SaveManager")
 UIManager = NodePath("../UI Manager")
 enemySpawner = NodePath("../Enemy Spawner")
 playerScene = ExtResource("2_73044")
@@ -85,6 +89,9 @@ desiredEnemies = 200
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
 wait_time = 0.5
+
+[node name="SaveManager" type="Node" parent="=== MANAGER ==="]
+script = ExtResource("6_0o8l2")
 
 [node name="=== UI ===" type="Node" parent="."]
 
@@ -169,9 +176,15 @@ offset_bottom = 0.319946
 text = "Shop"
 
 [node name="--- pause ---" type="CanvasLayer" parent="=== UI ==="]
+
+[node name="Sprite2D" type="Sprite2D" parent="=== UI ===/--- pause ---"]
 visible = false
+position = Vector2(656, 360)
+scale = Vector2(176, 144)
+texture = SubResource("CanvasTexture_y7ox6")
 
 [node name="Background" type="Sprite2D" parent="=== UI ===/--- pause ---"]
+visible = false
 material = SubResource("CanvasItemMaterial_2yd7s")
 position = Vector2(328, 241.4)
 rotation = 3.14159

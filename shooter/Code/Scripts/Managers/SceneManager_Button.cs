@@ -43,7 +43,6 @@ public partial class SceneManager
         UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
         UIManager.Game_SetHealthBarMax(player.GetMaxHealth());
         
-        
         //Start Timer
         enemySpawner.StartTimer();
 
@@ -51,7 +50,6 @@ public partial class SceneManager
 
     public void Main_QuitGameFunction()
     {
-        SaveGame();
         GetTree().Quit();
     }
 
@@ -96,7 +94,6 @@ public partial class SceneManager
         //Reset game data
         Global.gamePaused = false;
         score = 0;
-        SaveGame();
 
     }
     
@@ -106,7 +103,7 @@ public partial class SceneManager
 
     private void Result_RestartButtonFunction()
     {
-        SaveGame();
+
     }
 
     private void Result_MainMenuButtonFunction()
@@ -116,15 +113,16 @@ public partial class SceneManager
         
         UIManager.SetResultUIState(false);
         UIManager.SetMainUIState(true);
-        SaveGame();
         
     }
 
     private void Result_QuitButtonFunction()
     {
         //Save Data HERE!!!
-        SaveGame();
+        
+        
         GetTree().Quit();
+        
     }
 
     #endregion

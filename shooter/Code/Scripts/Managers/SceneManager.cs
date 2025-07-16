@@ -3,7 +3,7 @@ using System;
 
 public partial class SceneManager : Node
 {
-
+    [Export] private SaveManager saveManager;
     [Export] private UIManager UIManager;
     [Export] private EnemySpawner enemySpawner;
     [Export] private PackedScene playerScene;
@@ -17,6 +17,7 @@ public partial class SceneManager : Node
     
     public override void _Ready()
     {
+
         
         //UI Setup
         UIManager.SetMainUIState(true);
@@ -26,8 +27,21 @@ public partial class SceneManager : Node
         
         //Spawner Startup
         enemySpawner.Startup();
-        
-        LoadGame();
+
+        var saveData = new SaveData
+        {
+            PlayerPosition = new Vector3(1, 2, 3),
+            PlayerHealth = 100,
+            Inventory = new string[] { "Sword", "Potion" }
+        };
+
+        saveManager.SaveGame(saveData);
+
+        var loaded = saveManager.LoadGame();
+        if (loaded != null)
+        {
+            GD.Print("Player health: ", loaded.PlayerHealth);
+        }
         
         UIManager.Main_SetCreditsText(credits);
 
@@ -77,26 +91,6 @@ public partial class SceneManager : Node
         //Update UI
         UIManager.Game_SetScoreText(score);
     }
-
-    private void SaveGame()
-    {
-        
-        var save = FileAccess.Open("user://PlayerSave.txt", FileAccess.ModeFlags.Write);
-        save.StoreString(credits.ToString());
-        save.Close();
-
-    }
-
-    private void LoadGame()
-    {
-        
-        var save = FileAccess.Open("user://PlayerSave.txt", FileAccess.ModeFlags.Read);
-        if (save != null)
-        {
-            string content = save.GetAsText();
-            credits = content[0];
-        }
-        
-    }
+    
     
 }
