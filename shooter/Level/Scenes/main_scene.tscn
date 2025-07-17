@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=25 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
@@ -34,8 +34,14 @@ font_size = 56
 [sub_resource type="LabelSettings" id="LabelSettings_nc8lr"]
 font_size = 68
 
+[sub_resource type="LabelSettings" id="LabelSettings_2qg1q"]
+font_size = 23
+
 [sub_resource type="LabelSettings" id="LabelSettings_i5qe8"]
 font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_337eu"]
+font_size = 19
 
 [sub_resource type="Sky" id="Sky_0o8l2"]
 
@@ -62,27 +68,29 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("_saveManager", "_uiManager", "_enemySpawner", "_levelNode", "_startPosition")]
 script = ExtResource("1_2yd7s")
-saveManager = NodePath("../SaveManager")
-UIManager = NodePath("../UI Manager")
-enemySpawner = NodePath("../Enemy Spawner")
-playerScene = ExtResource("2_73044")
-levelNode = NodePath("../../=== LEVEL ===")
-startPosition = NodePath("../../=== LEVEL ===/Start Position")
+_saveManager = NodePath("../SaveManager")
+_uiManager = NodePath("../UI Manager")
+_enemySpawner = NodePath("../Enemy Spawner")
+_playerScene = ExtResource("2_73044")
+_levelNode = NodePath("../../=== LEVEL ===")
+_startPosition = NodePath("../../=== LEVEL ===/Start Position")
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "game_ScoreLabel", "healthBar", "mainUIGroup", "main_CreditsLabel", "pauseUIGroup", "resultUIGroup", "result_ScoreLabel", "result_CreditsEarnedLabel", "result_TotalCreditsLabel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("_gameUIGroup", "_gameScoreLabel", "_healthBar", "_mainUIGroup", "_mainCreditsLabel", "pauseUIGroup", "_resultUIGroup", "_resultScoreLabel", "_resultCreditsEarnedLabel", "_resultTotalCreditsLabel", "_shopUIGroup", "_shopCreditsLabel")]
 script = ExtResource("2_xj7ar")
-gameUIGroup = NodePath("../../=== UI ===/--- game ---")
-game_ScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
-healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
-mainUIGroup = NodePath("../../=== UI ===/--- main ---")
-main_CreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
+_gameUIGroup = NodePath("../../=== UI ===/--- game ---")
+_gameScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
+_healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
+_mainUIGroup = NodePath("../../=== UI ===/--- main ---")
+_mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
-resultUIGroup = NodePath("../../=== UI ===/--- result ---")
-result_ScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
-result_CreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
-result_TotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
+_resultUIGroup = NodePath("../../=== UI ===/--- result ---")
+_resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
+_resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
+_resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
+_shopUIGroup = NodePath("../../=== UI ===/--- shop ---")
+_shopCreditsLabel = NodePath("../../=== UI ===/--- shop ---/Credits Label")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
@@ -100,6 +108,7 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -357,7 +366,6 @@ offset_bottom = 0.159973
 text = "Quit"
 
 [node name="--- shop ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 
 [node name="Shop Title Label" type="Label" parent="=== UI ===/--- shop ---"]
 anchors_preset = -1
@@ -374,20 +382,73 @@ label_settings = SubResource("LabelSettings_nc8lr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Credits Label" type="Label" parent="=== UI ===/--- shop ---"]
+anchors_preset = -1
+anchor_left = 0.394
+anchor_top = 0.189
+anchor_right = 0.575
+anchor_bottom = 0.233
+offset_left = -0.320038
+offset_top = -0.0800018
+offset_right = -6.10352e-05
+offset_bottom = 0.23999
+text = "Credits: 0"
+label_settings = SubResource("LabelSettings_2qg1q")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Health Label" type="Label" parent="=== UI ===/--- shop ---"]
 anchors_preset = -1
-anchor_left = 0.256
-anchor_top = 0.022
-anchor_right = 0.756
-anchor_bottom = 0.156
-offset_left = -263.68
-offset_top = 208.16
-offset_right = -712.68
-offset_bottom = 164.68
+anchor_left = 0.05
+anchor_top = 0.311
+anchor_right = 0.199
+anchor_bottom = 0.378
+offset_left = 3.05176e-05
+offset_top = 0.0799866
+offset_right = 0.279984
+offset_bottom = 4.84
 text = "Health:"
 label_settings = SubResource("LabelSettings_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Health Level Label" type="Label" parent="=== UI ===/--- shop ---"]
+anchors_preset = -1
+anchor_left = 0.212
+anchor_top = 0.311
+anchor_right = 0.306
+anchor_bottom = 0.385
+offset_left = 0.639984
+offset_top = 0.0799866
+offset_right = 0.319977
+offset_bottom = -0.200012
+text = "0/5"
+label_settings = SubResource("LabelSettings_337eu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health Upgrade Button" type="Button" parent="=== UI ===/--- shop ---"]
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.911
+anchor_right = 0.556
+anchor_bottom = 0.978
+offset_left = -72.0
+offset_top = -415.92
+offset_right = -71.6801
+offset_bottom = -416.16
+text = "Upgrade"
+
+[node name="Back Button" type="Button" parent="=== UI ===/--- shop ---"]
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.911
+anchor_right = 0.556
+anchor_bottom = 0.978
+offset_top = 0.0799561
+offset_right = 0.319946
+offset_bottom = -0.160034
+text = "Go Back"
 
 [node name="=== LEVEL ===" type="Node" parent="."]
 
@@ -442,3 +503,5 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="pressed" from="=== UI ===/--- result ---/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Main Menu Button" to="=== MANAGER ===/Scene Manager" method="Result_MainMenuButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Result_QuitButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- shop ---/Health Upgrade Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- shop ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]

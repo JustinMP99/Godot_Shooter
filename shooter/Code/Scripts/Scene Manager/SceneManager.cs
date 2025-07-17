@@ -3,80 +3,80 @@ using System;
 
 public partial class SceneManager : Node
 {
-    [Export] private SaveManager saveManager;
-    [Export] private UIManager UIManager;
-    [Export] private EnemySpawner enemySpawner;
-    [Export] private PackedScene playerScene;
-    [Export] private Node levelNode;
+    [Export] private SaveManager _saveManager;
+    [Export] private UIManager _uiManager;
+    [Export] private EnemySpawner _enemySpawner;
+    [Export] private PackedScene _playerScene;
+    [Export] private Node _levelNode;
     //[Export] private bool gamePaused;
-    [Export] private Node3D startPosition;
+    [Export] private Node3D _startPosition;
     [ExportCategory("Player Data")] 
-    [Export] private int score;
-    private PlayerController player;
-    private int credits;
-    
+    [Export] private int _score;
+    private PlayerController _player;
+
     public override void _Ready()
     {
 
        
-        saveManager.load();
+        _saveManager.load();
         
         //UI Setup
-        UIManager.SetMainUIState(true);
-        UIManager.SetPauseUIState(false);
-        UIManager.SetGameUIState(false);
-        UIManager.SetResultUIState(false);
+        _uiManager.SetMainUIState(true);
+        _uiManager.SetPauseUIState(false);
+        _uiManager.SetGameUIState(false);
+        _uiManager.SetResultUIState(false);
+        _uiManager.SetShopUIState(false);
         
         //Spawner Startup
-        enemySpawner.Startup();
+        _enemySpawner.Startup();
         
-        UIManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
+        _uiManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
         //saveManager.Save();
     }
 
     public void ActivatePause()
     {
         
-        UIManager.SetGameUIState(false);
+        _uiManager.SetGameUIState(false);
         
-        UIManager.SetPauseUIState(true);
+        _uiManager.SetPauseUIState(true);
 
         Global.gamePaused = true;
         
-        player.SetTakingInput(false);
+        _player.SetTakingInput(false);
         
     }
 
     public void UpdateGameUI()
     {
-        UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
+        _uiManager.Game_SetHealthBarCurrent(_player.GetCurrentHealth());
     }
 
     public void GameOver()
     {
         
         //Stop Spawning Enemies
-        enemySpawner.StopTimer();
+        _enemySpawner.StopTimer();
 
-        int tempCredits = score / 10;
+        int tempCredits = _score / 10;
         GameData.Instance.data["Credits"] = GameData.Instance.data["Credits"].AsInt32() + tempCredits;
         
         //Update UI
-        UIManager.SetGameUIState(false);
-        UIManager.SetResultUIState(true);
+        _uiManager.SetGameUIState(false);
+        _uiManager.SetResultUIState(true);
        
-        UIManager.Result_SetScoreText(score);
-        UIManager.Result_SetCreditsEarnedText(tempCredits);
-        UIManager.Result_SetTotalCreditsText(GameData.Instance.credits);
+        _uiManager.Result_SetScoreText(_score);
+        _uiManager.Result_SetCreditsEarnedText(tempCredits);
+        _uiManager.Result_SetTotalCreditsText(GameData.Instance.credits);
         
     }
 
     public void DefeatedEnemy()
     {
         //Increase Score
-        score += 100;
+        _score += 100;
         //Update UI
-        UIManager.Game_SetScoreText(score);
+        _uiManager.Game_SetScoreText(_score);
     }
     
 }

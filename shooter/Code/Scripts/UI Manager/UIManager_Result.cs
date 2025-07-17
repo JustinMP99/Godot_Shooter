@@ -5,31 +5,29 @@ public partial class UIManager
 {
 
     [ExportCategory("Result UI")] 
-    [Export] private CanvasLayer resultUIGroup;
-
-    [Export] private Label result_ScoreLabel;
-    [Export] private Label result_CreditsEarnedLabel;
-    [Export] private Label result_TotalCreditsLabel;
+    [Export] private CanvasLayer _resultUIGroup;
+    [Export] private Label _resultScoreLabel;
+    [Export] private Label _resultCreditsEarnedLabel;
+    [Export] private Label _resultTotalCreditsLabel;
     
-
     public void SetResultUIState(bool state)
     {
-        resultUIGroup.Visible = state;
+        _resultUIGroup.Visible = state;
     }
 
     public void Result_SetScoreText(int newScore)
     {
-        result_ScoreLabel.Text = "Score: " + newScore;
+        _resultScoreLabel.Text = "Score: " + newScore;
     }
 
     public void Result_SetCreditsEarnedText(int newCredits)
     {
-        result_CreditsEarnedLabel.Text = "Credits Earned: " + newCredits.ToString();
+        _resultCreditsEarnedLabel.Text = "Credits Earned: " + newCredits.ToString();
     }
 
     public void Result_SetTotalCreditsText(int newCredits)
     {
-        result_TotalCreditsLabel.Text = "Total Credits: " + newCredits.ToString();
+        _resultTotalCreditsLabel.Text = "Total Credits: " + newCredits.ToString();
     }
     
 }

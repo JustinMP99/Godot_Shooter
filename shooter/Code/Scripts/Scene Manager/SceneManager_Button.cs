@@ -10,41 +10,41 @@ public partial class SceneManager
     {
         
         //Disable Main UI
-        UIManager.SetMainUIState(false);
+        _uiManager.SetMainUIState(false);
         
         //Enable Game UI
-        UIManager.SetGameUIState(true);
+        _uiManager.SetGameUIState(true);
 
-        score = 0;
+        _score = 0;
         
-        UIManager.Game_SetScoreText(score);
+        _uiManager.Game_SetScoreText(_score);
         
         //Create Player
-        player = playerScene.Instantiate() as PlayerController;
-        levelNode.AddChild(player);
-        player.Position = startPosition.Position;
-        player.SetTakingInput(true);
-        player.SetSpeed(8.0f);
+        _player = _playerScene.Instantiate() as PlayerController;
+        _levelNode.AddChild(_player);
+        _player.Position = _startPosition.Position;
+        _player.SetTakingInput(true);
+        _player.SetSpeed(8.0f);
         
         
-        if (player == null)
+        if (_player == null)
         {
             GD.Print("Player is null");
         }
         
         //Assign Signal Functions
-        player.PauseSignal += ActivatePause;
-        player.PlayerHit += UpdateGameUI;
-        player.PlayerDied += GameOver;
-        player.EnemyDefeated += DefeatedEnemy;
+        _player.PauseSignal += ActivatePause;
+        _player.PlayerHit += UpdateGameUI;
+        _player.PlayerDied += GameOver;
+        _player.EnemyDefeated += DefeatedEnemy;
         
 
         //Set UI Data
-        UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
-        UIManager.Game_SetHealthBarMax(player.GetMaxHealth());
+        _uiManager.Game_SetHealthBarCurrent(_player.GetCurrentHealth());
+        _uiManager.Game_SetHealthBarMax(_player.GetMaxHealth());
         
         //Start Timer
-        enemySpawner.StartTimer();
+        _enemySpawner.StartTimer();
 
     }
 
@@ -55,7 +55,18 @@ public partial class SceneManager
 
     public void Main_ShopButtonFunction()
     {
-        //UIManager.   
+        
+        //Set Main UI State
+        _uiManager.SetMainUIState(false);
+        
+        
+        //Set Shop UI Data
+        _uiManager.SetShopCreditsText(GameData.Instance.data["Credits"].AsInt32());
+        
+        
+        //Set Shop UI State
+        _uiManager.SetShopUIState(true);
+        
     }
 
     #endregion
@@ -70,10 +81,10 @@ public partial class SceneManager
     {
         
         //Set UI States
-        UIManager.SetPauseUIState(false);
-        UIManager.SetGameUIState(true);
+        _uiManager.SetPauseUIState(false);
+        _uiManager.SetGameUIState(true);
         Global.gamePaused = false;
-        player.SetTakingInput(true);
+        _player.SetTakingInput(true);
 
     }
 
@@ -81,19 +92,19 @@ public partial class SceneManager
     {
         
         //Destroy Player Object
-        player.QueueFree();
+        _player.QueueFree();
         
         //Destroy all enemies
         
         //Set UI States
-        UIManager.SetPauseUIState(false);
-        UIManager.SetMainUIState(true);
+        _uiManager.SetPauseUIState(false);
+        _uiManager.SetMainUIState(true);
         
-        enemySpawner.StopTimer();
+        _enemySpawner.StopTimer();
         
         //Reset game data
         Global.gamePaused = false;
-        score = 0;
+        _score = 0;
 
     }
     
@@ -104,7 +115,7 @@ public partial class SceneManager
     private void Result_RestartButtonFunction()
     {
 
-        saveManager.Save();
+        _saveManager.Save();
         
         
     }
@@ -112,25 +123,39 @@ public partial class SceneManager
     private void Result_MainMenuButtonFunction()
     {
 
-        saveManager.Save();
+        _saveManager.Save();
         
-        UIManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
+        _uiManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
         
-        UIManager.SetResultUIState(false);
-        UIManager.SetMainUIState(true);
+        _uiManager.SetResultUIState(false);
+        _uiManager.SetMainUIState(true);
         
     }
 
     private void Result_QuitButtonFunction()
     {
         //Save Data HERE!!!
-        saveManager.Save();
+        _saveManager.Save();
         
         GetTree().Quit();
         
     }
 
     #endregion
-    
+
+    #region Shop UI Button Functions
+
+    private void Shop_BackButtonFunction()
+    {
+
+        _uiManager.SetShopUIState(false);
+        
+        _uiManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
+        
+        _uiManager.SetMainUIState(true);
+
+    }
+
+    #endregion
     
 }
