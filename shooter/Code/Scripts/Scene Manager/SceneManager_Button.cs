@@ -55,7 +55,7 @@ public partial class SceneManager
 
     public void Main_ShopButtonFunction()
     {
-        
+        //UIManager.   
     }
 
     #endregion
@@ -104,14 +104,17 @@ public partial class SceneManager
     private void Result_RestartButtonFunction()
     {
 
+        saveManager.Save();
+        
+        
     }
 
     private void Result_MainMenuButtonFunction()
     {
+
+        saveManager.Save();
         
-        saveManager.SaveGame(save);
-        
-        UIManager.Main_SetCreditsText(credits);
+        UIManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
         
         UIManager.SetResultUIState(false);
         UIManager.SetMainUIState(true);
@@ -121,7 +124,7 @@ public partial class SceneManager
     private void Result_QuitButtonFunction()
     {
         //Save Data HERE!!!
-        saveManager.SaveGame(save);
+        saveManager.Save();
         
         GetTree().Quit();
         

@@ -13,7 +13,7 @@ collision_layer = 2
 collision_mask = 4
 freeze = true
 script = ExtResource("1_npp7k")
-speed = 8.0
+speed = 5.0
 area = NodePath("Area3D")
 collider = NodePath("Area3D/CollisionShape3D")
 

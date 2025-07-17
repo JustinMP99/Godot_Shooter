@@ -1,14 +1,15 @@
-[gd_scene load_steps=22 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=23 format=3 uid="uid://b7eyggjoqoow4"]
 
-[ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Managers/SceneManager.cs" id="1_2yd7s"]
+[ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
-[ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/Managers/UIManager.cs" id="2_xj7ar"]
+[ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
 [ext_resource type="Script" uid="uid://cywkt1mp5oa0w" path="res://Code/Scripts/EnemySpawner.cs" id="4_73044"]
 [ext_resource type="PackedScene" uid="uid://cbok5qannybiy" path="res://Level/Prefabs/Enemy.tscn" id="5_y7ox6"]
 [ext_resource type="Script" uid="uid://dw0m4q34peuy6" path="res://Code/Scripts/Save System/SaveManager.cs" id="6_0o8l2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m0h58"]
-font_size = 68
+font_size = 58
+font_color = Color(0.522229, 0.74167, 0.901316, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_y7ox6"]
 
@@ -36,10 +37,13 @@ font_size = 68
 [sub_resource type="LabelSettings" id="LabelSettings_i5qe8"]
 font_size = 28
 
+[sub_resource type="Sky" id="Sky_0o8l2"]
+
 [sub_resource type="Environment" id="Environment_2yd7s"]
 background_mode = 1
-background_color = Color(0.733005, 0.733005, 0.733005, 1)
-ambient_light_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_0o8l2")
+ambient_light_color = Color(0.118581, 0.118581, 0.118581, 1)
+ambient_light_energy = 9.62
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xj7ar"]
 size = Vector3(1, 8.05054, 27.311)
@@ -100,13 +104,14 @@ follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
 anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.067
-anchor_right = 0.706
-anchor_bottom = 0.173
-offset_top = -0.16
-offset_right = 0.159973
-offset_bottom = -0.0400009
+anchor_left = 0.287
+anchor_top = 0.089
+anchor_right = 0.687
+anchor_bottom = 0.211
+offset_left = 0.640015
+offset_top = -0.0800018
+offset_right = 0.639954
+offset_bottom = 5.07999
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Godot Shooter"
@@ -386,12 +391,23 @@ vertical_alignment = 1
 
 [node name="=== LEVEL ===" type="Node" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="=== LEVEL ==="]
+[node name="Cam 1" type="Camera3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 0.805649, 0.592393, 0, -0.592393, 0.805649, 0, 6, 5)
+current = true
 fov = 90.0
+
+[node name="Cam 2" type="Camera3D" parent="=== LEVEL ==="]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10.8739, -4.45276)
+visible = false
+projection = 1
+fov = 90.0
+size = 17.6943
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="=== LEVEL ==="]
 environment = SubResource("Environment_2yd7s")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="=== LEVEL ==="]
+transform = Transform3D(1, 0, 0, 0, 0.911173, 0.412023, 0, -0.412023, 0.911173, 0, 24.9809, 0)
 
 [node name="Start Position" type="Node3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84457)

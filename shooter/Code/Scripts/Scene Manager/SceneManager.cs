@@ -14,10 +14,12 @@ public partial class SceneManager : Node
     [Export] private int score;
     private PlayerController player;
     private int credits;
-    private SaveData save;
     
     public override void _Ready()
     {
+
+       
+        saveManager.load();
         
         //UI Setup
         UIManager.SetMainUIState(true);
@@ -28,6 +30,8 @@ public partial class SceneManager : Node
         //Spawner Startup
         enemySpawner.Startup();
         
+        UIManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
+        //saveManager.Save();
     }
 
     public void ActivatePause()
@@ -55,7 +59,7 @@ public partial class SceneManager : Node
         enemySpawner.StopTimer();
 
         int tempCredits = score / 10;
-        credits += tempCredits;
+        GameData.Instance.data["Credits"] = GameData.Instance.data["Credits"].AsInt32() + tempCredits;
         
         //Update UI
         UIManager.SetGameUIState(false);
@@ -63,7 +67,7 @@ public partial class SceneManager : Node
        
         UIManager.Result_SetScoreText(score);
         UIManager.Result_SetCreditsEarnedText(tempCredits);
-        UIManager.Result_SetTotalCreditsText(credits);
+        UIManager.Result_SetTotalCreditsText(GameData.Instance.credits);
         
     }
 
@@ -74,6 +78,5 @@ public partial class SceneManager : Node
         //Update UI
         UIManager.Game_SetScoreText(score);
     }
-    
     
 }
