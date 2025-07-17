@@ -10,29 +10,53 @@ public partial class SaveManager : Node
 {
     
     
-    private string savePath => "user://GodotShooter/savegame.json";
+    private string savePath => "user://savegame.json";
 
     public void SaveGame(SaveData data)
     {
-        string json = JsonSerializer.Serialize(data);
-        using var file = FileAccess.Open(savePath, FileAccess.ModeFlags.Write);
-        file.StoreString(json);
-        GD.Print("Game saved to ", savePath);
+        
+        var file = FileAccess.Open(savePath, FileAccess.ModeFlags.Write);
+        if (file != null)
+        {
+            //
+            // string jsonData = Json.Stringify(data.PlayerData);
+        
+            file.StoreVar(data.PlayerData);
+            file.Close();   
+        }
+        else
+        {
+            GD.Print("Save Filepath is NULL");
+        }
+
     }
     
     public SaveData LoadGame()
     {
-        if (!FileAccess.FileExists(savePath))
-        {
-            GD.PrintErr("Save file not found.");
-            return null;
-        }
 
-        using var file = FileAccess.Open(savePath, FileAccess.ModeFlags.Read);
-        string json = file.GetAsText();
-        SaveData data = JsonSerializer.Deserialize<SaveData>(json);
-        GD.Print("Game loaded from ", savePath);
+        SaveData data = new SaveData();
+
+        if (FileAccess.FileExists(savePath))
+        {
+            var file = FileAccess.Open(savePath, FileAccess.ModeFlags.Read);
+
+            var saveData = file.GetVar();
+
+            // int count = saveData["Credits"];
+            //
+            // var jsonData = file.GetAsText();
+            // var parsedData = Json.ParseString(jsonData);
+            //
+            // int count = ;
+            
+            // data.PlayerData["Credits"] = parsedData.;
+            // GD.Print(jsonData);
+            file.Close();
+        }
+        
+
         return data;
+        
     }
     
     

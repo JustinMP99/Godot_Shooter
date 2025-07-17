@@ -96,7 +96,6 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -176,6 +175,7 @@ offset_bottom = 0.319946
 text = "Shop"
 
 [node name="--- pause ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="=== UI ===/--- pause ---"]
 visible = false

@@ -23,13 +23,10 @@ public partial class EnemySpawner : Node
         
         for (int i = 0; i < desiredEnemies; i++)
         {
-            GD.Print("Instanced Enemy " + i);
             EnemyController enemy = enemyPrefab.Instantiate() as EnemyController;
             enemy.DisableEnemy();
             enemyList.Add(enemy);
             AddChild(enemy);
-            //GetTree().Root.AddChild(enemy);
-            //enemyContainer.AddChild(enemy);
         }
         
     }

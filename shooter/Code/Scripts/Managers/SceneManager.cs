@@ -17,7 +17,6 @@ public partial class SceneManager : Node
     
     public override void _Ready()
     {
-
         
         //UI Setup
         UIManager.SetMainUIState(true);
@@ -27,24 +26,7 @@ public partial class SceneManager : Node
         
         //Spawner Startup
         enemySpawner.Startup();
-
-        var saveData = new SaveData
-        {
-            PlayerPosition = new Vector3(1, 2, 3),
-            PlayerHealth = 100,
-            Inventory = new string[] { "Sword", "Potion" }
-        };
-
-        saveManager.SaveGame(saveData);
-
-        var loaded = saveManager.LoadGame();
-        if (loaded != null)
-        {
-            GD.Print("Player health: ", loaded.PlayerHealth);
-        }
         
-        UIManager.Main_SetCreditsText(credits);
-
     }
 
     public void ActivatePause()
