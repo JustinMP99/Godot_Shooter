@@ -10,24 +10,11 @@ public partial class SaveManager : Node
 {
     
     
-    private string savePath => "user://savegame.json";
+    private string savePath => "user://savegame.tres";
 
     public void SaveGame(SaveData data)
     {
         
-        var file = FileAccess.Open(savePath, FileAccess.ModeFlags.Write);
-        if (file != null)
-        {
-            //
-            // string jsonData = Json.Stringify(data.PlayerData);
-        
-            file.StoreVar(data.PlayerData);
-            file.Close();   
-        }
-        else
-        {
-            GD.Print("Save Filepath is NULL");
-        }
 
     }
     
@@ -36,25 +23,10 @@ public partial class SaveManager : Node
 
         SaveData data = new SaveData();
 
-        if (FileAccess.FileExists(savePath))
+        if (data == null)
         {
-            var file = FileAccess.Open(savePath, FileAccess.ModeFlags.Read);
-
-            var saveData = file.GetVar();
-
-            // int count = saveData["Credits"];
-            //
-            // var jsonData = file.GetAsText();
-            // var parsedData = Json.ParseString(jsonData);
-            //
-            // int count = ;
-            
-            // data.PlayerData["Credits"] = parsedData.;
-            // GD.Print(jsonData);
-            file.Close();
+            GD.Print("Loaded Data is Null!!");
         }
-        
-
         return data;
         
     }

@@ -109,6 +109,8 @@ public partial class SceneManager
     private void Result_MainMenuButtonFunction()
     {
         
+        saveManager.SaveGame(save);
+        
         UIManager.Main_SetCreditsText(credits);
         
         UIManager.SetResultUIState(false);
@@ -119,7 +121,7 @@ public partial class SceneManager
     private void Result_QuitButtonFunction()
     {
         //Save Data HERE!!!
-        
+        saveManager.SaveGame(save);
         
         GetTree().Quit();
         

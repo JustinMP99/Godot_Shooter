@@ -14,6 +14,7 @@ public partial class SceneManager : Node
     [Export] private int score;
     private PlayerController player;
     private int credits;
+    private SaveData save;
     
     public override void _Ready()
     {
