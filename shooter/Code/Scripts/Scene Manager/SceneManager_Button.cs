@@ -156,6 +156,19 @@ public partial class SceneManager
 
     }
 
+    private void Shop_UpgradeHealthButtonFunction()
+    {
+
+        if (GameData.Instance.data["HealthLevel"].AsInt32() != 5)
+        {
+            GameData.Instance.data["HealthLevel"] = GameData.Instance.data["HealthLevel"].AsInt32() + 1;
+            _player.SetMaxHealth(_player.GetMaxHealth() + 50);
+            _player.SetCurrentHealth(_player.GetMaxHealth());
+            //_uiManager.SetSho
+        }
+        
+    }
+
     #endregion
     
 }

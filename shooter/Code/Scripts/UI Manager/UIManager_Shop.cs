@@ -20,5 +20,10 @@ public partial class UIManager
     {
         _shopCreditsLabel.Text = newCredits.ToString();
     }
+
+    public void SetHealthLevelText(int currentLevel, int maxLevel)
+    {
+        _shopHealthLevelLabel.Text = currentLevel.ToString() + "/" + maxLevel.ToString();
+    }
     
 }

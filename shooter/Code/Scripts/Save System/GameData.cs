@@ -10,7 +10,8 @@ public partial class GameData : Node
     {
         {"Credits", 0},
         {"WeaponLevel", 1},
-        {"HealthLevel", 1}
+        {"CurrentHealthLevel", 1},
+        {"MaxHeathLevel", 5}
     };
     
     public override void _Ready()
@@ -19,5 +20,7 @@ public partial class GameData : Node
         data["Credits"] = 0;
         data["WeaponLevel"] = 1;
         data["HealthLevel"] = 1;
+        data["CurrentHealthLevel"] = 1;
+        data["MaxHeathLevel"] = 5;
     }
 }

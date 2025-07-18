@@ -429,14 +429,14 @@ vertical_alignment = 1
 
 [node name="Health Upgrade Button" type="Button" parent="=== UI ===/--- shop ---"]
 anchors_preset = -1
-anchor_left = 0.45
-anchor_top = 0.911
-anchor_right = 0.556
-anchor_bottom = 0.978
-offset_left = -72.0
-offset_top = -415.92
-offset_right = -71.6801
-offset_bottom = -416.16
+anchor_left = 0.394
+anchor_top = 0.333
+anchor_right = 0.5
+anchor_bottom = 0.4
+offset_left = -0.320038
+offset_top = 0.23996
+offset_right = -0.00012207
+offset_bottom = -3.05176e-05
 text = "Upgrade"
 
 [node name="Back Button" type="Button" parent="=== UI ===/--- shop ---"]
@@ -503,5 +503,5 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="pressed" from="=== UI ===/--- result ---/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Main Menu Button" to="=== MANAGER ===/Scene Manager" method="Result_MainMenuButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Result_QuitButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- shop ---/Health Upgrade Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- shop ---/Health Upgrade Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- shop ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]

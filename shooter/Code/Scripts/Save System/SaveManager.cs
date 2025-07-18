@@ -71,7 +71,8 @@ public partial class SaveManager : Node
         
         GameData.Instance.data["Credits"] = tempData["Credits"];
         GameData.Instance.data["WeaponLevel"] = tempData["WeaponLevel"];
-         GameData.Instance.data["HealthLevel"] = tempData["HealthLevel"];
+        GameData.Instance.data["CurrentHealthLevel"] = tempData["CurrentHealthLevel"];
+        GameData.Instance.data["MaxHealthLevel"] = tempData["MaxHealthLevel"];
 
     }
     
