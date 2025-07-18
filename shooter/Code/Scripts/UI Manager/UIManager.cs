@@ -3,14 +3,11 @@ using System;
 
 public partial class UIManager : Node
 {
-
- 
     
     public override void _Ready()
     {
         
     }
-    
 
     #region Getter
 
@@ -24,6 +21,5 @@ public partial class UIManager : Node
 
 
     #endregion
-    
     
 }

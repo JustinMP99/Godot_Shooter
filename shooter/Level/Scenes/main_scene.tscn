@@ -77,7 +77,7 @@ _playerScene = ExtResource("2_73044")
 _levelNode = NodePath("../../=== LEVEL ===")
 _startPosition = NodePath("../../=== LEVEL ===/Start Position")
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("_gameUIGroup", "_gameScoreLabel", "_healthBar", "_mainUIGroup", "_mainCreditsLabel", "pauseUIGroup", "_resultUIGroup", "_resultScoreLabel", "_resultCreditsEarnedLabel", "_resultTotalCreditsLabel", "_shopUIGroup", "_shopCreditsLabel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("_gameUIGroup", "_gameScoreLabel", "_healthBar", "_mainUIGroup", "_mainCreditsLabel", "pauseUIGroup", "_resultUIGroup", "_resultScoreLabel", "_resultCreditsEarnedLabel", "_resultTotalCreditsLabel", "_shopUIGroup", "_shopCreditsLabel", "_shopHealthLevelLabel")]
 script = ExtResource("2_xj7ar")
 _gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 _gameScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
@@ -91,6 +91,7 @@ _resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Ea
 _resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
 _shopUIGroup = NodePath("../../=== UI ===/--- shop ---")
 _shopCreditsLabel = NodePath("../../=== UI ===/--- shop ---/Credits Label")
+_shopHealthLevelLabel = NodePath("../../=== UI ===/--- shop ---/Health Level Label")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
@@ -366,6 +367,7 @@ offset_bottom = 0.159973
 text = "Quit"
 
 [node name="--- shop ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 
 [node name="Shop Title Label" type="Label" parent="=== UI ===/--- shop ---"]
 anchors_preset = -1

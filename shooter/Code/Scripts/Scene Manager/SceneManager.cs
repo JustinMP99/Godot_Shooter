@@ -12,13 +12,12 @@ public partial class SceneManager : Node
     [Export] private Node3D _startPosition;
     [ExportCategory("Player Data")] 
     [Export] private int _score;
-    private PlayerController _player;
 
+    private PlayerController _player;
+    
     public override void _Ready()
     {
-
-       
-        _saveManager.load();
+        
         
         //UI Setup
         _uiManager.SetMainUIState(true);
@@ -30,10 +29,26 @@ public partial class SceneManager : Node
         //Spawner Startup
         _enemySpawner.Startup();
         
-        _uiManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
-        //saveManager.Save();
-    }
+        _player = PlayerController.Instance;
+        _player.Position = new Vector3(0.0f, 0.0f, 10.0f);
+        
+        bool loadResult = _saveManager.load();
 
+        if (!loadResult)
+        {
+            _player._credits = 0;
+            _player.stats._currentHealth = 50;
+            _player.stats._maxHealth = 50;
+            _player.stats._healthLevel = 1;
+            _saveManager.Save();
+            GD.Print("First time save");
+        }
+        
+        //_saveManager.Save();
+        
+        _uiManager.Main_SetCreditsText(_player._credits);
+    }
+    
     public void ActivatePause()
     {
         
@@ -49,7 +64,7 @@ public partial class SceneManager : Node
 
     public void UpdateGameUI()
     {
-        _uiManager.Game_SetHealthBarCurrent(_player.GetCurrentHealth());
+        _uiManager.Game_SetHealthBarCurrent( _player.GetCurrentHealth());
     }
 
     public void GameOver()
@@ -59,7 +74,7 @@ public partial class SceneManager : Node
         _enemySpawner.StopTimer();
 
         int tempCredits = _score / 10;
-        GameData.Instance.data["Credits"] = GameData.Instance.data["Credits"].AsInt32() + tempCredits;
+       _player._credits += tempCredits;
         
         //Update UI
         _uiManager.SetGameUIState(false);
@@ -67,7 +82,7 @@ public partial class SceneManager : Node
        
         _uiManager.Result_SetScoreText(_score);
         _uiManager.Result_SetCreditsEarnedText(tempCredits);
-        _uiManager.Result_SetTotalCreditsText(GameData.Instance.credits);
+        _uiManager.Result_SetTotalCreditsText(_player._credits);
         
     }
 

@@ -3,6 +3,7 @@ using System;
 
 public partial class PlayerController : CharacterBody3D
 {
+    public static PlayerController Instance { get; private set; }
     [Signal] 
     public delegate void PauseSignalEventHandler();
 
@@ -15,22 +16,22 @@ public partial class PlayerController : CharacterBody3D
     [Signal]
     public delegate void EnemyDefeatedEventHandler();
     
-    
-    [Export] private float speed;
     [Export] private bool takingInput;
     [Export] private Node3D bulletPosition;
     [Export] private PackedScene bulletPrefab;
 
-    [ExportCategory("Player Stats")] 
-    [Export] private int currentHealth;
-    [Export] private int maxHealth;
-    
+    [ExportCategory("Player Stats")]
+    [Export] public int _credits = 0;
+    [Export] public Player_Stats stats;
+
     private Vector3 targetVelocity = Vector3.Zero;
     private Vector3 direction;
     
     public override void _Ready()
     {
-        
+
+        Instance = this;
+
     }
 
     public override void _Process(double delta)
@@ -46,8 +47,8 @@ public partial class PlayerController : CharacterBody3D
             
             CollectInput();
             
-            targetVelocity.X = direction.X * speed;
-            targetVelocity.Z = direction.Z * speed;
+            targetVelocity.X = direction.X * stats._speed;
+            targetVelocity.Z = direction.Z * stats._speed;
 
             Velocity = targetVelocity;
             
@@ -126,10 +127,10 @@ public partial class PlayerController : CharacterBody3D
             //enemy.Position = new Vector3(10.0f, 10.0f, 10.0f);
             
             //take damage
-            currentHealth -= 10;
+            stats._currentHealth -= 10;
             
             //Check currentHealth
-            if (currentHealth <= 0)
+            if (stats._currentHealth <= 0)
             {
                 GD.Print("Player has died");
                 takingInput = false;
@@ -153,12 +154,12 @@ public partial class PlayerController : CharacterBody3D
     
     public int GetCurrentHealth()
     {
-        return currentHealth;
+        return stats._currentHealth;
     }
 
     public int GetMaxHealth()
     {
-        return maxHealth;
+        return stats._maxHealth;
     }
 
     #endregion
@@ -167,12 +168,12 @@ public partial class PlayerController : CharacterBody3D
 
     public void SetCurrentHealth(int newCurrent)
     {
-        currentHealth = newCurrent;
+        stats._currentHealth = newCurrent;
     }
 
     public void SetMaxHealth(int newMax)
     {
-        maxHealth = newMax;
+        stats._maxHealth = newMax;
     }
     
     public void SetTakingInput(bool state)
@@ -182,7 +183,7 @@ public partial class PlayerController : CharacterBody3D
 
     public void SetSpeed(float newSpeed)
     {
-        speed = newSpeed;
+        stats._speed = newSpeed;
     }
 
     #endregion

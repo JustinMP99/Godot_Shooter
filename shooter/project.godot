@@ -21,6 +21,7 @@ config/icon="res://Art/Sprites/icon.svg"
 
 SaveManager="*res://Code/Scripts/Save System/SaveManager.cs"
 GameData="*res://Code/Scripts/Save System/GameData.cs"
+Player="*res://Level/Prefabs/Player.tscn"
 
 [display]
 

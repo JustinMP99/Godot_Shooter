@@ -16,12 +16,12 @@ public partial class UIManager
         _shopUIGroup.Visible = state;
     }
 
-    public void SetShopCreditsText(int newCredits)
+    public void Shop_SetCreditsText(int newCredits)
     {
         _shopCreditsLabel.Text = newCredits.ToString();
     }
 
-    public void SetHealthLevelText(int currentLevel, int maxLevel)
+    public void Shop_SetHealthLevelText(int currentLevel, int maxLevel)
     {
         _shopHealthLevelLabel.Text = currentLevel.ToString() + "/" + maxLevel.ToString();
     }

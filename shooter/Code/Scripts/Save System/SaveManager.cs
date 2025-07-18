@@ -17,8 +17,18 @@ public partial class SaveManager : Node
     public void Save()
     {
 
+        PlayerController tempPlayer = PlayerController.Instance;
+        Godot.Collections.Dictionary tempData = new Dictionary();
+        tempData = new Dictionary()
+        {
+            {"Credits", tempPlayer._credits},
+            {"HealthLevel", tempPlayer.stats._healthLevel},
+            {"CurrentHealth", tempPlayer.stats._currentHealth},
+            {"MaxHealth", tempPlayer.stats._maxHealth},
+        };
+        
         //Convert data dictionary to string for json file
-        string json = Json.Stringify(GameData.Instance.data);
+        string json = Json.Stringify(tempData);
 
         GD.Print(json);
         
@@ -35,19 +45,24 @@ public partial class SaveManager : Node
         //Join the globalized path with the save folder + file
         path = Path.Join(path, "/Saves/savegame.json");
         File.WriteAllText(path, json);
-        
+
+        tempData = null;
+
     }
 
-    public void load()
+    public bool load()
     {
+        
+        PlayerController tempPlayer = PlayerController.Instance;
         string data = string.Empty;
 
         string path = ProjectSettings.GlobalizePath("user://");
         
         if (!File.Exists(path + "/Saves/savegame.json"))
         {
-
-            return;
+            
+            //If the file doesn't exist, consider this the first time playing
+            return false;
 
         }
 
@@ -62,17 +77,18 @@ public partial class SaveManager : Node
         if (error != Error.Ok)
         {
             GD.Print(error);
-            return;
+            return false;
         }
 
         Godot.Collections.Dictionary tempData = (Godot.Collections.Dictionary)jsonLoader.Data;
 
         //GameData.Instance.data = tempData;
-        
-        GameData.Instance.data["Credits"] = tempData["Credits"];
-        GameData.Instance.data["WeaponLevel"] = tempData["WeaponLevel"];
-        GameData.Instance.data["CurrentHealthLevel"] = tempData["CurrentHealthLevel"];
-        GameData.Instance.data["MaxHealthLevel"] = tempData["MaxHealthLevel"];
+        tempPlayer._credits = tempData["Credits"].AsInt32();
+        tempPlayer.stats._healthLevel = tempData["HealthLevel"].AsInt32();
+        tempPlayer.stats._maxHealth = tempData["MaxHealth"].AsInt32();
+        tempPlayer.stats._currentHealth = tempPlayer.stats._maxHealth;
+
+        return true;
 
     }
     

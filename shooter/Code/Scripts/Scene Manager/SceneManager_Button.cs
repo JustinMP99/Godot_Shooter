@@ -18,16 +18,13 @@ public partial class SceneManager
         _score = 0;
         
         _uiManager.Game_SetScoreText(_score);
-        
-        //Create Player
-        _player = _playerScene.Instantiate() as PlayerController;
-        _levelNode.AddChild(_player);
+        _player.Reparent(_levelNode);
         _player.Position = _startPosition.Position;
         _player.SetTakingInput(true);
         _player.SetSpeed(8.0f);
         
         
-        if (_player == null)
+        if ( _player == null)
         {
             GD.Print("Player is null");
         }
@@ -40,8 +37,8 @@ public partial class SceneManager
         
 
         //Set UI Data
-        _uiManager.Game_SetHealthBarCurrent(_player.GetCurrentHealth());
-        _uiManager.Game_SetHealthBarMax(_player.GetMaxHealth());
+        _uiManager.Game_SetHealthBarCurrent( _player.GetCurrentHealth());
+        _uiManager.Game_SetHealthBarMax( _player.GetMaxHealth());
         
         //Start Timer
         _enemySpawner.StartTimer();
@@ -59,10 +56,9 @@ public partial class SceneManager
         //Set Main UI State
         _uiManager.SetMainUIState(false);
         
-        
         //Set Shop UI Data
-        _uiManager.SetShopCreditsText(GameData.Instance.data["Credits"].AsInt32());
-        
+        _uiManager.Shop_SetCreditsText(_player._credits);
+        _uiManager.Shop_SetHealthLevelText(_player.stats._healthLevel, 5);
         
         //Set Shop UI State
         _uiManager.SetShopUIState(true);
@@ -92,8 +88,8 @@ public partial class SceneManager
     {
         
         //Destroy Player Object
-        _player.QueueFree();
-        
+        //PlayerController.Instance.QueueFree();
+        _player.Position = new Vector3(0.0f, 0.0f, 10.0f);
         //Destroy all enemies
         
         //Set UI States
@@ -115,21 +111,24 @@ public partial class SceneManager
     private void Result_RestartButtonFunction()
     {
 
-        _saveManager.Save();
+        _player.stats._currentHealth = _player.stats._maxHealth;
         
+        _saveManager.Save();
         
     }
 
     private void Result_MainMenuButtonFunction()
     {
-
-        _saveManager.Save();
         
-        _uiManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
+        _uiManager.Main_SetCreditsText(_player._credits);
+
+        _player.stats._currentHealth = _player.stats._maxHealth;
         
         _uiManager.SetResultUIState(false);
+        
         _uiManager.SetMainUIState(true);
         
+        _saveManager.Save();
     }
 
     private void Result_QuitButtonFunction()
@@ -150,7 +149,7 @@ public partial class SceneManager
 
         _uiManager.SetShopUIState(false);
         
-        _uiManager.Main_SetCreditsText(GameData.Instance.data["Credits"].AsInt32());
+        _uiManager.Main_SetCreditsText(_player._credits);
         
         _uiManager.SetMainUIState(true);
 
@@ -159,12 +158,36 @@ public partial class SceneManager
     private void Shop_UpgradeHealthButtonFunction()
     {
 
-        if (GameData.Instance.data["HealthLevel"].AsInt32() != 5)
+        if (_player.stats._healthLevel != 5)
         {
-            GameData.Instance.data["HealthLevel"] = GameData.Instance.data["HealthLevel"].AsInt32() + 1;
+
+            switch (_player.stats._healthLevel)
+            {
+                
+                case 1:
+
+                    _player._credits -= 50;
+                    
+                    break;
+                
+                case 2:
+                    _player._credits -= 100;
+                    break;
+                
+                case 3:
+                    _player._credits -= 150;
+                    break;
+                case 4:
+                    _player._credits -= 200;
+                    break;
+            }
+           
+            _player.stats._healthLevel++;
             _player.SetMaxHealth(_player.GetMaxHealth() + 50);
             _player.SetCurrentHealth(_player.GetMaxHealth());
-            //_uiManager.SetSho
+            _uiManager.Shop_SetHealthLevelText(_player.stats._healthLevel, 5);
+            _uiManager.Shop_SetCreditsText(_player._credits);
+            _saveManager.Save();
         }
         
     }
