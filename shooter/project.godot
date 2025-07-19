@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Godot Shooter"
+config/name="infiniSpace"
 config/description="A simple top-down shooter made in the Godot engine "
 config/version="0.0.1"
 run/main_scene="uid://b7eyggjoqoow4"
@@ -27,6 +27,7 @@ Player="*res://Level/Prefabs/Player.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/resizable=false
 
 [dotnet]
 

@@ -7,7 +7,7 @@ public partial class UIManager
     [Export] private CanvasLayer shopUIGroup;
     [Export] private Label shopCreditsLabel;
     [Export] private Label shopHealthLevelLabel;
-
+    [Export] private UpgradePanel healthUpgradePanel;
 
     public void SetShopUIState(bool state)
     {
@@ -21,6 +21,6 @@ public partial class UIManager
 
     public void Shop_SetHealthLevelText(int currentLevel, int maxLevel)
     {
-        shopHealthLevelLabel.Text = currentLevel.ToString() + "/" + maxLevel.ToString();
+        healthUpgradePanel.SetLevelLabel(currentLevel, maxLevel);
     }
 }
