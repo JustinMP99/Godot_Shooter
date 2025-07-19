@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=24 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
-[ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/Player.tscn" id="2_73044"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
 [ext_resource type="Script" uid="uid://cywkt1mp5oa0w" path="res://Code/Scripts/EnemySpawner.cs" id="4_73044"]
 [ext_resource type="PackedScene" uid="uid://cbok5qannybiy" path="res://Level/Prefabs/Enemy.tscn" id="5_y7ox6"]
@@ -9,7 +8,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_m0h58"]
 font_size = 58
-font_color = Color(0.522229, 0.74167, 0.901316, 1)
+font_color = Color(0.196173, 0.327057, 0.561027, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_y7ox6"]
 
@@ -47,6 +46,7 @@ font_size = 19
 
 [sub_resource type="Environment" id="Environment_2yd7s"]
 background_mode = 1
+background_color = Color(0.645797, 0.736832, 0.829202, 1)
 sky = SubResource("Sky_0o8l2")
 ambient_light_color = Color(0.118581, 0.118581, 0.118581, 1)
 ambient_light_energy = 9.62
@@ -68,37 +68,36 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("_saveManager", "_uiManager", "_enemySpawner", "_levelNode", "_startPosition")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition")]
 script = ExtResource("1_2yd7s")
-_saveManager = NodePath("../SaveManager")
-_uiManager = NodePath("../UI Manager")
-_enemySpawner = NodePath("../Enemy Spawner")
-_playerScene = ExtResource("2_73044")
-_levelNode = NodePath("../../=== LEVEL ===")
-_startPosition = NodePath("../../=== LEVEL ===/Start Position")
+saveManager = NodePath("../SaveManager")
+UIManager = NodePath("../UI Manager")
+enemySpawner = NodePath("../Enemy Spawner")
+levelNode = NodePath("../../=== LEVEL ===")
+startPosition = NodePath("../../=== LEVEL ===/Start Position")
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("_gameUIGroup", "_gameScoreLabel", "_healthBar", "_mainUIGroup", "_mainCreditsLabel", "pauseUIGroup", "_resultUIGroup", "_resultScoreLabel", "_resultCreditsEarnedLabel", "_resultTotalCreditsLabel", "_shopUIGroup", "_shopCreditsLabel", "_shopHealthLevelLabel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreLabel", "healthBar", "mainUIGroup", "mainCreditsLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel")]
 script = ExtResource("2_xj7ar")
-_gameUIGroup = NodePath("../../=== UI ===/--- game ---")
-_gameScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
-_healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
-_mainUIGroup = NodePath("../../=== UI ===/--- main ---")
-_mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
+gameUIGroup = NodePath("../../=== UI ===/--- game ---")
+gameScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
+healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
+mainUIGroup = NodePath("../../=== UI ===/--- main ---")
+mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
-_resultUIGroup = NodePath("../../=== UI ===/--- result ---")
-_resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
-_resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
-_resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
-_shopUIGroup = NodePath("../../=== UI ===/--- shop ---")
-_shopCreditsLabel = NodePath("../../=== UI ===/--- shop ---/Credits Label")
-_shopHealthLevelLabel = NodePath("../../=== UI ===/--- shop ---/Health Level Label")
+resultUIGroup = NodePath("../../=== UI ===/--- result ---")
+resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
+resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
+resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
+shopUIGroup = NodePath("../../=== UI ===/--- shop ---")
+shopCreditsLabel = NodePath("../../=== UI ===/--- shop ---/Credits Label")
+shopHealthLevelLabel = NodePath("../../=== UI ===/--- shop ---/Health Level Label")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
 spawnTimer = NodePath("Timer")
 enemyPrefab = ExtResource("5_y7ox6")
 enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
-desiredEnemies = 200
+desiredEnemies = 300
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
 wait_time = 0.5
@@ -109,7 +108,6 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -471,6 +469,7 @@ environment = SubResource("Environment_2yd7s")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 0.911173, 0.412023, 0, -0.412023, 0.911173, 0, 24.9809, 0)
+light_color = Color(0.735825, 0.696707, 0.555465, 1)
 
 [node name="Start Position" type="Node3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84457)

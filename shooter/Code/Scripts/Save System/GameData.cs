@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Godot.Collections;
+
 public partial class GameData : Node
 {
     public static GameData Instance { get; private set; }
@@ -11,12 +12,12 @@ public partial class GameData : Node
 
     public Godot.Collections.Dictionary data = new Dictionary()
     {
-        {"Credits", 0},
-        {"WeaponLevel", 1},
-        {"CurrentHealthLevel", 1},
-        {"MaxHeathLevel", 5}
+        { "Credits", 0 },
+        { "WeaponLevel", 1 },
+        { "CurrentHealthLevel", 1 },
+        { "MaxHeathLevel", 5 }
     };
-    
+
     public override void _Ready()
     {
         Instance = this;

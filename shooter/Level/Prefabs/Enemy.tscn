@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbok5qannybiy"]
+[gd_scene load_steps=6 format=3 uid="uid://cbok5qannybiy"]
 
 [ext_resource type="Script" uid="uid://qtihgjyqwxdg" path="res://Code/Scripts/EnemyController.cs" id="1_npp7k"]
+[ext_resource type="Resource" uid="uid://doj18tmg033sd" path="res://Code/Resources/EnemyStats_Base.tres" id="2_00bo2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pbibn"]
 
@@ -13,7 +14,7 @@ collision_layer = 2
 collision_mask = 4
 freeze = true
 script = ExtResource("1_npp7k")
-speed = 5.0
+Stats = ExtResource("2_00bo2")
 area = NodePath("Area3D")
 collider = NodePath("Area3D/CollisionShape3D")
 

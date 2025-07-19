@@ -4,7 +4,10 @@ using System;
 public partial class PlayerController : CharacterBody3D
 {
     public static PlayerController Instance { get; private set; }
-    [Signal] 
+
+    #region Signals
+
+    [Signal]
     public delegate void PauseSignalEventHandler();
 
     [Signal]
@@ -12,104 +15,102 @@ public partial class PlayerController : CharacterBody3D
 
     [Signal]
     public delegate void PlayerDiedEventHandler();
-    
+
     [Signal]
     public delegate void EnemyDefeatedEventHandler();
-    
+
+    #endregion
+
     [Export] private bool takingInput;
     [Export] private Node3D bulletPosition;
     [Export] private PackedScene bulletPrefab;
 
-    [ExportCategory("Player Stats")]
-    [Export] public int _credits = 0;
-    [Export] public Player_Stats stats;
-
+    [Export] private AudioStreamPlayer shootSound;
+    
+    
+    [ExportCategory("Player Stats")] 
+    [Export] public int Credits { get; set; }
+    [Export] public Player_Stats Stats;
     private Vector3 targetVelocity = Vector3.Zero;
     private Vector3 direction;
-    
+
     public override void _Ready()
     {
-
         Instance = this;
-
     }
 
     public override void _Process(double delta)
     {
-        
     }
 
     public override void _PhysicsProcess(double delta)
     {
-
         if (takingInput)
         {
-            
             CollectInput();
-            
-            targetVelocity.X = direction.X * stats._speed;
-            targetVelocity.Z = direction.Z * stats._speed;
+
+            targetVelocity.X = direction.X * Stats.Speed;
+            targetVelocity.Z = direction.Z * Stats.Speed;
 
             Velocity = targetVelocity;
-            
-            MoveAndSlide();
-            
-        }
-        
-    }
 
+            MoveAndSlide();
+        }
+    }
 
     private void CollectInput()
     {
         direction = Vector3.Zero;
-        
+
         if (Input.IsActionPressed("Move_Left"))
         {
             direction.X -= 1.0f;
         }
+
         if (Input.IsActionPressed("Move_Right"))
         {
             direction.X += 1.0f;
         }
+
         if (Input.IsActionJustPressed("Shoot"))
         {
             ShootFunction();
         }
+
         if (Input.IsActionJustPressed("Pause"))
         {
             PauseFunction();
         }
-        if (direction !=  Vector3.Zero)
+
+        if (direction != Vector3.Zero)
         {
             direction = direction.Normalized();
         }
     }
-    
+
     private void PauseFunction()
     {
-        
         GD.Print("Emitting Pause Signal");
         //Emit Signal
         EmitSignal(SignalName.PauseSignal);
-
     }
 
     private void ShootFunction()
     {
-        
         GD.Print("Shooting");
         //Instantiate Bullet
         //RigidBody3D bullet = bulletPrefab.Instantiate() as RigidBody3D;
         Bullet bullet = bulletPrefab.Instantiate() as Bullet;
         bullet.FinalShot += EnemyDefeat;
         
+        shootSound.Play();
+
         //Set Child
-        
+
         //Set Position
         bullet.Position = bulletPosition.GlobalPosition;
-        
-        GetTree().Root.AddChild(bullet);
 
+        GetTree().Root.AddChild(bullet);
     }
 
     private void EnemyDefeat()
@@ -119,22 +120,21 @@ public partial class PlayerController : CharacterBody3D
 
     private void OnBodyEntered(Node3D body)
     {
-
         if (body is EnemyController enemy)
         {
             GD.Print("Collided with Enemy!");
             enemy.DisableEnemy();
             //enemy.Position = new Vector3(10.0f, 10.0f, 10.0f);
-            
+
             //take damage
-            stats._currentHealth -= 10;
-            
+            Stats.CurrentHealth -= 10;
+
             //Check currentHealth
-            if (stats._currentHealth <= 0)
+            if (Stats.CurrentHealth <= 0)
             {
                 GD.Print("Player has died");
                 takingInput = false;
-            
+
                 this.QueueFree();
                 //Game Over
                 EmitSignal(SignalName.PlayerDied);
@@ -144,22 +144,20 @@ public partial class PlayerController : CharacterBody3D
                 GD.Print("Player has taken damage");
                 //Update UI
                 EmitSignal(SignalName.PlayerHit);
-
             }
         }
-        
     }
 
     #region Getter
-    
+
     public int GetCurrentHealth()
     {
-        return stats._currentHealth;
+        return Stats.CurrentHealth;
     }
 
     public int GetMaxHealth()
     {
-        return stats._maxHealth;
+        return Stats.MaxHealth;
     }
 
     #endregion
@@ -168,14 +166,14 @@ public partial class PlayerController : CharacterBody3D
 
     public void SetCurrentHealth(int newCurrent)
     {
-        stats._currentHealth = newCurrent;
+        Stats.CurrentHealth = newCurrent;
     }
 
     public void SetMaxHealth(int newMax)
     {
-        stats._maxHealth = newMax;
+        Stats.MaxHealth = newMax;
     }
-    
+
     public void SetTakingInput(bool state)
     {
         takingInput = state;
@@ -183,9 +181,8 @@ public partial class PlayerController : CharacterBody3D
 
     public void SetSpeed(float newSpeed)
     {
-        stats._speed = newSpeed;
+        Stats.Speed = newSpeed;
     }
 
     #endregion
-    
 }

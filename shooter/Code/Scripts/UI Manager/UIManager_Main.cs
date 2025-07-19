@@ -3,19 +3,17 @@ using System;
 
 public partial class UIManager
 {
-    
     [ExportCategory("Main UI")] 
-    [Export] private CanvasLayer _mainUIGroup;
-    [Export] private Label _mainCreditsLabel;
+    [Export] private CanvasLayer mainUIGroup;
+    [Export] private Label mainCreditsLabel;
 
     public void SetMainUIState(bool state)
     {
-        _mainUIGroup.Visible = state;
+        mainUIGroup.Visible = state;
     }
 
     public void Main_SetCreditsText(int newCredits)
     {
-        _mainCreditsLabel.Text = "Credits: " + newCredits.ToString();
+        mainCreditsLabel.Text = "Credits: " + newCredits.ToString();
     }
-    
 }

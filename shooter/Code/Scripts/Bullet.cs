@@ -21,6 +21,8 @@ public partial class Bullet : RigidBody3D
     /// Speed at which the bullet travels.
     /// </summary>
     [Export] private float speed;
+
+    [Export] private int damage;
     
     /// <summary>
     /// Signal emitted when the bullet hits an enemy and is about to be destroyed.
@@ -33,7 +35,6 @@ public partial class Bullet : RigidBody3D
     /// </summary>
     public override void _Ready()
     {
-        
     }
 
     /// <summary>
@@ -54,7 +55,7 @@ public partial class Bullet : RigidBody3D
             if (lifetime >= maxLifetime)
             {
                 this.QueueFree();
-            }   
+            }
         }
     }
 
@@ -68,8 +69,13 @@ public partial class Bullet : RigidBody3D
         if (node is EnemyController enemy)
         {
             GD.Print("Hit Enemy!");
-            enemy.DisableEnemy();
-            EmitSignal(SignalName.FinalShot);
+            bool KilledEnemy = enemy.TakeDamage(damage);
+            if (KilledEnemy)
+            {
+                enemy.DisableEnemy();
+                EmitSignal(SignalName.FinalShot);
+            }
+            
             this.QueueFree();
         }
     }
