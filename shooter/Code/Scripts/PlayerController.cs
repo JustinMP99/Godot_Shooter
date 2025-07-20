@@ -134,8 +134,7 @@ public partial class PlayerController : CharacterBody3D
             {
                 GD.Print("Player has died");
                 takingInput = false;
-
-                this.QueueFree();
+                this.Position = new Vector3(0.0f, 0.0f, 10.0f);
                 //Game Over
                 EmitSignal(SignalName.PlayerDied);
             }

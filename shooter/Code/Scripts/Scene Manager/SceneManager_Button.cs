@@ -21,8 +21,8 @@ public partial class SceneManager
         player.Position = startPosition.Position;
         player.SetTakingInput(true);
         player.SetSpeed(8.0f);
-
-
+        player.SetCurrentHealth(player.GetMaxHealth());
+        
         if (player == null)
         {
             GD.Print("Player is null");
@@ -34,13 +34,13 @@ public partial class SceneManager
         player.PlayerDied += GameOver;
         player.EnemyDefeated += DefeatedEnemy;
 
-
         //Set UI Data
-        UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
         UIManager.Game_SetHealthBarMax(player.GetMaxHealth());
+        UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
 
         //Start Timer
         enemySpawner.StartTimer();
+        
     }
 
     public void Main_QuitGameFunction()

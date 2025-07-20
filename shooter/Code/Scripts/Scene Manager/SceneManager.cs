@@ -32,6 +32,7 @@ public partial class SceneManager : Node
         
         player = PlayerController.Instance;
         player.Position = new Vector3(0.0f, 0.0f, 10.0f);
+        player.SetTakingInput(false);
 
         bool loadResult = saveManager.load();
 

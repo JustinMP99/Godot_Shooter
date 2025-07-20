@@ -48,6 +48,7 @@ sky = SubResource("Sky_0o8l2")
 ambient_light_color = Color(0.118581, 0.118581, 0.118581, 1)
 ambient_light_energy = 9.62
 fog_mode = 1
+fog_density = 1.0
 fog_depth_curve = 1.86607
 fog_depth_begin = 0.0
 volumetric_fog_emission = Color(0.585062, 0.585062, 0.585062, 1)
