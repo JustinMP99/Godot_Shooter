@@ -11,6 +11,7 @@ public partial class SceneManager : Node
 
     [ExportCategory("Round Variables")]
     [Export] private int round;
+    [Export] private Timer roundTimer;
     
     [ExportCategory("Player Variables")] 
     [Export] private int score;
@@ -33,7 +34,14 @@ public partial class SceneManager : Node
         player = PlayerController.Instance;
         player.Position = new Vector3(0.0f, 0.0f, 10.0f);
         player.SetTakingInput(false);
-
+        player.Reparent(levelNode);
+        
+        //Assign Signal Functions
+        player.PauseSignal += ActivatePause;
+        player.PlayerHit += UpdateGameUI;
+        player.PlayerDied += GameOver;
+        player.EnemyDefeated += DefeatedEnemy;
+        
         bool loadResult = saveManager.load();
 
         if (!loadResult)
@@ -51,6 +59,24 @@ public partial class SceneManager : Node
         UIManager.Main_SetCreditsText(player.Credits);
     }
 
+    #region Timer Functions
+
+
+    private void StartRoundTimer()
+    {
+        roundTimer.SetProcess(true);
+        roundTimer.Start();
+    }
+    
+    private void GameBegin()
+    {
+        
+    }
+
+    #endregion
+
+    #region Signal Functions
+    
     public void ActivatePause()
     {
         UIManager.SetGameUIState(false);
@@ -91,4 +117,8 @@ public partial class SceneManager : Node
         //Update UI
         UIManager.Game_SetScoreText(score);
     }
+
+
+    #endregion
+    
 }

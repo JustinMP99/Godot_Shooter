@@ -78,6 +78,10 @@ enemySpawner = NodePath("../Enemy Spawner")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 
+[node name="Start Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
+wait_time = 3.0
+one_shot = true
+
 [node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreLabel", "healthBar", "mainUIGroup", "mainCreditsLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel")]
 script = ExtResource("2_xj7ar")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
@@ -106,7 +110,7 @@ speedstrStats = ExtResource("6_tw4tw")
 baseStats = ExtResource("7_1nw18")
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
-wait_time = 0.5
+wait_time = 3.0
 
 [node name="SaveManager" type="Node" parent="=== MANAGER ==="]
 script = ExtResource("6_0o8l2")

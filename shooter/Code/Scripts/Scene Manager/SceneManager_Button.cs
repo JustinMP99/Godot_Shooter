@@ -7,36 +7,30 @@ public partial class SceneManager
 
     public void Main_StartGameFunction()
     {
-        //Disable Main UI
+        //Set UI states
         UIManager.SetMainUIState(false);
-
-        //Enable Game UI
         UIManager.SetGameUIState(true);
 
+        //Reset temp game values
         score = 0;
         round = 1;
 
-        UIManager.Game_SetScoreText(score);
-        player.Reparent(levelNode);
+        //Configure Player data
         player.Position = startPosition.Position;
         player.SetTakingInput(true);
-        player.SetSpeed(8.0f);
         player.SetCurrentHealth(player.GetMaxHealth());
-        
         if (player == null)
         {
             GD.Print("Player is null");
         }
-
-        //Assign Signal Functions
-        player.PauseSignal += ActivatePause;
-        player.PlayerHit += UpdateGameUI;
-        player.PlayerDied += GameOver;
-        player.EnemyDefeated += DefeatedEnemy;
-
+    
+        //Start timer
+        
+        
         //Set UI Data
         UIManager.Game_SetHealthBarMax(player.GetMaxHealth());
         UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
+        UIManager.Game_SetScoreText(score);
 
         //Start Timer
         enemySpawner.StartTimer();
