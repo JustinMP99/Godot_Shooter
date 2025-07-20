@@ -10,6 +10,11 @@ public partial class EnemySpawner : Node
     [Export] private int desiredEnemies;
     private List<EnemyController> enemyList;
 
+    [ExportCategory("Enemy Resources")] 
+    [Export] private EnemyStats tankStats;
+    [Export] private EnemyStats speedstrStats;
+    [Export] private EnemyStats baseStats;
+    
     private int currentListIter;
     private int maxListIter;
 
@@ -32,29 +37,20 @@ public partial class EnemySpawner : Node
             {
                 
                 case 1:
-
-                    enemy.Stats.Class = EnemyClass.Base_Unit;
-                    enemy.Stats.MaxHealth = 100;
-                    enemy.Stats.CurrentHealth = 100;
-                    enemy.Stats.Speed = 5.0f;
+                    
+                    enemy.Stats = baseStats.Duplicate() as EnemyStats;
 
                     break;
                     
                 case 2:
 
-                    enemy.Stats.Class = EnemyClass.Speedstr_Unit;
-                    enemy.Stats.MaxHealth = 50;
-                    enemy.Stats.CurrentHealth = 50;
-                    enemy.Stats.Speed = 8.0f;
+                    enemy.Stats = speedstrStats.Duplicate() as EnemyStats;
                     
                     break;
                 
                 case 3:
 
-                    enemy.Stats.Class = EnemyClass.Tank_Unit;
-                    enemy.Stats.MaxHealth = 200;
-                    enemy.Stats.CurrentHealth = 200;
-                    enemy.Stats.Speed = 3.0f;
+                    enemy.Stats = tankStats.Duplicate() as EnemyStats;
                     
                     break;
                 

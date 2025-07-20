@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3 uid="uid://b2xqi00aqgqxk"]
+
+[ext_resource type="Script" uid="uid://gjdac44paj5f" path="res://Code/Resources/EnemyStats.cs" id="1_trwje"]
+
+[resource]
+script = ExtResource("1_trwje")
+Class = 2
+Speed = 8.0
+CurrentHealth = 50
+MaxHealth = 50
+metadata/_custom_type_script = "uid://gjdac44paj5f"

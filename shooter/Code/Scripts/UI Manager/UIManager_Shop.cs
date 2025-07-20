@@ -16,7 +16,7 @@ public partial class UIManager
 
     public void Shop_SetCreditsText(int newCredits)
     {
-        shopCreditsLabel.Text = newCredits.ToString();
+        shopCreditsLabel.Text = "Credits: " + newCredits.ToString();
     }
 
     public void Shop_SetHealthLevelText(int currentLevel, int maxLevel)

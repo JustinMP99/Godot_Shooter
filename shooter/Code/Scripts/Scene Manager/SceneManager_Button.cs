@@ -14,6 +14,7 @@ public partial class SceneManager
         UIManager.SetGameUIState(true);
 
         score = 0;
+        round = 1;
 
         UIManager.Game_SetScoreText(score);
         player.Reparent(levelNode);
@@ -47,6 +48,11 @@ public partial class SceneManager
         GetTree().Quit();
     }
 
+    public void Main_SettingsButtonFunction()
+    {
+        
+    }
+    
     public void Main_ShopButtonFunction()
     {
         //Set Main UI State

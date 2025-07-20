@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dooakmcxnot8e"]
+
+[ext_resource type="Shader" uid="uid://ca7n66ojut7dk" path="res://Code/Shaders/EnemyMaterial.gdshader" id="1_vtf28"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_vtf28")

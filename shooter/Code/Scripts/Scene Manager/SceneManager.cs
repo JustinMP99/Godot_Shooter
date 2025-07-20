@@ -9,7 +9,10 @@ public partial class SceneManager : Node
     [Export] private Node levelNode;
     [Export] private Node3D startPosition;
 
-    [ExportCategory("Player Data")] 
+    [ExportCategory("Round Variables")]
+    [Export] private int round;
+    
+    [ExportCategory("Player Variables")] 
     [Export] private int score;
     private PlayerController player;
 
@@ -25,6 +28,8 @@ public partial class SceneManager : Node
         //Spawner Startup
         enemySpawner.Startup();
 
+        round = 0;
+        
         player = PlayerController.Instance;
         player.Position = new Vector3(0.0f, 0.0f, 10.0f);
 
