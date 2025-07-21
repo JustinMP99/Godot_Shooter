@@ -1,16 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyraxlfot6oqf"]
+[gd_scene load_steps=10 format=3 uid="uid://dyraxlfot6oqf"]
 
 [ext_resource type="Script" uid="uid://6q2aq0nj86e3" path="res://Code/Scripts/PlayerController.cs" id="1_n220g"]
 [ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/Bullet.tscn" id="2_1gt8s"]
 [ext_resource type="Resource" uid="uid://dasm4vfey6ngs" path="res://Code/Resources/PlayerStats.tres" id="3_uvim0"]
+[ext_resource type="ArrayMesh" uid="uid://c3k5uig2p4ao5" path="res://Art/Models/PlayerShip.obj" id="4_3mocp"]
 [ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Sounds/Shoot.wav" id="4_5ajbo"]
+[ext_resource type="Texture2D" uid="uid://dcm2tilscafne" path="res://Art/Models/PlayerShip.png" id="5_odanr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_n220g"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1gt8s"]
-albedo_color = Color(0.270588, 1, 1, 1)
+albedo_texture = ExtResource("5_odanr")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
 
@@ -27,7 +27,8 @@ Stats = ExtResource("3_uvim0")
 shape = SubResource("BoxShape3D_mprxd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_n220g")
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0.112739, 0.920846, 0.0185141)
+mesh = ExtResource("4_3mocp")
 surface_material_override/0 = SubResource("StandardMaterial3D_1gt8s")
 
 [node name="Bullet Position" type="Node3D" parent="."]
