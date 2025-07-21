@@ -8,7 +8,12 @@ public partial class SceneManager : Node
     [Export] private EnemySpawner enemySpawner;
     [Export] private Node levelNode;
     [Export] private Node3D startPosition;
-
+    
+    
+    [Export] private Timer introTimer; //Counts down from 3 when the player presses the start button
+    private int introCount; // Counts the seconds on the intro timer
+    
+    
     [ExportCategory("Round Variables")]
     [Export] private int round;
     [Export] private Timer roundTimer;
@@ -29,12 +34,12 @@ public partial class SceneManager : Node
         //Spawner Startup
         enemySpawner.Startup();
 
+        score = 0;
         round = 0;
         
         player = PlayerController.Instance;
         player.Position = new Vector3(0.0f, 0.0f, 10.0f);
         player.SetTakingInput(false);
-        player.Reparent(levelNode);
         
         //Assign Signal Functions
         player.PauseSignal += ActivatePause;
@@ -54,22 +59,46 @@ public partial class SceneManager : Node
             GD.Print("First time save");
         }
 
-        //_saveManager.Save();
-
         UIManager.Main_SetCreditsText(player.Credits);
+        
     }
 
-    #region Timer Functions
-
-
-    private void StartRoundTimer()
+    public override void _Process(double delta)
     {
-        roundTimer.SetProcess(true);
-        roundTimer.Start();
+        
     }
     
-    private void GameBegin()
+    #region Timer Functions
+    
+    private void StartIntroTimer()
     {
+        UIManager.Game_SetCountDownLabelState(true);
+        introCount = 3;
+        UIManager.Game_SetCountDownLabelText(introCount);
+        introTimer.Start();
+    }
+    
+    private void IntroTimerTimeout()
+    {
+        
+        //End round timer
+        introCount--;
+        if (introCount == 0)
+        {
+            UIManager.Game_SetCountDownLabelText("Round " + round);
+            introTimer.Start();
+        }
+        else if (introCount == -1)
+        {
+            //End intro timer and begin game
+            UIManager.Game_SetCountDownLabelState(false);
+            enemySpawner.StartTimer();
+        }
+        else
+        {
+            UIManager.Game_SetCountDownLabelText(introCount);
+            introTimer.Start();
+        }
         
     }
 
@@ -115,7 +144,7 @@ public partial class SceneManager : Node
         //Increase Score
         score += 100;
         //Update UI
-        UIManager.Game_SetScoreText(score);
+        UIManager.Game_SetScoreValueText(score);
     }
 
 

@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_cj254")
-_speed = 8.0
-_healthLevel = 1
-_currentHealth = 0
-_maxHealth = 0
+HealthLevel = 0
+Speed = 8.0
+CurrentHealth = 0
+MaxHealth = 0
 metadata/_custom_type_script = "uid://bl0t7ymd5e3lt"

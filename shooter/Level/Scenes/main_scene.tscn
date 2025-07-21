@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=28 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -13,9 +13,8 @@
 [ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Fonts/TitleLabelSettings.tres" id="8_i5qe8"]
 [ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="9_2qg1q"]
 [ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Fonts/NormalLabelSettings.tres" id="10_5d42l"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_5d42l"]
-font_color = Color(0, 0, 0, 1)
+[ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Fonts/CountdownLabelSettings.tres" id="11_tw4tw"]
+[ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Fonts/GameScoreLabelSettings.tres" id="14_1nw18"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_5rw63"]
 
@@ -25,14 +24,8 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xj7ar"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_2yd7s"]
-font_size = 26
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xj7ar"]
 bg_color = Color(0, 0.698039, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_7j67u"]
-font_size = 135
 
 [sub_resource type="LabelSettings" id="LabelSettings_y7ox6"]
 font_size = 56
@@ -70,23 +63,25 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition", "introTimer", "roundTimer")]
 script = ExtResource("1_2yd7s")
 saveManager = NodePath("../SaveManager")
 UIManager = NodePath("../UI Manager")
 enemySpawner = NodePath("../Enemy Spawner")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
+introTimer = NodePath("Intro Timer")
+roundTimer = NodePath("Intro Timer")
 
-[node name="Start Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
-wait_time = 3.0
+[node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
 one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreLabel", "healthBar", "mainUIGroup", "mainCreditsLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreValueLabel", "healthBar", "countDownLabel", "mainUIGroup", "mainCreditsLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel")]
 script = ExtResource("2_xj7ar")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
-gameScoreLabel = NodePath("../../=== UI ===/--- game ---/Score Label")
+gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
 healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
+countDownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
@@ -136,20 +131,6 @@ label_settings = ExtResource("8_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Credits Label" type="Label" parent="=== UI ===/--- main ---"]
-anchors_preset = -1
-anchor_left = 0.287
-anchor_top = 0.844
-anchor_right = 0.711
-anchor_bottom = 0.894
-offset_left = 0.640015
-offset_top = 0.319946
-offset_right = 0.280029
-offset_bottom = 0.319946
-text = "Credits: 0"
-label_settings = SubResource("LabelSettings_5d42l")
-horizontal_alignment = 1
-
 [node name="Start Button" type="Button" parent="=== UI ===/--- main ---"]
 anchors_preset = -1
 anchor_left = 0.425
@@ -165,23 +146,25 @@ text = "Start"
 [node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---"]
 anchors_preset = -1
 anchor_left = 0.425
-anchor_top = 0.544
+anchor_top = 0.456
 anchor_right = 0.575
-anchor_bottom = 0.611
-offset_top = -63.68
-offset_right = -6.10352e-05
-offset_bottom = -63.92
+anchor_bottom = 0.522
+offset_top = -0.319977
+offset_right = -0.00012207
+offset_bottom = 0.160004
+theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "Upgrades"
 
 [node name="Options Button" type="Button" parent="=== UI ===/--- main ---"]
 anchors_preset = -1
 anchor_left = 0.425
-anchor_top = 0.456
+anchor_top = 0.544
 anchor_right = 0.575
-anchor_bottom = 0.522
-offset_top = 63.68
-offset_right = -6.10352e-05
-offset_bottom = 64.16
+anchor_bottom = 0.611
+offset_top = 0.319977
+offset_right = -0.00012207
+offset_bottom = 0.0799866
+theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "Options"
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- main ---"]
@@ -193,6 +176,7 @@ anchor_bottom = 0.7
 offset_top = 0.23999
 offset_right = -6.10352e-05
 offset_bottom = -3.05176e-05
+theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "Quit"
 
 [node name="How to Play Button" type="Button" parent="=== UI ===/--- main ---"]
@@ -205,7 +189,23 @@ offset_left = -512.0
 offset_top = 184.24
 offset_right = -512.0
 offset_bottom = 184.0
+theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "How to Play"
+
+[node name="Credits Label" type="Label" parent="=== UI ===/--- main ---"]
+anchors_preset = -1
+anchor_left = 0.287
+anchor_top = 0.844
+anchor_right = 0.711
+anchor_bottom = 0.894
+offset_left = 0.640015
+offset_top = 0.319946
+offset_right = 0.280029
+offset_bottom = 0.319946
+text = "Credits: 0"
+label_settings = ExtResource("10_5d42l")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Sub-title Label" type="Label" parent="=== UI ===/--- main ---"]
 anchors_preset = 7
@@ -220,7 +220,7 @@ offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Micro game created by Justin Philie"
-label_settings = SubResource("LabelSettings_5d42l")
+label_settings = ExtResource("10_5d42l")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -242,17 +242,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Credits Label" type="Label" parent="=== UI ===/--- upgrade ---"]
-anchors_preset = -1
-anchor_left = 0.406
-anchor_top = 0.189
-anchor_right = 0.587
-anchor_bottom = 0.233
-offset_left = 0.319946
-offset_top = -0.0800018
-offset_right = 0.640015
-offset_bottom = 0.23999
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 112.0
+offset_right = 136.0
+offset_bottom = 152.0
+grow_horizontal = 2
 text = "Credits: 0"
-label_settings = ExtResource("10_5d42l")
+label_settings = ExtResource("14_1nw18")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -583,12 +582,30 @@ text = "Quit"
 visible = false
 
 [node name="Score Label" type="Label" parent="=== UI ===/--- game ---"]
-anchors_preset = -1
-anchor_right = 0.287
-anchor_bottom = 0.1
-offset_right = 0.320007
-text = "Score: 0"
-label_settings = SubResource("LabelSettings_2yd7s")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.0
+offset_right = 49.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "Score"
+label_settings = ExtResource("14_1nw18")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score Value Label" type="Label" parent="=== UI ===/--- game ---"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 48.0
+offset_right = 50.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "0"
+label_settings = ExtResource("14_1nw18")
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Health Bar" type="ProgressBar" parent="=== UI ===/--- game ---"]
@@ -605,16 +622,15 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_xj7ar")
 show_percentage = false
 
 [node name="Countdown Label" type="Label" parent="=== UI ===/--- game ---"]
-visible = false
 anchors_preset = -1
 anchor_left = 0.2
-anchor_top = 0.117
+anchor_top = 0.156
 anchor_right = 0.8
-anchor_bottom = 0.502
-offset_top = -0.160004
-offset_bottom = -42.96
-text = "0"
-label_settings = SubResource("LabelSettings_7j67u")
+anchor_bottom = 0.419
+offset_top = -0.32
+offset_bottom = 0.319977
+text = "3"
+label_settings = ExtResource("11_tw4tw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -764,6 +780,7 @@ curve = SubResource("Curve3D_xj7ar")
 
 [node name="Enemy Container" type="Node3D" parent="=== LEVEL ==="]
 
+[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Intro Timer" to="=== MANAGER ===/Scene Manager" method="IntroTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]

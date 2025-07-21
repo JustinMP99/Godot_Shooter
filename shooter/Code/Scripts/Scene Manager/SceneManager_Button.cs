@@ -19,21 +19,19 @@ public partial class SceneManager
         player.Position = startPosition.Position;
         player.SetTakingInput(true);
         player.SetCurrentHealth(player.GetMaxHealth());
+        player.Reparent(levelNode);
         if (player == null)
         {
             GD.Print("Player is null");
         }
-    
-        //Start timer
-        
         
         //Set UI Data
         UIManager.Game_SetHealthBarMax(player.GetMaxHealth());
         UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
-        UIManager.Game_SetScoreText(score);
-
-        //Start Timer
-        enemySpawner.StartTimer();
+        UIManager.Game_SetScoreValueText(score);
+        
+        //Start timer
+        StartIntroTimer();
         
     }
 
@@ -42,7 +40,7 @@ public partial class SceneManager
         GetTree().Quit();
     }
 
-    public void Main_SettingsButtonFunction()
+    public void Main_OptionsButtonFunction()
     {
         
     }
