@@ -10,22 +10,17 @@ public partial class SceneManager
         //Set UI states
         UIManager.SetMainUIState(false);
         UIManager.SetGameUIState(true);
-
-        UIManager.Game_ShowRound();
         
         //Reset temp game values
         score = 0;
-        round = 1;
+        round = 0;
+        enemiesLeft = 10;
 
         //Configure Player data
         player.Position = startPosition.Position;
         player.SetTakingInput(true);
         player.SetCurrentHealth(player.GetMaxHealth());
         player.Reparent(levelNode);
-        if (player == null)
-        {
-            GD.Print("Player is null");
-        }
         
         //Set UI Data
         UIManager.Game_SetHealthBarMax(player.GetMaxHealth());

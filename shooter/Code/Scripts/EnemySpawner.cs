@@ -61,8 +61,16 @@ public partial class EnemySpawner : Node
             AddChild(enemy);
         }
     }
-    
 
+    public void DisableAllEnemies()
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            enemyList[i].DisableEnemy();
+        }
+    }
+    
+    
     private void OnTimerTimeout()
     {
         if (!Global.gamePaused)

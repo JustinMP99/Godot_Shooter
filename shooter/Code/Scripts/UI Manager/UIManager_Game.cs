@@ -3,14 +3,13 @@ using System;
 
 public partial class UIManager
 {
+    
     [ExportCategory("Game UI")]
     [Export] private CanvasLayer gameUIGroup;
     [Export] private Label gameScoreValueLabel;
     [Export] private ProgressBar healthBar;
-    [Export] private Label countDownLabel;
-
-    [Export] private Node gameMainSubGroup;
-    [Export] private Node gameRoundSubGroup;
+    [Export] private Label countdownLabel;
+    [Export] private Label roundLabel;
 
 
     public void SetGameUIState(bool state)
@@ -26,7 +25,7 @@ public partial class UIManager
         gameScoreValueLabel.Visible = false;
         
         //Show countdown/round label
-        countDownLabel.Visible = true;
+        //countdownLabel.Visible = true;
 
     }
     
@@ -34,16 +33,14 @@ public partial class UIManager
     {
         
         //Hide countdown/round label
-        countDownLabel.Visible = false;
+        countdownLabel.Visible = false;
         
         //Show healthbar, credits, etc
         
         healthBar.Visible = true;
         gameScoreValueLabel.Visible = true;
         
-
     }
-    
     
     public void Game_SetScoreValueText(int newScore)
     {
@@ -62,16 +59,32 @@ public partial class UIManager
 
     public void Game_SetCountDownLabelText(string timeVal)
     {
-        countDownLabel.Text = timeVal;
+        countdownLabel.Text = timeVal;
     }
     public void Game_SetCountDownLabelText(int timeVal)
     {
-        countDownLabel.Text = timeVal.ToString();
+        countdownLabel.Text = timeVal.ToString();
     }
-
     public void Game_SetCountDownLabelState(bool state)
     {
-        countDownLabel.Visible = state;
+        countdownLabel.Visible = state;
     }
+
+    public void Game_SetRoundLabelText(int round)
+    {
+        roundLabel.Text = "Round " + round.ToString();
+    }
+
+    public void Game_SetRoundLabelState(bool state)
+    {
+        roundLabel.Visible = state;
+    }
+
+    public void Game_SetHudState(bool state)
+    {
+        healthBar.Visible = state;
+        gameScoreValueLabel.Visible = state;
+    }
+    
     
 }

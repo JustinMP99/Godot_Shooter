@@ -9,13 +9,12 @@ public partial class SceneManager : Node
     [Export] private Node levelNode;
     [Export] private Node3D startPosition;
     
-    
     [Export] private Timer introTimer; //Counts down from 3 when the player presses the start button
     private int introCount; // Counts the seconds on the intro timer
     
-    
     [ExportCategory("Round Variables")]
     [Export] private int round;
+    private int enemiesLeft; //the amount of enemies that must be defeated to end the round
     [Export] private Timer roundTimer;
     
     [ExportCategory("Player Variables")] 
@@ -33,9 +32,6 @@ public partial class SceneManager : Node
 
         //Spawner Startup
         enemySpawner.Startup();
-
-        score = 0;
-        round = 0;
         
         player = PlayerController.Instance;
         player.Position = new Vector3(0.0f, 0.0f, 10.0f);
@@ -67,6 +63,19 @@ public partial class SceneManager : Node
     {
         
     }
+
+    #region Round Functions
+    
+    private void StartNewRound()
+    {
+        round++;
+        UIManager.Game_SetRoundLabelText(round);
+        UIManager.Game_SetRoundLabelState(true);
+        roundTimer.Start();
+        
+    }
+
+    #endregion
     
     #region Timer Functions
     
@@ -83,17 +92,10 @@ public partial class SceneManager : Node
         
         //End round timer
         introCount--;
-        if (introCount == 0)
+        if (introCount <= 0)
         {
-            UIManager.Game_SetCountDownLabelText("Round " + round);
-            introTimer.Start();
-        }
-        else if (introCount == -1)
-        {
-            //End intro timer and begin game
-            //UIManager.Game_SetCountDownLabelState(false);
-            UIManager.Game_HideRound();
-            enemySpawner.StartTimer();
+            UIManager.Game_SetCountDownLabelState(false);
+            StartNewRound();
         }
         else
         {
@@ -103,6 +105,12 @@ public partial class SceneManager : Node
         
     }
 
+    private void RoundTimerTimeout()
+    {
+        UIManager.Game_SetRoundLabelState(false);
+        enemySpawner.StartTimer();
+    }
+    
     #endregion
 
     #region Signal Functions
@@ -144,6 +152,17 @@ public partial class SceneManager : Node
     {
         //Increase Score
         score += 100;
+
+        enemiesLeft--;
+        if (enemiesLeft <= 0)
+        {
+            //End round
+            StartNewRound();
+            
+            enemySpawner.DisableAllEnemies();
+            
+        }
+        
         //Update UI
         UIManager.Game_SetScoreValueText(score);
     }

@@ -63,7 +63,7 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition", "introTimer")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition", "introTimer", "roundTimer")]
 script = ExtResource("1_2yd7s")
 saveManager = NodePath("../SaveManager")
 UIManager = NodePath("../UI Manager")
@@ -71,16 +71,22 @@ enemySpawner = NodePath("../Enemy Spawner")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 introTimer = NodePath("Intro Timer")
+roundTimer = NodePath("Round Timer")
 
 [node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
 one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreValueLabel", "healthBar", "countDownLabel", "mainUIGroup", "mainCreditsLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel")]
+[node name="Round Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
+wait_time = 2.5
+one_shot = true
+
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreValueLabel", "healthBar", "countdownLabel", "roundLabel", "mainUIGroup", "mainCreditsLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel")]
 script = ExtResource("2_xj7ar")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
 healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
-countDownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
+countdownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
+roundLabel = NodePath("../../=== UI ===/--- game ---/Round Label")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
@@ -104,7 +110,7 @@ speedstrStats = ExtResource("6_tw4tw")
 baseStats = ExtResource("7_1nw18")
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
-wait_time = 3.0
+wait_time = 2.0
 
 [node name="SaveManager" type="Node" parent="=== MANAGER ==="]
 script = ExtResource("6_0o8l2")
@@ -577,9 +583,9 @@ theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "Quit"
 
 [node name="--- game ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 
 [node name="Countdown Label" type="Label" parent="=== UI ===/--- game ---"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -589,6 +595,21 @@ offset_right = 54.0
 offset_bottom = 281.0
 grow_horizontal = 2
 text = "3"
+label_settings = ExtResource("11_tw4tw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Round Label" type="Label" parent="=== UI ===/--- game ---"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 128.0
+offset_right = 54.0
+offset_bottom = 281.0
+grow_horizontal = 2
+text = "Round X"
 label_settings = ExtResource("11_tw4tw")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -780,6 +801,7 @@ curve = SubResource("Curve3D_xj7ar")
 [node name="Enemy Container" type="Node3D" parent="=== LEVEL ==="]
 
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Intro Timer" to="=== MANAGER ===/Scene Manager" method="IntroTimerTimeout"]
+[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Round Timer" to="=== MANAGER ===/Scene Manager" method="RoundTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]
