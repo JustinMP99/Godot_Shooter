@@ -29,7 +29,7 @@ public partial class EnemySpawner : Node
             EnemyController enemy = enemyPrefab.Instantiate() as EnemyController;
             
             //Generate Class and stats
-            enemy.Stats.Duplicate();
+            //enemy.Stats.Duplicate();
 
             int value = (int)GD.RandRange(1.0, 4.0);
 

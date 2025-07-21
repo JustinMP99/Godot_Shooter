@@ -63,7 +63,7 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition", "introTimer", "roundTimer")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition", "introTimer")]
 script = ExtResource("1_2yd7s")
 saveManager = NodePath("../SaveManager")
 UIManager = NodePath("../UI Manager")
@@ -71,7 +71,6 @@ enemySpawner = NodePath("../Enemy Spawner")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 introTimer = NodePath("Intro Timer")
-roundTimer = NodePath("Intro Timer")
 
 [node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
 one_shot = true
@@ -113,6 +112,7 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -181,14 +181,13 @@ text = "Quit"
 
 [node name="How to Play Button" type="Button" parent="=== UI ===/--- main ---"]
 anchors_preset = -1
-anchor_left = 0.425
-anchor_top = 0.633
-anchor_right = 0.575
-anchor_bottom = 0.7
-offset_left = -512.0
-offset_top = 184.24
-offset_right = -512.0
-offset_bottom = 184.0
+anchor_left = 0.025
+anchor_top = 0.889
+anchor_right = 0.175
+anchor_bottom = 0.956
+offset_top = -0.0800171
+offset_right = -1.52588e-05
+offset_bottom = -0.320007
 theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "How to Play"
 
@@ -278,10 +277,10 @@ z_index = 1
 texture_filter = 1
 layout_mode = 2
 anchor_left = -0.022
-anchor_right = 0.978
+anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.04201
-offset_right = 8.04199
+offset_right = 0.539978
 texture = ExtResource("7_nc8lr")
 
 [node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Upgrade Panel"]
@@ -341,13 +340,13 @@ icon = SubResource("ImageTexture_5rw63")
 
 [node name="Speed Upgrade Panel" type="Control" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
 layout_mode = 3
-anchor_left = 0.375
+anchor_left = 0.694
 anchor_top = 0.289
-anchor_right = 0.641
+anchor_right = 0.961
 anchor_bottom = 0.822
-offset_left = 408.0
+offset_left = -0.320007
 offset_top = -0.0800018
-offset_right = 408.52
+offset_right = -1.08008
 offset_bottom = 0.159973
 grow_horizontal = 2
 grow_vertical = 2
@@ -361,11 +360,10 @@ upgradeButton = NodePath("Button")
 z_index = 1
 texture_filter = 1
 layout_mode = 2
-anchor_left = -0.022
-anchor_right = 0.978
+anchor_right = 1.002
 anchor_bottom = 1.0
-offset_left = 8.04201
-offset_right = 8.04199
+offset_left = 0.54001
+offset_right = -0.142059
 texture = ExtResource("7_nc8lr")
 
 [node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Upgrade Panel"]
@@ -425,13 +423,12 @@ icon = SubResource("ImageTexture_5rw63")
 
 [node name="Weapon Upgrade Panel" type="Control" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
 layout_mode = 3
-anchor_left = 0.375
+anchor_left = 0.05
 anchor_top = 0.289
-anchor_right = 0.641
+anchor_right = 0.317
 anchor_bottom = 0.822
-offset_left = -416.0
 offset_top = -0.0800018
-offset_right = -415.48
+offset_right = -0.76004
 offset_bottom = 0.159973
 grow_horizontal = 2
 grow_vertical = 2
@@ -445,11 +442,10 @@ upgradeButton = NodePath("Button")
 z_index = 1
 texture_filter = 1
 layout_mode = 2
-anchor_left = -0.022
-anchor_right = 0.978
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.04201
-offset_right = 8.04199
+offset_left = 0.540011
+offset_right = 0.539978
 texture = ExtResource("7_nc8lr")
 
 [node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Weapon Upgrade Panel"]
@@ -527,17 +523,17 @@ visible = false
 
 [node name="Pause Title" type="Label" parent="=== UI ===/--- pause ---"]
 anchors_preset = -1
-anchor_left = 0.406
-anchor_top = 0.178
-anchor_right = 0.606
-anchor_bottom = 0.356
-offset_left = 0.319946
-offset_top = -0.160004
-offset_right = 4.32001
-offset_bottom = -0.320007
+anchor_left = 0.309
+anchor_top = 0.122
+anchor_right = 0.708
+anchor_bottom = 0.333
+offset_left = 0.47998
+offset_top = 0.159996
+offset_right = -0.23999
+offset_bottom = 1.23999
 grow_horizontal = 2
 text = "PAUSE"
-label_settings = ExtResource("8_i5qe8")
+label_settings = ExtResource("11_tw4tw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -564,6 +560,7 @@ anchor_bottom = 0.481
 offset_top = -0.160019
 offset_right = -3.05176e-05
 offset_bottom = 0.11998
+theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "Resume
 "
 
@@ -576,12 +573,28 @@ anchor_bottom = 0.581
 offset_top = -0.160004
 offset_bottom = 0.119995
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "Quit"
 
 [node name="--- game ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
 
+[node name="Countdown Label" type="Label" parent="=== UI ===/--- game ---"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 128.0
+offset_right = 54.0
+offset_bottom = 281.0
+grow_horizontal = 2
+text = "3"
+label_settings = ExtResource("11_tw4tw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Score Label" type="Label" parent="=== UI ===/--- game ---"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -599,9 +612,8 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.0
-offset_top = 48.0
 offset_right = 50.0
-offset_bottom = 88.0
+offset_bottom = 40.0
 grow_horizontal = 2
 text = "0"
 label_settings = ExtResource("14_1nw18")
@@ -620,19 +632,6 @@ tooltip_text = "
 "
 theme_override_styles/fill = SubResource("StyleBoxFlat_xj7ar")
 show_percentage = false
-
-[node name="Countdown Label" type="Label" parent="=== UI ===/--- game ---"]
-anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.156
-anchor_right = 0.8
-anchor_bottom = 0.419
-offset_top = -0.32
-offset_bottom = 0.319977
-text = "3"
-label_settings = ExtResource("11_tw4tw")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="--- result ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false

@@ -9,12 +9,42 @@ public partial class UIManager
     [Export] private ProgressBar healthBar;
     [Export] private Label countDownLabel;
 
+    [Export] private Node gameMainSubGroup;
+    [Export] private Node gameRoundSubGroup;
+
 
     public void SetGameUIState(bool state)
     {
         gameUIGroup.Visible = state;
     }
 
+    public void Game_ShowRound()
+    {
+        
+        //Hide healthbar, credits, etc
+        healthBar.Visible = false;
+        gameScoreValueLabel.Visible = false;
+        
+        //Show countdown/round label
+        countDownLabel.Visible = true;
+
+    }
+    
+    public void Game_HideRound()
+    {
+        
+        //Hide countdown/round label
+        countDownLabel.Visible = false;
+        
+        //Show healthbar, credits, etc
+        
+        healthBar.Visible = true;
+        gameScoreValueLabel.Visible = true;
+        
+
+    }
+    
+    
     public void Game_SetScoreValueText(int newScore)
     {
         gameScoreValueLabel.Text = newScore.ToString();

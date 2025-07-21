@@ -91,7 +91,8 @@ public partial class SceneManager : Node
         else if (introCount == -1)
         {
             //End intro timer and begin game
-            UIManager.Game_SetCountDownLabelState(false);
+            //UIManager.Game_SetCountDownLabelState(false);
+            UIManager.Game_HideRound();
             enemySpawner.StartTimer();
         }
         else

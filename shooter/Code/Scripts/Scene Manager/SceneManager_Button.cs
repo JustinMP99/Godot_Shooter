@@ -11,6 +11,8 @@ public partial class SceneManager
         UIManager.SetMainUIState(false);
         UIManager.SetGameUIState(true);
 
+        UIManager.Game_ShowRound();
+        
         //Reset temp game values
         score = 0;
         round = 1;
