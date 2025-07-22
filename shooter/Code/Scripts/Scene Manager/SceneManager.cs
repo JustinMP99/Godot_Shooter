@@ -15,6 +15,7 @@ public partial class SceneManager : Node
     [ExportCategory("Round Variables")]
     [Export] private int round;
     private int enemiesLeft; //the amount of enemies that must be defeated to end the round
+    private int enemiesLeftMax = 10;
     [Export] private Timer roundTimer;
     
     [ExportCategory("Player Variables")] 
@@ -68,9 +69,13 @@ public partial class SceneManager : Node
     
     private void StartNewRound()
     {
+        
         round++;
+        enemiesLeftMax += 10;
+        enemiesLeft = enemiesLeftMax;
         UIManager.Game_SetRoundLabelText(round);
         UIManager.Game_SetRoundLabelState(true);
+        GD.Print("Enemies Left: " + enemiesLeft);
         roundTimer.Start();
         
     }
@@ -108,6 +113,7 @@ public partial class SceneManager : Node
     private void RoundTimerTimeout()
     {
         UIManager.Game_SetRoundLabelState(false);
+        UIManager.Game_SetHudState(true);
         enemySpawner.StartTimer();
     }
     

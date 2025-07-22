@@ -52,7 +52,8 @@ public partial class PlayerController : CharacterBody3D
             targetVelocity.X = direction.X * Stats.Speed;
             targetVelocity.Z = direction.Z * Stats.Speed;
 
-            Velocity = targetVelocity;
+            Velocity = Velocity.Lerp(targetVelocity, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
+           // Velocity = targetVelocity;
 
             MoveAndSlide();
         }

@@ -27,6 +27,8 @@ public partial class SceneManager
         UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
         UIManager.Game_SetScoreValueText(score);
         
+        UIManager.Game_SetHudState(false);
+        
         //Start timer
         StartIntroTimer();
         
