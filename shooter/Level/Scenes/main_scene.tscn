@@ -80,7 +80,7 @@ one_shot = true
 wait_time = 1.5
 one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreValueLabel", "healthBar", "countdownLabel", "roundLabel", "mainUIGroup", "mainCreditsLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreValueLabel", "healthBar", "countdownLabel", "roundLabel", "mainUIGroup", "mainCreditsLabel", "subTitleLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel")]
 script = ExtResource("2_xj7ar")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
@@ -89,6 +89,7 @@ countdownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
 roundLabel = NodePath("../../=== UI ===/--- game ---/Round Label")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
+subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
 resultUIGroup = NodePath("../../=== UI ===/--- result ---")
 resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
@@ -118,7 +119,6 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -583,6 +583,7 @@ theme_override_fonts/font = ExtResource("9_2qg1q")
 text = "Quit"
 
 [node name="--- game ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 
 [node name="Countdown Label" type="Label" parent="=== UI ===/--- game ---"]
 visible = false
@@ -803,8 +804,16 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Intro Timer" to="=== MANAGER ===/Scene Manager" method="IntroTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Round Timer" to="=== MANAGER ===/Scene Manager" method="RoundTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_UpgradeHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Upgrade Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]

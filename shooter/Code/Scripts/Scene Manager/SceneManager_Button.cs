@@ -14,7 +14,7 @@ public partial class SceneManager
         //Reset temp game values
         score = 0;
         round = 0;
-        enemiesLeft = 10;
+        enemiesLeft = 0;
 
         //Configure Player data
         player.Position = startPosition.Position;
@@ -56,7 +56,34 @@ public partial class SceneManager
         //Set Shop UI State
         UIManager.SetShopUIState(true);
     }
+    
+    public void Main_StartGameHover()
+    {
+        UIManager.Main_SetSubTitleText("Start the game and see how many waves you can survive!");
+    }
 
+    public void Main_QuitGameHover()
+    {
+        UIManager.Main_SetSubTitleText("Close the game");
+    }
+
+    public void Main_UpgradeHover()
+    {
+        UIManager.Main_SetSubTitleText("Use the credits you've earned to upgrade your ship");
+    }
+
+    public void Main_OptionsHover()
+    {
+        UIManager.Main_SetSubTitleText("Change audio level and more");
+    }
+    
+    public void Main_ButtonHoverExit()
+    {
+        UIManager.Main_SetSubTitleText("Micro game created by Justin Philie");
+    }
+                
+    
+    
     #endregion
 
     #region Game UI Button Functions
