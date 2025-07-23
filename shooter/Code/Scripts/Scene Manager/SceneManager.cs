@@ -71,7 +71,7 @@ public partial class SceneManager : Node
     {
         
         round++;
-        enemiesLeftMax += 10;
+        enemiesLeftMax += (int)GD.RandRange(1.0, 20.0);
         enemiesLeft = enemiesLeftMax;
         UIManager.Game_SetRoundLabelText(round);
         UIManager.Game_SetRoundLabelState(true);
