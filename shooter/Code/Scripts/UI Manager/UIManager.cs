@@ -17,6 +17,7 @@ public partial class UIManager : Node
     [ExportCategory("Options UI")] [Export]
     private CanvasLayer optionsUIGroup;
     
+    
     [ExportCategory("Game UI")]
     [Export] private CanvasLayer gameUIGroup;
     [Export] private Label gameScoreValueLabel;
@@ -32,7 +33,6 @@ public partial class UIManager : Node
     [Export] private Label resultScoreLabel;
     [Export] private Label resultCreditsEarnedLabel;
     [Export] private Label resultTotalCreditsLabel;
-
     
     
     public override void _Ready()
@@ -57,7 +57,15 @@ public partial class UIManager : Node
     }
 
     #endregion
-    
+
+    #region Options UI Functions
+
+    public void SetOptionsUIState(bool state)
+    {
+        optionsUIGroup.Visible = state;
+    }
+
+    #endregion
     
     #region Getter
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/Bullet.tscn" id="2_1gt8s"]
 [ext_resource type="Resource" uid="uid://dasm4vfey6ngs" path="res://Code/Resources/PlayerStats.tres" id="3_uvim0"]
 [ext_resource type="ArrayMesh" uid="uid://c3k5uig2p4ao5" path="res://Art/Models/PlayerShip.obj" id="4_3mocp"]
-[ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Sounds/Shoot.wav" id="4_5ajbo"]
+[ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="4_5ajbo"]
 [ext_resource type="Texture2D" uid="uid://dcm2tilscafne" path="res://Art/Models/PlayerShip.png" id="5_odanr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
@@ -24,6 +24,7 @@ shootSound = NodePath("AudioStreamPlayer")
 Stats = ExtResource("3_uvim0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("BoxShape3D_mprxd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -35,6 +36,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1gt8s")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05704)
 
 [node name="Area3D" type="Area3D" parent="."]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

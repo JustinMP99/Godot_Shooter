@@ -24,10 +24,7 @@ public partial class PlayerController : CharacterBody3D
     [Export] private bool takingInput;
     [Export] private Node3D bulletPosition;
     [Export] private PackedScene bulletPrefab;
-
     [Export] private AudioStreamPlayer shootSound;
-    
-    
     [ExportCategory("Player Stats")] 
     [Export] public int Credits { get; set; }
     [Export] public Player_Stats Stats;
@@ -104,8 +101,8 @@ public partial class PlayerController : CharacterBody3D
         Bullet bullet = bulletPrefab.Instantiate() as Bullet;
         bullet.FinalShot += EnemyDefeat;
         
-        shootSound.Play();
-
+        //shootSound.Play();
+        AudioManager.Instance.PlayShootSound();
         //Set Child
 
         //Set Position

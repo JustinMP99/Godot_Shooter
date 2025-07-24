@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=30 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -10,11 +10,13 @@
 [ext_resource type="Resource" uid="uid://b2xqi00aqgqxk" path="res://Code/Resources/EnemyStats_Speedstr.tres" id="6_tw4tw"]
 [ext_resource type="Resource" uid="uid://doj18tmg033sd" path="res://Code/Resources/EnemyStats_Base.tres" id="7_1nw18"]
 [ext_resource type="Texture2D" uid="uid://b6u5cnavhxsvv" path="res://Art/Sprites/UpgradeTile.png" id="7_nc8lr"]
-[ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Fonts/TitleLabelSettings.tres" id="8_i5qe8"]
+[ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/TitleLabelSettings.tres" id="8_i5qe8"]
 [ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="9_2qg1q"]
-[ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Fonts/NormalLabelSettings.tres" id="10_5d42l"]
-[ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Fonts/CountdownLabelSettings.tres" id="11_tw4tw"]
-[ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Fonts/GameScoreLabelSettings.tres" id="14_1nw18"]
+[ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/NormalLabelSettings.tres" id="10_5d42l"]
+[ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico-Regular.ttf" id="10_odk2k"]
+[ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
+[ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/GameScoreLabelSettings.tres" id="14_1nw18"]
+[ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/volume_slider.tscn" id="15_5nx6i"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_5rw63"]
 
@@ -154,7 +156,7 @@ anchor_bottom = 0.433
 offset_top = -0.240021
 offset_right = -6.10352e-05
 offset_bottom = 0.23999
-theme_override_fonts/font = ExtResource("9_2qg1q")
+theme_override_fonts/font = ExtResource("10_odk2k")
 text = "Start"
 
 [node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---"]
@@ -166,7 +168,7 @@ anchor_bottom = 0.522
 offset_top = -0.319977
 offset_right = -0.00012207
 offset_bottom = 0.160004
-theme_override_fonts/font = ExtResource("9_2qg1q")
+theme_override_fonts/font = ExtResource("10_odk2k")
 text = "Upgrades"
 
 [node name="Options Button" type="Button" parent="=== UI ===/--- main ---"]
@@ -178,7 +180,7 @@ anchor_bottom = 0.611
 offset_top = 0.319977
 offset_right = -0.00012207
 offset_bottom = 0.0799866
-theme_override_fonts/font = ExtResource("9_2qg1q")
+theme_override_fonts/font = ExtResource("10_odk2k")
 text = "Options"
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- main ---"]
@@ -190,7 +192,7 @@ anchor_bottom = 0.7
 offset_top = 0.23999
 offset_right = -6.10352e-05
 offset_bottom = -3.05176e-05
-theme_override_fonts/font = ExtResource("9_2qg1q")
+theme_override_fonts/font = ExtResource("10_odk2k")
 text = "Quit"
 
 [node name="How to Play Button" type="Button" parent="=== UI ===/--- main ---"]
@@ -202,7 +204,7 @@ anchor_bottom = 0.956
 offset_top = -0.0800171
 offset_right = -1.52588e-05
 offset_bottom = -0.320007
-theme_override_fonts/font = ExtResource("9_2qg1q")
+theme_override_fonts/font = ExtResource("10_odk2k")
 text = "How to Play"
 
 [node name="Credits Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -535,17 +537,81 @@ text = "Go Back"
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
 
 [node name="Title" type="Label" parent="=== UI ===/--- options ---"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -139.5
-offset_right = 139.5
-offset_bottom = 60.0
+anchors_preset = -1
+anchor_left = 0.391
+anchor_right = 0.609
+anchor_bottom = 0.136
+offset_left = 0.0199585
+offset_right = -0.0200195
+offset_bottom = -37.92
 grow_horizontal = 2
 text = "Options"
 label_settings = ExtResource("8_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Master Slider Title Label" type="Label" parent="=== UI ===/--- options ---"]
+anchors_preset = -1
+anchor_left = 0.051
+anchor_top = 0.189
+anchor_right = 0.272
+anchor_bottom = 0.222
+offset_left = -0.280006
+offset_top = -0.0800018
+offset_right = -0.160034
+offset_bottom = 0.159988
+text = "Master  Volume"
+label_settings = ExtResource("10_5d42l")
+
+[node name="Master Slider" parent="=== UI ===/--- options ---" instance=ExtResource("15_5nx6i")]
+anchor_left = 0.05
+anchor_top = 0.246
+anchor_right = 0.272
+anchor_bottom = 0.268
+offset_left = 0.0
+offset_top = -0.12001
+offset_right = -0.160034
+offset_bottom = 0.0399933
+value = 100.0
+audioBus = "Master"
+
+[node name="SFX Slider Title Label" type="Label" parent="=== UI ===/--- options ---"]
+anchors_preset = -1
+anchor_left = 0.051
+anchor_top = 0.333
+anchor_right = 0.269
+anchor_bottom = 0.367
+offset_left = -1.28001
+offset_top = 0.23999
+offset_right = 2.67996
+offset_bottom = -0.240021
+text = "SFX Volume"
+label_settings = ExtResource("10_5d42l")
+
+[node name="SFX Slider" parent="=== UI ===/--- options ---" instance=ExtResource("15_5nx6i")]
+anchor_left = 0.05
+anchor_top = 0.389
+anchor_right = 0.271
+anchor_bottom = 0.411
+offset_left = 0.0
+offset_right = 1.11996
+value = 100.0
+audioBus = "sfx"
+
+[node name="Back Button" type="Button" parent="=== UI ===/--- options ---"]
+anchors_preset = -1
+anchor_left = 0.412
+anchor_top = 0.878
+anchor_right = 0.587
+anchor_bottom = 0.956
+offset_left = 0.639954
+offset_top = -0.160034
+offset_right = 0.640015
+offset_bottom = -0.320007
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("10_odk2k")
+text = "Back"
 
 [node name="--- help ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -835,11 +901,13 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="pressed" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]
 [connection signal="mouse_entered" from="=== UI ===/--- main ---/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsHover"]
 [connection signal="mouse_exited" from="=== UI ===/--- main ---/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsButtonFunction"]
 [connection signal="mouse_entered" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameHover"]
 [connection signal="mouse_exited" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Upgrade Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]

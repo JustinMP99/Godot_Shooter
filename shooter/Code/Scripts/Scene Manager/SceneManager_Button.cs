@@ -41,7 +41,9 @@ public partial class SceneManager
 
     public void Main_OptionsButtonFunction()
     {
-        
+        //set UI states
+        UIManager.SetMainUIState(false);
+        UIManager.SetOptionsUIState(true);
     }
     
     public void Main_ShopButtonFunction()
@@ -81,11 +83,20 @@ public partial class SceneManager
     {
         UIManager.Main_SetSubTitleText("Micro game created by Justin Philie");
     }
-                
-    
     
     #endregion
 
+    #region Options UI Button Functions
+
+    private void Options_BackButtonFunction()
+    {
+        //set ui state
+        UIManager.SetOptionsUIState(false);
+        UIManager.SetMainUIState(true);
+    }
+
+    #endregion
+    
     #region Game UI Button Functions
 
     #endregion

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp33w52ec8niv"]
+
+[ext_resource type="Script" uid="uid://db4gphoo3sgt8" path="res://Code/Scripts/AudioManager.cs" id="1_fjojs"]
+[ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="2_oeg1d"]
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("shootSound")]
+script = ExtResource("1_fjojs")
+shootSound = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_oeg1d")

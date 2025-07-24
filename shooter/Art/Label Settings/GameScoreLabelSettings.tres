@@ -1,8 +1,8 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://co0s16g826nsh"]
 
-[ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="1_i3auj"]
+[ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico-Regular.ttf" id="1_x3aui"]
 
 [resource]
-font = ExtResource("1_i3auj")
+font = ExtResource("1_x3aui")
 font_size = 45
 font_color = Color(0, 0, 0, 1)

@@ -1,8 +1,8 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dnff8clkk64ls"]
 
-[ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="1_4l6av"]
+[ext_resource type="FontFile" uid="uid://cqyjshrmdao21" path="res://Art/Fonts/Quantico-Bold.ttf" id="1_ic4w1"]
 
 [resource]
-font = ExtResource("1_4l6av")
+font = ExtResource("1_ic4w1")
 font_size = 68
 font_color = Color(0, 0, 0, 1)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b6u5cnavhxsvv" path="res://Art/Sprites/UpgradeTile.png" id="1_5rw63"]
 [ext_resource type="Script" uid="uid://ktbv83iscdqf" path="res://Code/Scripts/UpgradePanel.cs" id="1_uuvkg"]
-[ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Fonts/TitleLabelSettings.tres" id="3_0yfgp"]
+[ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/TitleLabelSettings.tres" id="3_0yfgp"]
 [ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="3_54d8q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uuvkg"]

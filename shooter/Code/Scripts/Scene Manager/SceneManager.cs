@@ -26,6 +26,7 @@ public partial class SceneManager : Node
     {
         //UI Setup
         UIManager.SetMainUIState(true);
+        UIManager.SetOptionsUIState(false);
         UIManager.SetPauseUIState(false);
         UIManager.SetGameUIState(false);
         UIManager.SetResultUIState(false);

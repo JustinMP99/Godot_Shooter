@@ -3,11 +3,11 @@ render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_toon, specular_
 
 uniform vec4 albedo : source_color;
 //Textures to adjust lighting
-uniform sampler2D color_gradient; 
+uniform sampler2D color_gradient;
 uniform sampler2D fresnel_gradient;
 
 float fresnel(float amount, vec3 normal, vec3 view)
-{		
+{
 	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 0.0)), amount);
 }
 

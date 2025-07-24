@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://pubk2l5mqbvp"]
+
+[ext_resource type="Script" uid="uid://mexyw8qp62xl" path="res://Code/Scripts/VolumeSlider.cs" id="1_fyuch"]
+
+[node name="Volume Slider" type="HSlider"]
+anchors_preset = -1
+anchor_left = 0.387
+anchor_top = 0.489
+anchor_right = 0.612
+anchor_bottom = 0.511
+offset_left = 0.639954
+offset_top = -0.0800171
+offset_right = -3.36005
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.001
+script = ExtResource("1_fyuch")

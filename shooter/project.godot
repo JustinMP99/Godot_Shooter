@@ -18,11 +18,16 @@ config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/max_fps=165
 config/icon="res://Art/Sprites/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://Art/Audio/default_bus_layout.tres"
+
 [autoload]
 
 SaveManager="*res://Code/Scripts/Save System/SaveManager.cs"
 GameData="*res://Code/Scripts/Save System/GameData.cs"
 Player="*res://Level/Prefabs/Player.tscn"
+AudioManager="*res://Level/Prefabs/AudioManager.tscn"
 
 [display]
 
