@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cclpg32mn8mhn"]
+[gd_scene load_steps=11 format=3 uid="uid://cclpg32mn8mhn"]
 
 [ext_resource type="Shader" uid="uid://bqsrioh4pvqux" path="res://Code/Shaders/Cel-Shading-Test.gdshader" id="1_etr6r"]
 [ext_resource type="Shader" uid="uid://dbgdtv0u4hwxb" path="res://Code/Shaders/FresnelExample.gdshader" id="2_3eskm"]
@@ -28,18 +28,24 @@ shader_parameter/fresnel_gradient = SubResource("GradientTexture1D_735fc")
 render_priority = 0
 shader = ExtResource("2_3eskm")
 shader_parameter/custom_color = Vector3(1, 1, 1)
+shader_parameter/fresnel_amplifier = 10.0
 shader_parameter/show_glow = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_3eskm"]
+custom_aabb = AABB(0, 0, 0, 19.85, 19.885, 0)
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="TestScene" type="Node"]
 
 [node name="Cel Shading Example" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cel Shading Example"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0383598, 0)
 mesh = SubResource("SphereMesh_s6d6b")
 surface_material_override/0 = SubResource("ShaderMaterial_3eskm")
 
 [node name="Fresnel Example" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35647, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46164, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Fresnel Example"]
 mesh = SubResource("SphereMesh_s6d6b")
@@ -47,3 +53,13 @@ surface_material_override/0 = SubResource("ShaderMaterial_735fc")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.743273, 0.537959, 0.79626)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43622, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_3eskm")
+emission_shape = 3
+emission_box_extents = Vector3(4.47, 0.32, 7.29)
+emission_colors = PackedColorArray(0.306686, 0.565826, 0.180413, 1)
+gravity = Vector3(0, 9.8, 4.9)
+scale_amount_min = 0.0

@@ -1,10 +1,15 @@
 shader_type spatial;
 
 uniform vec3 custom_color = vec3(0.0);
+uniform float fresnel_amplifier = 0.0f;
 uniform bool show_glow = false;
 
 float fresnel(float amount, vec3 normal, vec3 view)
 {
+	//Get the dot product of the normal and the view vector
+	//Clamp the values between 0.0 and 1.0
+	//Calculate the value of the result raist to the passed in amount
+	//The result is the fresnel value/color
 	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0)), amount);
 }
 
@@ -30,7 +35,7 @@ void fragment() {
 	else
 	{
 		float basic_fresnel = fresnel(3.0, NORMAL, VIEW);
-		ALBEDO = base_color + basic_fresnel;
+		ALBEDO = base_color + basic_fresnel * fresnel_amplifier;
 	}
 	
 }
