@@ -3,12 +3,7 @@ using System;
 
 public partial class UIManager
 {
-    [ExportCategory("Result UI")] 
-    [Export] private CanvasLayer resultUIGroup;
-    [Export] private Label resultScoreLabel;
-    [Export] private Label resultCreditsEarnedLabel;
-    [Export] private Label resultTotalCreditsLabel;
-
+ 
     public void SetResultUIState(bool state)
     {
         resultUIGroup.Visible = state;

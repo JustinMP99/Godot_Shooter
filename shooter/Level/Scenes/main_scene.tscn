@@ -40,7 +40,6 @@ background_color = Color(0.813048, 0.863449, 0.915101, 1)
 sky = SubResource("Sky_0o8l2")
 ambient_light_color = Color(0.118581, 0.118581, 0.118581, 1)
 ambient_light_energy = 9.62
-fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.832463, 0.859326, 0.850583, 1)
 fog_sun_scatter = 0.5
@@ -48,7 +47,10 @@ fog_density = 0.02
 fog_sky_affect = 0.7
 fog_depth_curve = 0.535887
 fog_depth_begin = 0.0
-volumetric_fog_emission = Color(0.585062, 0.585062, 0.585062, 1)
+volumetric_fog_enabled = true
+volumetric_fog_emission = Color(0.851769, 0.851769, 0.851769, 1)
+volumetric_fog_length = 37.4
+volumetric_fog_sky_affect = 0.36
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xj7ar"]
 size = Vector3(1, 8.05054, 27.311)
@@ -84,25 +86,26 @@ one_shot = true
 wait_time = 1.5
 one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("gameUIGroup", "gameScoreValueLabel", "healthBar", "countdownLabel", "roundLabel", "mainUIGroup", "mainCreditsLabel", "subTitleLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "shopHealthLevelLabel", "healthUpgradePanel", "optionsUIGroup", "gameUIGroup", "gameScoreValueLabel", "healthBar", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel")]
 script = ExtResource("2_xj7ar")
+mainUIGroup = NodePath("../../=== UI ===/--- main ---")
+mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
+subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
+shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
+shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
+shopHealthLevelLabel = NodePath("../../=== UI ===/--- upgrade ---/Health Upgrade Panel/Level Label")
+healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Upgrade Panel")
+optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
 healthBar = NodePath("../../=== UI ===/--- game ---/Health Bar")
 countdownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
 roundLabel = NodePath("../../=== UI ===/--- game ---/Round Label")
-mainUIGroup = NodePath("../../=== UI ===/--- main ---")
-mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
-subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
 resultUIGroup = NodePath("../../=== UI ===/--- result ---")
 resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
 resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
 resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
-shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
-shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
-shopHealthLevelLabel = NodePath("../../=== UI ===/--- upgrade ---/Health Upgrade Panel/Level Label")
-healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Upgrade Panel")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
@@ -123,6 +126,7 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -528,6 +532,24 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Go Back"
 
+[node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
+
+[node name="Title" type="Label" parent="=== UI ===/--- options ---"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -139.5
+offset_right = 139.5
+offset_bottom = 60.0
+grow_horizontal = 2
+text = "Options"
+label_settings = ExtResource("8_i5qe8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="--- help ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
+
 [node name="--- pause ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
 
@@ -757,9 +779,6 @@ offset_top = -0.160034
 offset_bottom = 0.159973
 text = "Quit"
 
-[node name="--- help ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
-
 [node name="=== LEVEL ===" type="Node" parent="."]
 
 [node name="Cam 1" type="Camera3D" parent="=== LEVEL ==="]
@@ -800,7 +819,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00558472, 0.57462, 6.18657)
 shape = SubResource("BoxShape3D_73044")
 
 [node name="Enemy Spawn Path" type="Path3D" parent="=== LEVEL ==="]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -51.6352)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.5634)
 curve = SubResource("Curve3D_xj7ar")
 
 [node name="Enemy Container" type="Node3D" parent="=== LEVEL ==="]

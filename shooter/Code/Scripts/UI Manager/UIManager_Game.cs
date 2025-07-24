@@ -4,14 +4,6 @@ using System;
 public partial class UIManager
 {
     
-    [ExportCategory("Game UI")]
-    [Export] private CanvasLayer gameUIGroup;
-    [Export] private Label gameScoreValueLabel;
-    [Export] private ProgressBar healthBar;
-    [Export] private Label countdownLabel;
-    [Export] private Label roundLabel;
-
-
     public void SetGameUIState(bool state)
     {
         gameUIGroup.Visible = state;
