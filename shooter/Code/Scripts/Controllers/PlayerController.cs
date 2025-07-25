@@ -22,6 +22,7 @@ public partial class PlayerController : CharacterBody3D
     #endregion
 
     [Export] private bool takingInput;
+    public bool simpleShoot { get; set; }
     [Export] private Node3D bulletPosition;
     [Export] private PackedScene bulletPrefab;
     [Export] private AudioStreamPlayer shootSound;
@@ -29,6 +30,7 @@ public partial class PlayerController : CharacterBody3D
     [Export] public int Credits { get; set; }
     [Export] public Player_Stats Stats;
     private Vector3 targetVelocity = Vector3.Zero;
+    private Vector3 targetRotation = Vector3.Zero;
     private Vector3 direction;
     private Vector3 rotation;
     private float rotationSpeed = 1.5f;
@@ -44,17 +46,19 @@ public partial class PlayerController : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+
+       
+        
         if (takingInput)
         {
             CollectInput();
-
+            //velocity calculation
             targetVelocity.X = direction.X * Stats.Speed;
-            //rotation.Z = Rotation.Z * rotationSpeed;
-
             Velocity = Velocity.Lerp(targetVelocity, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
-            Rotation = new Vector3 (0.0f, 0.0f, Velocity.X * -5.0f);
-            // Velocity = targetVelocity;
-
+            //rotation calculation
+            targetRotation.Z = rotation.Z * rotationSpeed;
+            Rotation = Rotation.Lerp(targetRotation, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
+            
             MoveAndSlide();
         }
     }
@@ -63,30 +67,34 @@ public partial class PlayerController : CharacterBody3D
     {
         direction = Vector3.Zero;
         rotation = Vector3.Zero;
-
+        
         if (Input.IsActionPressed("Move_Left"))
         {
-            //Rotation = Rotation.Lerp(new Vector3(Rotation.X, Rotation.Y, -15.0f), 0.8f);
-            rotation.Z -= 1.0f;
             direction.X -= 1.0f;
+            rotation.Z += 0.25f;
+            
+        }
+        if (Input.IsActionPressed("Move_Right"))
+        {
+            direction.X += 1.0f;
+            rotation.Z -= 0.25f;
+        }
+
+        if (simpleShoot)
+        {
+            if (Input.IsActionPressed("Shoot"))
+            {
+                ShootFunction();
+            }
         }
         else
         {
-            Rotation = Rotation.Lerp(new Vector3(Rotation.X, Rotation.Y, 0.0f), 0.5f);
+            if (Input.IsActionPressed("Shoot"))
+            {
+                ShootFunction();
+            }
         }
-
-        if (Input.IsActionPressed("Move_Right"))
-        {
-            // = Rotation.Lerp(new Vector3(Rotation.X, Rotation.Y, -15.0f), 0.5f);
-            rotation.Z += 1.0f;
-            direction.X += 1.0f;
-        }
-
-        if (Input.IsActionJustPressed("Shoot"))
-        {
-            ShootFunction();
-        }
-
+    
         if (Input.IsActionJustPressed("Pause"))
         {
             PauseFunction();

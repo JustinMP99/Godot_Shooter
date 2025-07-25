@@ -88,13 +88,18 @@ public partial class SceneManager
 
     #region Options UI Button Functions
 
+    private void Options_SimpleShootToggleFunction()
+    {
+        player.simpleShoot = !player.simpleShoot;
+    }
+    
     private void Options_BackButtonFunction()
     {
         //set ui state
         UIManager.SetOptionsUIState(false);
         UIManager.SetMainUIState(true);
     }
-
+    
     #endregion
     
     #region Game UI Button Functions

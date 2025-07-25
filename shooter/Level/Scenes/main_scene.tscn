@@ -598,6 +598,17 @@ offset_right = 1.11996
 value = 100.0
 audioBus = "sfx"
 
+[node name="Simple Shoot Toggle" type="CheckButton" parent="=== UI ===/--- options ---"]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.533
+anchor_right = 0.185
+anchor_bottom = 0.576
+offset_top = 0.23996
+offset_right = -128.8
+offset_bottom = -6.72003
+text = "Simple Shooting"
+
 [node name="Back Button" type="Button" parent="=== UI ===/--- options ---"]
 anchors_preset = -1
 anchor_left = 0.412
@@ -907,6 +918,7 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Upgrade Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
