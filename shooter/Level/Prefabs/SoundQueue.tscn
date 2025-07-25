@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6xn6myf2y2ix"]
+
+[ext_resource type="Script" uid="uid://cotsadhk1eqtb" path="res://Code/Scripts/Audio/SoundQueue.cs" id="1_g7e70"]
+
+[node name="SoundQueue" type="Node"]
+script = ExtResource("1_g7e70")
+instanceCount = 0
