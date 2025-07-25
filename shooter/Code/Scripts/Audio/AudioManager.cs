@@ -9,20 +9,40 @@ public partial class AudioManager : Node
     private Dictionary<string, SoundQueue> soundQueueByName = new Dictionary<string, SoundQueue>();
     private Dictionary<string, SoundPool> soundPoolByName = new Dictionary<string, SoundPool>();
 
-    [ExportCategory("Shoot Sounds")] 
+    [ExportCategory("SFX")] 
     [Export] private AudioStreamPlayer shootSound;
+    [Export] private AudioStreamPlayer playerDeath;
+    [Export] private AudioStreamPlayer enemyDeath;
+
+    [ExportCategory("Music")]
+    [Export] private AudioStreamPlayer mainMusic;
     
     public override void _Ready()
     {
         Instance = this;
         
-        soundQueueByName.Add("ShootSoundQueue", GetNode<SoundQueue>("ShootSoundQueue"));
+        //soundQueueByName.Add("ShootSoundQueue", GetNode<SoundQueue>("ShootSoundQueue"));
         
     }
 
     public void PlayShootSound()
     {
         shootSound.Play();
+    }
+
+    public void PlayPlayerDeathSound()
+    {
+        playerDeath.Play();
+    }
+
+    public void PlayEnemyDeathSound()
+    {
+        enemyDeath.Play();
+    }
+
+    public void PlayEnemyDamageSound()
+    {
+        
     }
     
 }

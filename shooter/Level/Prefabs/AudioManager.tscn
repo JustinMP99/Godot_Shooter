@@ -1,15 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp33w52ec8niv"]
+[gd_scene load_steps=5 format=3 uid="uid://cp33w52ec8niv"]
 
 [ext_resource type="Script" uid="uid://db4gphoo3sgt8" path="res://Code/Scripts/Audio/AudioManager.cs" id="1_fjojs"]
 [ext_resource type="PackedScene" uid="uid://b6xn6myf2y2ix" path="res://Level/Prefabs/SoundQueue.tscn" id="2_585w5"]
 [ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="2_oeg1d"]
+[ext_resource type="AudioStream" uid="uid://cg081mwtxap36" path="res://Art/Audio/sfx/Enemy_Death.wav" id="4_e8cmj"]
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("shootSound")]
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("shootSound", "enemyDeath")]
 script = ExtResource("1_fjojs")
-shootSound = NodePath("ShootSoundQueue/AudioStreamPlayer")
+shootSound = NodePath("SFX/ShootPlayer")
+enemyDeath = NodePath("SFX/EnemyDeathPlayer")
 
-[node name="ShootSoundQueue" parent="." instance=ExtResource("2_585w5")]
+[node name="SFX" parent="." instance=ExtResource("2_585w5")]
+script = null
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ShootSoundQueue"]
+[node name="ShootPlayer" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("2_oeg1d")
 bus = &"sfx"
+
+[node name="EnemyDeathPlayer" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_e8cmj")

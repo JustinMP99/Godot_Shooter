@@ -72,6 +72,7 @@ public partial class Bullet : RigidBody3D
             bool KilledEnemy = enemy.TakeDamage(damage);
             if (KilledEnemy)
             {
+                //AudioManager.Instance.PlayEnemyDeathSound();
                 enemy.DisableEnemy();
                 EmitSignal(SignalName.FinalShot);
             }

@@ -30,6 +30,8 @@ public partial class PlayerController : CharacterBody3D
     [Export] public Player_Stats Stats;
     private Vector3 targetVelocity = Vector3.Zero;
     private Vector3 direction;
+    private Vector3 rotation;
+    private float rotationSpeed = 1.5f;
 
     public override void _Ready()
     {
@@ -47,10 +49,11 @@ public partial class PlayerController : CharacterBody3D
             CollectInput();
 
             targetVelocity.X = direction.X * Stats.Speed;
-            targetVelocity.Z = direction.Z * Stats.Speed;
+            //rotation.Z = Rotation.Z * rotationSpeed;
 
             Velocity = Velocity.Lerp(targetVelocity, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
-           // Velocity = targetVelocity;
+            Rotation = new Vector3 (0.0f, 0.0f, Velocity.X * -5.0f);
+            // Velocity = targetVelocity;
 
             MoveAndSlide();
         }
@@ -59,14 +62,23 @@ public partial class PlayerController : CharacterBody3D
     private void CollectInput()
     {
         direction = Vector3.Zero;
+        rotation = Vector3.Zero;
 
         if (Input.IsActionPressed("Move_Left"))
         {
+            //Rotation = Rotation.Lerp(new Vector3(Rotation.X, Rotation.Y, -15.0f), 0.8f);
+            rotation.Z -= 1.0f;
             direction.X -= 1.0f;
+        }
+        else
+        {
+            Rotation = Rotation.Lerp(new Vector3(Rotation.X, Rotation.Y, 0.0f), 0.5f);
         }
 
         if (Input.IsActionPressed("Move_Right"))
         {
+            // = Rotation.Lerp(new Vector3(Rotation.X, Rotation.Y, -15.0f), 0.5f);
+            rotation.Z += 1.0f;
             direction.X += 1.0f;
         }
 
@@ -80,6 +92,8 @@ public partial class PlayerController : CharacterBody3D
             PauseFunction();
         }
 
+        //
+        
         if (direction != Vector3.Zero)
         {
             direction = direction.Normalized();
