@@ -89,7 +89,7 @@ public partial class PlayerController : CharacterBody3D
         }
         else
         {
-            if (Input.IsActionPressed("Shoot"))
+            if (Input.IsActionJustPressed("Shoot"))
             {
                 ShootFunction();
             }

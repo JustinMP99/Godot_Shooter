@@ -11,7 +11,6 @@ public partial class EnemyController : RigidBody3D
 
     [ExportCategory("Enemy Components")]
     [Export] private Area3D area;
-
     [Export] private CollisionShape3D collider;
 
     #region Constructors
@@ -59,7 +58,6 @@ public partial class EnemyController : RigidBody3D
         Visible = false;
         Position = new Vector3(10.0f, 10.0f, 10.0f);
     }
-
     
     /// <summary>
     /// Calculates the damage taken by the enemy when shot by a player bullet
@@ -82,7 +80,6 @@ public partial class EnemyController : RigidBody3D
     {
         Stats.CurrentHealth = Stats.MaxHealth;
     }
-    
     
     #region Getter
 

@@ -135,7 +135,7 @@ public partial class SceneManager : Node
 
     public void UpdateGameUI()
     {
-        UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
+        UIManager.playerInfoBox.SetHealthBarCurrent(player.GetCurrentHealth());
     }
 
     public void GameOver()

@@ -13,7 +13,7 @@ public partial class UIManager
     {
         
         //Hide healthbar, credits, etc
-        healthBar.Visible = false;
+        playerInfoBox.Visible = false;
         gameScoreValueLabel.Visible = false;
         
         //Show countdown/round label
@@ -29,7 +29,7 @@ public partial class UIManager
         
         //Show healthbar, credits, etc
         
-        healthBar.Visible = true;
+        playerInfoBox.Visible = true;
         gameScoreValueLabel.Visible = true;
         
     }
@@ -38,17 +38,7 @@ public partial class UIManager
     {
         gameScoreValueLabel.Text = newScore.ToString();
     }
-
-    public void Game_SetHealthBarMax(int newMax)
-    {
-        healthBar.MaxValue = newMax;
-    }
-
-    public void Game_SetHealthBarCurrent(int newCurrent)
-    {
-        healthBar.Value = newCurrent;
-    }
-
+    
     public void Game_SetCountDownLabelText(string timeVal)
     {
         countdownLabel.Text = timeVal;
@@ -74,7 +64,7 @@ public partial class UIManager
 
     public void Game_SetHudState(bool state)
     {
-        healthBar.Visible = state;
+        playerInfoBox.Visible = state;
         gameScoreValueLabel.Visible = state;
     }
     

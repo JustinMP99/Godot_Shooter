@@ -21,7 +21,7 @@ public partial class UIManager : Node
     [ExportCategory("Game UI")]
     [Export] private CanvasLayer gameUIGroup;
     [Export] private Label gameScoreValueLabel;
-    [Export] private ProgressBar healthBar;
+    [Export] public PlayerInfoBox playerInfoBox;
     [Export] private Label countdownLabel;
     [Export] private Label roundLabel;
     

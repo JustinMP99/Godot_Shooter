@@ -23,8 +23,8 @@ public partial class SceneManager
         player.Reparent(levelNode);
         
         //Set UI Data
-        UIManager.Game_SetHealthBarMax(player.GetMaxHealth());
-        UIManager.Game_SetHealthBarCurrent(player.GetCurrentHealth());
+        UIManager.playerInfoBox.SetHealthBarMax(player.GetMaxHealth());
+        UIManager.playerInfoBox.SetHealthBarCurrent(player.GetCurrentHealth());
         UIManager.Game_SetScoreValueText(score);
         
         UIManager.Game_SetHudState(false);
@@ -91,6 +91,20 @@ public partial class SceneManager
     private void Options_SimpleShootToggleFunction()
     {
         player.simpleShoot = !player.simpleShoot;
+    }
+
+    private void Options_FullscreenToggleFunction(bool toggled)
+    {
+
+        if (toggled)
+        {
+            DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
+        }
+        else
+        {
+            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+        }
+        
     }
     
     private void Options_BackButtonFunction()

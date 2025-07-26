@@ -11,7 +11,8 @@ using FileAccess = System.IO.FileAccess;
 public partial class SaveManager : Node
 {
     private string savePath => "user://savegame.json";
-
+    private string configPath = "user://settings.cfg";
+    
     public void Save()
     {
         PlayerController tempPlayer = PlayerController.Instance;
@@ -84,6 +85,13 @@ public partial class SaveManager : Node
         return true;
     }
 
+    #region Config Save 
+
+    
+
+    #endregion
+    
+    
     #region Save Resource
 
     public void Save_Resource()
