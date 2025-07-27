@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=29 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -9,25 +9,27 @@
 [ext_resource type="Script" uid="uid://ktbv83iscdqf" path="res://Code/Scripts/UpgradePanel.cs" id="6_7j67u"]
 [ext_resource type="Resource" uid="uid://b2xqi00aqgqxk" path="res://Code/Resources/EnemyStats_Speedstr.tres" id="6_tw4tw"]
 [ext_resource type="Resource" uid="uid://doj18tmg033sd" path="res://Code/Resources/EnemyStats_Base.tres" id="7_1nw18"]
-[ext_resource type="Texture2D" uid="uid://b6u5cnavhxsvv" path="res://Art/Sprites/UpgradeTile.png" id="7_nc8lr"]
 [ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/TitleLabelSettings.tres" id="8_i5qe8"]
 [ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/NormalLabelSettings.tres" id="10_5d42l"]
 [ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico-Regular.ttf" id="10_odk2k"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
 [ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/GameScoreLabelSettings.tres" id="14_1nw18"]
+[ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="14_5nx6i"]
 [ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/volume_slider.tscn" id="15_5nx6i"]
 [ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/PlayerInfoBox.tscn" id="18_hcnd7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
+bg_color = Color(0, 0, 0, 0.827451)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uuvkg"]
+font = ExtResource("14_5nx6i")
+font_size = 13
 
 [sub_resource type="ImageTexture" id="ImageTexture_5rw63"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nx6i"]
-bg_color = Color(0.890196, 0.890196, 0.890196, 0.827451)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-shadow_color = Color(0, 0, 0, 0.827451)
-shadow_size = 5
+bg_color = Color(0, 0, 0, 0.827451)
+shadow_color = Color(0, 0, 0, 0.466667)
 
 [sub_resource type="LabelSettings" id="LabelSettings_y7ox6"]
 font_size = 56
@@ -95,8 +97,8 @@ mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
 subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
 shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
 shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
-shopHealthLevelLabel = NodePath("../../=== UI ===/--- upgrade ---/Health Upgrade Panel/Level Label")
-healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Upgrade Panel")
+shopHealthLevelLabel = NodePath("")
+healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
 optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
@@ -128,17 +130,16 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -200.0
+offset_left = -312.0
 offset_top = 56.0
-offset_right = 208.0
-offset_bottom = 135.0
+offset_right = 296.0
+offset_bottom = 280.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -258,256 +259,6 @@ label_settings = ExtResource("14_1nw18")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Health Upgrade Panel" type="Control" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
-layout_mode = 3
-anchor_left = 0.375
-anchor_top = 0.289
-anchor_right = 0.641
-anchor_bottom = 0.822
-offset_left = -0.540009
-offset_top = -0.0800018
-offset_right = -0.0200195
-offset_bottom = 0.159973
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_7j67u")
-titleLabel = NodePath("Title Label")
-descriptionLabel = NodePath("Description Label")
-levelLabel = NodePath("Level Label")
-upgradeButton = NodePath("Button")
-
-[node name="Background Sprite" type="TextureRect" parent="=== UI ===/--- upgrade ---/Health Upgrade Panel"]
-z_index = 1
-texture_filter = 1
-layout_mode = 2
-anchor_left = -0.022
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.04201
-offset_right = 0.539978
-texture = ExtResource("7_nc8lr")
-
-[node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_top = 0.104
-anchor_right = 1.0
-anchor_bottom = 0.271
-offset_top = 0.0639992
-offset_bottom = -0.0640106
-text = "Health"
-label_settings = ExtResource("8_i5qe8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Description Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_left = 0.125
-anchor_top = 0.349
-anchor_right = 0.875
-anchor_bottom = 0.698
-offset_top = -0.0559998
-offset_right = -3.05176e-05
-offset_bottom = -0.112
-text = "Increase health by 50 points"
-label_settings = ExtResource("10_5d42l")
-horizontal_alignment = 1
-
-[node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_left = 0.025
-anchor_top = 0.744
-anchor_right = 0.975
-anchor_bottom = 0.814
-offset_top = 0.0639954
-offset_bottom = -0.0159912
-text = "0/0"
-label_settings = ExtResource("10_5d42l")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="=== UI ===/--- upgrade ---/Health Upgrade Panel"]
-z_index = 2
-layout_mode = 2
-anchor_left = 0.235
-anchor_top = 0.875
-anchor_right = 0.727
-anchor_bottom = 0.956
-offset_left = -0.135002
-offset_top = -3.05176e-05
-offset_right = 0.0929871
-offset_bottom = -0.104004
-text = "Upgrade"
-icon = SubResource("ImageTexture_5rw63")
-
-[node name="Speed Upgrade Panel" type="Control" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
-layout_mode = 3
-anchor_left = 0.694
-anchor_top = 0.289
-anchor_right = 0.961
-anchor_bottom = 0.822
-offset_left = -0.320007
-offset_top = -0.0800018
-offset_right = -1.08008
-offset_bottom = 0.159973
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_7j67u")
-titleLabel = NodePath("Title Label")
-descriptionLabel = NodePath("Description Label")
-levelLabel = NodePath("Level Label")
-upgradeButton = NodePath("Button")
-
-[node name="Background Sprite" type="TextureRect" parent="=== UI ===/--- upgrade ---/Speed Upgrade Panel"]
-z_index = 1
-texture_filter = 1
-layout_mode = 2
-anchor_right = 1.002
-anchor_bottom = 1.0
-offset_left = 0.54001
-offset_right = -0.142059
-texture = ExtResource("7_nc8lr")
-
-[node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_top = 0.104
-anchor_right = 1.0
-anchor_bottom = 0.271
-offset_top = 0.0639992
-offset_bottom = -0.0640106
-text = "Speed"
-label_settings = ExtResource("8_i5qe8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Description Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_left = 0.125
-anchor_top = 0.349
-anchor_right = 0.875
-anchor_bottom = 0.698
-offset_top = -0.0559998
-offset_right = -3.05176e-05
-offset_bottom = -0.112
-text = "Increase speed by __ points"
-label_settings = ExtResource("10_5d42l")
-horizontal_alignment = 1
-
-[node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_left = 0.025
-anchor_top = 0.744
-anchor_right = 0.975
-anchor_bottom = 0.814
-offset_top = 0.0639954
-offset_bottom = -0.0159912
-text = "0/0"
-label_settings = ExtResource("10_5d42l")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="=== UI ===/--- upgrade ---/Speed Upgrade Panel"]
-z_index = 2
-layout_mode = 2
-anchor_left = 0.235
-anchor_top = 0.875
-anchor_right = 0.727
-anchor_bottom = 0.956
-offset_left = -0.135002
-offset_top = -3.05176e-05
-offset_right = 0.0929871
-offset_bottom = -0.104004
-text = "Upgrade"
-icon = SubResource("ImageTexture_5rw63")
-
-[node name="Weapon Upgrade Panel" type="Control" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
-layout_mode = 3
-anchor_left = 0.05
-anchor_top = 0.289
-anchor_right = 0.317
-anchor_bottom = 0.822
-offset_top = -0.0800018
-offset_right = -0.76004
-offset_bottom = 0.159973
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_7j67u")
-titleLabel = NodePath("Title Label")
-descriptionLabel = NodePath("Description Label")
-levelLabel = NodePath("Level Label")
-upgradeButton = NodePath("Button")
-
-[node name="Background Sprite" type="TextureRect" parent="=== UI ===/--- upgrade ---/Weapon Upgrade Panel"]
-z_index = 1
-texture_filter = 1
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 0.540011
-offset_right = 0.539978
-texture = ExtResource("7_nc8lr")
-
-[node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Weapon Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_top = 0.104
-anchor_right = 1.0
-anchor_bottom = 0.271
-offset_top = 0.0639992
-offset_bottom = -0.0640106
-text = "Weapon"
-label_settings = ExtResource("8_i5qe8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Description Label" type="Label" parent="=== UI ===/--- upgrade ---/Weapon Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_left = 0.125
-anchor_top = 0.349
-anchor_right = 0.875
-anchor_bottom = 0.698
-offset_left = -34.625
-offset_top = -6.01602
-offset_right = 38.625
-offset_bottom = -6.07202
-text = "Increase weapon damage by __ points"
-label_settings = ExtResource("10_5d42l")
-horizontal_alignment = 1
-
-[node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Weapon Upgrade Panel"]
-z_index = 3
-layout_mode = 2
-anchor_left = 0.025
-anchor_top = 0.744
-anchor_right = 0.975
-anchor_bottom = 0.814
-offset_top = 0.0639954
-offset_bottom = -0.0159912
-text = "0/0"
-label_settings = ExtResource("10_5d42l")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="=== UI ===/--- upgrade ---/Weapon Upgrade Panel"]
-z_index = 2
-layout_mode = 2
-anchor_left = 0.235
-anchor_top = 0.875
-anchor_right = 0.727
-anchor_bottom = 0.956
-offset_left = -0.135002
-offset_top = -3.05176e-05
-offset_right = 0.0929871
-offset_bottom = -0.104004
-text = "Upgrade"
-icon = SubResource("ImageTexture_5rw63")
-
 [node name="Back Button" type="Button" parent="=== UI ===/--- upgrade ---"]
 anchors_preset = 7
 anchor_left = 0.5
@@ -521,6 +272,80 @@ offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Go Back"
+
+[node name="Health Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.278
+anchor_right = 0.312
+anchor_bottom = 0.811
+offset_top = -0.160019
+offset_right = 5.63998
+offset_bottom = 0.0799561
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
+script = ExtResource("6_7j67u")
+titleLabel = NodePath("Title Label")
+descriptionLabel = NodePath("Description Label")
+levelLabel = NodePath("Level Label")
+upgradeButton = NodePath("Button")
+
+[node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Panel"]
+z_index = 3
+layout_mode = 2
+anchor_top = 0.104
+anchor_right = 1.0
+anchor_bottom = 0.359
+offset_top = 0.0639992
+offset_bottom = -33.856
+text = "Health"
+label_settings = ExtResource("8_i5qe8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Panel"]
+z_index = 3
+layout_mode = 2
+anchor_left = 0.125
+anchor_top = 0.349
+anchor_right = 0.875
+anchor_bottom = 0.698
+offset_top = -0.0559998
+offset_right = -3.05176e-05
+offset_bottom = -0.112
+text = "Increase Health by __ Points"
+label_settings = SubResource("LabelSettings_uuvkg")
+horizontal_alignment = 1
+
+[node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Panel"]
+z_index = 3
+layout_mode = 2
+anchor_left = 0.025
+anchor_top = 0.744
+anchor_right = 0.975
+anchor_bottom = 0.814
+offset_top = 0.0639954
+offset_bottom = -0.0159912
+text = "0/0"
+label_settings = ExtResource("10_5d42l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="=== UI ===/--- upgrade ---/Health Panel"]
+z_index = 2
+layout_mode = 2
+anchor_left = 0.235
+anchor_top = 0.875
+anchor_right = 0.727
+anchor_bottom = 0.956
+offset_left = -0.135002
+offset_top = -3.05176e-05
+offset_right = 0.0929871
+offset_bottom = -0.104004
+theme_override_fonts/font = ExtResource("10_odk2k")
+text = "Upgrade"
+icon = SubResource("ImageTexture_5rw63")
 
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -542,14 +367,14 @@ vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="=== UI ===/--- options ---"]
 anchors_preset = -1
-anchor_left = 0.25
-anchor_top = 0.278
-anchor_right = 0.746
-anchor_bottom = 0.715
-offset_left = -8.0
-offset_top = -0.240021
+anchor_left = 0.175
+anchor_top = 0.178
+anchor_right = 0.819
+anchor_bottom = 0.811
+offset_left = -1.52588e-05
+offset_top = -0.160004
 offset_right = -0.320068
-offset_bottom = -0.200012
+offset_bottom = 0.0799561
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -570,6 +395,7 @@ offset_bottom = 0.155579
 
 [node name="Master Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Master  Volume"
 label_settings = ExtResource("10_5d42l")
 
@@ -580,6 +406,7 @@ audioBus = "Master"
 
 [node name="SFX Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "SFX Volume"
 label_settings = ExtResource("10_5d42l")
 
@@ -587,6 +414,23 @@ label_settings = ExtResource("10_5d42l")
 layout_mode = 2
 value = 100.0
 audioBus = "sfx"
+
+[node name="Fullscreen Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Resolution Option" type="OptionButton" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "3840x2160"
+popup/item_0/id = 0
+popup/item_1/text = "2560x1440"
+popup/item_1/id = 1
+popup/item_2/text = "1920x1080"
+popup/item_2/id = 2
+popup/item_3/text = "1280x720"
+popup/item_3/id = 3
 
 [node name="Simple Shoot Toggle" type="CheckButton" parent="=== UI ===/--- options ---"]
 anchors_preset = -1
@@ -598,16 +442,6 @@ offset_top = 0.319977
 offset_right = 0.199982
 offset_bottom = -0.359985
 text = "Simple Shooting"
-
-[node name="Fullscreen Toggle" type="CheckButton" parent="=== UI ===/--- options ---"]
-anchors_preset = -1
-anchor_left = 0.25
-anchor_top = 0.5
-anchor_right = 0.385
-anchor_bottom = 0.544
-offset_right = 0.199982
-offset_bottom = -0.679993
-text = "Fullscreen"
 
 [node name="Back Button" type="Button" parent="=== UI ===/--- options ---"]
 anchors_preset = -1
@@ -629,6 +463,7 @@ text = "Back"
 visible = false
 
 [node name="--- pause ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Pause Title" type="Label" parent="=== UI ===/--- pause ---"]
@@ -898,10 +733,10 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameHover"]
 [connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
-[connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Upgrade Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
+[connection signal="toggled" from="=== UI ===/--- options ---/Panel/Slider Vertical Container/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
+[connection signal="item_selected" from="=== UI ===/--- options ---/Panel/Slider Vertical Container/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutioonDropDown"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
-[connection signal="toggled" from="=== UI ===/--- options ---/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/VBoxContainer/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/VBoxContainer/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]

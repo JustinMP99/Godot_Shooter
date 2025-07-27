@@ -1,12 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqqhlhhc0id28"]
+[gd_scene load_steps=6 format=3 uid="uid://cqqhlhhc0id28"]
 
 [ext_resource type="Script" uid="uid://lltonc7lwh6b" path="res://Code/Scripts/PlayerInfoBox.cs" id="1_1urlh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1urlh"]
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+bg_color = Color(0, 0, 0, 0.827451)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_poqhl"]
 bg_color = Color(1, 1, 1, 1)
@@ -14,6 +11,8 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t54r1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfg0k"]
 bg_color = Color(1.26584e-05, 0.835661, 0.183229, 1)
@@ -65,6 +64,7 @@ offset_left = 0.143997
 offset_right = 0.359985
 offset_bottom = -0.00800323
 grow_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_t54r1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gfg0k")
 value = 21.46
 show_percentage = false

@@ -4,5 +4,4 @@
 
 [resource]
 font = ExtResource("1_ic4w1")
-font_size = 68
-font_color = Color(0, 0, 0, 1)
+font_size = 106

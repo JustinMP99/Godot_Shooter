@@ -106,6 +106,33 @@ public partial class SceneManager
         }
         
     }
+
+    private void Options_ResolutioonDropDown(int index)
+    {
+
+        switch (index)
+        {
+            
+            case 0:
+                //DisplayServer.WindowSetSize(new Vector2I(3840, 2160));
+                GetWindow().SetSize(new Vector2I(3840, 2160));
+                break;
+            case 1:
+                //DisplayServer.WindowSetSize(new Vector2I(2560, 1440));
+                GetWindow().SetSize(new Vector2I(2560, 1440));
+                break;
+            case 2:
+                GetWindow().SetSize(new Vector2I(1920, 1080));
+                //DisplayServer.WindowSetSize(new Vector2I(1920, 1080));
+                break;
+            case 3:
+                GetWindow().SetSize(new Vector2I(1280, 720));
+                //DisplayServer.WindowSetSize(new Vector2I(1280, 720));
+                break;
+            
+        }
+        
+    }
     
     private void Options_BackButtonFunction()
     {
