@@ -107,7 +107,7 @@ public partial class SceneManager
         
     }
 
-    private void Options_ResolutioonDropDown(int index)
+    private void Options_ResolutionDropDown(int index)
     {
 
         switch (index)
@@ -131,6 +131,15 @@ public partial class SceneManager
                 break;
             
         }
+        
+    }
+
+    private void Options_ResetSaveDataButtonFunction()
+    {
+        saveManager.ResetSave();
+        saveManager.load();
+        //Refresh Credits UI
+        UIManager.Main_SetCreditsText(player.Credits);
         
     }
     

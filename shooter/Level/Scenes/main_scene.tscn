@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=32 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -18,6 +18,7 @@
 [ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="14_5nx6i"]
 [ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/volume_slider.tscn" id="15_5nx6i"]
 [ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/PlayerInfoBox.tscn" id="18_hcnd7"]
+[ext_resource type="Texture2D" uid="uid://hijcvnqhb6xx" path="res://Art/Sprites/HDR_blue_nebulae-1.hdr" id="19_52m5l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
 bg_color = Color(0, 0, 0, 0.827451)
@@ -37,10 +38,15 @@ font_size = 56
 
 [sub_resource type="LabelSettings" id="LabelSettings_0o8l2"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lojpb"]
+panorama = ExtResource("19_52m5l")
+energy_multiplier = 7.0
+
 [sub_resource type="Sky" id="Sky_0o8l2"]
+sky_material = SubResource("PanoramaSkyMaterial_lojpb")
 
 [sub_resource type="Environment" id="Environment_2yd7s"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.813048, 0.863449, 0.915101, 1)
 sky = SubResource("Sky_0o8l2")
 ambient_light_color = Color(0.118581, 0.118581, 0.118581, 1)
@@ -52,7 +58,6 @@ fog_density = 0.02
 fog_sky_affect = 0.7
 fog_depth_curve = 0.535887
 fog_depth_begin = 0.0
-volumetric_fog_enabled = true
 volumetric_fog_emission = Color(0.851769, 0.851769, 0.851769, 1)
 volumetric_fog_length = 37.4
 volumetric_fog_sky_affect = 0.36
@@ -155,10 +160,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -184.0
+offset_left = -185.0
 offset_top = -91.0
-offset_right = 61.0
-offset_bottom = 92.0
+offset_right = 60.0001
+offset_bottom = 94.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
@@ -232,6 +237,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="--- upgrade ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Shop Title Label" type="Label" parent="=== UI ===/--- upgrade ---"]
@@ -261,28 +267,14 @@ label_settings = ExtResource("14_1nw18")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Back Button" type="Button" parent="=== UI ===/--- upgrade ---"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -56.0
-offset_right = 79.0
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Go Back"
-
 [node name="Health Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.278
 anchor_right = 0.312
 anchor_bottom = 0.811
-offset_top = -0.160019
-offset_right = 5.63998
+offset_top = -0.160034
+offset_right = 5.63995
 offset_bottom = 0.0799561
 grow_horizontal = 2
 grow_vertical = 2
@@ -353,6 +345,22 @@ theme_override_fonts/font = ExtResource("10_odk2k")
 text = "Upgrade"
 icon = SubResource("ImageTexture_5rw63")
 
+[node name="Back Button" type="Button" parent="=== UI ===/--- upgrade ---"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -112.0
+offset_top = -80.0
+offset_right = 112.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("10_odk2k")
+theme_override_font_sizes/font_size = 40
+text = "Go Back"
+
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
 follow_viewport_enabled = true
@@ -372,62 +380,61 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="=== UI ===/--- options ---"]
-anchors_preset = -1
-anchor_left = 0.175
-anchor_top = 0.178
-anchor_right = 0.819
-anchor_bottom = 0.811
-offset_left = -1.52588e-05
-offset_top = -0.160004
-offset_right = -0.320068
-offset_bottom = 0.0799561
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -568.0
+offset_top = -340.0
+offset_right = 568.0
+offset_bottom = 316.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_5nx6i")
 
-[node name="Slider Vertical Container" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
+[node name="Core Settings" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.012
-anchor_top = 0.026
-anchor_right = 0.412
-anchor_bottom = 0.33
-offset_left = 0.28928
-offset_top = -0.181682
-offset_right = 0.265259
-offset_bottom = 0.155579
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -323.5
+offset_right = 383.0
+offset_bottom = 324.5
+grow_vertical = 2
 
-[node name="Master Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container"]
+[node name="Master Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Core Settings"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Master  Volume"
 label_settings = ExtResource("10_5d42l")
 
-[node name="Master Slider" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container" instance=ExtResource("15_5nx6i")]
+[node name="Master Slider" parent="=== UI ===/--- options ---/Panel/Core Settings" instance=ExtResource("15_5nx6i")]
 layout_mode = 2
 value = 100.0
 audioBus = "Master"
 
-[node name="SFX Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container"]
+[node name="SFX Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Core Settings"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "SFX Volume"
 label_settings = ExtResource("10_5d42l")
 
-[node name="SFX Slider" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container" instance=ExtResource("15_5nx6i")]
+[node name="SFX Slider" parent="=== UI ===/--- options ---/Panel/Core Settings" instance=ExtResource("15_5nx6i")]
 layout_mode = 2
 value = 100.0
 audioBus = "sfx"
 
-[node name="Fullscreen Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container"]
+[node name="Fullscreen Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Panel/Core Settings"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="Resolution Option" type="OptionButton" parent="=== UI ===/--- options ---/Panel/Slider Vertical Container"]
+[node name="Resolution Option" type="OptionButton" parent="=== UI ===/--- options ---/Panel/Core Settings"]
 layout_mode = 2
-selected = 0
+selected = 2
 item_count = 4
 popup/item_0/text = "3840x2160"
 popup/item_0/id = 0
@@ -438,16 +445,50 @@ popup/item_2/id = 2
 popup/item_3/text = "1280x720"
 popup/item_3/id = 3
 
-[node name="Simple Shoot Toggle" type="CheckButton" parent="=== UI ===/--- options ---"]
-anchors_preset = -1
-anchor_left = 0.25
-anchor_top = 0.444
-anchor_right = 0.385
-anchor_bottom = 0.488
-offset_top = 0.319977
-offset_right = 0.199982
-offset_bottom = -0.359985
+[node name="Toggle Settings" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -323.0
+offset_right = -24.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Simple Shoot Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Panel/Toggle Settings"]
+layout_mode = 2
 text = "Simple Shooting"
+
+[node name="Reset Save Button" type="Button" parent="=== UI ===/--- options ---/Panel/Toggle Settings"]
+layout_mode = 2
+text = "Reset Save Data"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -480.0
+offset_top = -280.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="LineEdit" type="LineEdit" parent="=== UI ===/--- options ---/Panel/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Cheatcode Here!"
+
+[node name="Button" type="Button" parent="=== UI ===/--- options ---/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_odk2k")
+text = "Enter Cheat"
 
 [node name="Back Button" type="Button" parent="=== UI ===/--- options ---"]
 anchors_preset = -1
@@ -462,8 +503,25 @@ offset_bottom = -0.320007
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Back"
+
+[node name="Label" type="Label" parent="=== UI ===/--- options ---"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -200.0
+offset_right = 576.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Enter description text here"
+label_settings = ExtResource("10_5d42l")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="--- help ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -698,7 +756,6 @@ environment = SubResource("Environment_2yd7s")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 0.911173, 0.412023, 0, -0.412023, 0.911173, 0, 24.9809, 0)
-light_color = Color(0.735825, 0.696707, 0.555465, 1)
 
 [node name="Start Position" type="Node3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84457)
@@ -739,11 +796,12 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameHover"]
 [connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
 [connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
-[connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
-[connection signal="toggled" from="=== UI ===/--- options ---/Panel/Slider Vertical Container/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
-[connection signal="item_selected" from="=== UI ===/--- options ---/Panel/Slider Vertical Container/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutioonDropDown"]
-[connection signal="pressed" from="=== UI ===/--- options ---/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
+[connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
+[connection signal="toggled" from="=== UI ===/--- options ---/Panel/Core Settings/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
+[connection signal="item_selected" from="=== UI ===/--- options ---/Panel/Core Settings/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutioonDropDown"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Panel/Toggle Settings/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Panel/Toggle Settings/Reset Save Button" to="=== MANAGER ===/Scene Manager" method="Options_ResetSaveDataButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/VBoxContainer/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/VBoxContainer/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]

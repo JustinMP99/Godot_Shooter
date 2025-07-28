@@ -54,7 +54,6 @@ public partial class SceneManager : Node
             player.Stats.MaxHealth = 50;
             player.Stats.HealthLevel = 1;
             saveManager.Save();
-            GD.Print("First time save");
         }
         
         UIManager.Main_SetCreditsText(player.Credits);

@@ -110,14 +110,12 @@ public partial class PlayerController : CharacterBody3D
 
     private void PauseFunction()
     {
-        GD.Print("Emitting Pause Signal");
         //Emit Signal
         EmitSignal(SignalName.PauseSignal);
     }
 
     private void ShootFunction()
     {
-        GD.Print("Shooting");
         //Instantiate Bullet
         //RigidBody3D bullet = bulletPrefab.Instantiate() as RigidBody3D;
         Bullet bullet = bulletPrefab.Instantiate() as Bullet;
@@ -142,7 +140,6 @@ public partial class PlayerController : CharacterBody3D
     {
         if (body is EnemyController enemy)
         {
-            GD.Print("Collided with Enemy!");
             enemy.DisableEnemy();
             //enemy.Position = new Vector3(10.0f, 10.0f, 10.0f);
 
@@ -152,7 +149,6 @@ public partial class PlayerController : CharacterBody3D
             //Check currentHealth
             if (Stats.CurrentHealth <= 0)
             {
-                GD.Print("Player has died");
                 takingInput = false;
                 this.Position = new Vector3(0.0f, 0.0f, 10.0f);
                 //Game Over
@@ -160,7 +156,6 @@ public partial class PlayerController : CharacterBody3D
             }
             else
             {
-                GD.Print("Player has taken damage");
                 //Update UI
                 EmitSignal(SignalName.PlayerHit);
             }

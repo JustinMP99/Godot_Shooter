@@ -68,7 +68,7 @@ public partial class Bullet : RigidBody3D
     {
         if (node is EnemyController enemy)
         {
-            GD.Print("Hit Enemy!");
+            
             bool KilledEnemy = enemy.TakeDamage(damage);
             if (KilledEnemy)
             {

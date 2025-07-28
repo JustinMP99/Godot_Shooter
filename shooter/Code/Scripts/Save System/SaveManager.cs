@@ -28,8 +28,6 @@ public partial class SaveManager : Node
         //Convert data dictionary to string for json file
         string json = Json.Stringify(tempData);
 
-        GD.Print(json);
-
         //Get the global path for the User directory
         string path = ProjectSettings.GlobalizePath("user://");
 
@@ -62,8 +60,6 @@ public partial class SaveManager : Node
 
         data = File.ReadAllText(path + "/Saves/savegame.json");
 
-        GD.Print(data);
-
         Json jsonLoader = new Json();
 
         Error error = jsonLoader.Parse(data);
@@ -85,6 +81,38 @@ public partial class SaveManager : Node
         return true;
     }
 
+    public bool ResetSave()
+    {
+        PlayerController tempPlayer = PlayerController.Instance;
+        Godot.Collections.Dictionary tempData = new Dictionary();
+        tempData = new Dictionary()
+        {
+            { "Credits", 0 },
+            { "HealthLevel", 1 },
+            { "CurrentHealth", 50 },
+            { "MaxHealth", 50 },
+        };
+
+        //Convert data dictionary to string for json file
+        string json = Json.Stringify(tempData);
+        
+        //Get the global path for the User directory
+        string path = ProjectSettings.GlobalizePath("user://");
+
+        //Check if Directory exits
+        if (!Directory.Exists(path + "/Saves"))
+        {
+            //Create Directory if it doesn't exist
+            Directory.CreateDirectory(path + "/Saves");
+        }
+
+        //Join the globalized path with the save folder + file
+        path = Path.Join(path, "/Saves/savegame.json");
+        File.WriteAllText(path, json);
+
+        return true;
+    }
+    
     #region Config Save 
 
     
