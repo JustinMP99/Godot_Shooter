@@ -136,11 +136,26 @@ public partial class SceneManager
 
     private void Options_ResetSaveDataButtonFunction()
     {
+        
+        //Enable Delete Save Panel
+        
+        UIManager.SetDeleteSavePanelState(true);
+        
+    }
+
+    private void Options_YesDeleteButtonFunction()
+    {
         saveManager.ResetSave();
         saveManager.load();
         //Refresh Credits UI
         UIManager.Main_SetCreditsText(player.Credits);
-        
+        UIManager.SetDeleteSavePanelState(false);
+    }
+
+    private void Options_NoDeleteButtonFunction()
+    {
+        //Disable Delete Save Panel
+        UIManager.SetDeleteSavePanelState(false);
     }
     
     private void Options_BackButtonFunction()

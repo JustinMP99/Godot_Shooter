@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=33 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -32,6 +32,9 @@ font_size = 21
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nx6i"]
 bg_color = Color(0, 0, 0, 0.827451)
 shadow_color = Color(0, 0, 0, 0.466667)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52m5l"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.760784)
 
 [sub_resource type="LabelSettings" id="LabelSettings_y7ox6"]
 font_size = 56
@@ -96,7 +99,7 @@ one_shot = true
 wait_time = 1.5
 one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
@@ -105,6 +108,7 @@ shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
 shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
 healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
 optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
+deleteSavePanel = NodePath("../../=== UI ===/--- options ---/Delete Save Panel")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
 playerInfoBox = NodePath("../../=== UI ===/--- game ---/PlayerInfoBox")
@@ -135,7 +139,6 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -366,13 +369,12 @@ visible = false
 follow_viewport_enabled = true
 
 [node name="Title" type="Label" parent="=== UI ===/--- options ---"]
-anchors_preset = -1
-anchor_left = 0.391
-anchor_right = 0.609
-anchor_bottom = 0.136
-offset_left = 0.0199585
-offset_right = -0.0200195
-offset_bottom = -37.92
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -237.5
+offset_right = 237.5
+offset_bottom = 181.0
 grow_horizontal = 2
 text = "Options"
 label_settings = ExtResource("8_i5qe8")
@@ -401,9 +403,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 24.0
-offset_top = -323.5
+offset_top = -323.0
 offset_right = 383.0
-offset_bottom = 324.5
+offset_bottom = 49.0
 grow_vertical = 2
 
 [node name="Master Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Core Settings"]
@@ -455,7 +457,7 @@ anchor_bottom = 0.5
 offset_left = -480.0
 offset_top = -323.0
 offset_right = -24.0
-offset_bottom = 1.0
+offset_bottom = 48.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -467,25 +469,24 @@ text = "Simple Shooting"
 layout_mode = 2
 text = "Reset Save Data"
 
-[node name="HBoxContainer" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
+[node name="Cheat Box" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -480.0
-offset_top = -280.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 0
+offset_left = -232.0
+offset_top = -264.0
+offset_right = 232.0
+grow_horizontal = 2
 grow_vertical = 0
 
-[node name="LineEdit" type="LineEdit" parent="=== UI ===/--- options ---/Panel/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="=== UI ===/--- options ---/Panel/Cheat Box"]
 layout_mode = 2
 placeholder_text = "Enter Cheatcode Here!"
 
-[node name="Button" type="Button" parent="=== UI ===/--- options ---/Panel/HBoxContainer"]
+[node name="Button" type="Button" parent="=== UI ===/--- options ---/Panel/Cheat Box"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_odk2k")
 text = "Enter Cheat"
@@ -522,6 +523,68 @@ text = "Enter description text here"
 label_settings = ExtResource("10_5d42l")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Delete Save Panel" type="Panel" parent="=== UI ===/--- options ---"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_52m5l")
+
+[node name="Label" type="Label" parent="=== UI ===/--- options ---/Delete Save Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = 232.0
+offset_right = 67.0
+offset_bottom = 254.333
+grow_horizontal = 2
+text = "Delete Save Data?"
+label_settings = ExtResource("8_i5qe8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Yes Delete Button" type="Button" parent="=== UI ===/--- options ---/Delete Save Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -28.0
+offset_right = -196.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_odk2k")
+text = "Yeah, delete my data"
+
+[node name="No Delete Button" type="Button" parent="=== UI ===/--- options ---/Delete Save Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = -28.0
+offset_right = 476.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_odk2k")
+text = "No, wait!"
 
 [node name="--- help ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -803,6 +866,8 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="pressed" from="=== UI ===/--- options ---/Panel/Toggle Settings/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Panel/Toggle Settings/Reset Save Button" to="=== MANAGER ===/Scene Manager" method="Options_ResetSaveDataButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/Yes Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_YesDeleteButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/No Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_NoDeleteButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/VBoxContainer/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- pause ---/VBoxContainer/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]

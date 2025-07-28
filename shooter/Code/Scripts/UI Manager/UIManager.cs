@@ -16,6 +16,7 @@ public partial class UIManager : Node
 
     [ExportCategory("Options UI")] [Export]
     private CanvasLayer optionsUIGroup;
+    [Export] private Panel deleteSavePanel;
     
     
     [ExportCategory("Game UI")]
@@ -65,6 +66,11 @@ public partial class UIManager : Node
         optionsUIGroup.Visible = state;
     }
 
+    public void SetDeleteSavePanelState(bool state)
+    {
+        deleteSavePanel.Visible = state;
+    }
+    
     #endregion
     
     #region Getter
