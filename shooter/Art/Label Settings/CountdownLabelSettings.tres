@@ -1,8 +1,13 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://buiblni7vvcgk"]
 
-[ext_resource type="FontFile" uid="uid://cqyjshrmdao21" path="res://Art/Fonts/Quantico-Bold.ttf" id="1_6744e"]
+[sub_resource type="FontFile" id="FontFile_tsyfw"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
 [resource]
-font = ExtResource("1_6744e")
+font = SubResource("FontFile_tsyfw")
 font_size = 174
 font_color = Color(0, 0, 0, 1)

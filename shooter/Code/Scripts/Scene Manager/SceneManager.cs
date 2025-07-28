@@ -56,7 +56,7 @@ public partial class SceneManager : Node
             saveManager.Save();
             GD.Print("First time save");
         }
-
+        
         UIManager.Main_SetCreditsText(player.Credits);
         
     }
