@@ -14,10 +14,9 @@ public partial class UIManager : Node
     [Export] private Label shopHealthLevelLabel;
     [Export] private UpgradePanel healthUpgradePanel;
 
-    [ExportCategory("Options UI")] [Export]
-    private CanvasLayer optionsUIGroup;
+    [ExportCategory("Options UI")] 
+    [Export] private CanvasLayer optionsUIGroup;
     [Export] private Panel deleteSavePanel;
-    
     
     [ExportCategory("Game UI")]
     [Export] private CanvasLayer gameUIGroup;
@@ -34,7 +33,6 @@ public partial class UIManager : Node
     [Export] private Label resultScoreLabel;
     [Export] private Label resultCreditsEarnedLabel;
     [Export] private Label resultTotalCreditsLabel;
-    
     
     public override void _Ready()
     {
