@@ -117,7 +117,6 @@ public partial class PlayerController : CharacterBody3D
     private void ShootFunction()
     {
         //Instantiate Bullet
-        //RigidBody3D bullet = bulletPrefab.Instantiate() as RigidBody3D;
         Bullet bullet = bulletPrefab.Instantiate() as Bullet;
         bullet.FinalShot += EnemyDefeat;
         

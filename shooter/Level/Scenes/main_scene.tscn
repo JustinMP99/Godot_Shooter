@@ -139,6 +139,7 @@ script = ExtResource("6_0o8l2")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -365,7 +366,6 @@ theme_override_font_sizes/font_size = 40
 text = "Go Back"
 
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Title" type="Label" parent="=== UI ===/--- options ---"]
@@ -381,7 +381,7 @@ label_settings = ExtResource("8_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="=== UI ===/--- options ---"]
+[node name="Settings Panel" type="Panel" parent="=== UI ===/--- options ---"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -397,7 +397,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_5nx6i")
 
-[node name="Core Settings" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
+[node name="Core Settings" type="VBoxContainer" parent="=== UI ===/--- options ---/Settings Panel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -408,33 +408,44 @@ offset_right = 383.0
 offset_bottom = 49.0
 grow_vertical = 2
 
-[node name="Master Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Core Settings"]
+[node name="Master Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Master  Volume"
 label_settings = ExtResource("10_5d42l")
 
-[node name="Master Slider" parent="=== UI ===/--- options ---/Panel/Core Settings" instance=ExtResource("15_5nx6i")]
+[node name="Master Slider" parent="=== UI ===/--- options ---/Settings Panel/Core Settings" instance=ExtResource("15_5nx6i")]
 layout_mode = 2
 value = 100.0
 audioBus = "Master"
 
-[node name="SFX Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Panel/Core Settings"]
+[node name="SFX Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "SFX Volume"
 label_settings = ExtResource("10_5d42l")
 
-[node name="SFX Slider" parent="=== UI ===/--- options ---/Panel/Core Settings" instance=ExtResource("15_5nx6i")]
+[node name="SFX Slider" parent="=== UI ===/--- options ---/Settings Panel/Core Settings" instance=ExtResource("15_5nx6i")]
 layout_mode = 2
 value = 100.0
 audioBus = "sfx"
 
-[node name="Fullscreen Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Panel/Core Settings"]
+[node name="Music Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Music Volume"
+label_settings = ExtResource("10_5d42l")
+
+[node name="Music Slider" parent="=== UI ===/--- options ---/Settings Panel/Core Settings" instance=ExtResource("15_5nx6i")]
+layout_mode = 2
+value = 100.0
+audioBus = "sfx"
+
+[node name="Fullscreen Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="Resolution Option" type="OptionButton" parent="=== UI ===/--- options ---/Panel/Core Settings"]
+[node name="Resolution Option" type="OptionButton" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
 layout_mode = 2
 selected = 2
 item_count = 4
@@ -447,7 +458,7 @@ popup/item_2/id = 2
 popup/item_3/text = "1280x720"
 popup/item_3/id = 3
 
-[node name="Toggle Settings" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
+[node name="Toggle Settings" type="VBoxContainer" parent="=== UI ===/--- options ---/Settings Panel"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -461,15 +472,15 @@ offset_bottom = 48.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Simple Shoot Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Panel/Toggle Settings"]
+[node name="Simple Shoot Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Settings Panel/Toggle Settings"]
 layout_mode = 2
 text = "Simple Shooting"
 
-[node name="Reset Save Button" type="Button" parent="=== UI ===/--- options ---/Panel/Toggle Settings"]
+[node name="Reset Save Button" type="Button" parent="=== UI ===/--- options ---/Settings Panel/Toggle Settings"]
 layout_mode = 2
 text = "Reset Save Data"
 
-[node name="Cheat Box" type="VBoxContainer" parent="=== UI ===/--- options ---/Panel"]
+[node name="Cheat Box" type="VBoxContainer" parent="=== UI ===/--- options ---/Settings Panel"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -479,14 +490,17 @@ anchor_bottom = 1.0
 offset_left = -232.0
 offset_top = -264.0
 offset_right = 232.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 6
+alignment = 2
 
-[node name="LineEdit" type="LineEdit" parent="=== UI ===/--- options ---/Panel/Cheat Box"]
+[node name="LineEdit" type="LineEdit" parent="=== UI ===/--- options ---/Settings Panel/Cheat Box"]
 layout_mode = 2
 placeholder_text = "Enter Cheatcode Here!"
 
-[node name="Button" type="Button" parent="=== UI ===/--- options ---/Panel/Cheat Box"]
+[node name="Button" type="Button" parent="=== UI ===/--- options ---/Settings Panel/Cheat Box"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_odk2k")
 text = "Enter Cheat"
@@ -861,10 +875,10 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
-[connection signal="toggled" from="=== UI ===/--- options ---/Panel/Core Settings/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
-[connection signal="item_selected" from="=== UI ===/--- options ---/Panel/Core Settings/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutioonDropDown"]
-[connection signal="pressed" from="=== UI ===/--- options ---/Panel/Toggle Settings/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
-[connection signal="pressed" from="=== UI ===/--- options ---/Panel/Toggle Settings/Reset Save Button" to="=== MANAGER ===/Scene Manager" method="Options_ResetSaveDataButtonFunction"]
+[connection signal="toggled" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
+[connection signal="item_selected" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutioonDropDown"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Settings Panel/Toggle Settings/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Settings Panel/Toggle Settings/Reset Save Button" to="=== MANAGER ===/Scene Manager" method="Options_ResetSaveDataButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/Yes Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_YesDeleteButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/No Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_NoDeleteButtonFunction"]
