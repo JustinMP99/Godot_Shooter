@@ -16,6 +16,9 @@ public partial class UIManager : Node
 
     [ExportCategory("Options UI")] 
     [Export] private CanvasLayer optionsUIGroup;
+    [Export] private Slider masterVolumeSlider;
+    [Export] private Slider sfxVolumeSlider;
+    [Export] private Slider musicVolumeSlider;
     [Export] private Panel deleteSavePanel;
     
     [ExportCategory("Game UI")]
@@ -68,6 +71,22 @@ public partial class UIManager : Node
     {
         deleteSavePanel.Visible = state;
     }
+
+    public void SetMasterSliderValue(float value)
+    {
+        masterVolumeSlider.Value = value;
+    }
+
+    public void SetSFXSliderValue(float value)
+    {
+        sfxVolumeSlider.Value = value;
+    }
+    
+    public void SetMusicSliderValue(float value)
+    {
+        musicVolumeSlider.Value = value;
+    }
+
     
     #endregion
     

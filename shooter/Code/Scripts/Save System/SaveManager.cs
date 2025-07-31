@@ -113,9 +113,45 @@ public partial class SaveManager : Node
         return true;
     }
     
-    #region Config Save 
+    #region Config Save
 
-    
+    public void SaveConfig()
+    {
+
+        var config = new ConfigFile();
+
+        float masterVolume = AudioServer.GetBusVolumeLinear(0);
+        float sfxVolume = AudioServer.GetBusVolumeLinear(1);
+        float musicVolume = AudioServer.GetBusVolumeLinear(2);
+        
+        config.SetValue("Audio", "MasterLevel",  masterVolume);
+        config.SetValue("Audio", "SFXLevel",  sfxVolume);
+        config.SetValue("Audio", "MusicLevel",  musicVolume);
+        
+        config.Save(configPath);
+
+    }
+
+    public void LoadConfig()
+    {
+        var config = new ConfigFile();
+        
+        Error err = config.Load(configPath);
+        if (err != Error.Ok)
+        {
+            GD.Print("Error Reading file");
+            return;
+        }
+
+        float masterLevel = (float)config.GetValue("Audio", "MasterLevel");
+        float sfxLevel = (float)config.GetValue("Audio", "SFXLevel");
+        float musicLevel = (float)config.GetValue("Audio", "MusicLevel");
+        
+        AudioServer.SetBusVolumeLinear(0, masterLevel );
+        AudioServer.SetBusVolumeLinear(1, sfxLevel );
+        AudioServer.SetBusVolumeLinear(2, musicLevel );
+        
+    }
 
     #endregion
     

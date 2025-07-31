@@ -37,7 +37,7 @@ void fragment() {
 		float basic_fresnel = fresnel(3.0, NORMAL, VIEW);
 		ALBEDO = base_color + basic_fresnel * fresnel_amplifier;
 	}
-	
+
 }
 
 //void light() {

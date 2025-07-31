@@ -41,6 +41,9 @@ public partial class SceneManager
 
     public void Main_OptionsButtonFunction()
     {
+        
+        //UIManager.SetMasterSliderValue(AudioServer.);
+        
         //set UI states
         UIManager.SetMainUIState(false);
         UIManager.SetOptionsUIState(true);
@@ -163,6 +166,7 @@ public partial class SceneManager
         //set ui state
         UIManager.SetOptionsUIState(false);
         UIManager.SetMainUIState(true);
+        saveManager.SaveConfig();
     }
     
     #endregion

@@ -99,7 +99,7 @@ one_shot = true
 wait_time = 1.5
 one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
@@ -108,6 +108,9 @@ shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
 shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
 healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
 optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
+masterVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Master Slider")
+sfxVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/SFX Slider")
+musicVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Music Slider")
 deleteSavePanel = NodePath("../../=== UI ===/--- options ---/Delete Save Panel")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
@@ -416,7 +419,8 @@ label_settings = ExtResource("10_5d42l")
 
 [node name="Master Slider" parent="=== UI ===/--- options ---/Settings Panel/Core Settings" instance=ExtResource("15_5nx6i")]
 layout_mode = 2
-value = 100.0
+max_value = 1.0
+value = 1.0
 audioBus = "Master"
 
 [node name="SFX Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
@@ -427,8 +431,10 @@ label_settings = ExtResource("10_5d42l")
 
 [node name="SFX Slider" parent="=== UI ===/--- options ---/Settings Panel/Core Settings" instance=ExtResource("15_5nx6i")]
 layout_mode = 2
-value = 100.0
+max_value = 1.0
+value = 1.0
 audioBus = "sfx"
+busIndex = 1
 
 [node name="Music Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
 layout_mode = 2
@@ -438,8 +444,10 @@ label_settings = ExtResource("10_5d42l")
 
 [node name="Music Slider" parent="=== UI ===/--- options ---/Settings Panel/Core Settings" instance=ExtResource("15_5nx6i")]
 layout_mode = 2
-value = 100.0
-audioBus = "sfx"
+max_value = 1.0
+value = 1.0
+audioBus = "music"
+busIndex = 2
 
 [node name="Fullscreen Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
 layout_mode = 2

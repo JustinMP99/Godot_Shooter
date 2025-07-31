@@ -24,6 +24,13 @@ public partial class SceneManager : Node
 
     public override void _Ready()
     {
+        
+        saveManager.LoadConfig();
+        
+        UIManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
+        UIManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
+        UIManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
+        
         //UI Setup
         UIManager.SetMainUIState(true);
         UIManager.SetOptionsUIState(false);
