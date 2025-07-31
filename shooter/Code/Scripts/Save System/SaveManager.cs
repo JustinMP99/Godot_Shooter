@@ -127,34 +127,39 @@ public partial class SaveManager : Node
         config.SetValue("Audio", "MasterLevel",  masterVolume);
         config.SetValue("Audio", "SFXLevel",  sfxVolume);
         config.SetValue("Audio", "MusicLevel",  musicVolume);
+        config.SetValue("Screen", "Fullscreen", GameData.Instance.isFullscreen);
+        config.SetValue("Screen", "ResolutionValue", GameData.Instance.resolutionValue);
         
         config.Save(configPath);
 
     }
 
-    public void LoadConfig()
+    public bool LoadConfig()
     {
         var config = new ConfigFile();
         
         Error err = config.Load(configPath);
         if (err != Error.Ok)
         {
+            GD.Print(err);
             GD.Print("Error Reading file");
-            return;
+            return false;
         }
 
         float masterLevel = (float)config.GetValue("Audio", "MasterLevel");
         float sfxLevel = (float)config.GetValue("Audio", "SFXLevel");
         float musicLevel = (float)config.GetValue("Audio", "MusicLevel");
+        GameData.Instance.isFullscreen = (bool)config.GetValue("Screen", "Fullscreen");
+        GameData.Instance.resolutionValue = (int)config.GetValue("Screen", "ResolutionValue");
         
         AudioServer.SetBusVolumeLinear(0, masterLevel );
         AudioServer.SetBusVolumeLinear(1, sfxLevel );
         AudioServer.SetBusVolumeLinear(2, musicLevel );
-        
+
+        return true;
     }
 
     #endregion
-    
     
     #region Save Resource
 

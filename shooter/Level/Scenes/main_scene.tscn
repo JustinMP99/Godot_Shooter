@@ -824,6 +824,12 @@ text = "Quit"
 
 [node name="=== LEVEL ===" type="Node" parent="."]
 
+[node name="Camera Position Main" type="Node3D" parent="=== LEVEL ==="]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 5)
+
+[node name="Camera Position Game" type="Node3D" parent="=== LEVEL ==="]
+transform = Transform3D(1, 0, 0, 0, 0.809017, 0.587785, 0, -0.587785, 0.809017, 0, 6, 5)
+
 [node name="Cam 1" type="Camera3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 0.805649, 0.592393, 0, -0.592393, 0.805649, 0, 6, 5)
 current = true

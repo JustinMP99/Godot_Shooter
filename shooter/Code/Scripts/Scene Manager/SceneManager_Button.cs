@@ -99,42 +99,13 @@ public partial class SceneManager
     private void Options_FullscreenToggleFunction(bool toggled)
     {
 
-        if (toggled)
-        {
-            DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
-        }
-        else
-        {
-            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
-        }
+       SetFullscreen(toggled);
         
     }
 
     private void Options_ResolutionDropDown(int index)
     {
-
-        switch (index)
-        {
-            
-            case 0:
-                //DisplayServer.WindowSetSize(new Vector2I(3840, 2160));
-                GetWindow().SetSize(new Vector2I(3840, 2160));
-                break;
-            case 1:
-                //DisplayServer.WindowSetSize(new Vector2I(2560, 1440));
-                GetWindow().SetSize(new Vector2I(2560, 1440));
-                break;
-            case 2:
-                GetWindow().SetSize(new Vector2I(1920, 1080));
-                //DisplayServer.WindowSetSize(new Vector2I(1920, 1080));
-                break;
-            case 3:
-                GetWindow().SetSize(new Vector2I(1280, 720));
-                //DisplayServer.WindowSetSize(new Vector2I(1280, 720));
-                break;
-            
-        }
-        
+        SetResolution(index);
     }
 
     private void Options_ResetSaveDataButtonFunction()
@@ -163,6 +134,8 @@ public partial class SceneManager
     
     private void Options_BackButtonFunction()
     {
+        GD.Print("Resolution Setting: " + GameData.Instance.resolutionValue);
+        GD.Print("Fullscreen Setting: " + GameData.Instance.isFullscreen);
         //set ui state
         UIManager.SetOptionsUIState(false);
         UIManager.SetMainUIState(true);

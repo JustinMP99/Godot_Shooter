@@ -25,23 +25,55 @@ public partial class SceneManager : Node
     public override void _Ready()
     {
         
-        saveManager.LoadConfig();
+        //load configuration file
+        LoadConfig();
         
-        UIManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
-        UIManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
-        UIManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
+        //load player data
+        LoadPlayerData();
         
-        //UI Setup
-        UIManager.SetMainUIState(true);
-        UIManager.SetOptionsUIState(false);
-        UIManager.SetPauseUIState(false);
-        UIManager.SetGameUIState(false);
-        UIManager.SetResultUIState(false);
-        UIManager.SetShopUIState(false);
-
-        //Spawner Startup
+        //setup UI
+        UISetup();
+        
+        //additional startup calls
         enemySpawner.Startup();
         
+    }
+
+    public override void _Process(double delta)
+    {
+        
+    }
+    
+    #region Startup Functions
+
+    private void LoadConfig()
+    {
+        bool configLoaded = saveManager.LoadConfig();
+
+        if (configLoaded)
+        {
+            UIManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
+            UIManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
+            UIManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
+        
+            SetResolution(GameData.Instance.resolutionValue);
+            SetFullscreen(GameData.Instance.isFullscreen);
+        }
+        else
+        {
+            GD.Print("Creating new config file");
+            UIManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
+            UIManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
+            UIManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
+        
+            SetResolution(3);
+            SetFullscreen(false);
+        }
+
+    }
+
+    private void LoadPlayerData()
+    {
         player = PlayerController.Instance;
         player.Position = new Vector3(0.0f, 0.0f, 10.0f);
         player.SetTakingInput(false);
@@ -62,16 +94,22 @@ public partial class SceneManager : Node
             player.Stats.HealthLevel = 1;
             saveManager.Save();
         }
-        
-        UIManager.Main_SetCreditsText(player.Credits);
-        
     }
 
-    public override void _Process(double delta)
+    private void UISetup()
     {
-        
-    }
+        UIManager.SetMainUIState(true);
+        UIManager.SetOptionsUIState(false);
+        UIManager.SetPauseUIState(false);
+        UIManager.SetGameUIState(false);
+        UIManager.SetResultUIState(false);
+        UIManager.SetShopUIState(false);
+        UIManager.Main_SetCreditsText(player.Credits);
 
+    }
+    
+    #endregion
+    
     #region Round Functions
     
     private void StartNewRound()
@@ -182,5 +220,43 @@ public partial class SceneManager : Node
 
 
     #endregion
+
+    private void SetResolution(int index)
+    {
+        
+        GameData.Instance.resolutionValue = index;
+        
+        switch (index)
+        {
+            
+            case 0:
+                GetWindow().SetSize(new Vector2I(3840, 2160));
+                break;
+            case 1:
+                GetWindow().SetSize(new Vector2I(2560, 1440));
+                break;
+            case 2:
+                GetWindow().SetSize(new Vector2I(1920, 1080));
+                break;
+            case 3:
+                GetWindow().SetSize(new Vector2I(1280, 720));
+                break;
+            
+        }
+    }
+
+    private void SetFullscreen(bool state)
+    {
+
+        GameData.Instance.isFullscreen = state;
+        if (state)
+        {
+            DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
+        }
+        else
+        {
+            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+        }
+    }
     
 }
