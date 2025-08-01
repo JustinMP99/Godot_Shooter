@@ -105,6 +105,7 @@ public partial class SceneManager
 
     private void Options_ResolutionDropDown(int index)
     {
+        GD.Print(index);
         SetResolution(index);
     }
 

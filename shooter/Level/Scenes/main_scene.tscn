@@ -890,7 +890,7 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
 [connection signal="toggled" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
-[connection signal="item_selected" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutioonDropDown"]
+[connection signal="item_selected" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutionDropDown"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Settings Panel/Toggle Settings/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Settings Panel/Toggle Settings/Reset Save Button" to="=== MANAGER ===/Scene Manager" method="Options_ResetSaveDataButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]

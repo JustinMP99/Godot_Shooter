@@ -65,7 +65,7 @@ public partial class SceneManager : Node
             UIManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
             UIManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
             UIManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
-        
+            
             SetResolution(3);
             SetFullscreen(false);
         }
@@ -105,7 +105,6 @@ public partial class SceneManager : Node
         UIManager.SetResultUIState(false);
         UIManager.SetShopUIState(false);
         UIManager.Main_SetCreditsText(player.Credits);
-
     }
     
     #endregion
@@ -225,6 +224,7 @@ public partial class SceneManager : Node
     {
         
         GameData.Instance.resolutionValue = index;
+        GD.Print("Resolution Index: " + index);
         
         switch (index)
         {
@@ -249,6 +249,7 @@ public partial class SceneManager : Node
     {
 
         GameData.Instance.isFullscreen = state;
+        GD.Print("Fullscreen State: " + state);
         if (state)
         {
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
