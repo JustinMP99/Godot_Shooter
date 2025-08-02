@@ -1,14 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyraxlfot6oqf"]
+[gd_scene load_steps=11 format=3 uid="uid://dyraxlfot6oqf"]
 
 [ext_resource type="Script" uid="uid://6q2aq0nj86e3" path="res://Code/Scripts/Controllers/PlayerController.cs" id="1_n220g"]
 [ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/Bullet.tscn" id="2_1gt8s"]
 [ext_resource type="Resource" uid="uid://dasm4vfey6ngs" path="res://Code/Resources/PlayerStats.tres" id="3_uvim0"]
 [ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="4_5ajbo"]
 [ext_resource type="PackedScene" uid="uid://cj2ycq0wdeu5p" path="res://Art/Models/SpaceShipVoxel.blend" id="4_b707i"]
+[ext_resource type="Texture2D" uid="uid://dwan2buoxlnkm" path="res://Art/Sprites/Reticle.png" id="6_3mocp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_odanr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owh07"]
+transparency = 1
+albedo_texture = ExtResource("6_3mocp")
+texture_filter = 0
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletPosition", "shootTimer")]
 rotation_order = 0
@@ -42,6 +50,11 @@ stream = ExtResource("4_5ajbo")
 
 [node name="Shoot Timer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="Reticle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.08688)
+mesh = SubResource("QuadMesh_odanr")
+surface_material_override/0 = SubResource("StandardMaterial3D_owh07")
 
 [connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
 [connection signal="timeout" from="Shoot Timer" to="." method="ReadyToShoot"]
