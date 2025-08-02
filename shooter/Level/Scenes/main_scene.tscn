@@ -20,7 +20,7 @@
 [ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="14_5nx6i"]
 [ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/volume_slider.tscn" id="15_5nx6i"]
 [ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/PlayerInfoBox.tscn" id="18_hcnd7"]
-[ext_resource type="Texture2D" uid="uid://hijcvnqhb6xx" path="res://Art/Sprites/HDR_blue_nebulae-1.hdr" id="19_52m5l"]
+[ext_resource type="Texture2D" uid="uid://hijcvnqhb6xx" path="res://Art/Textures/HDR_blue_nebulae-1.hdr" id="19_52m5l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
 bg_color = Color(0, 0, 0, 0.827451)
