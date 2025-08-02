@@ -135,8 +135,8 @@ public partial class SceneManager
     
     private void Options_BackButtonFunction()
     {
-        GD.Print("Resolution Setting: " + GameData.Instance.resolutionValue);
-        GD.Print("Fullscreen Setting: " + GameData.Instance.isFullscreen);
+        GD.Print("Resolution Setting: " + GameData.Instance.ResolutionValue);
+        GD.Print("Fullscreen Setting: " + GameData.Instance.Fullscreen);
         //set ui state
         UIManager.SetOptionsUIState(false);
         UIManager.SetMainUIState(true);

@@ -42,7 +42,7 @@ public partial class EnemyController : RigidBody3D
     {
     }
 
-    public void EnableEnemy()
+    public void Enable()
     {
         isActive = true;
         SetProcess(true);
@@ -50,7 +50,7 @@ public partial class EnemyController : RigidBody3D
         Visible = true;
     }
 
-    public void DisableEnemy()
+    public void Disable()
     {
         isActive = false;
         SetProcess(false);

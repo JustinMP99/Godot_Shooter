@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=35 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -11,6 +11,8 @@
 [ext_resource type="Resource" uid="uid://doj18tmg033sd" path="res://Code/Resources/EnemyStats_Base.tres" id="7_1nw18"]
 [ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/TitleLabelSettings.tres" id="8_i5qe8"]
 [ext_resource type="FontFile" uid="uid://c4j3qccfmy0pq" path="res://Art/Fonts/Electrolize-Regular.ttf" id="9_hcnd7"]
+[ext_resource type="Script" uid="uid://co8gb5p8db5kv" path="res://Level/Scenes/BulletManager.cs" id="9_lojpb"]
+[ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/Bullet.tscn" id="10_3gthi"]
 [ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/NormalLabelSettings.tres" id="10_5d42l"]
 [ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico-Regular.ttf" id="10_odk2k"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
@@ -82,11 +84,12 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "levelNode", "startPosition", "introTimer", "roundTimer")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "bulletManager", "levelNode", "startPosition", "introTimer", "roundTimer")]
 script = ExtResource("1_2yd7s")
 saveManager = NodePath("../SaveManager")
 UIManager = NodePath("../UI Manager")
 enemySpawner = NodePath("../Enemy Spawner")
+bulletManager = NodePath("../Bullet Manager")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 introTimer = NodePath("Intro Timer")
@@ -138,6 +141,11 @@ wait_time = 2.0
 
 [node name="SaveManager" type="Node" parent="=== MANAGER ==="]
 script = ExtResource("6_0o8l2")
+
+[node name="Bullet Manager" type="Node" parent="=== MANAGER ==="]
+script = ExtResource("9_lojpb")
+desiredBullets = 500
+bulletPrefab = ExtResource("10_3gthi")
 
 [node name="=== UI ===" type="Node" parent="."]
 

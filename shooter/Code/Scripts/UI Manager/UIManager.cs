@@ -100,6 +100,128 @@ public partial class UIManager : Node
     }
     
     #endregion
+
+    #region Game UI functions
+
+    public void SetGameUIState(bool state)
+    {
+        gameUIGroup.Visible = state;
+    }
+
+    public void Game_ShowRound()
+    {
+        
+        //Hide healthbar, credits, etc
+        playerInfoBox.Visible = false;
+        gameScoreValueLabel.Visible = false;
+        
+        //Show countdown/round label
+        //countdownLabel.Visible = true;
+
+    }
+    
+    public void Game_HideRound()
+    {
+        
+        //Hide countdown/round label
+        countdownLabel.Visible = false;
+        
+        //Show healthbar, credits, etc
+        
+        playerInfoBox.Visible = true;
+        gameScoreValueLabel.Visible = true;
+        
+    }
+    
+    public void Game_SetScoreValueText(int newScore)
+    {
+        gameScoreValueLabel.Text = newScore.ToString();
+    }
+    
+    public void Game_SetCountDownLabelText(string timeVal)
+    {
+        countdownLabel.Text = timeVal;
+    }
+    
+    public void Game_SetCountDownLabelText(int timeVal)
+    {
+        countdownLabel.Text = timeVal.ToString();
+    }
+    
+    public void Game_SetCountDownLabelState(bool state)
+    {
+        countdownLabel.Visible = state;
+    }
+
+    public void Game_SetRoundLabelText(int round)
+    {
+        roundLabel.Text = "Round " + round.ToString();
+    }
+
+    public void Game_SetRoundLabelState(bool state)
+    {
+        roundLabel.Visible = state;
+    }
+
+    public void Game_SetHudState(bool state)
+    {
+        playerInfoBox.Visible = state;
+        gameScoreValueLabel.Visible = state;
+    }
+    
+    #endregion
+
+    #region Pause UI Functions
+
+    public void SetPauseUIState(bool state)
+    {
+        pauseUIGroup.Visible = state;
+    }
+
+    #endregion
+
+    #region Result UI Functions
+
+    public void SetResultUIState(bool state)
+    {
+        resultUIGroup.Visible = state;
+    }
+
+    public void Result_SetScoreText(int newScore)
+    {
+        resultScoreLabel.Text = "Score: " + newScore;
+    }
+
+    public void Result_SetCreditsEarnedText(int newCredits)
+    {
+        resultCreditsEarnedLabel.Text = "Credits Earned: " + newCredits.ToString();
+    }
+
+    public void Result_SetTotalCreditsText(int newCredits)
+    {
+        resultTotalCreditsLabel.Text = "Total Credits: " + newCredits.ToString();
+    }
+
+    #endregion
+
+    #region Upgrade UI Functions
+
+    public void SetShopUIState(bool state)
+    {
+        shopUIGroup.Visible = state;
+    }
+
+    public void Shop_SetCreditsText(int newCredits)
+    {
+        shopCreditsLabel.Text = "Credits: " + newCredits.ToString();
+    }
+
+    public void Shop_SetHealthLevelText(int currentLevel, int maxLevel)
+    {
+        healthUpgradePanel.SetLevelLabel(currentLevel, maxLevel);
+    }
+
+    #endregion
     
     #region Getter
 

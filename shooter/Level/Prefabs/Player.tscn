@@ -14,14 +14,14 @@ albedo_texture = ExtResource("5_odanr")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletPosition", "shootSound")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletPosition", "shootTimer")]
 rotation_order = 0
 collision_mask = 8
 script = ExtResource("1_n220g")
 takingInput = true
 bulletPosition = NodePath("Bullet Position")
 bulletPrefab = ExtResource("2_1gt8s")
-shootSound = NodePath("AudioStreamPlayer")
+shootTimer = NodePath("Shoot Timer")
 Stats = ExtResource("3_uvim0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -47,4 +47,8 @@ shape = SubResource("BoxShape3D_1gt8s")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_5ajbo")
 
+[node name="Shoot Timer" type="Timer" parent="."]
+wait_time = 0.2
+
 [connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
+[connection signal="timeout" from="Shoot Timer" to="." method="ReadyToShoot"]

@@ -25,10 +25,17 @@ public partial class PlayerController : CharacterBody3D
     public bool simpleShoot { get; set; }
     [Export] private Node3D bulletPosition;
     [Export] private PackedScene bulletPrefab;
-    [Export] private AudioStreamPlayer shootSound;
+
+    [ExportCategory("Shooting Variables")]
+    [Export] private bool canShoot;
+    [Export] private Timer shootTimer;
+    [Export] public BulletManager bulletManager { get; set; }
+    
+    
     [ExportCategory("Player Stats")] 
     [Export] public int Credits { get; set; }
     [Export] public Player_Stats Stats;
+    [Export] private Gun playerGun;
     private Vector3 targetVelocity = Vector3.Zero;
     private Vector3 targetRotation = Vector3.Zero;
     private Vector3 direction;
@@ -38,6 +45,7 @@ public partial class PlayerController : CharacterBody3D
     public override void _Ready()
     {
         Instance = this;
+        canShoot = true;
     }
 
     public override void _Process(double delta)
@@ -80,19 +88,9 @@ public partial class PlayerController : CharacterBody3D
             rotation.Z -= 0.25f;
         }
 
-        if (simpleShoot)
+        if (Input.IsActionPressed("Shoot"))
         {
-            if (Input.IsActionPressed("Shoot"))
-            {
-                ShootFunction();
-            }
-        }
-        else
-        {
-            if (Input.IsActionJustPressed("Shoot"))
-            {
-                ShootFunction();
-            }
+            ShootFunction();
         }
     
         if (Input.IsActionJustPressed("Pause"))
@@ -116,18 +114,32 @@ public partial class PlayerController : CharacterBody3D
 
     private void ShootFunction()
     {
-        //Instantiate Bullet
-        Bullet bullet = bulletPrefab.Instantiate() as Bullet;
-        bullet.FinalShot += EnemyDefeat;
+        if (canShoot)
+        {
+
+            Bullet temp = bulletManager.RequestBullet();
+
+            temp.Position = bulletPosition.GlobalPosition;
+            temp.FinalShot += EnemyDefeat;
+            
+            temp.Enable();
+            
+            //Instantiate Bullet
+            // Bullet bullet = bulletPrefab.Instantiate() as Bullet;
+            // bullet.FinalShot += EnemyDefeat;
         
-        //shootSound.Play();
-        AudioManager.Instance.PlayShootSound();
-        //Set Child
+            AudioManager.Instance.PlayShootSound();
+            //Set Child
 
-        //Set Position
-        bullet.Position = bulletPosition.GlobalPosition;
+            //Set Position
+           // bullet.Position = bulletPosition.GlobalPosition;
 
-        GetTree().Root.AddChild(bullet);
+            //Start Timer
+            canShoot = false;
+            shootTimer.Start();
+            
+            //GetTree().Root.AddChild(bullet);
+        }
     }
 
     private void EnemyDefeat()
@@ -139,7 +151,7 @@ public partial class PlayerController : CharacterBody3D
     {
         if (body is EnemyController enemy)
         {
-            enemy.DisableEnemy();
+            enemy.Disable();
             //enemy.Position = new Vector3(10.0f, 10.0f, 10.0f);
 
             //take damage
@@ -161,6 +173,12 @@ public partial class PlayerController : CharacterBody3D
         }
     }
 
+    private void ReadyToShoot()
+    {
+        canShoot = true;
+        //GD.Print("shooting is available");
+    }
+    
     #region Getter
 
     public int GetCurrentHealth()

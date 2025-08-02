@@ -56,7 +56,7 @@ public partial class EnemySpawner : Node
                 
             }
             
-            enemy.DisableEnemy();
+            enemy.Disable();
             enemyList.Add(enemy);
             AddChild(enemy);
         }
@@ -66,7 +66,7 @@ public partial class EnemySpawner : Node
     {
         for (int i = 0; i < enemyList.Count; i++)
         {
-            enemyList[i].DisableEnemy();
+            enemyList[i].Disable();
         }
     }
     
@@ -79,7 +79,7 @@ public partial class EnemySpawner : Node
             {
                 if (!enemyList[currentListIter].GetIsActive())
                 {
-                    enemyList[currentListIter].EnableEnemy();
+                    enemyList[currentListIter].Enable();
                     enemyList[currentListIter].ResetHealth();
                     enemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
 

@@ -54,7 +54,8 @@ public partial class Bullet : RigidBody3D
             // Destroy the bullet if it exceeds its maximum lifetime.
             if (lifetime >= maxLifetime)
             {
-                this.QueueFree();
+                Position = new Vector3(-100.0f, 0.0f, 0.0f);
+                Disable();
             }
         }
     }
@@ -73,11 +74,28 @@ public partial class Bullet : RigidBody3D
             if (KilledEnemy)
             {
                 //AudioManager.Instance.PlayEnemyDeathSound();
-                enemy.DisableEnemy();
+                enemy.Disable();
                 EmitSignal(SignalName.FinalShot);
             }
-            
-            this.QueueFree();
+
+            Position = new Vector3(-100.0f, 0.0f, 0.0f);
+            Disable();
         }
     }
+
+    public void Enable()
+    {
+        SetProcess(true);
+        SetPhysicsProcess(true);
+        Visible = true;
+        lifetime = 0.0f;
+    }
+    
+    public void Disable()
+    {
+        SetProcess(false);
+        SetPhysicsProcess(false);
+        Visible = false;
+    }
+    
 }

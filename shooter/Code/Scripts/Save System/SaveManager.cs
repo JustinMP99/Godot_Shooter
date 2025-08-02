@@ -127,8 +127,8 @@ public partial class SaveManager : Node
         config.SetValue("Audio", "MasterLevel",  masterVolume);
         config.SetValue("Audio", "SFXLevel",  sfxVolume);
         config.SetValue("Audio", "MusicLevel",  musicVolume);
-        config.SetValue("Screen", "Fullscreen", GameData.Instance.isFullscreen);
-        config.SetValue("Screen", "ResolutionValue", GameData.Instance.resolutionValue);
+        config.SetValue("Screen", "Fullscreen", GameData.Instance.Fullscreen);
+        config.SetValue("Screen", "ResolutionValue", GameData.Instance.ResolutionValue);
         
         config.Save(configPath);
 
@@ -149,8 +149,8 @@ public partial class SaveManager : Node
         float masterLevel = (float)config.GetValue("Audio", "MasterLevel");
         float sfxLevel = (float)config.GetValue("Audio", "SFXLevel");
         float musicLevel = (float)config.GetValue("Audio", "MusicLevel");
-        GameData.Instance.isFullscreen = (bool)config.GetValue("Screen", "Fullscreen");
-        GameData.Instance.resolutionValue = (int)config.GetValue("Screen", "ResolutionValue");
+        GameData.Instance.Fullscreen = (bool)config.GetValue("Screen", "Fullscreen");
+        GameData.Instance.ResolutionValue = (int)config.GetValue("Screen", "ResolutionValue");
         
         AudioServer.SetBusVolumeLinear(0, masterLevel );
         AudioServer.SetBusVolumeLinear(1, sfxLevel );
@@ -161,11 +161,4 @@ public partial class SaveManager : Node
 
     #endregion
     
-    #region Save Resource
-
-    public void Save_Resource()
-    {
-    }
-
-    #endregion
 }

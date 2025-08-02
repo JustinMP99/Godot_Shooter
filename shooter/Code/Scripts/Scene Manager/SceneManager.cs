@@ -3,9 +3,15 @@ using System;
 
 public partial class SceneManager : Node
 {
+    
+    [ExportCategory("Managers")]
     [Export] private SaveManager saveManager;
     [Export] private UIManager UIManager;
+    
+    [ExportCategory("Spawners")]
     [Export] private EnemySpawner enemySpawner;
+    [Export] private BulletManager bulletManager;
+    
     [Export] private Node levelNode;
     [Export] private Node3D startPosition;
     
@@ -36,6 +42,7 @@ public partial class SceneManager : Node
         
         //additional startup calls
         enemySpawner.Startup();
+        bulletManager.Startup();
         
     }
 
@@ -56,8 +63,8 @@ public partial class SceneManager : Node
             UIManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
             UIManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
         
-            SetResolution(GameData.Instance.resolutionValue);
-            SetFullscreen(GameData.Instance.isFullscreen);
+            SetResolution(GameData.Instance.ResolutionValue);
+            SetFullscreen(GameData.Instance.Fullscreen);
         }
         else
         {
@@ -83,6 +90,7 @@ public partial class SceneManager : Node
         player.PlayerHit += UpdateGameUI;
         player.PlayerDied += GameOver;
         player.EnemyDefeated += DefeatedEnemy;
+        player.bulletManager = bulletManager;
         
         bool loadResult = saveManager.load();
 
@@ -220,10 +228,12 @@ public partial class SceneManager : Node
 
     #endregion
 
+    #region Supporting Functions
+    
     private void SetResolution(int index)
     {
         
-        GameData.Instance.resolutionValue = index;
+        GameData.Instance.ResolutionValue = index;
         GD.Print("Resolution Index: " + index);
         
         switch (index)
@@ -248,7 +258,7 @@ public partial class SceneManager : Node
     private void SetFullscreen(bool state)
     {
 
-        GameData.Instance.isFullscreen = state;
+        GameData.Instance.Fullscreen = state;
         GD.Print("Fullscreen State: " + state);
         if (state)
         {
@@ -259,5 +269,7 @@ public partial class SceneManager : Node
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
         }
     }
-    
+
+    #endregion
+ 
 }
