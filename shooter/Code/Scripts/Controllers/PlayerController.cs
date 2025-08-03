@@ -51,15 +51,19 @@ public partial class PlayerController : CharacterBody3D
 
     public override void _Process(double delta)
     {
+        
+       
+
     }
 
     public override void _PhysicsProcess(double delta)
     {
 
-       ReticleRaycast();
-        
         if (takingInput)
         {
+            
+            ReticleRaycast();
+            
             CollectInput();
             //velocity calculation
             targetVelocity.X = direction.X * Stats.Speed;
@@ -76,22 +80,26 @@ public partial class PlayerController : CharacterBody3D
     {
         
         var spaceState = GetWorld3D().DirectSpaceState;
-        //var cam = GetNode<Camera3D>("Cam 1");
-        //var mousePos = GetViewport().GetMousePosition();
-
-        var origin = this.Position;
-        var end = origin + Vector3.Forward * 0.5f;
-        var query = PhysicsRayQueryParameters3D.Create(origin, end);
-        query.CollideWithAreas = true;
-
+        
+        var origin = bulletPosition.GlobalPosition;
+        var end = origin + new Vector3(0.0f, 0.0f, -100.0f);
+        var query = PhysicsRayQueryParameters3D.Create(origin, end, collisionMask:2);
+        
         var result = spaceState.IntersectRay(query);
         
-        GD.Print(result);
+        if (result.ContainsKey("position"))
+        {
+            
+            GD.Print("Region Positon:" + result["position"].AsVector3());
+            Vector3 newReticlePosition =  result["position"].AsVector3();
+            newReticlePosition.Z += 0.1f;
 
-        reticle.Position = new Vector3(0.0f, 0.0f, -5.0f);
-
-        //reticle.Position = (Vector3)result["position"];
-
+            reticle.GlobalPosition = newReticlePosition;
+        }
+        else
+        {
+            reticle.Position = new Vector3(0.0f, 0.0f, -5.0f);
+        }
     }
     
     private void CollectInput()
