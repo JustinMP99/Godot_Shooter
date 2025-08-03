@@ -102,7 +102,7 @@ one_shot = true
 wait_time = 1.5
 one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
@@ -111,6 +111,7 @@ shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
 shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
 healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
 optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
+cheatIF = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/LineEdit")
 masterVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Master Slider")
 sfxVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/SFX Slider")
 musicVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Music Slider")
@@ -901,6 +902,7 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="item_selected" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutionDropDown"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Settings Panel/Toggle Settings/Simple Shoot Toggle" to="=== MANAGER ===/Scene Manager" method="Options_SimpleShootToggleFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Settings Panel/Toggle Settings/Reset Save Button" to="=== MANAGER ===/Scene Manager" method="Options_ResetSaveDataButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- options ---/Settings Panel/Cheat Box/Button" to="=== MANAGER ===/Scene Manager" method="Options_EnterCheatButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/Yes Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_YesDeleteButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/No Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_NoDeleteButtonFunction"]

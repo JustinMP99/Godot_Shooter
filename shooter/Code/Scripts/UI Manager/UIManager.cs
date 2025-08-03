@@ -18,6 +18,7 @@ public partial class UIManager : Node
     [Export] private CanvasLayer optionsUIGroup;
     [Export] private OptionButton resolutionOptionButton;
     [Export] private CheckButton fullscreenToggle;
+    [Export] private LineEdit cheatIF;
     [Export] private Slider masterVolumeSlider;
     [Export] private Slider sfxVolumeSlider;
     [Export] private Slider musicVolumeSlider;
@@ -97,6 +98,11 @@ public partial class UIManager : Node
     public void SetResolutionOptionButtonValue(int value)
     {
         resolutionOptionButton.Selected = value;
+    }
+
+    public string GetCheatIFString()
+    {
+        return cheatIF.Text;
     }
     
     #endregion

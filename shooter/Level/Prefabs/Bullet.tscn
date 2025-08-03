@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://fdrgiae10hx8"]
+[gd_scene load_steps=6 format=4 uid="uid://fdrgiae10hx8"]
 
 [ext_resource type="Script" uid="uid://b1yrkfdj44jly" path="res://Code/Scripts/Bullet.cs" id="1_gsyx3"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_7hjwt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipaw4"]
 
@@ -45,11 +43,6 @@ script = ExtResource("1_gsyx3")
 maxLifetime = 55.0
 speed = 8.0
 damage = 25
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("BoxShape3D_7hjwt")
-disabled = true
 
 [node name="Bullet Mesh3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.732256, 0, 0, 0, 0.732256, 0, 0, 0, 0.732256, 0, 0, 0)

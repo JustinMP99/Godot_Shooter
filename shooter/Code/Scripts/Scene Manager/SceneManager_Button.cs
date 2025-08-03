@@ -109,6 +109,20 @@ public partial class SceneManager
         SetResolution(index);
     }
 
+    private void Options_EnterCheatButtonFunction()
+    {
+        
+        //Get string from input field
+        string cheatCode = UIManager.GetCheatIFString();
+
+        //Check input field
+        if (cheatCode.Contains("UNBEATABLE"))
+        {
+            
+        }
+        
+    }
+    
     private void Options_ResetSaveDataButtonFunction()
     {
         
@@ -164,7 +178,7 @@ public partial class SceneManager
     {
         //Destroy Player Object
         //PlayerController.Instance.QueueFree();
-        player.Position = new Vector3(0.0f, 0.0f, 10.0f);
+        player.Position = new Vector3(0.0f, 0.0f, 100.0f);
         //Destroy all enemies
 
         //Set UI States

@@ -21,6 +21,9 @@ public partial class PlayerController : CharacterBody3D
 
     #endregion
 
+    [ExportCategory("Cheat Settings")]
+    private bool Invincible { get; set; }
+
     [Export] private bool takingInput;
     public bool simpleShoot { get; set; }
     [Export] private Node3D bulletPosition;
@@ -52,8 +55,6 @@ public partial class PlayerController : CharacterBody3D
     public override void _Process(double delta)
     {
         
-       
-
     }
 
     public override void _PhysicsProcess(double delta)
@@ -98,7 +99,7 @@ public partial class PlayerController : CharacterBody3D
         }
         else
         {
-            reticle.Position = new Vector3(0.0f, 0.0f, -5.0f);
+            reticle.Position = new Vector3(0.0f, 0.0f, -10.0f);
         }
     }
     
