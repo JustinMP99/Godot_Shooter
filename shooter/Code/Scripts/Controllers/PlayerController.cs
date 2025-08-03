@@ -30,6 +30,7 @@ public partial class PlayerController : CharacterBody3D
     [Export] private bool canShoot;
     [Export] private Timer shootTimer;
     [Export] public BulletManager bulletManager { get; set; }
+    [Export] private Node3D reticle;
     
     
     [ExportCategory("Player Stats")] 
@@ -55,7 +56,7 @@ public partial class PlayerController : CharacterBody3D
     public override void _PhysicsProcess(double delta)
     {
 
-       
+       ReticleRaycast();
         
         if (takingInput)
         {
@@ -71,6 +72,28 @@ public partial class PlayerController : CharacterBody3D
         }
     }
 
+    private void ReticleRaycast()
+    {
+        
+        var spaceState = GetWorld3D().DirectSpaceState;
+        //var cam = GetNode<Camera3D>("Cam 1");
+        //var mousePos = GetViewport().GetMousePosition();
+
+        var origin = this.Position;
+        var end = origin + Vector3.Forward * 0.5f;
+        var query = PhysicsRayQueryParameters3D.Create(origin, end);
+        query.CollideWithAreas = true;
+
+        var result = spaceState.IntersectRay(query);
+        
+        GD.Print(result);
+
+        reticle.Position = new Vector3(0.0f, 0.0f, -5.0f);
+
+        //reticle.Position = (Vector3)result["position"];
+
+    }
+    
     private void CollectInput()
     {
         direction = Vector3.Zero;

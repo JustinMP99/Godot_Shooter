@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dasm4vfey6ngs" path="res://Code/Resources/PlayerStats.tres" id="3_uvim0"]
 [ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="4_5ajbo"]
 [ext_resource type="PackedScene" uid="uid://cj2ycq0wdeu5p" path="res://Art/Models/SpaceShipVoxel.blend" id="4_b707i"]
-[ext_resource type="Texture2D" uid="uid://dwan2buoxlnkm" path="res://Art/Sprites/Reticle.png" id="6_3mocp"]
+[ext_resource type="Texture2D" uid="uid://dd5xbi8wjah3l" path="res://Art/Sprites/Reticle_V2.png" id="6_3mocp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
 
@@ -18,7 +18,7 @@ transparency = 1
 albedo_texture = ExtResource("6_3mocp")
 texture_filter = 0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletPosition", "shootTimer")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletPosition", "shootTimer", "reticle")]
 rotation_order = 0
 collision_mask = 8
 script = ExtResource("1_n220g")
@@ -26,6 +26,7 @@ takingInput = true
 bulletPosition = NodePath("Bullet Position")
 bulletPrefab = ExtResource("2_1gt8s")
 shootTimer = NodePath("Shoot Timer")
+reticle = NodePath("Reticle")
 Stats = ExtResource("3_uvim0")
 
 [node name="SpaceShipVoxel" parent="." instance=ExtResource("4_b707i")]
@@ -52,7 +53,7 @@ stream = ExtResource("4_5ajbo")
 wait_time = 0.2
 
 [node name="Reticle" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.08688)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 mesh = SubResource("QuadMesh_odanr")
 surface_material_override/0 = SubResource("StandardMaterial3D_owh07")
 
