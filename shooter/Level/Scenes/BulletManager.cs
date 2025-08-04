@@ -11,7 +11,6 @@ public partial class BulletManager : Node
     private int bulletIter;
     private int bulletIterMax;
     
-
     public void Startup()
     {
         
@@ -26,7 +25,6 @@ public partial class BulletManager : Node
             newBullet.Disable();
             GD.Print("Added bullet to list");
             this.AddChild(newBullet);
-            
         }
         
     }
@@ -40,6 +38,18 @@ public partial class BulletManager : Node
         }
 
         return bulletList[bulletIter];
+    }
+
+    public bool SetBulletsInstaKillState()
+    {
+        for (int i = 0; i < bulletList.Count; i++)
+        {
+            bulletList[i].InstaKill = !bulletList[i].InstaKill;
+            
+        }
+
+        return bulletList[0].InstaKill;
+
     }
     
 }

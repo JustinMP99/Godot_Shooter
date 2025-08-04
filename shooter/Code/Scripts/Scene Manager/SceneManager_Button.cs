@@ -115,9 +115,19 @@ public partial class SceneManager
         //Get string from input field
         string cheatCode = UIManager.GetCheatIFString();
 
-        //Check input field
+        //make player invincible
         if (cheatCode.Contains("UNBEATABLE"))
         {
+            player.Invincible = !player.Invincible;
+        }
+
+        //make bullets instakill
+        if (cheatCode.Contains("ONESHOT"))
+        {
+            
+            bool result = bulletManager.SetBulletsInstaKillState();
+            
+            //print out result
             
         }
         

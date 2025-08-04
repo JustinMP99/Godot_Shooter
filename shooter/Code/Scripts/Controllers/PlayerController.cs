@@ -22,7 +22,7 @@ public partial class PlayerController : CharacterBody3D
     #endregion
 
     [ExportCategory("Cheat Settings")]
-    private bool Invincible { get; set; }
+    public bool Invincible = false;
 
     [Export] private bool takingInput;
     public bool simpleShoot { get; set; }
@@ -90,11 +90,8 @@ public partial class PlayerController : CharacterBody3D
         
         if (result.ContainsKey("position"))
         {
-            
-            GD.Print("Region Positon:" + result["position"].AsVector3());
             Vector3 newReticlePosition =  result["position"].AsVector3();
             newReticlePosition.Z += 0.1f;
-
             reticle.GlobalPosition = newReticlePosition;
         }
         else
@@ -129,8 +126,6 @@ public partial class PlayerController : CharacterBody3D
         {
             PauseFunction();
         }
-
-        //
         
         if (direction != Vector3.Zero)
         {
@@ -155,22 +150,13 @@ public partial class PlayerController : CharacterBody3D
             temp.FinalShot += EnemyDefeat;
             
             temp.Enable();
-            
-            //Instantiate Bullet
-            // Bullet bullet = bulletPrefab.Instantiate() as Bullet;
-            // bullet.FinalShot += EnemyDefeat;
         
             AudioManager.Instance.PlayShootSound();
-            //Set Child
-
-            //Set Position
-           // bullet.Position = bulletPosition.GlobalPosition;
 
             //Start Timer
             canShoot = false;
             shootTimer.Start();
             
-            //GetTree().Root.AddChild(bullet);
         }
     }
 
@@ -184,11 +170,13 @@ public partial class PlayerController : CharacterBody3D
         if (body is EnemyController enemy)
         {
             enemy.Disable();
-            //enemy.Position = new Vector3(10.0f, 10.0f, 10.0f);
 
             //take damage
-            Stats.CurrentHealth -= 10;
-
+            if (!Invincible)
+            {
+                Stats.CurrentHealth -= 10;
+            }
+            
             //Check currentHealth
             if (Stats.CurrentHealth <= 0)
             {
@@ -208,7 +196,6 @@ public partial class PlayerController : CharacterBody3D
     private void ReadyToShoot()
     {
         canShoot = true;
-        //GD.Print("shooting is available");
     }
     
     #region Getter

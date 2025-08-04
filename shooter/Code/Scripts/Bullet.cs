@@ -23,6 +23,8 @@ public partial class Bullet : RigidBody3D
     [Export] private float speed;
 
     [Export] private int damage;
+
+    public bool InstaKill;
     
     /// <summary>
     /// Signal emitted when the bullet hits an enemy and is about to be destroyed.
@@ -69,15 +71,22 @@ public partial class Bullet : RigidBody3D
     {
         if (node is EnemyController enemy)
         {
-            
-            bool KilledEnemy = enemy.TakeDamage(damage);
-            if (KilledEnemy)
+
+            if (!InstaKill)
             {
-                //AudioManager.Instance.PlayEnemyDeathSound();
+                bool KilledEnemy = enemy.TakeDamage(damage);
+                if (KilledEnemy)
+                {
+                    enemy.Disable();
+                    EmitSignal(SignalName.FinalShot);
+                }
+            }
+            else
+            {
                 enemy.Disable();
                 EmitSignal(SignalName.FinalShot);
             }
-
+            
             Position = new Vector3(-100.0f, 0.0f, 0.0f);
             Disable();
         }
