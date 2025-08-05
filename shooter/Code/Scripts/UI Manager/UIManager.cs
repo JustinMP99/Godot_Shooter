@@ -16,8 +16,7 @@ public partial class UIManager : Node
 
     [ExportCategory("Options UI")] 
     [Export] private CanvasLayer optionsUIGroup;
-    [Export] private OptionButton resolutionOptionButton;
-    [Export] private CheckButton fullscreenToggle;
+    [Export] private Label cheatDescriptionLabel;
     [Export] private LineEdit cheatIF;
     [Export] private Slider masterVolumeSlider;
     [Export] private Slider sfxVolumeSlider;
@@ -90,16 +89,21 @@ public partial class UIManager : Node
         musicVolumeSlider.Value = value;
     }
 
-    public void SetFullscreenToggleState(bool state)
+    // public void SetFullscreenToggleState(bool state)
+    // {
+    //     fullscreenToggle.ToggleMode = state;
+    // }
+    
+    // public void SetResolutionOptionButtonValue(int value)
+    // {
+    //     resolutionOptionButton.Selected = value;
+    // }
+
+    public void SetCheatDescriptionLabelText(string description)
     {
-        fullscreenToggle.ToggleMode = state;
+        cheatDescriptionLabel.Text = description;
     }
     
-    public void SetResolutionOptionButtonValue(int value)
-    {
-        resolutionOptionButton.Selected = value;
-    }
-
     public string GetCheatIFString()
     {
         return cheatIF.Text;

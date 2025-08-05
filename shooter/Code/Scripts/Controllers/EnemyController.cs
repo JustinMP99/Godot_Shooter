@@ -5,18 +5,13 @@ using System;
 public partial class EnemyController : RigidBody3D
 {
     private bool isActive;
-
     [ExportCategory("Enemy Stats")]
     [Export] public EnemyStats Stats;
 
     [ExportCategory("Enemy Components")]
     [Export] private Area3D area;
     [Export] private CollisionShape3D collider;
-
-    #region Constructors
-
-    #endregion
-
+    
     public override void _Ready()
     {
     }
@@ -59,11 +54,6 @@ public partial class EnemyController : RigidBody3D
         Position = new Vector3(10.0f, 10.0f, 10.0f);
     }
     
-    /// <summary>
-    /// Calculates the damage taken by the enemy when shot by a player bullet
-    /// </summary>
-    /// <param name="bulletDamage"></param>
-    /// <returns>If the current health is less than or equal to zero, the function returns true</returns>
     public bool TakeDamage(int bulletDamage)
     {
 

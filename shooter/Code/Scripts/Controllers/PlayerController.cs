@@ -30,11 +30,10 @@ public partial class PlayerController : CharacterBody3D
     [Export] private PackedScene bulletPrefab;
 
     [ExportCategory("Shooting Variables")]
-    [Export] private bool canShoot;
     [Export] private Timer shootTimer;
+    [Export] private bool canShoot;
     [Export] public BulletManager bulletManager { get; set; }
     [Export] private Node3D reticle;
-    
     
     [ExportCategory("Player Stats")] 
     [Export] public int Credits { get; set; }
@@ -59,10 +58,8 @@ public partial class PlayerController : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-
         if (takingInput)
         {
-            
             ReticleRaycast();
             
             CollectInput();
@@ -77,29 +74,8 @@ public partial class PlayerController : CharacterBody3D
         }
     }
 
-    private void ReticleRaycast()
-    {
-        
-        var spaceState = GetWorld3D().DirectSpaceState;
-        
-        var origin = bulletPosition.GlobalPosition;
-        var end = origin + new Vector3(0.0f, 0.0f, -100.0f);
-        var query = PhysicsRayQueryParameters3D.Create(origin, end, collisionMask:2);
-        
-        var result = spaceState.IntersectRay(query);
-        
-        if (result.ContainsKey("position"))
-        {
-            Vector3 newReticlePosition =  result["position"].AsVector3();
-            newReticlePosition.Z += 0.1f;
-            reticle.GlobalPosition = newReticlePosition;
-        }
-        else
-        {
-            reticle.Position = new Vector3(0.0f, 0.0f, -10.0f);
-        }
-    }
-    
+    #region Input Functions
+
     private void CollectInput()
     {
         direction = Vector3.Zero;
@@ -143,23 +119,44 @@ public partial class PlayerController : CharacterBody3D
     {
         if (canShoot)
         {
-
             Bullet temp = bulletManager.RequestBullet();
-
             temp.Position = bulletPosition.GlobalPosition;
             temp.FinalShot += EnemyDefeat;
-            
             temp.Enable();
-        
             AudioManager.Instance.PlayShootSound();
-
             //Start Timer
             canShoot = false;
             shootTimer.Start();
-            
         }
     }
 
+    #endregion
+
+    #region Additional Functions
+
+    private void ReticleRaycast()
+    {
+        
+        var spaceState = GetWorld3D().DirectSpaceState;
+        
+        var origin = bulletPosition.GlobalPosition;
+        var end = origin + new Vector3(0.0f, 0.0f, -100.0f);
+        var query = PhysicsRayQueryParameters3D.Create(origin, end, collisionMask:2);
+        
+        var result = spaceState.IntersectRay(query);
+        
+        if (result.ContainsKey("position"))
+        {
+            Vector3 newReticlePosition =  result["position"].AsVector3();
+            newReticlePosition.Z += 0.1f;
+            reticle.GlobalPosition = newReticlePosition;
+        }
+        else
+        {
+            reticle.Position = new Vector3(0.0f, 0.0f, -10.0f);
+        }
+    }
+    
     private void EnemyDefeat()
     {
         EmitSignal(SignalName.EnemyDefeated);
@@ -197,7 +194,9 @@ public partial class PlayerController : CharacterBody3D
     {
         canShoot = true;
     }
-    
+
+    #endregion
+
     #region Getter
 
     public int GetCurrentHealth()
@@ -234,5 +233,11 @@ public partial class PlayerController : CharacterBody3D
         Stats.Speed = newSpeed;
     }
 
+    public bool SetInvincibleState()
+    {
+        Invincible = !Invincible;
+        return Invincible;
+    }
+    
     #endregion
 }

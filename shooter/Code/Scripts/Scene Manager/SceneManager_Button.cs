@@ -118,19 +118,31 @@ public partial class SceneManager
         //make player invincible
         if (cheatCode.Contains("UNBEATABLE"))
         {
-            player.Invincible = !player.Invincible;
-        }
 
+            bool result = player.SetInvincibleState();
+            if (player.Invincible)
+            {
+                UIManager.SetCheatDescriptionLabelText("You are now invincible");
+            }
+            else
+            {
+                UIManager.SetCheatDescriptionLabelText("You are now vincible");
+            }
+        }
         //make bullets instakill
         if (cheatCode.Contains("ONESHOT"))
         {
-            
             bool result = bulletManager.SetBulletsInstaKillState();
-            
             //print out result
-            
+            if (result)
+            {
+                UIManager.SetCheatDescriptionLabelText("Enabled oneshot bullets");
+            }
+            else
+            {
+                UIManager.SetCheatDescriptionLabelText("Disabled oneshot bullets");
+            }
         }
-        
     }
     
     private void Options_ResetSaveDataButtonFunction()

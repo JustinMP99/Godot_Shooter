@@ -27,9 +27,6 @@ public partial class EnemySpawner : Node
         for (int i = 0; i < desiredEnemies; i++)
         {
             EnemyController enemy = enemyPrefab.Instantiate() as EnemyController;
-            
-            //Generate Class and stats
-            //enemy.Stats.Duplicate();
 
             int value = (int)GD.RandRange(1.0, 4.0);
 
@@ -69,7 +66,6 @@ public partial class EnemySpawner : Node
             enemyList[i].Disable();
         }
     }
-    
     
     private void OnTimerTimeout()
     {

@@ -23,7 +23,6 @@ public partial class BulletManager : Node
             Bullet newBullet = bulletPrefab.Instantiate() as Bullet;
             bulletList.Add(newBullet);
             newBullet.Disable();
-            GD.Print("Added bullet to list");
             this.AddChild(newBullet);
         }
         
@@ -45,9 +44,7 @@ public partial class BulletManager : Node
         for (int i = 0; i < bulletList.Count; i++)
         {
             bulletList[i].InstaKill = !bulletList[i].InstaKill;
-            
         }
-
         return bulletList[0].InstaKill;
 
     }
