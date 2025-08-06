@@ -8,8 +8,9 @@ public partial class EnemySpawner : Node
     [Export] private PackedScene enemyPrefab;
     [Export] private Node3D enemyContainer;
     [Export] private int desiredEnemies;
-    private List<EnemyController> enemyList;
-
+    private List<EnemyController> masterEnemyList;
+    private List<EnemyController> activeEnemyList;
+    
     [ExportCategory("Enemy Resources")] 
     [Export] private EnemyStats tankStats;
     [Export] private EnemyStats speedstrStats;
@@ -20,7 +21,7 @@ public partial class EnemySpawner : Node
 
     public void Startup()
     {
-        enemyList = new List<EnemyController>();
+        masterEnemyList = new List<EnemyController>();
         currentListIter = 0;
         maxListIter = desiredEnemies;
 
@@ -54,16 +55,16 @@ public partial class EnemySpawner : Node
             }
             
             enemy.Disable();
-            enemyList.Add(enemy);
+            masterEnemyList.Add(enemy);
             AddChild(enemy);
         }
     }
 
     public void DisableAllEnemies()
     {
-        for (int i = 0; i < enemyList.Count; i++)
+        for (int i = 0; i < masterEnemyList.Count; i++)
         {
-            enemyList[i].Disable();
+            masterEnemyList[i].Disable();
         }
     }
     
@@ -73,11 +74,11 @@ public partial class EnemySpawner : Node
         {
             if (desiredEnemies > 0)
             {
-                if (!enemyList[currentListIter].GetIsActive())
+                if (!masterEnemyList[currentListIter].GetIsActive())
                 {
-                    enemyList[currentListIter].Enable();
-                    enemyList[currentListIter].ResetHealth();
-                    enemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
+                    masterEnemyList[currentListIter].Enable();
+                    masterEnemyList[currentListIter].ResetHealth();
+                    masterEnemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
 
                     currentListIter++;
                     if (currentListIter >= maxListIter)

@@ -54,8 +54,8 @@ sky_material = SubResource("PanoramaSkyMaterial_lojpb")
 background_mode = 2
 background_color = Color(0.813048, 0.863449, 0.915101, 1)
 sky = SubResource("Sky_0o8l2")
-ambient_light_color = Color(0.118581, 0.118581, 0.118581, 1)
-ambient_light_energy = 9.62
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 fog_mode = 1
 fog_light_color = Color(0.832463, 0.859326, 0.850583, 1)
 fog_sun_scatter = 0.5
@@ -862,6 +862,7 @@ environment = SubResource("Environment_2yd7s")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 0.911173, 0.412023, 0, -0.412023, 0.911173, 0, 24.9809, 0)
+visible = false
 
 [node name="Start Position" type="Node3D" parent="=== LEVEL ==="]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.84457)

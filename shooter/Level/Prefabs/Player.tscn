@@ -90,7 +90,7 @@ shape = SubResource("BoxShape3D_1gt8s")
 stream = ExtResource("4_5ajbo")
 
 [node name="Shoot Timer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 
 [node name="Reticle" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)

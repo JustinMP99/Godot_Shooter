@@ -11,6 +11,12 @@ public partial class EnemyController : RigidBody3D
     [ExportCategory("Enemy Components")]
     [Export] private Area3D area;
     [Export] private CollisionShape3D collider;
+    [Export] private MeshInstance3D meshRef;
+    [Export] private Timer hitTimer;
+
+    [ExportCategory("Materials")]
+    [Export] private Material normalMaterial;
+    [Export] private Material hitMaterial;
     
     public override void _Ready()
     {
@@ -62,10 +68,18 @@ public partial class EnemyController : RigidBody3D
         {
             return true;
         }
+
+        meshRef.MaterialOverride = hitMaterial;
+        hitTimer.Start();
         
         return false;
     }
 
+    private void HitTimerEnd()
+    {
+        meshRef.MaterialOverride = normalMaterial;
+    }
+    
     public void ResetHealth()
     {
         Stats.CurrentHealth = Stats.MaxHealth;

@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbok5qannybiy"]
+[gd_scene load_steps=7 format=3 uid="uid://cbok5qannybiy"]
 
 [ext_resource type="Script" uid="uid://qtihgjyqwxdg" path="res://Code/Scripts/Controllers/EnemyController.cs" id="1_npp7k"]
+[ext_resource type="Material" uid="uid://dooakmcxnot8e" path="res://Art/Materials/enemy_normal_material.tres" id="2_bb4ow"]
+[ext_resource type="Material" uid="uid://chn2pxpwlnhcp" path="res://Art/Materials/enemy_hit_material.tres" id="3_hdwu3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pbibn"]
 
@@ -8,19 +10,24 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_npp7k"]
 
-[node name="Enemy" type="RigidBody3D" node_paths=PackedStringArray("area", "collider")]
+[node name="Enemy" type="RigidBody3D" node_paths=PackedStringArray("area", "collider", "meshRef", "hitTimer")]
 collision_layer = 2
 collision_mask = 4
 freeze = true
 script = ExtResource("1_npp7k")
 area = NodePath("Area3D")
 collider = NodePath("Area3D/CollisionShape3D")
+meshRef = NodePath("MeshInstance3D")
+hitTimer = NodePath("Hit Timer")
+normalMaterial = ExtResource("2_bb4ow")
+hitMaterial = ExtResource("3_hdwu3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_pbibn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_npp7k")
+surface_material_override/0 = ExtResource("2_bb4ow")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
@@ -28,3 +35,8 @@ collision_layer = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_npp7k")
+
+[node name="Hit Timer" type="Timer" parent="."]
+wait_time = 0.07
+
+[connection signal="timeout" from="Hit Timer" to="." method="HitTimerEnd"]
