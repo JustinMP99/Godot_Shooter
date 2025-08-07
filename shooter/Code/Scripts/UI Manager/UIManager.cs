@@ -38,6 +38,10 @@ public partial class UIManager : Node
     [Export] private Label resultScoreLabel;
     [Export] private Label resultCreditsEarnedLabel;
     [Export] private Label resultTotalCreditsLabel;
+
+    [ExportCategory("Debug UI")]
+    [Export] private CanvasLayer debugUIGroup;
+    [Export] private Label FramerateLabel;
     
     public override void _Ready()
     {
@@ -231,6 +235,20 @@ public partial class UIManager : Node
         healthUpgradePanel.SetLevelLabel(currentLevel, maxLevel);
     }
 
+    #endregion
+    
+    #region Debug UI Functions
+
+    public void SetDebugUIState(bool state)
+    {
+        debugUIGroup.Visible = state;
+    }
+
+    public void SetFramerateLabelText(double value)
+    {
+        FramerateLabel.Text = "FPS: " + value;
+    }
+    
     #endregion
     
     #region Getter

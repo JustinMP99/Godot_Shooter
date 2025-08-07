@@ -70,10 +70,11 @@ public partial class Bullet : RigidBody3D
     }
     
     public void Disable()
-    {
+    { 
         SetProcess(false);
         SetPhysicsProcess(false);
         Visible = false;
+        FinalShot += null;
     }
     
 }

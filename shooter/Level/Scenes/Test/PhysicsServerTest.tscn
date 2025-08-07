@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsptiyjhbl3mh"]
+
+[ext_resource type="Script" uid="uid://bs2jxwvo6rd5t" path="res://Code/Test/ServerTest.cs" id="1_2otiy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_onht3"]
+
+[node name="PhysicsServerTest" type="Node"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.37648, 0, 0, 0, 0.416467, 0, 0, 0, 5.7486, 0, -1.27515, 0)
+mesh = SubResource("BoxMesh_onht3")
+
+[node name="Server Tester" type="Node3D" parent="."]
+script = ExtResource("1_2otiy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.904827, 0.425779, 0, -0.425779, 0.904827, 0, 2.53164, 3.59167)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.954854, 0.297075, 0, -0.297075, 0.954854, 0, 2.4492, 5.85278)

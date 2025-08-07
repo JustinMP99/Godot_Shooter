@@ -86,6 +86,7 @@ point_count = 2
 
 [node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "bulletManager", "levelNode", "startPosition", "introTimer", "roundTimer")]
 script = ExtResource("1_2yd7s")
+debugEnabled = true
 saveManager = NodePath("../SaveManager")
 UIManager = NodePath("../UI Manager")
 enemySpawner = NodePath("../Enemy Spawner")
@@ -102,7 +103,7 @@ one_shot = true
 wait_time = 1.5
 one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel")]
+[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
@@ -127,6 +128,8 @@ resultUIGroup = NodePath("../../=== UI ===/--- result ---")
 resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
 resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
 resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
+debugUIGroup = NodePath("../../=== UI ===/--- debug ---")
+FramerateLabel = NodePath("../../=== UI ===/--- debug ---/Framerate Label")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
@@ -146,7 +149,7 @@ script = ExtResource("6_0o8l2")
 
 [node name="Bullet Manager" type="Node" parent="=== MANAGER ==="]
 script = ExtResource("9_lojpb")
-desiredBullets = 500
+desiredBullets = 1000
 bulletPrefab = ExtResource("10_3gthi")
 
 [node name="=== UI ===" type="Node" parent="."]
@@ -836,6 +839,19 @@ offset_left = -3.05176e-05
 offset_top = -0.160034
 offset_bottom = 0.159973
 text = "Quit"
+
+[node name="--- debug ---" type="CanvasLayer" parent="=== UI ==="]
+
+[node name="Framerate Label" type="Label" parent="=== UI ===/--- debug ---"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -216.0
+offset_bottom = 88.0
+grow_horizontal = 0
+text = "FPS: 0"
+label_settings = ExtResource("10_5d42l")
+horizontal_alignment = 2
 
 [node name="=== LEVEL ===" type="Node" parent="."]
 

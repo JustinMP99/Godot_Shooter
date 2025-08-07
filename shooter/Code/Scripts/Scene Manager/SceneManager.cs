@@ -3,6 +3,9 @@ using System;
 
 public partial class SceneManager : Node
 {
+
+    [ExportCategory("Debug")]
+    [Export] private bool debugEnabled;
     
     [ExportCategory("Managers")]
     [Export] private SaveManager saveManager;
@@ -48,7 +51,7 @@ public partial class SceneManager : Node
 
     public override void _Process(double delta)
     {
-        
+        UIManager.SetFramerateLabelText(Engine.GetFramesPerSecond());
     }
     
     #region Startup Functions
@@ -113,6 +116,16 @@ public partial class SceneManager : Node
         UIManager.SetResultUIState(false);
         UIManager.SetShopUIState(false);
         UIManager.Main_SetCreditsText(player.Credits);
+
+        if (debugEnabled)
+        {
+            UIManager.SetDebugUIState(true);
+        }
+        else
+        {
+            UIManager.SetDebugUIState(false);
+        }
+        
     }
     
     #endregion

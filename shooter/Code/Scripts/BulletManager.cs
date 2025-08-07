@@ -35,6 +35,7 @@ public partial class BulletManager : Node
         {
             bulletIter = 0;
         }
+        GD.Print("Bullet Iter: " + bulletIter);
 
         return bulletList[bulletIter];
     }
