@@ -27,31 +27,25 @@ public partial class PlayerController : CharacterBody3D
 
     #endregion
     
-    [ExportCategory("Cheat Settings")]
-    public bool Invincible = false;
-
-    [Export] private bool takingInput;
-    public bool simpleShoot { get; set; }
+    [ExportCategory("Player Components")]
     [Export] private Node3D bulletPositionOne;
     [Export] private Node3D bulletPositionTwo;
     [Export] private Node3D bulletPositionThree;
-    [Export] private PackedScene bulletPrefab;
-
+    [Export] private Node3D reticle;
+    [Export] private MeshInstance3D playerMesh;
+    public BulletManager bulletManager;
+    
     [ExportCategory("Shooting Variables")]
     [Export] private ShootType shootType;
     [Export] private Timer shootTimer;
     [Export] private bool canShoot;
-
     private Bullet cachedBulletOne;
     private Bullet cachedBulletTwo;
     private Bullet cachedBulletThree;
     
-    [Export] public BulletManager bulletManager { get; set; }
-    [Export] private Node3D reticle;
-    [Export] private MeshInstance3D playerMesh;
-    
     [ExportCategory("Player Stats")] 
-    [Export] public int Credits { get; set; }
+    [Export] private bool takingInput;
+    [Export] public int Credits;
     [Export] public Player_Stats Stats;
     [Export] private Gun playerGun;
     private Vector3 targetVelocity = Vector3.Zero;
@@ -59,7 +53,11 @@ public partial class PlayerController : CharacterBody3D
     private Vector3 direction;
     private Vector3 rotation;
     private float rotationSpeed = 1.25f;
-
+    
+    [ExportCategory("Cheat Settings")]
+    public bool Invincible = false;
+    public bool simpleShoot;
+    
     public override void _Ready()
     {
         Instance = this;

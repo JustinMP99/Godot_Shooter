@@ -10,26 +10,22 @@ public partial class SceneManager : Node
     [ExportCategory("Managers")]
     [Export] private SaveManager saveManager;
     [Export] private UIManager UIManager;
-    
-    [ExportCategory("Spawners")]
     [Export] private EnemySpawner enemySpawner;
     [Export] private BulletManager bulletManager;
     
+    [ExportCategory("Environment Variables")]
     [Export] private Node levelNode;
     [Export] private Node3D startPosition;
-    
     [Export] private Timer introTimer; //Counts down from 3 when the player presses the start button
-    private int introCount; // Counts the seconds on the intro timer
-    
-    [ExportCategory("Round Variables")]
+    [Export] private Timer roundTimer;
+    private PlayerController player;
+  
+    [ExportCategory("Gameplay Values")]
     [Export] private int round;
+    [Export] private int score;
     private int enemiesLeft; //the amount of enemies that must be defeated to end the round
     private int enemiesLeftMax = 10;
-    [Export] private Timer roundTimer;
-    
-    [ExportCategory("Player Variables")] 
-    [Export] private int score;
-    private PlayerController player;
+    private int introCount; // Counts the seconds on the intro timer
 
     public override void _Ready()
     {
