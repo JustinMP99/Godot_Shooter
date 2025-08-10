@@ -55,7 +55,11 @@ background_mode = 2
 background_color = Color(0.813048, 0.863449, 0.915101, 1)
 sky = SubResource("Sky_0o8l2")
 ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_color = Color(0.838897, 0.838897, 0.838897, 1)
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 2.2
+glow_blend_mode = 0
 fog_mode = 1
 fog_light_color = Color(0.832463, 0.859326, 0.850583, 1)
 fog_sun_scatter = 0.5
@@ -86,6 +90,7 @@ point_count = 2
 
 [node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "bulletManager", "levelNode", "startPosition", "introTimer", "roundTimer")]
 script = ExtResource("1_2yd7s")
+debugEnabled = true
 saveManager = NodePath("../SaveManager")
 UIManager = NodePath("../UI Manager")
 enemySpawner = NodePath("../Enemy Spawner")
@@ -898,7 +903,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00558472, 0.57462, 6.18657)
 shape = SubResource("BoxShape3D_73044")
 
 [node name="Enemy Spawn Path" type="Path3D" parent="=== LEVEL ==="]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.5634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -55)
 curve = SubResource("Curve3D_xj7ar")
 
 [node name="Enemy Container" type="Node3D" parent="=== LEVEL ==="]

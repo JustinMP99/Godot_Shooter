@@ -26,7 +26,7 @@ public partial class PlayerController : CharacterBody3D
     public delegate void EnemyDefeatedEventHandler();
 
     #endregion
-
+    
     [ExportCategory("Cheat Settings")]
     public bool Invincible = false;
 
@@ -48,6 +48,7 @@ public partial class PlayerController : CharacterBody3D
     
     [Export] public BulletManager bulletManager { get; set; }
     [Export] private Node3D reticle;
+    [Export] private MeshInstance3D playerMesh;
     
     [ExportCategory("Player Stats")] 
     [Export] public int Credits { get; set; }
@@ -57,7 +58,7 @@ public partial class PlayerController : CharacterBody3D
     private Vector3 targetRotation = Vector3.Zero;
     private Vector3 direction;
     private Vector3 rotation;
-    private float rotationSpeed = 1.5f;
+    private float rotationSpeed = 1.25f;
 
     public override void _Ready()
     {
@@ -75,15 +76,13 @@ public partial class PlayerController : CharacterBody3D
         if (takingInput)
         {
             ReticleRaycast();
-            
             CollectInput();
             //velocity calculation
             targetVelocity.X = direction.X * Stats.Speed;
             Velocity = Velocity.Lerp(targetVelocity, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
             //rotation calculation
             targetRotation.Z = rotation.Z * rotationSpeed;
-            Rotation = Rotation.Lerp(targetRotation, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
-            
+            playerMesh.Rotation = playerMesh.Rotation.Lerp(targetRotation, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
             MoveAndSlide();
         }
     }
@@ -98,8 +97,8 @@ public partial class PlayerController : CharacterBody3D
         if (Input.IsActionPressed("Move_Left"))
         {
             direction.X -= 1.0f;
+            //rotation.Z += 0.25f;
             rotation.Z += 0.25f;
-            
         }
         if (Input.IsActionPressed("Move_Right"))
         {

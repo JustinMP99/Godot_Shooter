@@ -7,26 +7,51 @@ public partial class BulletManager : Node
 
     [Export] private int desiredBullets;
     [Export] private PackedScene bulletPrefab;
-    private List<Bullet> bulletList;
+    private List<Bullet> masterList;
+    private List<Bullet> activeList;
     private int bulletIter;
     private int bulletIterMax;
     
     public void Startup()
     {
         
-        bulletList = new List<Bullet>();
+        masterList = new List<Bullet>();
+        activeList = new List<Bullet>();
         bulletIter = 0;
         bulletIterMax = desiredBullets;
         
         for (int i = 0; i < desiredBullets; i++)
         {
             Bullet newBullet = bulletPrefab.Instantiate() as Bullet;
-            bulletList.Add(newBullet);
+            masterList.Add(newBullet);
             newBullet.Disable();
             this.AddChild(newBullet);
         }
         
     }
+
+
+    public override void _Process(double delta)
+    {
+        if (!Global.gamePaused)
+        {
+            //move all active bullets
+            MoveActiveBullets(delta);
+        }
+    }
+
+    private void MoveActiveBullets(double delta)
+    {
+
+        for (int i = 0; i < activeList.Count; i++)
+        {
+            activeList[i].MoveBullet(delta);
+        }
+
+        activeList.RemoveAll(e => !e.isActive);
+
+    }
+    
 
     public Bullet RequestBullet()
     {
@@ -37,16 +62,18 @@ public partial class BulletManager : Node
         }
         GD.Print("Bullet Iter: " + bulletIter);
 
-        return bulletList[bulletIter];
+        activeList.Add(masterList[bulletIter]);
+        
+        return masterList[bulletIter];
     }
 
     public bool SetBulletsInstaKillState()
     {
-        for (int i = 0; i < bulletList.Count; i++)
+        for (int i = 0; i < masterList.Count; i++)
         {
-            bulletList[i].InstaKill = !bulletList[i].InstaKill;
+            masterList[i].InstaKill = !masterList[i].InstaKill;
         }
-        return bulletList[0].InstaKill;
+        return masterList[0].InstaKill;
 
     }
     

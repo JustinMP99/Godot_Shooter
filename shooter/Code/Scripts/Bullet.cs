@@ -8,7 +8,9 @@ public partial class Bullet : RigidBody3D
     [Export] private float speed;
     [Export] private int damage;
     public bool InstaKill;
+
     [ExportCategory("Lifetime Variables")]
+    public bool isActive;
     [Export] private float lifetime;
     [Export] private float maxLifetime;
     [Signal] public delegate void FinalShotEventHandler();
@@ -19,20 +21,36 @@ public partial class Bullet : RigidBody3D
     
     public override void _PhysicsProcess(double delta)
     {
-        if (!Global.gamePaused)
+        // if (!Global.gamePaused)
+        // {
+        //     // Move the bullet forward along its local Z axis.
+        //     MoveAndCollide(-Transform.Basis.Z * (float)delta * speed);
+        //
+        //     // Increment the bullet's lifetime.
+        //     lifetime += 0.1f;
+        //
+        //     // Destroy the bullet if it exceeds its maximum lifetime.
+        //     if (lifetime >= maxLifetime)
+        //     {
+        //         Position = new Vector3(-100.0f, 0.0f, 0.0f);
+        //         Disable();
+        //     }
+        // }
+    }
+
+    public void MoveBullet(double delta)
+    {
+        // Move the bullet forward along its local Z axis.
+        MoveAndCollide(-Transform.Basis.Z * (float)delta * speed);
+
+        
+        // Increment the bullet's lifetime.
+        lifetime += 0.1f;
+
+        // Destroy the bullet if it exceeds its maximum lifetime.
+        if (Position.Z <= -55.0f)
         {
-            // Move the bullet forward along its local Z axis.
-            MoveAndCollide(-Transform.Basis.Z * (float)delta * speed);
-
-            // Increment the bullet's lifetime.
-            lifetime += 0.1f;
-
-            // Destroy the bullet if it exceeds its maximum lifetime.
-            if (lifetime >= maxLifetime)
-            {
-                Position = new Vector3(-100.0f, 0.0f, 0.0f);
-                Disable();
-            }
+            Disable();
         }
     }
     
@@ -40,7 +58,7 @@ public partial class Bullet : RigidBody3D
     {
         if (node is EnemyController enemy)
         {
-
+        
             if (!InstaKill)
             {
                 bool KilledEnemy = enemy.TakeDamage(damage);
@@ -63,16 +81,18 @@ public partial class Bullet : RigidBody3D
 
     public void Enable()
     {
-        SetProcess(true);
-        SetPhysicsProcess(true);
+        // SetProcess(true);
+        // SetPhysicsProcess(true);
+        isActive = true;
         Visible = true;
         lifetime = 0.0f;
     }
     
     public void Disable()
     { 
-        SetProcess(false);
-        SetPhysicsProcess(false);
+        //SetProcess(false);
+        //SetPhysicsProcess(false);
+        isActive = false;
         Visible = false;
         FinalShot += null;
     }
