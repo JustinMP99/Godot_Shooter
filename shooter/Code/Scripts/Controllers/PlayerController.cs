@@ -5,6 +5,7 @@ public enum ShootType
 {
     Single,
     Spread,
+    Spread_Random
 }
 
 public partial class PlayerController : CharacterBody3D
@@ -28,9 +29,9 @@ public partial class PlayerController : CharacterBody3D
     #endregion
     
     [ExportCategory("Player Components")]
-    [Export] private Node3D bulletPositionOne;
-    [Export] private Node3D bulletPositionTwo;
-    [Export] private Node3D bulletPositionThree;
+    [Export] private Node3D bulletLeftPosition;
+    [Export] private Node3D bulletCenterPosition;
+    [Export] private Node3D bulletRightPosition;
     [Export] private Node3D reticle;
     [Export] private MeshInstance3D playerMesh;
     public BulletManager bulletManager;
@@ -136,8 +137,8 @@ public partial class PlayerController : CharacterBody3D
                 
                 case ShootType.Single:
                     cachedBulletOne = bulletManager.RequestBullet();
-                    cachedBulletOne.Position = bulletPositionTwo.GlobalPosition;
-                    cachedBulletOne.Rotation = bulletPositionTwo.GlobalRotation;
+                    cachedBulletOne.Position = bulletCenterPosition.GlobalPosition;
+                    cachedBulletOne.Rotation = bulletCenterPosition.GlobalRotation;
                     cachedBulletOne.FinalShot += EnemyDefeat;
                     cachedBulletOne.Enable();
                     AudioManager.Instance.PlayShootSound();
@@ -151,16 +152,16 @@ public partial class PlayerController : CharacterBody3D
                     cachedBulletTwo = bulletManager.RequestBullet();
                     cachedBulletThree = bulletManager.RequestBullet();
                     
-                    cachedBulletOne.Position = bulletPositionTwo.GlobalPosition;
-                    cachedBulletOne.Rotation = bulletPositionOne.GlobalRotation;
+                    cachedBulletOne.Position = bulletCenterPosition.GlobalPosition;
+                    cachedBulletOne.Rotation = bulletLeftPosition.GlobalRotation;
                     cachedBulletOne.FinalShot += EnemyDefeat;
                     
-                    cachedBulletTwo.Position = bulletPositionTwo.GlobalPosition;
-                    cachedBulletTwo.Rotation = bulletPositionTwo.GlobalRotation;
+                    cachedBulletTwo.Position = bulletCenterPosition.GlobalPosition;
+                    cachedBulletTwo.Rotation = bulletCenterPosition.GlobalRotation;
                     cachedBulletTwo.FinalShot += EnemyDefeat;
                     
-                    cachedBulletThree.Position = bulletPositionTwo.GlobalPosition;
-                    cachedBulletThree.Rotation = bulletPositionThree.GlobalRotation;
+                    cachedBulletThree.Position = bulletCenterPosition.GlobalPosition;
+                    cachedBulletThree.Rotation = bulletRightPosition.GlobalRotation;
                     cachedBulletThree.FinalShot += EnemyDefeat;
                     
                     cachedBulletOne.Enable();
@@ -171,6 +172,21 @@ public partial class PlayerController : CharacterBody3D
                     //Start Timer
                     canShoot = false;
                     shootTimer.Start();
+                    
+                    break;
+                case ShootType.Spread_Random:
+                    
+                    cachedBulletOne = bulletManager.RequestBullet();
+                    
+                    cachedBulletOne.Position = bulletCenterPosition.GlobalPosition;
+                    
+                    cachedBulletOne.GlobalRotation =  new Vector3(0.0f, (float)GD.RandRange(-1.0f, 1.0f), 0.0f);
+                    
+                    cachedBulletOne.FinalShot += EnemyDefeat;
+                    
+                    cachedBulletOne.Enable();
+                    
+                    AudioManager.Instance.PlayShootSound();
                     
                     break;
                 
@@ -188,7 +204,7 @@ public partial class PlayerController : CharacterBody3D
         
         var spaceState = GetWorld3D().DirectSpaceState;
         
-        var origin = bulletPositionTwo.GlobalPosition;
+        var origin = bulletCenterPosition.GlobalPosition;
         var end = origin + new Vector3(0.0f, 0.0f, -100.0f);
         var query = PhysicsRayQueryParameters3D.Create(origin, end, collisionMask:2);
         

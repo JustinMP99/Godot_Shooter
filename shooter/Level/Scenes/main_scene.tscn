@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
 [ext_resource type="Script" uid="uid://cywkt1mp5oa0w" path="res://Code/Scripts/EnemySpawner.cs" id="4_73044"]
 [ext_resource type="Resource" uid="uid://brvri5kundxwe" path="res://Code/Resources/EnemyStats_Tank.tres" id="5_5d42l"]
-[ext_resource type="PackedScene" uid="uid://cbok5qannybiy" path="res://Level/Prefabs/Enemy.tscn" id="5_y7ox6"]
+[ext_resource type="PackedScene" uid="uid://cbok5qannybiy" path="res://Level/Prefabs/GameObjects/Enemy.tscn" id="5_y7ox6"]
 [ext_resource type="Script" uid="uid://dw0m4q34peuy6" path="res://Code/Scripts/Save System/SaveManager.cs" id="6_0o8l2"]
 [ext_resource type="Script" uid="uid://ktbv83iscdqf" path="res://Code/Scripts/UpgradePanel.cs" id="6_7j67u"]
 [ext_resource type="Resource" uid="uid://b2xqi00aqgqxk" path="res://Code/Resources/EnemyStats_Speedstr.tres" id="6_tw4tw"]
@@ -12,14 +12,14 @@
 [ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/TitleLabelSettings.tres" id="8_i5qe8"]
 [ext_resource type="FontFile" uid="uid://c4j3qccfmy0pq" path="res://Art/Fonts/Electrolize-Regular.ttf" id="9_hcnd7"]
 [ext_resource type="Script" uid="uid://co8gb5p8db5kv" path="res://Code/Scripts/BulletManager.cs" id="9_lojpb"]
-[ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/Bullet.tscn" id="10_3gthi"]
+[ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/GameObjects/Bullet.tscn" id="10_3gthi"]
 [ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/NormalLabelSettings.tres" id="10_5d42l"]
 [ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico-Regular.ttf" id="10_odk2k"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
 [ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/GameScoreLabelSettings.tres" id="14_1nw18"]
 [ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="14_5nx6i"]
-[ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/volume_slider.tscn" id="15_5nx6i"]
-[ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/PlayerInfoBox.tscn" id="18_hcnd7"]
+[ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/UI/volume_slider.tscn" id="15_5nx6i"]
+[ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/UI/PlayerInfoBox.tscn" id="18_hcnd7"]
 [ext_resource type="Texture2D" uid="uid://hijcvnqhb6xx" path="res://Art/Textures/HDR_blue_nebulae-1.hdr" id="19_52m5l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
@@ -51,23 +51,26 @@ energy_multiplier = 7.0
 sky_material = SubResource("PanoramaSkyMaterial_lojpb")
 
 [sub_resource type="Environment" id="Environment_2yd7s"]
-background_mode = 2
-background_color = Color(0.813048, 0.863449, 0.915101, 1)
+background_mode = 1
+background_color = Color(0.774165, 0.873684, 0.936415, 1)
 sky = SubResource("Sky_0o8l2")
 ambient_light_source = 2
-ambient_light_color = Color(0.729662, 0.878187, 0.917708, 1)
+ambient_light_color = Color(1, 1, 1, 1)
 ssao_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_energy = 28.705
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 2.2
 glow_blend_mode = 0
+fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.832463, 0.859326, 0.850583, 1)
+fog_light_color = Color(0.822848, 0.840703, 0.868766, 1)
 fog_sun_scatter = 0.5
-fog_density = 0.02
+fog_density = 1.0
 fog_sky_affect = 0.7
-fog_depth_curve = 0.535887
 fog_depth_begin = 0.0
+fog_depth_end = 55.0
 volumetric_fog_emission = Color(0.851769, 0.851769, 0.851769, 1)
 volumetric_fog_length = 37.4
 volumetric_fog_sky_affect = 0.36
@@ -160,7 +163,6 @@ bulletPrefab = ExtResource("10_3gthi")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -387,6 +389,7 @@ theme_override_font_sizes/font_size = 40
 text = "Go Back"
 
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Title" type="Label" parent="=== UI ===/--- options ---"]

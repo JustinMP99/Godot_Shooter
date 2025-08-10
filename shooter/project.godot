@@ -26,8 +26,8 @@ buses/default_bus_layout="res://Art/Audio/default_bus_layout.tres"
 
 SaveManager="*res://Code/Scripts/Save System/SaveManager.cs"
 GameData="*res://Code/Scripts/Save System/GameData.cs"
-Player="*res://Level/Prefabs/Player.tscn"
-AudioManager="*res://Level/Prefabs/AudioManager.tscn"
+Player="*res://Level/Prefabs/GameObjects/Player.tscn"
+AudioManager="*res://Level/Prefabs/GameObjects/AudioManager.tscn"
 
 [display]
 

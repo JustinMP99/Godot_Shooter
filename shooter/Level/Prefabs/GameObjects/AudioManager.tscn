@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cp33w52ec8niv"]
 
 [ext_resource type="Script" uid="uid://db4gphoo3sgt8" path="res://Code/Scripts/Audio/AudioManager.cs" id="1_fjojs"]
-[ext_resource type="PackedScene" uid="uid://b6xn6myf2y2ix" path="res://Level/Prefabs/SoundQueue.tscn" id="2_585w5"]
+[ext_resource type="PackedScene" uid="uid://b6xn6myf2y2ix" path="res://Level/Prefabs/GameObjects/SoundQueue.tscn" id="2_585w5"]
 [ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="2_oeg1d"]
 [ext_resource type="AudioStream" uid="uid://cg081mwtxap36" path="res://Art/Audio/sfx/Enemy_Death.wav" id="4_e8cmj"]
 

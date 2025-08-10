@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://dyraxlfot6oqf"]
+
+[ext_resource type="Script" uid="uid://6q2aq0nj86e3" path="res://Code/Scripts/Controllers/PlayerController.cs" id="1_0a5mx"]
+[ext_resource type="Resource" uid="uid://dasm4vfey6ngs" path="res://Code/Resources/PlayerStats.tres" id="2_ysarm"]
+[ext_resource type="ArrayMesh" uid="uid://06756guur25v" path="res://Art/Models/PlayerShip_V4.obj" id="3_p7s6k"]
+[ext_resource type="Material" uid="uid://bskexlm6v02jx" path="res://Art/Materials/PlayerShipMaterial.tres" id="4_20vac"]
+[ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="5_6sk5c"]
+[ext_resource type="Texture2D" uid="uid://dd5xbi8wjah3l" path="res://Art/Sprites/Reticle_V2.png" id="6_1fd0q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_odanr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owh07"]
+transparency = 1
+albedo_texture = ExtResource("6_1fd0q")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+texture_filter = 0
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletLeftPosition", "bulletCenterPosition", "bulletRightPosition", "reticle", "playerMesh", "shootTimer")]
+rotation_order = 0
+collision_mask = 8
+script = ExtResource("1_0a5mx")
+bulletLeftPosition = NodePath("BulletPositions/Bullet Left")
+bulletCenterPosition = NodePath("BulletPositions/Bullet Center")
+bulletRightPosition = NodePath("BulletPositions/Bullet Right")
+reticle = NodePath("Reticle")
+playerMesh = NodePath("Player Ship Mesh3D")
+shootTimer = NodePath("Shoot Timer")
+takingInput = true
+Stats = ExtResource("2_ysarm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
+shape = SubResource("BoxShape3D_mprxd")
+
+[node name="Player Ship Mesh3D" type="MeshInstance3D" parent="."]
+rotation_order = 0
+mesh = ExtResource("3_p7s6k")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("4_20vac")
+
+[node name="BulletPositions" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
+
+[node name="Bullet Left" type="Node3D" parent="BulletPositions"]
+transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 0, 0, 0)
+
+[node name="Bullet Center" type="Node3D" parent="BulletPositions"]
+
+[node name="Bullet Right" type="Node3D" parent="BulletPositions"]
+transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+visible = false
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_1gt8s")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6sk5c")
+
+[node name="Shoot Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Reticle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+mesh = SubResource("QuadMesh_odanr")
+surface_material_override/0 = SubResource("StandardMaterial3D_owh07")
+
+[connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
+[connection signal="timeout" from="Shoot Timer" to="." method="ReadyToShoot"]

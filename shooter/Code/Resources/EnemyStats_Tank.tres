@@ -6,6 +6,6 @@
 script = ExtResource("1_prouu")
 Class = 1
 Speed = 3.0
-CurrentHealth = 200
-MaxHealth = 200
+CurrentHealth = 400
+MaxHealth = 400
 metadata/_custom_type_script = "uid://gjdac44paj5f"
