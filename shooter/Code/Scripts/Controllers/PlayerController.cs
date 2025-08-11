@@ -32,7 +32,7 @@ public partial class PlayerController : CharacterBody3D
     [Export] private Node3D bulletLeftPosition;
     [Export] private Node3D bulletCenterPosition;
     [Export] private Node3D bulletRightPosition;
-    [Export] private Node3D reticle;
+    [Export] private MeshInstance3D reticle;
     [Export] private MeshInstance3D playerMesh;
     public BulletManager bulletManager;
     
@@ -40,9 +40,12 @@ public partial class PlayerController : CharacterBody3D
     [Export] private ShootType shootType;
     [Export] private Timer shootTimer;
     [Export] private bool canShoot;
+    [Export] private Texture reticleNormal;
+    [Export] private Texture reticleLocked;
     private Bullet cachedBulletOne;
     private Bullet cachedBulletTwo;
     private Bullet cachedBulletThree;
+    
     
     [ExportCategory("Player Stats")] 
     [Export] private bool takingInput;
@@ -214,11 +217,13 @@ public partial class PlayerController : CharacterBody3D
         {
             Vector3 newReticlePosition =  result["position"].AsVector3();
             newReticlePosition.Z += 0.1f;
+            //reticle.MaterialOverride.Set("albedo_texture", reticleLocked);
             reticle.GlobalPosition = newReticlePosition;
         }
         else
         {
             reticle.Position = new Vector3(0.0f, 0.0f, -10.0f);
+            //reticle.MaterialOverride.Set("albedo_texture", reticleNormal);
         }
     }
     
