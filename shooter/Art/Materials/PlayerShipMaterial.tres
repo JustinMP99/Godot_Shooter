@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bskexlm6v02jx"]
 
-[ext_resource type="Texture2D" uid="uid://bh15dgqhra3jb" path="res://Art/Sprites/low_poly_spaceship_texture.png" id="1_nm2rf"]
+[ext_resource type="Texture2D" uid="uid://bh15dgqhra3jb" path="res://Art/Textures/low_poly_spaceship_texture.png" id="1_nm2rf"]
 
 [resource]
 cull_mode = 2

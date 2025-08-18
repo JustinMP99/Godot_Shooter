@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwan2buoxlnkm"
-path.s3tc="res://.godot/imported/Reticle.png-531235ef39551bdc630b4ca0eb2eb343.s3tc.ctex"
+uid="uid://dhrnp7rflxjlt"
+path="res://.godot/imported/button_hover.png-ae20c0b2e2279816ec5467938ed6ea10.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Sprites/Reticle.png"
-dest_files=["res://.godot/imported/Reticle.png-531235ef39551bdc630b4ca0eb2eb343.s3tc.ctex"]
+source_file="res://Art/Sprites/Buttons/button_hover.png"
+dest_files=["res://.godot/imported/button_hover.png-ae20c0b2e2279816ec5467938ed6ea10.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

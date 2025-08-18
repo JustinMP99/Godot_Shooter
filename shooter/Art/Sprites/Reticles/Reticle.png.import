@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd5xbi8wjah3l"
-path.s3tc="res://.godot/imported/Reticle_V2.png-b6718a92ae92e737ae78eb946eb59e36.s3tc.ctex"
+uid="uid://dwan2buoxlnkm"
+path.s3tc="res://.godot/imported/Reticle.png-0697e5b1c56d71943328e37565f796b9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/Sprites/Reticle_V2.png"
-dest_files=["res://.godot/imported/Reticle_V2.png-b6718a92ae92e737ae78eb946eb59e36.s3tc.ctex"]
+source_file="res://Art/Sprites/Reticles/Reticle.png"
+dest_files=["res://.godot/imported/Reticle.png-0697e5b1c56d71943328e37565f796b9.s3tc.ctex"]
 
 [params]
 

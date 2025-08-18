@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://buiblni7vvcgk"]
 
-[ext_resource type="FontFile" uid="uid://d34e7h0dejr51" path="res://Art/Fonts/Quantico-BoldItalic.ttf" id="1_6744e"]
+[ext_resource type="FontFile" uid="uid://cqyjshrmdao21" path="res://Art/Fonts/Quantico-Bold.ttf" id="1_6744e"]
 
 [resource]
 font = ExtResource("1_6744e")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=39 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -10,17 +10,21 @@
 [ext_resource type="Resource" uid="uid://b2xqi00aqgqxk" path="res://Code/Resources/EnemyStats_Speedstr.tres" id="6_tw4tw"]
 [ext_resource type="Resource" uid="uid://doj18tmg033sd" path="res://Code/Resources/EnemyStats_Base.tres" id="7_1nw18"]
 [ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/TitleLabelSettings.tres" id="8_i5qe8"]
-[ext_resource type="FontFile" uid="uid://c4j3qccfmy0pq" path="res://Art/Fonts/Electrolize-Regular.ttf" id="9_hcnd7"]
 [ext_resource type="Script" uid="uid://co8gb5p8db5kv" path="res://Code/Scripts/BulletManager.cs" id="9_lojpb"]
 [ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/GameObjects/Bullet.tscn" id="10_3gthi"]
 [ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/NormalLabelSettings.tres" id="10_5d42l"]
 [ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico-Regular.ttf" id="10_odk2k"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
+[ext_resource type="StyleBox" uid="uid://c4hvvsty1tj6t" path="res://Art/Styles/Button/button_disabled_style.tres" id="13_wji82"]
 [ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/GameScoreLabelSettings.tres" id="14_1nw18"]
 [ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="14_5nx6i"]
+[ext_resource type="StyleBox" uid="uid://b7ajyoyic761p" path="res://Art/Styles/Button/button_hover_style.tres" id="14_ol1mp"]
+[ext_resource type="StyleBox" uid="uid://cyyx3iig3k7xj" path="res://Art/Styles/Button/button_pressed_style.tres" id="15_3nb0g"]
 [ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/UI/volume_slider.tscn" id="15_5nx6i"]
+[ext_resource type="StyleBox" uid="uid://r0iifhc8wqyl" path="res://Art/Styles/Button/button_normal_style.tres" id="15_s1w4x"]
 [ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/UI/PlayerInfoBox.tscn" id="18_hcnd7"]
 [ext_resource type="Texture2D" uid="uid://hijcvnqhb6xx" path="res://Art/Textures/HDR_blue_nebulae-1.hdr" id="19_52m5l"]
+[ext_resource type="Texture2D" uid="uid://bck3ti6v4uqaf" path="res://Art/Sprites/Asset 3.png" id="22_ol1mp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
 bg_color = Color(0, 0, 0, 0.827451)
@@ -31,9 +35,10 @@ font_size = 21
 
 [sub_resource type="ImageTexture" id="ImageTexture_5rw63"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nx6i"]
-bg_color = Color(0, 0, 0, 0.827451)
-shadow_color = Color(0, 0, 0, 0.466667)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3nb0g"]
+texture = ExtResource("22_ol1mp")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52m5l"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.760784)
@@ -181,66 +186,104 @@ label_settings = ExtResource("8_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Start Button" type="Button" parent="=== UI ===/--- main ---"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -140.0
+offset_right = 168.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_odk2k")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/disabled = ExtResource("13_wji82")
+theme_override_styles/hover = ExtResource("14_ol1mp")
+theme_override_styles/pressed = ExtResource("15_3nb0g")
+theme_override_styles/normal = ExtResource("15_s1w4x")
+text = "Start"
+
+[node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---"]
+offset_left = 792.0
+offset_top = 488.0
+offset_right = 1128.0
+offset_bottom = 569.0
+theme_override_fonts/font = ExtResource("10_odk2k")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/disabled = ExtResource("13_wji82")
+theme_override_styles/hover = ExtResource("14_ol1mp")
+theme_override_styles/pressed = ExtResource("15_3nb0g")
+theme_override_styles/normal = ExtResource("15_s1w4x")
+text = "Upgrades"
+
+[node name="Options Button" type="Button" parent="=== UI ===/--- main ---"]
+offset_left = 792.0
+offset_top = 576.0
+offset_right = 1128.0
+offset_bottom = 648.0
+theme_override_fonts/font = ExtResource("10_odk2k")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/disabled = ExtResource("13_wji82")
+theme_override_styles/hover = ExtResource("14_ol1mp")
+theme_override_styles/pressed = ExtResource("15_3nb0g")
+theme_override_styles/normal = ExtResource("15_s1w4x")
+text = "Options"
+
+[node name="Quit Button" type="Button" parent="=== UI ===/--- main ---"]
+offset_left = 792.0
+offset_top = 664.0
+offset_right = 1128.0
+offset_bottom = 744.0
+theme_override_fonts/font = ExtResource("10_odk2k")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/disabled = ExtResource("13_wji82")
+theme_override_styles/hover = ExtResource("14_ol1mp")
+theme_override_styles/pressed = ExtResource("15_3nb0g")
+theme_override_styles/normal = ExtResource("15_s1w4x")
+text = "Quit"
+
 [node name="Button Container" type="VBoxContainer" parent="=== UI ===/--- main ---"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -185.0
-offset_top = -91.0
-offset_right = 60.0001
-offset_bottom = 94.0
+offset_left = -1848.0
+offset_top = -172.0
+offset_right = -1575.0
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
-theme_override_constants/separation = 14
+theme_override_constants/separation = 18
 alignment = 1
-
-[node name="Start Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_hcnd7")
-theme_override_font_sizes/font_size = 32
-text = "Start"
-
-[node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_odk2k")
-text = "Upgrades"
-
-[node name="Options Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_odk2k")
-text = "Options"
-
-[node name="Quit Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_odk2k")
-text = "Quit"
 
 [node name="How to Play Button" type="Button" parent="=== UI ===/--- main ---"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 32.0
-offset_top = -64.0
-offset_right = 240.0
+offset_top = -88.0
+offset_right = 304.0
 offset_bottom = -16.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 40
 text = "How to Play"
 
 [node name="Credits Label" type="Label" parent="=== UI ===/--- main ---"]
 anchors_preset = -1
 anchor_left = 0.287
-anchor_top = 0.844
-anchor_right = 0.711
-anchor_bottom = 0.894
-offset_left = 0.640015
-offset_top = 0.319946
-offset_right = 0.280029
-offset_bottom = 0.319946
+anchor_top = 0.733
+anchor_right = 0.708
+anchor_bottom = 0.822
+offset_left = 0.960022
+offset_top = 0.359985
+offset_right = 0.640015
+offset_bottom = 0.23999
 text = "Credits: 0"
 label_settings = ExtResource("10_5d42l")
 horizontal_alignment = 1
@@ -396,30 +439,33 @@ follow_viewport_enabled = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -237.5
-offset_right = 237.5
-offset_bottom = 181.0
+offset_left = -304.0
+offset_top = -40.0
+offset_right = 296.0
+offset_bottom = 200.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 1
 text = "Options"
 label_settings = ExtResource("8_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Settings Panel" type="Panel" parent="=== UI ===/--- options ---"]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -568.0
-offset_top = -340.0
-offset_right = 568.0
-offset_bottom = 316.0
+offset_left = -472.0
+offset_top = -332.0
+offset_right = 472.0
+offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_5nx6i")
+theme_override_styles/panel = SubResource("StyleBoxTexture_3nb0g")
 
 [node name="Core Settings" type="VBoxContainer" parent="=== UI ===/--- options ---/Settings Panel"]
 layout_mode = 1
@@ -915,18 +961,18 @@ curve = SubResource("Curve3D_xj7ar")
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Intro Timer" to="=== MANAGER ===/Scene Manager" method="IntroTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Round Timer" to="=== MANAGER ===/Scene Manager" method="RoundTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
-[connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameHover"]
-[connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
-[connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_UpgradeHover"]
-[connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]
-[connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsHover"]
-[connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsButtonFunction"]
-[connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameHover"]
-[connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_UpgradeHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsButtonFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
 [connection signal="toggled" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
