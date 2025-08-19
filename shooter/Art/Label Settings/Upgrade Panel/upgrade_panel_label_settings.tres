@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ceq2yuvm8cu28"]
+
+[ext_resource type="FontFile" uid="uid://d15flt4hwkrxy" path="res://Art/Fonts/Roboto/Roboto-Medium.ttf" id="1_rwagh"]
+
+[resource]
+font = ExtResource("1_rwagh")
+font_size = 121
+font_color = Color(0.188235, 0.423529, 0.760784, 1)

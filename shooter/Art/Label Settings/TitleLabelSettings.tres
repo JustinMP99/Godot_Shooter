@@ -1,9 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dnff8clkk64ls"]
-
-[ext_resource type="FontFile" uid="uid://cqyjshrmdao21" path="res://Art/Fonts/Quantico-Bold.ttf" id="1_ic4w1"]
-
-[resource]
-font = ExtResource("1_ic4w1")
-font_size = 196
-outline_size = 50
-outline_color = Color(0.188235, 0.423529, 0.760784, 1)

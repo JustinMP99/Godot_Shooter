@@ -9,43 +9,43 @@
 [ext_resource type="Script" uid="uid://ktbv83iscdqf" path="res://Code/Scripts/UpgradePanel.cs" id="6_7j67u"]
 [ext_resource type="Resource" uid="uid://b2xqi00aqgqxk" path="res://Code/Resources/EnemyStats_Speedstr.tres" id="6_tw4tw"]
 [ext_resource type="Resource" uid="uid://doj18tmg033sd" path="res://Code/Resources/EnemyStats_Base.tres" id="7_1nw18"]
-[ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/TitleLabelSettings.tres" id="8_i5qe8"]
+[ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/Main Menu/main_menu_title_settings.tres" id="8_i5qe8"]
 [ext_resource type="Script" uid="uid://co8gb5p8db5kv" path="res://Code/Scripts/BulletManager.cs" id="9_lojpb"]
 [ext_resource type="PackedScene" uid="uid://fdrgiae10hx8" path="res://Level/Prefabs/GameObjects/Bullet.tscn" id="10_3gthi"]
-[ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/NormalLabelSettings.tres" id="10_5d42l"]
-[ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico-Regular.ttf" id="10_odk2k"]
+[ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/normal_text_settings.tres" id="10_5d42l"]
+[ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico/Quantico-Regular.ttf" id="10_odk2k"]
 [ext_resource type="Script" uid="uid://b4hg8kuerxlj2" path="res://Code/Scripts/PowerUpManager.cs" id="11_am5r7"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
 [ext_resource type="StyleBox" uid="uid://c4hvvsty1tj6t" path="res://Art/Styles/Button/button_disabled_style.tres" id="13_wji82"]
-[ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/GameScoreLabelSettings.tres" id="14_1nw18"]
-[ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="14_5nx6i"]
+[ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/score_text_setting.tres" id="14_1nw18"]
 [ext_resource type="StyleBox" uid="uid://b7ajyoyic761p" path="res://Art/Styles/Button/button_hover_style.tres" id="14_ol1mp"]
 [ext_resource type="StyleBox" uid="uid://cyyx3iig3k7xj" path="res://Art/Styles/Button/button_pressed_style.tres" id="15_3nb0g"]
 [ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/UI/volume_slider.tscn" id="15_5nx6i"]
 [ext_resource type="StyleBox" uid="uid://r0iifhc8wqyl" path="res://Art/Styles/Button/button_normal_style.tres" id="15_s1w4x"]
 [ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/UI/PlayerInfoBox.tscn" id="18_hcnd7"]
 [ext_resource type="Texture2D" uid="uid://hijcvnqhb6xx" path="res://Art/Textures/HDR_blue_nebulae-1.hdr" id="19_52m5l"]
-[ext_resource type="FontFile" uid="uid://cqyjshrmdao21" path="res://Art/Fonts/Quantico-Bold.ttf" id="21_3nb0g"]
-[ext_resource type="Texture2D" uid="uid://bck3ti6v4uqaf" path="res://Art/Sprites/Asset 3.png" id="22_ol1mp"]
+[ext_resource type="LabelSettings" uid="uid://ceq2yuvm8cu28" path="res://Art/Label Settings/Upgrade Panel/upgrade_panel_label_settings.tres" id="22_vbeqq"]
+[ext_resource type="LabelSettings" uid="uid://1kmi4xg4t47v" path="res://Art/Label Settings/Upgrade Panel/upgrade_panel_description_label_settings.tres" id="23_dntb7"]
 [ext_resource type="Theme" uid="uid://70sbutqju5io" path="res://Art/Themes/button_theme.tres" id="24_am5r7"]
+[ext_resource type="LabelSettings" uid="uid://oif2dqgge5k6" path="res://Art/Label Settings/Options/options_title_settings.tres" id="24_dntb7"]
+[ext_resource type="LabelSettings" uid="uid://c0u6ehyxmf4wq" path="res://Art/Label Settings/Options/options_selection_label_settings.tres" id="25_dntb7"]
+[ext_resource type="Theme" uid="uid://d06vuqaeaves3" path="res://Art/Themes/options_theme.tres" id="27_5i486"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
-bg_color = Color(0, 0, 0, 0.827451)
-
-[sub_resource type="LabelSettings" id="LabelSettings_uuvkg"]
-font = ExtResource("14_5nx6i")
-font_size = 21
+bg_color = Color(1, 1, 1, 0.937255)
+corner_radius_top_left = 55
+corner_radius_top_right = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
 
 [sub_resource type="ImageTexture" id="ImageTexture_5rw63"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_vbeqq"]
-font = ExtResource("21_3nb0g")
-font_size = 141
-outline_size = 50
-outline_color = Color(0.188235, 0.423529, 0.760784, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3nb0g"]
-texture = ExtResource("22_ol1mp")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_am5r7"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 55
+corner_radius_top_right = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52m5l"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.760784)
@@ -204,13 +204,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -168.0
-offset_top = -140.0
+offset_top = -52.0
 offset_right = 168.0
-offset_bottom = -59.0
+offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 56
+theme = ExtResource("24_am5r7")
 theme_override_styles/disabled = ExtResource("13_wji82")
 theme_override_styles/hover = ExtResource("14_ol1mp")
 theme_override_styles/pressed = ExtResource("15_3nb0g")
@@ -219,11 +218,10 @@ text = "Start"
 
 [node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---"]
 offset_left = 792.0
-offset_top = 488.0
+offset_top = 599.0
 offset_right = 1128.0
-offset_bottom = 569.0
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 56
+offset_bottom = 680.0
+theme = ExtResource("24_am5r7")
 theme_override_styles/disabled = ExtResource("13_wji82")
 theme_override_styles/hover = ExtResource("14_ol1mp")
 theme_override_styles/pressed = ExtResource("15_3nb0g")
@@ -232,28 +230,18 @@ text = "Upgrades"
 
 [node name="Options Button" type="Button" parent="=== UI ===/--- main ---"]
 offset_left = 792.0
-offset_top = 576.0
+offset_top = 711.0
 offset_right = 1128.0
-offset_bottom = 648.0
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 56
-theme_override_styles/disabled = ExtResource("13_wji82")
-theme_override_styles/hover = ExtResource("14_ol1mp")
-theme_override_styles/pressed = ExtResource("15_3nb0g")
-theme_override_styles/normal = ExtResource("15_s1w4x")
+offset_bottom = 783.0
+theme = ExtResource("24_am5r7")
 text = "Options"
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- main ---"]
 offset_left = 792.0
-offset_top = 664.0
+offset_top = 815.0
 offset_right = 1128.0
-offset_bottom = 744.0
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 56
-theme_override_styles/disabled = ExtResource("13_wji82")
-theme_override_styles/hover = ExtResource("14_ol1mp")
-theme_override_styles/pressed = ExtResource("15_3nb0g")
-theme_override_styles/normal = ExtResource("15_s1w4x")
+offset_bottom = 896.0
+theme = ExtResource("24_am5r7")
 text = "Quit"
 
 [node name="Button Container" type="VBoxContainer" parent="=== UI ===/--- main ---"]
@@ -273,6 +261,7 @@ theme_override_constants/separation = 18
 alignment = 1
 
 [node name="How to Play Button" type="Button" parent="=== UI ===/--- main ---"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -292,9 +281,9 @@ anchor_top = 0.733
 anchor_right = 0.708
 anchor_bottom = 0.822
 offset_left = 0.960022
-offset_top = 0.359985
+offset_top = 128.36
 offset_right = 0.640015
-offset_bottom = 0.23999
+offset_bottom = 128.24
 theme_override_font_sizes/font_size = 81
 text = "Credits: 0"
 label_settings = ExtResource("10_5d42l")
@@ -326,9 +315,10 @@ follow_viewport_enabled = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -231.5
-offset_right = 231.5
-offset_bottom = 93.0
+offset_left = -616.0
+offset_top = -16.0
+offset_right = 625.0
+offset_bottom = 214.0
 grow_horizontal = 2
 text = "Upgrade Shop"
 label_settings = ExtResource("8_i5qe8")
@@ -340,9 +330,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -128.0
-offset_top = 176.0
+offset_top = 216.0
 offset_right = 136.0
-offset_bottom = 241.0
+offset_bottom = 281.0
 grow_horizontal = 2
 text = "Credits: 0"
 label_settings = ExtResource("14_1nw18")
@@ -373,10 +363,11 @@ layout_mode = 2
 anchor_top = 0.104
 anchor_right = 1.0
 anchor_bottom = 0.359
-offset_top = -47.9715
-offset_bottom = -13.8209
+offset_top = -47.8915
+offset_right = -4.67999
+offset_bottom = 0.259079
 text = "Health"
-label_settings = ExtResource("8_i5qe8")
+label_settings = ExtResource("22_vbeqq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -395,7 +386,7 @@ offset_bottom = 10.8819
 grow_horizontal = 2
 grow_vertical = 2
 text = "Increase Health by __ Points"
-label_settings = SubResource("LabelSettings_uuvkg")
+label_settings = ExtResource("23_dntb7")
 horizontal_alignment = 1
 
 [node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Panel"]
@@ -408,57 +399,55 @@ anchor_bottom = 0.814
 offset_top = 0.0639954
 offset_bottom = -0.0159912
 text = "0/0"
-label_settings = ExtResource("10_5d42l")
+label_settings = ExtResource("23_dntb7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="=== UI ===/--- upgrade ---/Health Panel"]
 z_index = 2
 layout_mode = 2
-anchor_left = 0.498
-anchor_top = 0.993
-anchor_right = 0.5
-anchor_bottom = 0.993
-offset_left = -125.323
-offset_top = -71.9289
-offset_right = 124.159
-offset_bottom = -25.3866
-theme_override_fonts/font = ExtResource("10_odk2k")
+anchor_left = 0.252
+anchor_top = 0.868
+anchor_right = 0.739
+anchor_bottom = 0.965
+offset_left = -0.187363
+offset_top = 0.136139
+offset_right = 2.08548
+offset_bottom = 0.275757
+theme = ExtResource("24_am5r7")
 text = "Upgrade"
 icon = SubResource("ImageTexture_5rw63")
 
 [node name="Back Button" type="Button" parent="=== UI ===/--- upgrade ---"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -112.0
-offset_top = -80.0
-offset_right = 112.0
-offset_bottom = -17.0
+anchors_preset = -1
+anchor_left = 0.433
+anchor_top = 0.896
+anchor_right = 0.567
+anchor_bottom = 0.955
+offset_left = 0.639954
+offset_top = 0.319946
+offset_right = -0.640015
+offset_bottom = -0.400024
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 40
+theme = ExtResource("24_am5r7")
 text = "Go Back"
 
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Title" type="Label" parent="=== UI ===/--- options ---"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -264.0
+offset_left = -340.0
 offset_top = -24.0
-offset_right = 268.0
-offset_bottom = 178.0
+offset_right = 345.0
+offset_bottom = 206.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 1
 text = "Options"
-label_settings = SubResource("LabelSettings_vbeqq")
+label_settings = ExtResource("24_dntb7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -469,13 +458,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -552.0
-offset_top = -348.0
-offset_right = 552.0
-offset_bottom = 348.0
+offset_left = -568.0
+offset_top = -364.0
+offset_right = 584.0
+offset_bottom = 380.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_3nb0g")
+theme_override_styles/panel = SubResource("StyleBoxFlat_am5r7")
 
 [node name="Core Settings" type="VBoxContainer" parent="=== UI ===/--- options ---/Settings Panel"]
 layout_mode = 1
@@ -484,15 +473,15 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 24.0
 offset_top = -323.0
-offset_right = 383.0
-offset_bottom = 49.0
+offset_right = 408.0
+offset_bottom = 100.0
 grow_vertical = 2
 
 [node name="Master Slider Title Label" type="Label" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Master  Volume"
-label_settings = ExtResource("10_5d42l")
+label_settings = ExtResource("25_dntb7")
 
 [node name="Master Slider" parent="=== UI ===/--- options ---/Settings Panel/Core Settings" instance=ExtResource("15_5nx6i")]
 layout_mode = 2
@@ -528,9 +517,7 @@ busIndex = 2
 
 [node name="Fullscreen Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.188235, 0.423529, 0.760784, 1)
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 21
+theme = ExtResource("27_5i486")
 text = "Fullscreen"
 
 [node name="Resolution Option" type="OptionButton" parent="=== UI ===/--- options ---/Settings Panel/Core Settings"]
@@ -561,6 +548,7 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Simple Shoot Toggle" type="CheckButton" parent="=== UI ===/--- options ---/Settings Panel/Toggle Settings"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.188235, 0.423529, 0.760784, 1)
 theme_override_fonts/font = ExtResource("10_odk2k")
@@ -579,9 +567,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -232.0
-offset_top = -264.0
+offset_top = -290.0
 offset_right = 232.0
-offset_bottom = -16.0
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 6
@@ -603,19 +591,17 @@ text = "Enter Cheat"
 
 [node name="Back Button" type="Button" parent="=== UI ===/--- options ---"]
 anchors_preset = -1
-anchor_left = 0.412
-anchor_top = 0.926
-anchor_right = 0.587
-anchor_bottom = 0.989
-offset_left = 0.960022
-offset_top = -0.0800781
-offset_right = 0.959961
-offset_bottom = -0.119995
+anchor_left = 0.421
+anchor_top = 0.933
+anchor_right = 0.579
+anchor_bottom = 0.987
+offset_left = -0.320068
+offset_top = 0.359985
+offset_right = 0.319946
+offset_bottom = 0.039917
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("24_am5r7")
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 40
 theme_override_styles/disabled = ExtResource("13_wji82")
 theme_override_styles/hover = ExtResource("14_ol1mp")
 theme_override_styles/pressed = ExtResource("15_3nb0g")
@@ -629,9 +615,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -576.0
-offset_top = -160.0
+offset_top = -152.0
 offset_right = 576.0
-offset_bottom = -104.0
+offset_bottom = -92.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 561
@@ -677,13 +663,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -480.0
+offset_left = -544.0
 offset_top = -28.0
-offset_right = -196.0
-offset_bottom = 36.0
+offset_right = -125.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("10_odk2k")
+theme = ExtResource("24_am5r7")
 text = "Yeah, delete my data"
 
 [node name="No Delete Button" type="Button" parent="=== UI ===/--- options ---/Delete Save Panel"]
@@ -693,13 +679,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 192.0
+offset_left = 128.0
 offset_top = -28.0
-offset_right = 476.0
-offset_bottom = 36.0
+offset_right = 544.0
+offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("10_odk2k")
+theme = ExtResource("24_am5r7")
 text = "No, wait!"
 
 [node name="--- help ---" type="CanvasLayer" parent="=== UI ==="]
@@ -723,33 +709,41 @@ label_settings = ExtResource("11_tw4tw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Resume Button" type="Button" parent="=== UI ===/--- pause ---"]
+offset_left = 832.0
+offset_top = 416.0
+offset_right = 1088.0
+offset_bottom = 476.0
+theme = ExtResource("24_am5r7")
+theme_override_fonts/font = ExtResource("10_odk2k")
+theme_override_font_sizes/font_size = 25
+text = "Resume
+"
+
+[node name="Quit Button" type="Button" parent="=== UI ===/--- pause ---"]
+offset_left = 832.0
+offset_top = 504.0
+offset_right = 1088.0
+offset_bottom = 564.0
+theme = ExtResource("24_am5r7")
+theme_override_fonts/font = ExtResource("10_odk2k")
+theme_override_font_sizes/font_size = 25
+text = "Quit"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="=== UI ===/--- pause ---"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -39.5
-offset_right = 48.0
-offset_bottom = 39.5
+offset_left = -1296.0
+offset_top = -52.0
+offset_right = -1056.0
+offset_bottom = 182.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 19
 alignment = 1
-
-[node name="Resume Button" type="Button" parent="=== UI ===/--- pause ---/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 25
-text = "Resume
-"
-
-[node name="Quit Button" type="Button" parent="=== UI ===/--- pause ---/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 25
-text = "Quit"
 
 [node name="--- game ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -1008,8 +1002,8 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0,
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/Yes Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_YesDeleteButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/No Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_NoDeleteButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- pause ---/VBoxContainer/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- pause ---/VBoxContainer/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Main Menu Button" to="=== MANAGER ===/Scene Manager" method="Result_MainMenuButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Result_QuitButtonFunction"]

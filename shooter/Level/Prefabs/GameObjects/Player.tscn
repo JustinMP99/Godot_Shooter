@@ -36,7 +36,7 @@ reticleLocked = ExtResource("3_ysarm")
 takingInput = true
 Stats = ExtResource("2_ysarm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Wall Collider" type="CollisionShape3D" parent="."]
 visible = false
 shape = SubResource("BoxShape3D_mprxd")
 
@@ -57,11 +57,10 @@ transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 
 [node name="Bullet Right" type="Node3D" parent="BulletPositions"]
 transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="."]
-visible = false
-collision_mask = 2
+[node name="Object Colliders" type="Area3D" parent="."]
+collision_mask = 18
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Object Colliders"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_1gt8s")
 
@@ -76,5 +75,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 mesh = SubResource("QuadMesh_odanr")
 surface_material_override/0 = SubResource("StandardMaterial3D_owh07")
 
-[connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
+[connection signal="body_entered" from="Object Colliders" to="." method="OnBodyEntered"]
 [connection signal="timeout" from="Shoot Timer" to="." method="ReadyToShoot"]

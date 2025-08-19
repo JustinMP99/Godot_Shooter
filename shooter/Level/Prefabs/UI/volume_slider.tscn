@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://pubk2l5mqbvp"]
+[gd_scene load_steps=3 format=3 uid="uid://pubk2l5mqbvp"]
 
 [ext_resource type="Script" uid="uid://mexyw8qp62xl" path="res://Code/Scripts/VolumeSlider.cs" id="1_fyuch"]
+[ext_resource type="Theme" uid="uid://be3egm5n276ka" path="res://Art/Themes/slider_theme.tres" id="1_ovtqd"]
 
 [node name="Volume Slider" type="HSlider"]
 anchors_preset = -1
@@ -14,5 +15,7 @@ offset_right = -3.36005
 offset_bottom = 0.0799866
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ovtqd")
 step = 0.001
+value = 22.13
 script = ExtResource("1_fyuch")

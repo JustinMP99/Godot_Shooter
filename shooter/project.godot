@@ -33,8 +33,8 @@ AudioManager="*res://Level/Prefabs/GameObjects/AudioManager.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="viewport"
-window/vsync/vsync_mode=0
+window/size/initial_position=Vector2i(12, 12)
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
@@ -91,8 +91,8 @@ Shoot={
 3d_physics/layer_2="Enemy"
 3d_physics/layer_3="Bullet"
 3d_physics/layer_4="World"
+3d_physics/layer_5="PowerUp"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-anti_aliasing/quality/use_taa=true

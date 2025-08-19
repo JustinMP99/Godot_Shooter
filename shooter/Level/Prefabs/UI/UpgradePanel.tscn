@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://d320w8i78pjx0"]
 
 [ext_resource type="Script" uid="uid://ktbv83iscdqf" path="res://Code/Scripts/UpgradePanel.cs" id="1_uuvkg"]
-[ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/TitleLabelSettings.tres" id="3_0yfgp"]
-[ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/VCR_OSD_MONO.ttf" id="3_54d8q"]
-[ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/NormalLabelSettings.tres" id="4_mg6jw"]
-[ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico-Regular.ttf" id="5_af4o4"]
+[ext_resource type="LabelSettings" uid="uid://dnff8clkk64ls" path="res://Art/Label Settings/Main Menu/main_menu_title_settings.tres" id="3_0yfgp"]
+[ext_resource type="FontFile" uid="uid://m8vqe0236ah3" path="res://Art/Fonts/Additional/VCR_OSD_MONO.ttf" id="3_54d8q"]
+[ext_resource type="LabelSettings" uid="uid://dll00gxnnk7vh" path="res://Art/Label Settings/normal_text_settings.tres" id="4_mg6jw"]
+[ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico/Quantico-Regular.ttf" id="5_af4o4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
 bg_color = Color(0, 0, 0, 0.827451)

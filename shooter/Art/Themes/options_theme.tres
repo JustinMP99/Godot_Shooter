@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://d06vuqaeaves3"]
+
+[ext_resource type="FontFile" uid="uid://bandtts6s836p" path="res://Art/Fonts/Roboto/Roboto-Regular.ttf" id="1_gjm4o"]
+
+[resource]
+CheckButton/colors/font_color = Color(0.247059, 0.462745, 0.776471, 1)
+CheckButton/colors/font_focus_color = Color(0.31242, 0.52956, 0.847082, 1)
+CheckButton/colors/font_hover_color = Color(0.313726, 0.529412, 0.847059, 1)
+CheckButton/font_sizes/font_size = 30
+CheckButton/fonts/font = ExtResource("1_gjm4o")

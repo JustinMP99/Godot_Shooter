@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cla7gxwlbssjp"]
+
+[ext_resource type="Script" uid="uid://ddopki6clp3le" path="res://Code/Scripts/PowerUp.cs" id="1_k1qbm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_50wvc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_50wvc"]
+
+[node name="PowerUp" type="Node3D"]
+script = ExtResource("1_k1qbm")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_50wvc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_50wvc")

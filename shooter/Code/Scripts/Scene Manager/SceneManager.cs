@@ -34,7 +34,7 @@ public partial class SceneManager : Node
         LoadConfig();
         
         //load player data
-        LoadPlayerData();
+        PlayerSetup();
         
         //setup UI
         UISetup();
@@ -78,7 +78,7 @@ public partial class SceneManager : Node
 
     }
 
-    private void LoadPlayerData()
+    private void PlayerSetup()
     {
         player = PlayerController.Instance;
         player.Position = new Vector3(0.0f, 0.0f, 10.0f);
