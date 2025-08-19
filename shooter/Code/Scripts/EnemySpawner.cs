@@ -10,6 +10,8 @@ public partial class EnemySpawner : Node
     [Export] private int desiredEnemies;
     private List<EnemyController> masterEnemyList;
     private List<EnemyController> activeEnemyList;
+    [Export] private PathFollow3D spawnPath;
+    
     
     [ExportCategory("Enemy Resources")] 
     [Export] private EnemyStats tankStats;
@@ -78,6 +80,7 @@ public partial class EnemySpawner : Node
                 {
                     masterEnemyList[currentListIter].Enable();
                     masterEnemyList[currentListIter].ResetHealth();
+                    //spawnPath.ProgressRatio
                     masterEnemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
 
                     currentListIter++;

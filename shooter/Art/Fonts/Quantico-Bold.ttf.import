@@ -31,7 +31,7 @@ Compress=null
 compress=true
 preload=[{
 "chars": [],
-"glyphs": [],
+"glyphs": null,
 "name": "New Configuration",
 &"size": Vector2i(127, 0),
 &"variation_embolden": 0.0
