@@ -72,6 +72,7 @@ public partial class EnemySpawner : Node
     
     private void OnTimerTimeout()
     {
+        //TODO: Fix this! All timers should pause when game is paused. This check should be irrelevant/redundant!
         if (!Global.gamePaused)
         {
             if (desiredEnemies > 0)

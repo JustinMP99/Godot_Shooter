@@ -7,30 +7,29 @@ public partial class BulletManager : Node
 
     [Export] private int desiredBullets;
     [Export] private PackedScene bulletPrefab;
-    private List<Bullet> masterList;
-    private List<Bullet> activeList;
+    private List<Bullet> bulletPool;
+    private List<Bullet> activeBullets;
     private int bulletIter;
     private int bulletIterMax;
     
     public void Startup()
     {
         
-        masterList = new List<Bullet>();
-        activeList = new List<Bullet>();
+        bulletPool = new List<Bullet>();
+        activeBullets = new List<Bullet>();
         bulletIter = 0;
         bulletIterMax = desiredBullets;
         
         for (int i = 0; i < desiredBullets; i++)
         {
             Bullet newBullet = bulletPrefab.Instantiate() as Bullet;
-            masterList.Add(newBullet);
+            bulletPool.Add(newBullet);
             newBullet.Disable();
             this.AddChild(newBullet);
         }
         
     }
-
-
+    
     public override void _Process(double delta)
     {
         if (!Global.gamePaused)
@@ -43,16 +42,15 @@ public partial class BulletManager : Node
     private void MoveActiveBullets(double delta)
     {
 
-        for (int i = 0; i < activeList.Count; i++)
+        for (int i = 0; i < activeBullets.Count; i++)
         {
-            activeList[i].MoveBullet(delta);
+            activeBullets[i].MoveBullet(delta);
         }
 
-        activeList.RemoveAll(e => !e.isActive);
+        activeBullets.RemoveAll(e => !e.isActive);
 
     }
     
-
     public Bullet RequestBullet()
     {
         bulletIter++;
@@ -62,18 +60,18 @@ public partial class BulletManager : Node
         }
         GD.Print("Bullet Iter: " + bulletIter);
 
-        activeList.Add(masterList[bulletIter]);
+        activeBullets.Add(bulletPool[bulletIter]);
         
-        return masterList[bulletIter];
+        return bulletPool[bulletIter];
     }
 
     public bool SetBulletsInstaKillState()
     {
-        for (int i = 0; i < masterList.Count; i++)
+        for (int i = 0; i < bulletPool.Count; i++)
         {
-            masterList[i].InstaKill = !masterList[i].InstaKill;
+            bulletPool[i].InstaKill = !bulletPool[i].InstaKill;
         }
-        return masterList[0].InstaKill;
+        return bulletPool[0].InstaKill;
 
     }
     

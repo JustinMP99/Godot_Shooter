@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dyraxlfot6oqf"]
 
 [ext_resource type="Script" uid="uid://6q2aq0nj86e3" path="res://Code/Scripts/Controllers/PlayerController.cs" id="1_0a5mx"]
-[ext_resource type="Resource" uid="uid://dasm4vfey6ngs" path="res://Code/Resources/PlayerStats.tres" id="2_ysarm"]
+[ext_resource type="Resource" uid="uid://dasm4vfey6ngs" path="res://Level/Resource Objects/Player Stats/PlayerStats.tres" id="2_ysarm"]
 [ext_resource type="ArrayMesh" uid="uid://06756guur25v" path="res://Art/Models/PlayerShip_V4.obj" id="3_p7s6k"]
 [ext_resource type="Texture2D" uid="uid://3p26ry74la75" path="res://Art/Sprites/Reticles/Reticle_Locked.png" id="3_ysarm"]
 [ext_resource type="Material" uid="uid://bskexlm6v02jx" path="res://Art/Materials/PlayerShipMaterial.tres" id="4_20vac"]
