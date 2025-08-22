@@ -5,6 +5,7 @@ public partial class Bullet : RigidBody3D
 {
  
     [ExportCategory("Bullet Stats")]
+    //TODO: Move this stat data to a resource
     [Export] private float speed;
     [Export] private int damage;
     public bool InstaKill;

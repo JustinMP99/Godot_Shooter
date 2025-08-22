@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://p6q7fcy2hvva"]
-
-[ext_resource type="Script" uid="uid://ddopki6clp3le" path="res://Code/Scripts/PowerUp.cs" id="1_5pq2h"]
-
-[resource]
-script = ExtResource("1_5pq2h")
-speed = 0.0
-shootType = 0
-metadata/_custom_type_script = "uid://ddopki6clp3le"

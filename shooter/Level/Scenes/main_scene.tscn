@@ -178,7 +178,6 @@ script = ExtResource("11_am5r7")
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -198,15 +197,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Start Button" type="Button" parent="=== UI ===/--- main ---"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -168.0
-offset_top = -52.0
-offset_right = 168.0
-offset_bottom = 29.0
+anchors_preset = -1
+anchor_left = 0.412
+anchor_top = 0.474
+anchor_right = 0.587
+anchor_bottom = 0.552
+offset_left = 0.959961
+offset_top = 0.0799561
+offset_right = 0.959961
+offset_bottom = -2.16003
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("24_am5r7")
@@ -217,10 +216,15 @@ theme_override_styles/normal = ExtResource("15_s1w4x")
 text = "Start"
 
 [node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---"]
-offset_left = 792.0
-offset_top = 599.0
-offset_right = 1128.0
-offset_bottom = 680.0
+anchors_preset = -1
+anchor_left = 0.412
+anchor_top = 0.556
+anchor_right = 0.587
+anchor_bottom = 0.63
+offset_left = 0.959961
+offset_top = -0.480042
+offset_right = 0.959961
+offset_bottom = 0.599915
 theme = ExtResource("24_am5r7")
 theme_override_styles/disabled = ExtResource("13_wji82")
 theme_override_styles/hover = ExtResource("14_ol1mp")
@@ -229,18 +233,28 @@ theme_override_styles/normal = ExtResource("15_s1w4x")
 text = "Upgrades"
 
 [node name="Options Button" type="Button" parent="=== UI ===/--- main ---"]
-offset_left = 792.0
-offset_top = 711.0
-offset_right = 1128.0
-offset_bottom = 783.0
+anchors_preset = -1
+anchor_left = 0.412
+anchor_top = 0.637
+anchor_right = 0.587
+anchor_bottom = 0.711
+offset_left = 0.959961
+offset_top = 0.039978
+offset_right = 0.959961
+offset_bottom = 0.119995
 theme = ExtResource("24_am5r7")
 text = "Options"
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- main ---"]
-offset_left = 792.0
-offset_top = 815.0
-offset_right = 1128.0
-offset_bottom = 896.0
+anchors_preset = -1
+anchor_left = 0.412
+anchor_top = 0.719
+anchor_right = 0.587
+anchor_bottom = 0.793
+offset_left = 0.959961
+offset_top = -0.52002
+offset_right = 0.959961
+offset_bottom = 0.559937
 theme = ExtResource("24_am5r7")
 text = "Quit"
 
@@ -434,6 +448,7 @@ theme = ExtResource("24_am5r7")
 text = "Go Back"
 
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Title" type="Label" parent="=== UI ===/--- options ---"]

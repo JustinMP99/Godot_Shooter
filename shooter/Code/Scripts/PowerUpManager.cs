@@ -16,7 +16,6 @@ public partial class PowerUpManager : Node
     [Export] private PowerUp healthPowerUp;
     [Export] private PowerUp fireTypePowerUp;
     
-
     public void Startup()
     {
         //generate all
@@ -28,6 +27,7 @@ public partial class PowerUpManager : Node
         if (!Global.gamePaused)
         {
             //move powerups
+            MoveActivePowerUps();
         }
         
     }
@@ -43,7 +43,5 @@ public partial class PowerUpManager : Node
         //remove all power ups that have finished traveling from the active list
         
     }
-    
-    
     
 }

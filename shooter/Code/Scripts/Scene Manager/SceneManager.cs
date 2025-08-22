@@ -12,6 +12,7 @@ public partial class SceneManager : Node
     [Export] private UIManager UIManager;
     [Export] private EnemySpawner enemySpawner;
     [Export] private BulletManager bulletManager;
+    [Export] private PowerUpManager powerUpManager;
     
     [ExportCategory("Environment Variables")]
     [Export] private Node levelNode;
@@ -42,6 +43,7 @@ public partial class SceneManager : Node
         //additional startup calls
         enemySpawner.Startup();
         bulletManager.Startup();
+        powerUpManager.Startup();
         
     }
 

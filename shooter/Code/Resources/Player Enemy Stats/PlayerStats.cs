@@ -3,7 +3,7 @@ using System;
 
 
 [GlobalClass]
-public partial class Player_Stats : BaseStats
+public partial class PlayerStats : BaseStats
 {
 
     [Export] public int HealthLevel { get; set; }

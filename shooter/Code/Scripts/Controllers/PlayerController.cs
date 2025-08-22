@@ -50,7 +50,7 @@ public partial class PlayerController : CharacterBody3D
     [ExportCategory("Player Stats")] 
     [Export] private bool takingInput;
     [Export] public int Credits;
-    [Export] public Player_Stats Stats;
+    [Export] public PlayerStats Stats;
     [Export] private Gun playerGun;
     private Vector3 targetVelocity = Vector3.Zero;
     private Vector3 targetRotation = Vector3.Zero;
