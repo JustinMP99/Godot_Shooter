@@ -14,7 +14,7 @@ config/name="infiniSpace"
 config/description="A simple top-down shooter made in the Godot engine "
 config/version="0.2.0"
 run/main_scene="uid://b7eyggjoqoow4"
-config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=165
 config/icon="res://Art/Sprites/icon.svg"
 
@@ -24,9 +24,9 @@ buses/default_bus_layout="res://Art/Audio/default_bus_layout.tres"
 
 [autoload]
 
+Player="*res://Level/Prefabs/GameObjects/Player.tscn"
 SaveManager="*res://Code/Scripts/Save System/SaveManager.cs"
 GameData="*res://Code/Scripts/Save System/GameData.cs"
-Player="*res://Level/Prefabs/GameObjects/Player.tscn"
 AudioManager="*res://Level/Prefabs/GameObjects/AudioManager.tscn"
 
 [display]

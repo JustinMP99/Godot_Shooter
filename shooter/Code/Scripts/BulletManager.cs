@@ -61,8 +61,6 @@ public partial class BulletManager : Node
         {
             poolIter = 0;
         }
-        GD.Print("Bullet Iter: " + poolIter);
-
         activeBullets.Add(bulletPool[poolIter]);
         
         return bulletPool[poolIter];

@@ -48,8 +48,6 @@ public partial class EnemyController : RigidBody3D
         }
     }
     
-    
-    
     public void Release()
     {
     }

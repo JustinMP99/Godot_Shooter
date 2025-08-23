@@ -83,11 +83,13 @@ public partial class SceneManager : Node
     private void PlayerSetup()
     {
         player = PlayerController.Instance;
+
         player.Position = new Vector3(0.0f, 0.0f, 10.0f);
         player.SetTakingInput(false);
         
         //Assign Signal Functions
         player.PauseSignal += ActivatePause;
+        player.PlayerHealed += UpdateGameUI;
         player.PlayerHit += UpdateGameUI;
         player.PlayerDied += GameOver;
         player.EnemyDefeated += DefeatedEnemy;
@@ -178,6 +180,7 @@ public partial class SceneManager : Node
         UIManager.Game_SetRoundLabelState(false);
         UIManager.Game_SetHudState(true);
         enemySpawner.StartTimer();
+        powerUpManager.StartTimer();
     }
     
     #endregion
@@ -235,8 +238,7 @@ public partial class SceneManager : Node
         //Update UI
         UIManager.Game_SetScoreValueText(score);
     }
-
-
+    
     #endregion
 
     #region Supporting Functions

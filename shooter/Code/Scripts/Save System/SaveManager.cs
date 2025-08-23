@@ -64,11 +64,11 @@ public partial class SaveManager : Node
 
         Error error = jsonLoader.Parse(data);
 
-        if (error != Error.Ok)
-        {
-            GD.Print(error);
-            return false;
-        }
+        // if (error != Error.Ok)
+        // {
+        //     GD.Print(error);
+        //     return false;
+        // }
 
         Godot.Collections.Dictionary tempData = (Godot.Collections.Dictionary)jsonLoader.Data;
 

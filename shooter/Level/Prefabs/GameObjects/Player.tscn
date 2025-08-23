@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dyraxlfot6oqf"]
 
 [ext_resource type="Script" uid="uid://6q2aq0nj86e3" path="res://Code/Scripts/Controllers/PlayerController.cs" id="1_0a5mx"]
-[ext_resource type="Resource" uid="uid://dasm4vfey6ngs" path="res://Level/Resource Objects/Player Stats/PlayerStats.tres" id="2_ysarm"]
+[ext_resource type="Resource" uid="uid://pj1g6ji0ofdn" path="res://Level/Resource Objects/Player Stats/PlayerStats.tres" id="2_ysarm"]
 [ext_resource type="ArrayMesh" uid="uid://06756guur25v" path="res://Art/Models/PlayerShip_V4.obj" id="3_p7s6k"]
 [ext_resource type="Texture2D" uid="uid://3p26ry74la75" path="res://Art/Sprites/Reticles/Reticle_Locked.png" id="3_ysarm"]
 [ext_resource type="Material" uid="uid://bskexlm6v02jx" path="res://Art/Materials/PlayerShipMaterial.tres" id="4_20vac"]
@@ -11,6 +11,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
+size = Vector3(1.2583, 1, 1.19141)
 
 [sub_resource type="QuadMesh" id="QuadMesh_odanr"]
 
@@ -41,6 +42,7 @@ visible = false
 shape = SubResource("BoxShape3D_mprxd")
 
 [node name="Player Ship Mesh3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.118039)
 rotation_order = 0
 mesh = ExtResource("3_p7s6k")
 skeleton = NodePath("")
@@ -61,7 +63,7 @@ transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 
 collision_mask = 18
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Object Colliders"]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.00322265, 0, -0.114844)
 shape = SubResource("BoxShape3D_1gt8s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

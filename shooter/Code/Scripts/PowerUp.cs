@@ -5,9 +5,9 @@ using System;
 public partial class PowerUp : RigidBody3D
 {
 
-    
+    public bool isActive;
     [ExportCategory("PowerUp Stats")]
-    [Export] private PowerUpStats stats;
+    [Export] public PowerUpStats Stats;
 
     [ExportCategory("Lifetime Variables")]
     [Export] private float lifetime;
@@ -16,7 +16,7 @@ public partial class PowerUp : RigidBody3D
 
     public void MovePowerUp(double delta)
     {
-        MoveAndCollide(-Transform.Basis.Z * (float)delta * stats.Speed);
+        MoveAndCollide(Transform.Basis.Z * (float)delta * Stats.Speed);
 
         lifetime += 0.1f;
 
@@ -30,32 +30,21 @@ public partial class PowerUp : RigidBody3D
 
     public void OnBodyEntered(Node3D node)
     {
-        //hit player now do power up
-        switch (stats.Type)
-        {
-            case PowerUpType.Health:
-
-                GD.Print("Restored Player Health!");
-                PlayerController player = node as PlayerController;
-                
-                PowerUpStats_Health tempStats = stats as PowerUpStats_Health;
-                
-                player.Heal(tempStats.healthRestoreAmount);
-                
-                break;
-        }
+        
         
     }
     
     public void Enable()
     {
-        
+        isActive = true;
+        Visible = true;
     }
 
     public void Disable()
     {
-        
+        isActive = false;
+        Visible = false;
+        Position = new Vector3(10.0f, 10.0f, 10.0f);
     }
     
-
 }

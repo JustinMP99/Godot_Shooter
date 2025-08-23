@@ -124,9 +124,17 @@ public partial class EnemySpawner : Node
     {
         spawnTimer.Start();
     }
-
     public void StopTimer()
     {
         spawnTimer.Stop();
     }
+    public void PauseTimer()
+    {
+        spawnTimer.Paused = true;
+    }
+    public void ResumeTimer()
+    {
+        spawnTimer.Paused = false;
+    }
+    
 }

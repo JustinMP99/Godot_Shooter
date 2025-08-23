@@ -12,8 +12,8 @@ public partial class Bullet : RigidBody3D
 
     [ExportCategory("Lifetime Variables")]
     public bool isActive;
-    [Export] private float lifetime;
-    [Export] private float maxLifetime;
+    //[Export] private float lifetime;
+    //[Export] private float maxLifetime;
     [Signal] public delegate void FinalShotEventHandler();
 
     public override void _Ready()
@@ -84,7 +84,7 @@ public partial class Bullet : RigidBody3D
     {
         isActive = true;
         Visible = true;
-        lifetime = 0.0f;
+        //lifetime = 0.0f;
     }
     
     

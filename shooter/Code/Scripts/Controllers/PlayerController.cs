@@ -14,16 +14,15 @@ public partial class PlayerController : CharacterBody3D
 
     #region Signals
 
-    [Signal]
+    [Signal] 
     public delegate void PauseSignalEventHandler();
-
-    [Signal]
+    [Signal] 
     public delegate void PlayerHitEventHandler();
-
-    [Signal]
+    [Signal] 
     public delegate void PlayerDiedEventHandler();
-
-    [Signal]
+    [Signal] 
+    public delegate void PlayerHealedEventHandler();
+    [Signal] 
     public delegate void EnemyDefeatedEventHandler();
 
     #endregion
@@ -45,7 +44,6 @@ public partial class PlayerController : CharacterBody3D
     private Bullet cachedBulletOne;
     private Bullet cachedBulletTwo;
     private Bullet cachedBulletThree;
-    
     
     [ExportCategory("Player Stats")] 
     [Export] private bool takingInput;
@@ -258,6 +256,23 @@ public partial class PlayerController : CharacterBody3D
                 EmitSignal(SignalName.PlayerHit);
             }
         }
+        else if (body is PowerUp powerUp)
+        {
+            
+            switch (powerUp.Stats.Type)
+            {
+                case PowerUpType.Health:
+        
+                GD.Print("Restored Player Health!");
+                PowerUpStats_Health tempStats = powerUp.Stats as PowerUpStats_Health;
+                
+                powerUp.Disable();
+                Heal(tempStats.healthRestoreAmount);
+                
+                break;
+            }
+            
+        }
     }
 
     private void ReadyToShoot()
@@ -273,6 +288,12 @@ public partial class PlayerController : CharacterBody3D
     {
         GD.Print("player has been healed for " + healAmount + " points");
         Stats.CurrentHealth += healAmount;
+        if (Stats.CurrentHealth > Stats.MaxHealth)
+        {
+            Stats.CurrentHealth = Stats.MaxHealth;
+        }
+        
+        EmitSignal(SignalName.PlayerHealed);
     }
     
 
