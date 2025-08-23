@@ -4,21 +4,24 @@ using System.Collections.Generic;
 
 public partial class BulletManager : Node
 {
-
+    
+    [ExportCategory("Bullet Data")]
     [Export] private int desiredBullets;
     [Export] private PackedScene bulletPrefab;
+    
+    //Pool Data
     private List<Bullet> bulletPool;
     private List<Bullet> activeBullets;
-    private int bulletIter;
-    private int bulletIterMax;
+    private int poolIter;
+    private int poolIterMax;
     
     public void Startup()
     {
         
         bulletPool = new List<Bullet>();
         activeBullets = new List<Bullet>();
-        bulletIter = 0;
-        bulletIterMax = desiredBullets;
+        poolIter = 0;
+        poolIterMax = desiredBullets;
         
         for (int i = 0; i < desiredBullets; i++)
         {
@@ -53,16 +56,16 @@ public partial class BulletManager : Node
     
     public Bullet RequestBullet()
     {
-        bulletIter++;
-        if (bulletIter == bulletIterMax)
+        poolIter++;
+        if (poolIter == poolIterMax)
         {
-            bulletIter = 0;
+            poolIter = 0;
         }
-        GD.Print("Bullet Iter: " + bulletIter);
+        GD.Print("Bullet Iter: " + poolIter);
 
-        activeBullets.Add(bulletPool[bulletIter]);
+        activeBullets.Add(bulletPool[poolIter]);
         
-        return bulletPool[bulletIter];
+        return bulletPool[poolIter];
     }
 
     public bool SetBulletsInstaKillState()

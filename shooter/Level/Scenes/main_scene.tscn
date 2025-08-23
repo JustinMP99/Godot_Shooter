@@ -104,13 +104,14 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "bulletManager", "levelNode", "startPosition", "introTimer", "roundTimer")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition", "introTimer", "roundTimer")]
 script = ExtResource("1_2yd7s")
 debugEnabled = true
 saveManager = NodePath("../SaveManager")
 UIManager = NodePath("../UI Manager")
 enemySpawner = NodePath("../Enemy Spawner")
 bulletManager = NodePath("../Bullet Manager")
+powerUpManager = NodePath("../PowerUp Manager")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 introTimer = NodePath("Intro Timer")
@@ -154,9 +155,9 @@ FramerateLabel = NodePath("../../=== UI ===/--- debug ---/Framerate Label")
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
 spawnTimer = NodePath("Timer")
+desiredEnemies = 300
 enemyPrefab = ExtResource("5_y7ox6")
 enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
-desiredEnemies = 300
 tankStats = ExtResource("5_5d42l")
 speedstrStats = ExtResource("6_tw4tw")
 baseStats = ExtResource("7_1nw18")
@@ -334,7 +335,7 @@ offset_top = -16.0
 offset_right = 625.0
 offset_bottom = 214.0
 grow_horizontal = 2
-text = "Upgrade Shop"
+text = "Upgrades"
 label_settings = ExtResource("8_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1

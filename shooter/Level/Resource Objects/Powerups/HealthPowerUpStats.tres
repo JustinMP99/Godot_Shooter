@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUpStats_Health" load_steps=2 format=3 uid="uid://cd8tilsa8gj0n"]
+
+[ext_resource type="Script" uid="uid://dj0q5q5pgviov" path="res://Code/Resources/Power Up Stats/PowerUpStats_Health.cs" id="1_t2dt6"]
+
+[resource]
+script = ExtResource("1_t2dt6")
+healthRestoreAmount = 0
+Speed = 0.0
+Type = 0
+metadata/_custom_type_script = "uid://dj0q5q5pgviov"

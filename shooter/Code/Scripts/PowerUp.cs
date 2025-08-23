@@ -5,6 +5,7 @@ using System;
 public partial class PowerUp : RigidBody3D
 {
 
+    
     [ExportCategory("PowerUp Stats")]
     [Export] private PowerUpStats stats;
 
@@ -25,9 +26,27 @@ public partial class PowerUp : RigidBody3D
             Disable();
             
         }
-
     }
 
+    public void OnBodyEntered(Node3D node)
+    {
+        //hit player now do power up
+        switch (stats.Type)
+        {
+            case PowerUpType.Health:
+
+                GD.Print("Restored Player Health!");
+                PlayerController player = node as PlayerController;
+                
+                PowerUpStats_Health tempStats = stats as PowerUpStats_Health;
+                
+                player.Heal(tempStats.healthRestoreAmount);
+                
+                break;
+        }
+        
+    }
+    
     public void Enable()
     {
         

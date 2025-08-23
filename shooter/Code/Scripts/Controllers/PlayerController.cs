@@ -267,6 +267,18 @@ public partial class PlayerController : CharacterBody3D
 
     #endregion
 
+    #region PowerUp Functions
+
+    public void Heal(int healAmount)
+    {
+        GD.Print("player has been healed for " + healAmount + " points");
+        Stats.CurrentHealth += healAmount;
+    }
+    
+
+    #endregion
+    
+    
     #region Getter
 
     public int GetCurrentHealth()

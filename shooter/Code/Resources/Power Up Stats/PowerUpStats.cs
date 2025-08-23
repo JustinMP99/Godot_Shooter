@@ -17,5 +17,6 @@ public partial class PowerUpStats : Resource
 {
 
     [Export] public float Speed;
+    [Export] public PowerUpType Type;
 
 }

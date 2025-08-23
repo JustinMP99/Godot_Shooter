@@ -4,32 +4,35 @@ using System.Collections.Generic;
 
 public partial class EnemySpawner : Node
 {
+    
+    [ExportCategory("Spawner Components")]
     [Export] private Timer spawnTimer;
-    [Export] private PackedScene enemyPrefab;
-    [Export] private Node3D enemyContainer;
-    [Export] private int desiredEnemies;
-    private List<EnemyController> masterEnemyList;
-    private List<EnemyController> activeEnemyList;
     [Export] private PathFollow3D spawnPath;
     
-    
-    [ExportCategory("Enemy Resources")] 
+    [ExportCategory("Enemy Data")] 
+    [Export] private int desiredEnemies;
+    [Export] private PackedScene enemyPrefab;
+    [Export] private Node3D enemyContainer;
     [Export] private EnemyStats tankStats;
     [Export] private EnemyStats speedstrStats;
     [Export] private EnemyStats baseStats;
     
-    private int currentListIter;
-    private int maxListIter;
-
+    //Pool Data
+    private List<EnemyController> enemyPool;
+    private List<EnemyController> activeEnemies;
+    private int poolIter;
+    private int poolIterMax;
+    
     /// <summary>
     /// creates pool of enemies and generates enemy stats
     /// </summary>
     /// TODO: Maybe moving stat setting to when the enemy is spawned would allow for better difficulty control
     public void Startup()
     {
-        masterEnemyList = new List<EnemyController>();
-        currentListIter = 0;
-        maxListIter = desiredEnemies;
+        enemyPool = new List<EnemyController>();
+        activeEnemies = new List<EnemyController>();
+        poolIter = 0;
+        poolIterMax = desiredEnemies;
 
         for (int i = 0; i < desiredEnemies; i++)
         {
@@ -61,16 +64,36 @@ public partial class EnemySpawner : Node
             }
             
             enemy.Disable();
-            masterEnemyList.Add(enemy);
+            enemyPool.Add(enemy);
             AddChild(enemy);
         }
     }
 
+    public override void _Process(double delta)
+    {
+        if (!Global.gamePaused)
+        {
+            MoveActiveEnemies(delta);
+        }
+    }
+
+    private void MoveActiveEnemies(double delta)
+    {
+
+        for (int i = 0; i < activeEnemies.Count; i++)
+        {
+            activeEnemies[i].MoveEnemy(delta);
+        }
+        //Remove
+        activeEnemies.RemoveAll(e => !e.GetIsActive());
+
+    }
+    
     public void DisableAllEnemies()
     {
-        for (int i = 0; i < masterEnemyList.Count; i++)
+        for (int i = 0; i < enemyPool.Count; i++)
         {
-            masterEnemyList[i].Disable();
+            enemyPool[i].Disable();
         }
     }
     
@@ -79,19 +102,18 @@ public partial class EnemySpawner : Node
         //TODO: Fix this! All timers should pause when game is paused. This check should be irrelevant/redundant!
         if (!Global.gamePaused)
         {
-            if (desiredEnemies > 0)
+            if (desiredEnemies > 0) //TODO: Remove this check, it is a holdover from when enemies were spawned during runtime. Now it is always true
             {
-                if (!masterEnemyList[currentListIter].GetIsActive())
+                if (!enemyPool[poolIter].GetIsActive())
                 {
-                    masterEnemyList[currentListIter].Enable();
-                    masterEnemyList[currentListIter].ResetHealth();
-                    //spawnPath.ProgressRatio
-                    masterEnemyList[currentListIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
-
-                    currentListIter++;
-                    if (currentListIter >= maxListIter)
+                    enemyPool[poolIter].Enable();
+                    enemyPool[poolIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
+                    activeEnemies.Add(enemyPool[poolIter]);
+                    
+                    poolIter++;
+                    if (poolIter >= poolIterMax)
                     {
-                        currentListIter = 0;
+                        poolIter = 0;
                     }
                 }
             }

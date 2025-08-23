@@ -46,7 +46,7 @@ public partial class Bullet : RigidBody3D
 
         
         // Increment the bullet's lifetime.
-        lifetime += 0.1f;
+        //lifetime += 0.1f;
 
         // Destroy the bullet if it exceeds its maximum lifetime.
         if (Position.Z <= -55.0f)
@@ -82,17 +82,14 @@ public partial class Bullet : RigidBody3D
 
     public void Enable()
     {
-        // SetProcess(true);
-        // SetPhysicsProcess(true);
         isActive = true;
         Visible = true;
         lifetime = 0.0f;
     }
     
+    
     public void Disable()
     { 
-        //SetProcess(false);
-        //SetPhysicsProcess(false);
         isActive = false;
         Visible = false;
         FinalShot += null;

@@ -28,17 +28,28 @@ public partial class EnemyController : RigidBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (!Global.gamePaused)
-        {
-            MoveAndCollide(Transform.Basis.Z * (float)delta * Stats.Speed);
-            if (Position.Z >= 5.0f)
-            {
-                Visible = false;
-                isActive = false;
-            }
-        }
+        // if (!Global.gamePaused)
+        // {
+        //     MoveAndCollide(Transform.Basis.Z * (float)delta * Stats.Speed);
+        //     if (Position.Z >= 5.0f)
+        //     {
+        //         Visible = false;
+        //         isActive = false;
+        //     }
+        // }
     }
 
+    public void MoveEnemy(double delta)
+    {
+        MoveAndCollide(Transform.Basis.Z * (float)delta * Stats.Speed);
+        if (Position.Z >= 5.0f)
+        {
+            Disable();
+        }
+    }
+    
+    
+    
     public void Release()
     {
     }
@@ -46,16 +57,16 @@ public partial class EnemyController : RigidBody3D
     public void Enable()
     {
         isActive = true;
-        SetProcess(true);
-        SetPhysicsProcess(true);
         Visible = true;
+        ResetHealth();
     }
 
+    /// <summary>
+    /// disable the enemy
+    /// </summary>
     public void Disable()
     {
         isActive = false;
-        SetProcess(false);
-        SetPhysicsProcess(false);
         Visible = false;
         Position = new Vector3(10.0f, 10.0f, 10.0f);
     }
@@ -91,16 +102,6 @@ public partial class EnemyController : RigidBody3D
     {
         return isActive;
     }
-
-    // public int GetCurrentHealth()
-    // {
-    //     return currentHealth;
-    // }
-    //
-    // public int GetMaxHealth()
-    // {
-    //     return maxHealth;
-    // }
 
     #endregion
 
