@@ -25,6 +25,9 @@ public partial class PlayerController : CharacterBody3D
     [Signal] 
     public delegate void EnemyDefeatedEventHandler();
 
+    [Signal]
+    public delegate void ShootTypePowerUpEventHandler();
+    
     #endregion
     
     [ExportCategory("Player Components")]
@@ -258,20 +261,21 @@ public partial class PlayerController : CharacterBody3D
         }
         else if (body is PowerUp powerUp)
         {
-            
             switch (powerUp.Stats.Type)
             {
                 case PowerUpType.Health:
-        
-                GD.Print("Restored Player Health!");
-                PowerUpStats_Health tempStats = powerUp.Stats as PowerUpStats_Health;
-                
-                powerUp.Disable();
-                Heal(tempStats.healthRestoreAmount);
-                
+                    GD.Print("Restored Player Health!");
+                    PowerUpStats_Health tempStats = powerUp.Stats as PowerUpStats_Health;
+                    powerUp.Disable();
+                    Heal(tempStats.healthRestoreAmount);
                 break;
+                case PowerUpType.Shoot_Type:
+                    GD.Print("Changing Shoot Type!");
+                    powerUp.Disable();
+                    //activate shoot timer
+                    EmitSignal(SignalName.ShootTypePowerUp);
+                    break;
             }
-            
         }
     }
 
@@ -295,10 +299,13 @@ public partial class PlayerController : CharacterBody3D
         
         EmitSignal(SignalName.PlayerHealed);
     }
-    
+
+    public void SwitchShootType(ShootType newType)
+    {
+        shootType = newType;
+    }
 
     #endregion
-    
     
     #region Getter
 

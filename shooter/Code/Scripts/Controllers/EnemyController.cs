@@ -44,6 +44,7 @@ public partial class EnemyController : RigidBody3D
         MoveAndCollide(Transform.Basis.Z * (float)delta * Stats.Speed);
         if (Position.Z >= 5.0f)
         {
+            //TODO: Remove this and have Enemies disabled via a VisibleOnScreenNotifier3D
             Disable();
         }
     }

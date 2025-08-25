@@ -19,6 +19,7 @@ public partial class SceneManager : Node
     [Export] private Node3D startPosition;
     [Export] private Timer introTimer; //Counts down from 3 when the player presses the start button
     [Export] private Timer roundTimer;
+    [Export] private Timer powerUpTimer;
     private PlayerController player;
   
     [ExportCategory("Gameplay Values")]
@@ -93,6 +94,7 @@ public partial class SceneManager : Node
         player.PlayerHit += UpdateGameUI;
         player.PlayerDied += GameOver;
         player.EnemyDefeated += DefeatedEnemy;
+        player.ShootTypePowerUp += ShootTypeSwitchEvent;
         player.bulletManager = bulletManager;
         
         bool loadResult = saveManager.load();
@@ -182,7 +184,12 @@ public partial class SceneManager : Node
         enemySpawner.StartTimer();
         powerUpManager.StartTimer();
     }
-    
+
+    private void PowerUpTimerTimeout()
+    {
+        player.SwitchShootType(ShootType.Single);
+    }
+
     #endregion
 
     #region Signal Functions
@@ -238,7 +245,18 @@ public partial class SceneManager : Node
         //Update UI
         UIManager.Game_SetScoreValueText(score);
     }
-    
+
+    public void ShootTypeSwitchEvent()
+    {
+        
+        //start power up timer
+        powerUpTimer.Start();
+        
+        //set shoot type
+        player.SwitchShootType(ShootType.Spread_Random);
+        
+    }
+
     #endregion
 
     #region Supporting Functions

@@ -25,3 +25,8 @@ collision_layer = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_50wvc")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.724724, -0.730606, -1, 1.44945, 1.46121, 2)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="Disable"]

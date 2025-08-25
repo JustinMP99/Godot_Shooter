@@ -12,8 +12,8 @@ public partial class PowerUpManager : Node
     [Export] private int desiredPowerUps;
 
     [Export] private PackedScene powerUpsPrefab ;
-    [Export] private PowerUpStats healthPowerUpStats;
-    [Export] private PowerUpStats fireTypePowerUp;
+    [Export] private PowerUpStats healthPowerUp;
+    [Export] private PowerUpStats shootTypePowerUp;
     
     //Pool Data
     private List<PowerUp> powerUpsPool;
@@ -30,18 +30,14 @@ public partial class PowerUpManager : Node
         
         for (int i = 0; i < desiredPowerUps; i++)
         {
-
             PowerUp powerUp = powerUpsPrefab.Instantiate() as PowerUp;
-            
             //Temp
-            powerUp.Stats = healthPowerUpStats;
+            powerUp.Stats = shootTypePowerUp;
             
             powerUp.Disable();
             powerUpsPool.Add(powerUp);
             AddChild(powerUp);
-
         }
-        
     }
 
     public override void _Process(double delta)
@@ -72,16 +68,23 @@ public partial class PowerUpManager : Node
 
         if (!powerUpsPool[poolIter].isActive)
         {
+            GD.Print("Iter: " + poolIter);
+            GD.Print("Spawning PowerUp");
             powerUpsPool[poolIter].Enable();
             powerUpsPool[poolIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
             activePowerUps.Add(powerUpsPool[poolIter]);
             poolIter++;
             if (poolIter >= poolIterMax)
             {
+                GD.Print("Reseting Pool Iter!");
                 poolIter = 0;
             }
         }
-        
+        else
+        {
+            GD.Print("Skipping Power Up Spawn");
+            GD.Print("Pool Iter Value: " + poolIter);
+        } 
     }
 
     public void StartTimer()

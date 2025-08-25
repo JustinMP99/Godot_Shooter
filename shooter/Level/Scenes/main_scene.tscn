@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=46 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -16,10 +16,11 @@
 [ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico/Quantico-Regular.ttf" id="10_odk2k"]
 [ext_resource type="Script" uid="uid://b4hg8kuerxlj2" path="res://Code/Scripts/PowerUpManager.cs" id="11_am5r7"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
-[ext_resource type="Resource" uid="uid://cd8tilsa8gj0n" path="res://Level/Resource Objects/Powerups/HealthPowerUpStats.tres" id="12_5i486"]
 [ext_resource type="PackedScene" uid="uid://cla7gxwlbssjp" path="res://Level/Prefabs/GameObjects/PowerUp.tscn" id="12_iruui"]
+[ext_resource type="Resource" uid="uid://cd8tilsa8gj0n" path="res://Level/Resource Objects/Powerups/HealthPowerUp.tres" id="13_2w1o7"]
 [ext_resource type="StyleBox" uid="uid://c4hvvsty1tj6t" path="res://Art/Styles/Button/button_disabled_style.tres" id="13_wji82"]
 [ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/score_text_setting.tres" id="14_1nw18"]
+[ext_resource type="Resource" uid="uid://csjxm30misdm7" path="res://Level/Resource Objects/Powerups/ShootTypePowerUp.tres" id="14_lfhfm"]
 [ext_resource type="StyleBox" uid="uid://b7ajyoyic761p" path="res://Art/Styles/Button/button_hover_style.tres" id="14_ol1mp"]
 [ext_resource type="StyleBox" uid="uid://cyyx3iig3k7xj" path="res://Art/Styles/Button/button_pressed_style.tres" id="15_3nb0g"]
 [ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/UI/volume_slider.tscn" id="15_5nx6i"]
@@ -106,7 +107,7 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition", "introTimer", "roundTimer")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition", "introTimer", "roundTimer", "powerUpTimer")]
 script = ExtResource("1_2yd7s")
 debugEnabled = true
 saveManager = NodePath("../SaveManager")
@@ -118,6 +119,7 @@ levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
 introTimer = NodePath("Intro Timer")
 roundTimer = NodePath("Round Timer")
+powerUpTimer = NodePath("Power Up Timer")
 
 [node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
 one_shot = true
@@ -125,6 +127,9 @@ one_shot = true
 [node name="Round Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
 wait_time = 1.5
 one_shot = true
+
+[node name="Power Up Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
+wait_time = 10.0
 
 [node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
@@ -180,14 +185,16 @@ script = ExtResource("11_am5r7")
 spawnTimer = NodePath("Timer")
 desiredPowerUps = 10
 powerUpsPrefab = ExtResource("12_iruui")
-healthPowerUpStats = ExtResource("12_5i486")
+healthPowerUp = ExtResource("13_2w1o7")
+shootTypePowerUp = ExtResource("14_lfhfm")
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/PowerUp Manager"]
-wait_time = 3.5
+wait_time = 10.0
 
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -771,7 +778,6 @@ theme_override_constants/separation = 19
 alignment = 1
 
 [node name="--- game ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="PlayerInfoBox" parent="=== UI ===/--- game ---" instance=ExtResource("18_hcnd7")]
@@ -1004,6 +1010,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0,
 
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Intro Timer" to="=== MANAGER ===/Scene Manager" method="IntroTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Round Timer" to="=== MANAGER ===/Scene Manager" method="RoundTimerTimeout"]
+[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Power Up Timer" to="=== MANAGER ===/Scene Manager" method="PowerUpTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/PowerUp Manager/Timer" to="=== MANAGER ===/PowerUp Manager" method="OnTimerTimeout"]
 [connection signal="mouse_entered" from="=== UI ===/--- main ---/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameHover"]

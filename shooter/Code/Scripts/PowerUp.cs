@@ -17,21 +17,6 @@ public partial class PowerUp : RigidBody3D
     public void MovePowerUp(double delta)
     {
         MoveAndCollide(Transform.Basis.Z * (float)delta * Stats.Speed);
-
-        lifetime += 0.1f;
-
-        if (Position.Z <= -55.0f)
-        {
-            
-            Disable();
-            
-        }
-    }
-
-    public void OnBodyEntered(Node3D node)
-    {
-        
-        
     }
     
     public void Enable()
@@ -45,6 +30,7 @@ public partial class PowerUp : RigidBody3D
         isActive = false;
         Visible = false;
         Position = new Vector3(10.0f, 10.0f, 10.0f);
+        GD.Print("Disabling Node!");
     }
     
 }
