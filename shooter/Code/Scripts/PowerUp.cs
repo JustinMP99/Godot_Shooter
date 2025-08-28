@@ -6,6 +6,7 @@ public partial class PowerUp : RigidBody3D
 {
 
     public bool isActive;
+    [Export] private MeshInstance3D meshRef;
     [ExportCategory("PowerUp Stats")]
     [Export] public PowerUpStats Stats;
 
@@ -31,6 +32,11 @@ public partial class PowerUp : RigidBody3D
         Visible = false;
         Position = new Vector3(10.0f, 10.0f, 10.0f);
         //GD.Print("Disabling Node!");
+    }
+
+    public void SetMaterial(Material mat)
+    {
+        meshRef.MaterialOverride = mat;
     }
     
 }

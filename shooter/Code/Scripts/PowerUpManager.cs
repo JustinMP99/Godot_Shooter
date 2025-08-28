@@ -10,10 +10,14 @@ public partial class PowerUpManager : Node
     
     [ExportCategory("Power Up Data")]
     [Export] private int desiredPowerUps;
+    
+    
+    private PackedScene powerUpsPrefab ;
+    private PowerUpStats_Health healthPowerUp ;
+    private PowerUpStats_ShootType shootTypePowerUp;
 
-    [Export] private PackedScene powerUpsPrefab ;
-    [Export] private PowerUpStats_Health healthPowerUp ;
-    [Export] private PowerUpStats_ShootType shootTypePowerUp;
+    private Material healthMaterial;
+    private Material shootTypeMaterial;
     
     //Pool Data
     private List<PowerUp> powerUpsPool;
@@ -24,8 +28,12 @@ public partial class PowerUpManager : Node
     public void Startup()
     {
 
+        powerUpsPrefab = GD.Load<PackedScene>("res://Level/Prefabs/GameObjects/PowerUp.tscn");
         healthPowerUp = GD.Load<PowerUpStats_Health>("res://Level/Resource Objects/Powerups/HealthPowerUp.tres");
         shootTypePowerUp = GD.Load<PowerUpStats_ShootType>("res://Level/Resource Objects/Powerups/ShootTypePowerUp.tres");
+
+        healthMaterial = GD.Load<Material>("res://Art/Materials/Power Ups/health_powerup_material.tres");
+        shootTypeMaterial = GD.Load<Material>("res://Art/Materials/Power Ups/shoottype_powerup_material.tres");
         
         powerUpsPool = new List<PowerUp>();
         activePowerUps = new List<PowerUp>();
@@ -35,9 +43,6 @@ public partial class PowerUpManager : Node
         for (int i = 0; i < desiredPowerUps; i++)
         {
             PowerUp powerUp = powerUpsPrefab.Instantiate() as PowerUp;
-            //Temp
-            powerUp.Stats = shootTypePowerUp;
-            
             powerUp.Disable();
             powerUpsPool.Add(powerUp);
             AddChild(powerUp);
@@ -70,25 +75,37 @@ public partial class PowerUpManager : Node
     private void OnTimerTimeout()
     {
 
-        if (!powerUpsPool[poolIter].isActive)
+        int type;
+        PowerUp powerUp = powerUpsPool[poolIter];
+        
+        //spawn power up
+        if (!powerUp.isActive)
         {
-            GD.Print("Iter: " + poolIter);
-            GD.Print("Spawning PowerUp");
-            powerUpsPool[poolIter].Enable();
-            powerUpsPool[poolIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
-            activePowerUps.Add(powerUpsPool[poolIter]);
+            
+            //generate type
+            type = GD.RandRange(0, 1);
+
+            switch (type)
+            {
+                case 0:
+                    powerUp.Stats = healthPowerUp;
+                    powerUp.SetMaterial(healthMaterial);
+                    break;
+                case 1:
+                    powerUp.Stats = shootTypePowerUp;
+                    powerUp.SetMaterial(shootTypeMaterial);
+                    break;
+            }
+            
+            powerUp.Enable();
+            powerUp.Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
+            activePowerUps.Add(powerUp);
             poolIter++;
             if (poolIter >= poolIterMax)
             {
-                GD.Print("Reseting Pool Iter!");
                 poolIter = 0;
             }
         }
-        else
-        {
-            GD.Print("Skipping Power Up Spawn");
-            GD.Print("Pool Iter Value: " + poolIter);
-        } 
     }
 
     public void StartTimer()

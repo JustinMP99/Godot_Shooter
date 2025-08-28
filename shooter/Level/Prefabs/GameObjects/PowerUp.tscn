@@ -8,16 +8,17 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_50wvc"]
 
-[node name="PowerUp" type="RigidBody3D"]
+[node name="PowerUp" type="RigidBody3D" node_paths=PackedStringArray("meshRef")]
 collision_layer = 16
 collision_mask = 0
 freeze = true
 script = ExtResource("1_k1qbm")
+meshRef = NodePath("Power Up Mesh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_k1qbm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Power Up Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_50wvc")
 
 [node name="Area3D" type="Area3D" parent="."]

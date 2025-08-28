@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=43 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -16,7 +16,6 @@
 [ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico/Quantico-Regular.ttf" id="10_odk2k"]
 [ext_resource type="Script" uid="uid://b4hg8kuerxlj2" path="res://Code/Scripts/PowerUpManager.cs" id="11_am5r7"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
-[ext_resource type="PackedScene" uid="uid://cla7gxwlbssjp" path="res://Level/Prefabs/GameObjects/PowerUp.tscn" id="12_iruui"]
 [ext_resource type="StyleBox" uid="uid://c4hvvsty1tj6t" path="res://Art/Styles/Button/button_disabled_style.tres" id="13_wji82"]
 [ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/score_text_setting.tres" id="14_1nw18"]
 [ext_resource type="StyleBox" uid="uid://b7ajyoyic761p" path="res://Art/Styles/Button/button_hover_style.tres" id="14_ol1mp"]
@@ -181,7 +180,6 @@ bulletPrefab = ExtResource("10_3gthi")
 script = ExtResource("11_am5r7")
 spawnTimer = NodePath("Timer")
 desiredPowerUps = 10
-powerUpsPrefab = ExtResource("12_iruui")
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/PowerUp Manager"]
 wait_time = 10.0
