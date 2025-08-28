@@ -8,8 +8,8 @@ public partial class SceneManager
     public void Main_StartGameFunction()
     {
         //Set UI states
-        UIManager.SetMainUIState(false);
-        UIManager.SetGameUIState(true);
+        interfaceManager.SetMainUIState(false);
+        interfaceManager.SetGameUIState(true);
         
         //Reset temp game values
         score = 0;
@@ -23,11 +23,11 @@ public partial class SceneManager
         player.Reparent(levelNode);
         
         //Set UI Data
-        UIManager.playerInfoBox.SetHealthBarMax(player.GetMaxHealth());
-        UIManager.playerInfoBox.SetHealthBarCurrent(player.GetCurrentHealth());
-        UIManager.Game_SetScoreValueText(score);
+        interfaceManager.PlayerInfoBox.SetHealthBarMax(player.GetMaxHealth());
+        interfaceManager.PlayerInfoBox.SetHealthBarCurrent(player.GetCurrentHealth());
+        interfaceManager.Game_SetScoreValueText(score);
         
-        UIManager.Game_SetHudState(false);
+        interfaceManager.Game_SetHudState(false);
         
         //Start timer
         StartIntroTimer();
@@ -45,46 +45,46 @@ public partial class SceneManager
         //UIManager.SetMasterSliderValue(AudioServer.);
         
         //set UI states
-        UIManager.SetMainUIState(false);
-        UIManager.SetOptionsUIState(true);
+        interfaceManager.SetMainUIState(false);
+        interfaceManager.SetOptionsUIState(true);
     }
     
     public void Main_ShopButtonFunction()
     {
         //Set Main UI State
-        UIManager.SetMainUIState(false);
+        interfaceManager.SetMainUIState(false);
 
         //Set Shop UI Data
-        UIManager.Shop_SetCreditsText(player.Credits);
-        UIManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
+        interfaceManager.Shop_SetCreditsText(player.Credits);
+        interfaceManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
 
         //Set Shop UI State
-        UIManager.SetShopUIState(true);
+        interfaceManager.SetShopUIState(true);
     }
     
     public void Main_StartGameHover()
     {
-        UIManager.Main_SetSubTitleText("Start the game and see how many waves you can survive!");
+        interfaceManager.Main_SetSubTitleText("Start the game and see how many waves you can survive!");
     }
 
     public void Main_QuitGameHover()
     {
-        UIManager.Main_SetSubTitleText("Close the game");
+        interfaceManager.Main_SetSubTitleText("Close the game");
     }
 
     public void Main_UpgradeHover()
     {
-        UIManager.Main_SetSubTitleText("Use the credits you've earned to upgrade your ship");
+        interfaceManager.Main_SetSubTitleText("Use the credits you've earned to upgrade your ship");
     }
 
     public void Main_OptionsHover()
     {
-        UIManager.Main_SetSubTitleText("Change audio level and more");
+        interfaceManager.Main_SetSubTitleText("Change audio level and more");
     }
     
     public void Main_ButtonHoverExit()
     {
-        UIManager.Main_SetSubTitleText("Micro game created by Justin Philie");
+        interfaceManager.Main_SetSubTitleText("Micro game created by Justin Philie");
     }
     
     #endregion
@@ -113,7 +113,7 @@ public partial class SceneManager
     {
         
         //Get string from input field
-        string cheatCode = UIManager.GetCheatIFString();
+        string cheatCode = interfaceManager.GetCheatIFString();
 
         //make player invincible
         if (cheatCode.Contains("UNBEATABLE"))
@@ -122,11 +122,11 @@ public partial class SceneManager
             bool result = player.SetInvincibleState();
             if (player.Invincible)
             {
-                UIManager.SetCheatDescriptionLabelText("You are now invincible");
+                interfaceManager.SetCheatDescriptionLabelText("You are now invincible");
             }
             else
             {
-                UIManager.SetCheatDescriptionLabelText("You are now vincible");
+                interfaceManager.SetCheatDescriptionLabelText("You are now vincible");
             }
         }
         //make bullets instakill
@@ -136,11 +136,11 @@ public partial class SceneManager
             //print out result
             if (result)
             {
-                UIManager.SetCheatDescriptionLabelText("Enabled oneshot bullets");
+                interfaceManager.SetCheatDescriptionLabelText("Enabled oneshot bullets");
             }
             else
             {
-                UIManager.SetCheatDescriptionLabelText("Disabled oneshot bullets");
+                interfaceManager.SetCheatDescriptionLabelText("Disabled oneshot bullets");
             }
         }
     }
@@ -150,7 +150,7 @@ public partial class SceneManager
         
         //Enable Delete Save Panel
         
-        UIManager.SetDeleteSavePanelState(true);
+        interfaceManager.SetDeleteSavePanelState(true);
         
     }
 
@@ -159,14 +159,14 @@ public partial class SceneManager
         saveManager.ResetSave();
         saveManager.load();
         //Refresh Credits UI
-        UIManager.Main_SetCreditsText(player.Credits);
-        UIManager.SetDeleteSavePanelState(false);
+        interfaceManager.Main_SetCreditsText(player.Credits);
+        interfaceManager.SetDeleteSavePanelState(false);
     }
 
     private void Options_NoDeleteButtonFunction()
     {
         //Disable Delete Save Panel
-        UIManager.SetDeleteSavePanelState(false);
+        interfaceManager.SetDeleteSavePanelState(false);
     }
     
     private void Options_BackButtonFunction()
@@ -174,8 +174,8 @@ public partial class SceneManager
         GD.Print("Resolution Setting: " + GameData.Instance.ResolutionValue);
         GD.Print("Fullscreen Setting: " + GameData.Instance.Fullscreen);
         //set ui state
-        UIManager.SetOptionsUIState(false);
-        UIManager.SetMainUIState(true);
+        interfaceManager.SetOptionsUIState(false);
+        interfaceManager.SetMainUIState(true);
         saveManager.SaveConfig();
     }
     
@@ -190,8 +190,8 @@ public partial class SceneManager
     private void Pause_ResumeButtonFunction()
     {
         //Set UI States
-        UIManager.SetPauseUIState(false);
-        UIManager.SetGameUIState(true);
+        interfaceManager.SetPauseUIState(false);
+        interfaceManager.SetGameUIState(true);
         Global.gamePaused = false;
         player.SetTakingInput(true);
     }
@@ -204,8 +204,8 @@ public partial class SceneManager
         //Destroy all enemies
 
         //Set UI States
-        UIManager.SetPauseUIState(false);
-        UIManager.SetMainUIState(true);
+        interfaceManager.SetPauseUIState(false);
+        interfaceManager.SetMainUIState(true);
 
         enemySpawner.StopTimer();
 
@@ -227,13 +227,13 @@ public partial class SceneManager
 
     private void Result_MainMenuButtonFunction()
     {
-        UIManager.Main_SetCreditsText(player.Credits);
+        interfaceManager.Main_SetCreditsText(player.Credits);
 
         player.Stats.CurrentHealth = player.Stats.MaxHealth;
 
-        UIManager.SetResultUIState(false);
+        interfaceManager.SetResultUIState(false);
 
-        UIManager.SetMainUIState(true);
+        interfaceManager.SetMainUIState(true);
 
         saveManager.Save();
     }
@@ -252,11 +252,11 @@ public partial class SceneManager
 
     private void Shop_BackButtonFunction()
     {
-        UIManager.SetShopUIState(false);
+        interfaceManager.SetShopUIState(false);
 
-        UIManager.Main_SetCreditsText(player.Credits);
+        interfaceManager.Main_SetCreditsText(player.Credits);
 
-        UIManager.SetMainUIState(true);
+        interfaceManager.SetMainUIState(true);
     }
 
     private void Shop_UpgradeHealthButtonFunction()
@@ -286,8 +286,8 @@ public partial class SceneManager
             player.Stats.HealthLevel++;
             player.SetMaxHealth(player.GetMaxHealth() + 50);
             player.SetCurrentHealth(player.GetMaxHealth());
-            UIManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
-            UIManager.Shop_SetCreditsText(player.Credits);
+            interfaceManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
+            interfaceManager.Shop_SetCreditsText(player.Credits);
             saveManager.Save();
         }
     }

@@ -30,7 +30,7 @@ public partial class PowerUp : RigidBody3D
         isActive = false;
         Visible = false;
         Position = new Vector3(10.0f, 10.0f, 10.0f);
-        GD.Print("Disabling Node!");
+        //GD.Print("Disabling Node!");
     }
     
 }

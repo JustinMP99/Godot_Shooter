@@ -24,9 +24,9 @@ public partial class UIManager : Node
     [Export] private Panel deleteSavePanel;
     
     [ExportCategory("Game UI")]
+    [Export] public PlayerInfoBox PlayerInfoBox;
     [Export] private CanvasLayer gameUIGroup;
     [Export] private Label gameScoreValueLabel;
-    [Export] public PlayerInfoBox playerInfoBox;
     [Export] private Label countdownLabel;
     [Export] private Label roundLabel;
     
@@ -126,7 +126,7 @@ public partial class UIManager : Node
     {
         
         //Hide healthbar, credits, etc
-        playerInfoBox.Visible = false;
+        PlayerInfoBox.Visible = false;
         gameScoreValueLabel.Visible = false;
         
         //Show countdown/round label
@@ -142,7 +142,7 @@ public partial class UIManager : Node
         
         //Show healthbar, credits, etc
         
-        playerInfoBox.Visible = true;
+        PlayerInfoBox.Visible = true;
         gameScoreValueLabel.Visible = true;
         
     }
@@ -179,7 +179,7 @@ public partial class UIManager : Node
 
     public void Game_SetHudState(bool state)
     {
-        playerInfoBox.Visible = state;
+        PlayerInfoBox.Visible = state;
         gameScoreValueLabel.Visible = state;
     }
     

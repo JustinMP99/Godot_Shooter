@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=44 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -17,10 +17,8 @@
 [ext_resource type="Script" uid="uid://b4hg8kuerxlj2" path="res://Code/Scripts/PowerUpManager.cs" id="11_am5r7"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
 [ext_resource type="PackedScene" uid="uid://cla7gxwlbssjp" path="res://Level/Prefabs/GameObjects/PowerUp.tscn" id="12_iruui"]
-[ext_resource type="Resource" uid="uid://cd8tilsa8gj0n" path="res://Level/Resource Objects/Powerups/HealthPowerUp.tres" id="13_2w1o7"]
 [ext_resource type="StyleBox" uid="uid://c4hvvsty1tj6t" path="res://Art/Styles/Button/button_disabled_style.tres" id="13_wji82"]
 [ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/score_text_setting.tres" id="14_1nw18"]
-[ext_resource type="Resource" uid="uid://csjxm30misdm7" path="res://Level/Resource Objects/Powerups/ShootTypePowerUp.tres" id="14_lfhfm"]
 [ext_resource type="StyleBox" uid="uid://b7ajyoyic761p" path="res://Art/Styles/Button/button_hover_style.tres" id="14_ol1mp"]
 [ext_resource type="StyleBox" uid="uid://cyyx3iig3k7xj" path="res://Art/Styles/Button/button_pressed_style.tres" id="15_3nb0g"]
 [ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/UI/volume_slider.tscn" id="15_5nx6i"]
@@ -107,19 +105,17 @@ point_count = 2
 
 [node name="=== MANAGER ===" type="Node" parent="."]
 
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "UIManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition", "introTimer", "roundTimer", "powerUpTimer")]
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "interfaceManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition")]
 script = ExtResource("1_2yd7s")
 debugEnabled = true
 saveManager = NodePath("../SaveManager")
-UIManager = NodePath("../UI Manager")
+interfaceManager = NodePath("../Interface Manager")
 enemySpawner = NodePath("../Enemy Spawner")
 bulletManager = NodePath("../Bullet Manager")
 powerUpManager = NodePath("../PowerUp Manager")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
-introTimer = NodePath("Intro Timer")
-roundTimer = NodePath("Round Timer")
-powerUpTimer = NodePath("Power Up Timer")
+powerUpTimeMax = 10.0
 
 [node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
 one_shot = true
@@ -129,9 +125,10 @@ wait_time = 1.5
 one_shot = true
 
 [node name="Power Up Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
-wait_time = 10.0
+wait_time = 0.1
+one_shot = true
 
-[node name="UI Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "gameUIGroup", "gameScoreValueLabel", "playerInfoBox", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
@@ -146,9 +143,9 @@ masterVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/C
 sfxVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/SFX Slider")
 musicVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Music Slider")
 deleteSavePanel = NodePath("../../=== UI ===/--- options ---/Delete Save Panel")
+PlayerInfoBox = NodePath("../../=== UI ===/--- game ---/PlayerInfoBox")
 gameUIGroup = NodePath("../../=== UI ===/--- game ---")
 gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
-playerInfoBox = NodePath("../../=== UI ===/--- game ---/PlayerInfoBox")
 countdownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
 roundLabel = NodePath("../../=== UI ===/--- game ---/Round Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
@@ -185,8 +182,6 @@ script = ExtResource("11_am5r7")
 spawnTimer = NodePath("Timer")
 desiredPowerUps = 10
 powerUpsPrefab = ExtResource("12_iruui")
-healthPowerUp = ExtResource("13_2w1o7")
-shootTypePowerUp = ExtResource("14_lfhfm")
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/PowerUp Manager"]
 wait_time = 10.0
@@ -781,10 +776,15 @@ alignment = 1
 follow_viewport_enabled = true
 
 [node name="PlayerInfoBox" parent="=== UI ===/--- game ---" instance=ExtResource("18_hcnd7")]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 384.0
-offset_bottom = 80.0
+anchors_preset = -1
+anchor_left = 0.404
+anchor_top = 0.015
+anchor_right = 0.596
+anchor_bottom = 0.074
+offset_left = 0.319946
+offset_top = -0.200001
+offset_right = -0.320068
+offset_bottom = 0.0800018
 
 [node name="Countdown Label" type="Label" parent="=== UI ===/--- game ---"]
 visible = false
@@ -831,12 +831,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Score Value Label" type="Label" parent="=== UI ===/--- game ---"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.0
-offset_right = 50.0
-offset_bottom = 40.0
+anchors_preset = -1
+anchor_left = 0.462
+anchor_top = 0.074
+anchor_right = 0.537
+anchor_bottom = 0.123
+offset_left = 0.959961
+offset_top = 0.0800018
+offset_right = 0.959961
+offset_bottom = 0.160004
 grow_horizontal = 2
 text = "0"
 label_settings = ExtResource("14_1nw18")

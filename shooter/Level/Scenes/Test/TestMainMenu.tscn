@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo3v0r5k7m41c"]
+
+[ext_resource type="PackedScene" uid="uid://dyraxlfot6oqf" path="res://Level/Prefabs/GameObjects/Player.tscn" id="1_r5qeh"]
+
+[sub_resource type="Environment" id="Environment_r5qeh"]
+background_mode = 1
+background_color = Color(0.772549, 0.87451, 0.937255, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="TestMainMenu" type="Node"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.970338, 0, -0.241753, 0, 1, 0, 0.241753, 0, 0.970338, -1.15864, 0.232659, 1.13597)
+current = true
+
+[node name="Player" parent="." instance=ExtResource("1_r5qeh")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r5qeh")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]

@@ -5,8 +5,8 @@ public partial class PlayerInfoBox : Panel
 {
     
     [Export] private ProgressBar healthBar;
-    [Export] private ProgressBar shieldBar;
-
+    [Export] private ProgressBar powerUpBar;
+    
     
     public void SetHealthBarMax(int newMax)
     {
@@ -17,5 +17,16 @@ public partial class PlayerInfoBox : Panel
     {
         healthBar.Value = newCurrent;
     }
+
+    public void SetPowerUpBarCurrent(float newCurrent)
+    {
+        powerUpBar.Value = newCurrent;
+    }
+
+    public void SetPowerUpBarMax(int newMax)
+    {
+        powerUpBar.MaxValue = newMax;
+    }
+    
 
 }

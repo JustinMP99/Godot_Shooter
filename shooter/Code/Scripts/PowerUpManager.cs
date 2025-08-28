@@ -12,8 +12,8 @@ public partial class PowerUpManager : Node
     [Export] private int desiredPowerUps;
 
     [Export] private PackedScene powerUpsPrefab ;
-    [Export] private PowerUpStats healthPowerUp;
-    [Export] private PowerUpStats shootTypePowerUp;
+    [Export] private PowerUpStats_Health healthPowerUp ;
+    [Export] private PowerUpStats_ShootType shootTypePowerUp;
     
     //Pool Data
     private List<PowerUp> powerUpsPool;
@@ -23,6 +23,10 @@ public partial class PowerUpManager : Node
     
     public void Startup()
     {
+
+        healthPowerUp = GD.Load<PowerUpStats_Health>("res://Level/Resource Objects/Powerups/HealthPowerUp.tres");
+        shootTypePowerUp = GD.Load<PowerUpStats_ShootType>("res://Level/Resource Objects/Powerups/ShootTypePowerUp.tres");
+        
         powerUpsPool = new List<PowerUp>();
         activePowerUps = new List<PowerUp>();
 

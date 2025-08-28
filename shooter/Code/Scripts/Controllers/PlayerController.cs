@@ -4,7 +4,7 @@ using System;
 public enum ShootType
 {
     Single,
-    Spread,
+    Shotgun,
     Spread_Random
 }
 
@@ -150,7 +150,7 @@ public partial class PlayerController : CharacterBody3D
                     canShoot = false;
                     shootTimer.Start();
                     break;
-                case ShootType.Spread:
+                case ShootType.Shotgun:
 
                     cachedBulletOne = bulletManager.RequestBullet();
                     cachedBulletTwo = bulletManager.RequestBullet();
@@ -227,11 +227,6 @@ public partial class PlayerController : CharacterBody3D
             //reticle.MaterialOverride.Set("albedo_texture", reticleNormal);
         }
     }
-    
-    private void EnemyDefeat()
-    {
-        EmitSignal(SignalName.EnemyDefeated);
-    }
 
     private void OnBodyEntered(Node3D body)
     {
@@ -265,13 +260,14 @@ public partial class PlayerController : CharacterBody3D
             {
                 case PowerUpType.Health:
                     GD.Print("Restored Player Health!");
-                    PowerUpStats_Health tempStats = powerUp.Stats as PowerUpStats_Health;
+                    PowerUpStats_Health healthStats = powerUp.Stats as PowerUpStats_Health;
                     powerUp.Disable();
-                    Heal(tempStats.healthRestoreAmount);
+                    Heal(healthStats.healthRestoreAmount);
                 break;
                 case PowerUpType.Shoot_Type:
                     GD.Print("Changing Shoot Type!");
                     powerUp.Disable();
+                    PowerUpStats_ShootType shootStats = powerUp.Stats as PowerUpStats_ShootType;
                     //activate shoot timer
                     EmitSignal(SignalName.ShootTypePowerUp);
                     break;
@@ -303,6 +299,24 @@ public partial class PlayerController : CharacterBody3D
     public void SwitchShootType(ShootType newType)
     {
         shootType = newType;
+
+        switch (shootType)
+        {   
+            case ShootType.Single:
+                shootTimer.WaitTime = 1.5; 
+                break;
+            case ShootType.Shotgun:
+                shootTimer.WaitTime = 1.75;
+                break;
+            case ShootType.Spread_Random:
+                shootTimer.WaitTime = 1.0;
+                break;
+        }
+    }
+    
+    private void EnemyDefeat()
+    {
+        EmitSignal(SignalName.EnemyDefeated);
     }
 
     #endregion

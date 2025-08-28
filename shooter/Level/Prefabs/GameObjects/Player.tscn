@@ -70,10 +70,13 @@ shape = SubResource("BoxShape3D_1gt8s")
 stream = ExtResource("5_6sk5c")
 
 [node name="Shoot Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.15
+
+[node name="Power Up Timer" type="Timer" parent="."]
 
 [node name="Reticle" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+visible = false
 mesh = SubResource("QuadMesh_odanr")
 surface_material_override/0 = SubResource("StandardMaterial3D_owh07")
 

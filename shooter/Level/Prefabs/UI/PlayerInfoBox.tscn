@@ -1,9 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqqhlhhc0id28"]
+[gd_scene load_steps=8 format=3 uid="uid://cqqhlhhc0id28"]
 
 [ext_resource type="Script" uid="uid://lltonc7lwh6b" path="res://Code/Scripts/PlayerInfoBox.cs" id="1_1urlh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1urlh"]
-bg_color = Color(0, 0, 0, 0.827451)
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t54r1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfg0k"]
+bg_color = Color(1.26584e-05, 0.835661, 0.183229, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5twsd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etuad"]
+bg_color = Color(0, 0.435003, 0.654137, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_poqhl"]
 bg_color = Color(1, 1, 1, 1)
@@ -12,30 +22,62 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t54r1"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfg0k"]
-bg_color = Color(1.26584e-05, 0.835661, 0.183229, 1)
-
-[node name="PlayerInfoBox" type="Panel" node_paths=PackedStringArray("healthBar", "shieldBar")]
+[node name="PlayerInfoBox" type="Panel" node_paths=PackedStringArray("healthBar", "powerUpBar")]
 offset_left = 24.0
 offset_top = 24.0
-offset_right = 392.0
-offset_bottom = 88.0
+offset_right = 568.0
+offset_bottom = 120.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1urlh")
 script = ExtResource("1_1urlh")
 healthBar = NodePath("Health Bar")
-shieldBar = NodePath("Shield Bar")
+powerUpBar = NodePath("Power Up Timer Bar")
+
+[node name="Health Bar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015
+anchor_top = 0.125
+anchor_right = 0.971
+anchor_bottom = 0.552
+offset_left = -0.16
+offset_right = -0.22406
+offset_bottom = 0.00799561
+grow_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_t54r1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gfg0k")
+value = 21.46
+show_percentage = false
+
+[node name="Power Up Timer Bar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.074
+anchor_top = 0.583
+anchor_right = 0.912
+anchor_bottom = 0.76
+offset_left = -0.256001
+offset_top = 0.0319977
+offset_right = -0.128021
+offset_bottom = 0.0399933
+grow_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_5twsd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_etuad")
+max_value = 10.0
+value = 7.51
+show_percentage = false
 
 [node name="Weapon Sprite Panel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = -24.0
-offset_right = 64.0
-offset_bottom = 24.0
+anchors_preset = -1
+anchor_left = 0.044
+anchor_top = 0.083
+anchor_right = 0.191
+anchor_bottom = 0.833
+offset_left = 0.0639973
+offset_top = 0.0319996
+offset_right = 0.095993
+offset_bottom = 0.0319977
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_poqhl")
 
@@ -52,32 +94,3 @@ offset_right = 28.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Health Bar" type="ProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.217
-anchor_top = 0.125
-anchor_right = 0.98
-anchor_bottom = 0.547
-offset_left = 0.143997
-offset_right = 0.359985
-offset_bottom = -0.00800323
-grow_horizontal = 0
-theme_override_styles/background = SubResource("StyleBoxFlat_t54r1")
-theme_override_styles/fill = SubResource("StyleBoxFlat_gfg0k")
-value = 21.46
-show_percentage = false
-
-[node name="Shield Bar" type="ProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.217
-anchor_top = 0.625
-anchor_right = 0.98
-anchor_bottom = 0.797
-offset_left = 0.143997
-offset_right = 0.359985
-offset_bottom = -0.00800323
-grow_horizontal = 0
-show_percentage = false
