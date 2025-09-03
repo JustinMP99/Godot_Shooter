@@ -1,11 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cg2qnhh06eqk0"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cg2qnhh06eqk0"]
 
 [ext_resource type="Shader" uid="uid://b78w42lnmfpsh" path="res://Code/Shaders/powerup_shader.gdshader" id="1_rfu1l"]
+[ext_resource type="Texture2D" uid="uid://bqn5781pia3y2" path="res://Art/Textures/Noise Texture.jpg" id="2_0twe4"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_rfu1l")
 shader_parameter/baseColor = Vector3(0.1, 0.1, 0.1)
 shader_parameter/customColor = Vector3(0, 0, 0)
-shader_parameter/fresnelAmplifier = 7.625
-shader_parameter/transparency = 0.55
+shader_parameter/fresnelAmplifier = 6.055
+shader_parameter/transparency = 0.46
+shader_parameter/noiseTex = ExtResource("2_0twe4")
