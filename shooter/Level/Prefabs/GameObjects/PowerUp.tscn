@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cla7gxwlbssjp"]
+[gd_scene load_steps=6 format=3 uid="uid://cla7gxwlbssjp"]
 
 [ext_resource type="Script" uid="uid://ddopki6clp3le" path="res://Code/Scripts/PowerUp.cs" id="1_k1qbm"]
+[ext_resource type="Material" uid="uid://cg2qnhh06eqk0" path="res://Art/Materials/Power Ups/default_powerup_material.tres" id="2_ph73s"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k1qbm"]
 
@@ -13,12 +14,17 @@ collision_layer = 16
 collision_mask = 0
 freeze = true
 script = ExtResource("1_k1qbm")
-meshRef = NodePath("Power Up Mesh")
+meshRef = NodePath("Power Up Mesh2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_k1qbm")
 
 [node name="Power Up Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_50wvc")
+surface_material_override/0 = ExtResource("2_ph73s")
+
+[node name="Power Up Mesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.498243, 0, 0, 0, 0.498243, 0, 0, 0, 0.498243, 0, 0, 0)
 mesh = SubResource("SphereMesh_50wvc")
 
 [node name="Area3D" type="Area3D" parent="."]

@@ -303,7 +303,7 @@ public partial class PlayerController : CharacterBody3D
         switch (shootType)
         {   
             case ShootType.Single:
-                shootTimer.WaitTime = 1.5; 
+                shootTimer.WaitTime = 0.15f; 
                 break;
             case ShootType.Shotgun:
                 shootTimer.WaitTime = 1.75;
