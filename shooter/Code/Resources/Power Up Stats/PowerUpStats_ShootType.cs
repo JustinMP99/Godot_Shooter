@@ -5,6 +5,7 @@ using System;
 public partial class PowerUpStats_ShootType : PowerUpStats
 {
 
-    [Export] private ShootType type;
+    [Export] public ShootType ShootType;
+    [Export] public float FireRate;
 
 }

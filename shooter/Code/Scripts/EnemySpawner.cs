@@ -71,7 +71,7 @@ public partial class EnemySpawner : Node
 
     public override void _Process(double delta)
     {
-        if (!Global.gamePaused)
+        if (!Global.GamePaused)
         {
             MoveActiveEnemies(delta);
         }
@@ -100,7 +100,7 @@ public partial class EnemySpawner : Node
     private void OnTimerTimeout()
     {
         //TODO: Fix this! All timers should pause when game is paused. This check should be irrelevant/redundant!
-        if (!Global.gamePaused)
+        if (!Global.GamePaused)
         {
             if (desiredEnemies > 0) //TODO: Remove this check, it is a holdover from when enemies were spawned during runtime. Now it is always true
             {

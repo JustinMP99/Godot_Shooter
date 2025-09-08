@@ -52,7 +52,7 @@ mesh = SubResource("SphereMesh_s6d6b")
 surface_material_override/0 = SubResource("ShaderMaterial_735fc")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.743273, 0.537959, 0.79626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.332675, 0.537959, 0.79626)
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43622, 0, 0)

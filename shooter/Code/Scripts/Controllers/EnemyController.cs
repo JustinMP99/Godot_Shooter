@@ -28,15 +28,7 @@ public partial class EnemyController : RigidBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        // if (!Global.gamePaused)
-        // {
-        //     MoveAndCollide(Transform.Basis.Z * (float)delta * Stats.Speed);
-        //     if (Position.Z >= 5.0f)
-        //     {
-        //         Visible = false;
-        //         isActive = false;
-        //     }
-        // }
+
     }
 
     public void MoveEnemy(double delta)

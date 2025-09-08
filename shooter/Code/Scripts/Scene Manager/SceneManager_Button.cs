@@ -192,7 +192,7 @@ public partial class SceneManager
         //Set UI States
         interfaceManager.SetPauseUIState(false);
         interfaceManager.SetGameUIState(true);
-        Global.gamePaused = false;
+        Global.GamePaused = false;
         player.SetTakingInput(true);
     }
 
@@ -210,7 +210,7 @@ public partial class SceneManager
         enemySpawner.StopTimer();
 
         //Reset game data
-        Global.gamePaused = false;
+        Global.GamePaused = false;
         score = 0;
     }
 

@@ -52,7 +52,7 @@ public partial class PowerUpManager : Node
     public override void _Process(double delta)
     {
 
-        if (!Global.gamePaused)
+        if (!Global.GamePaused)
         {
             //move powerups
             MoveActivePowerUps(delta);
@@ -74,7 +74,7 @@ public partial class PowerUpManager : Node
     
     private void OnTimerTimeout()
     {
-
+        
         int type;
         PowerUp powerUp = powerUpsPool[poolIter];
         
@@ -92,7 +92,9 @@ public partial class PowerUpManager : Node
                     powerUp.SetMaterial(healthMaterial);
                     break;
                 case 1:
-                    powerUp.Stats = shootTypePowerUp;
+                    PowerUpStats_ShootType newStats = shootTypePowerUp.Duplicate(false) as PowerUpStats_ShootType;
+                    
+                    powerUp.Stats = newStats as PowerUpStats_ShootType;
                     powerUp.SetMaterial(shootTypeMaterial);
                     break;
             }
@@ -106,6 +108,17 @@ public partial class PowerUpManager : Node
                 poolIter = 0;
             }
         }
+    }
+
+
+    private void SpawnHealthPowerUp()
+    {
+
+    }
+
+    private void SpawnShootTypePowerUp()
+    {
+        
     }
 
     public void StartTimer()

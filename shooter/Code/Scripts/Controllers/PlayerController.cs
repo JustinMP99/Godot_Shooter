@@ -26,7 +26,7 @@ public partial class PlayerController : CharacterBody3D
     public delegate void EnemyDefeatedEventHandler();
 
     [Signal]
-    public delegate void ShootTypePowerUpEventHandler();
+    public delegate void ShootTypePowerUpEventHandler(PowerUpStats_ShootType shootStats);
     
     #endregion
     
@@ -269,7 +269,7 @@ public partial class PlayerController : CharacterBody3D
                     powerUp.Disable();
                     PowerUpStats_ShootType shootStats = powerUp.Stats as PowerUpStats_ShootType;
                     //activate shoot timer
-                    EmitSignal(SignalName.ShootTypePowerUp);
+                    EmitSignal(SignalName.ShootTypePowerUp, shootStats);
                     break;
             }
         }

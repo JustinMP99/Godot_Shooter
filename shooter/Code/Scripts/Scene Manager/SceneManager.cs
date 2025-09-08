@@ -221,7 +221,7 @@ public partial class SceneManager : Node
 
         interfaceManager.SetPauseUIState(true);
 
-        Global.gamePaused = true;
+        Global.GamePaused = true;
 
         player.SetTakingInput(false);
     }
@@ -267,7 +267,7 @@ public partial class SceneManager : Node
         interfaceManager.Game_SetScoreValueText(score);
     }
 
-    public void ShootTypeSwitchEvent()
+    public void ShootTypeSwitchEvent(PowerUpStats_ShootType shootStats)
     {
 
         powerUpTimeCurrent = powerUpTimeMax;
@@ -276,7 +276,8 @@ public partial class SceneManager : Node
         powerUpTimer.Start();
         
         //set shoot type
-        player.SwitchShootType(ShootType.Spread_Random);
+        player.SwitchShootType(shootStats.ShootType);
+        //player.SwitchShootType(ShootType.Spread_Random);
         
     }
 

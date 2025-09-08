@@ -31,6 +31,7 @@ bulletCenterPosition = NodePath("BulletPositions/Bullet Center")
 bulletRightPosition = NodePath("BulletPositions/Bullet Right")
 reticle = NodePath("Reticle")
 playerMesh = NodePath("Player Ship Mesh3D")
+shootType = 1
 shootTimer = NodePath("Shoot Timer")
 reticleNormal = ExtResource("6_0a5mx")
 reticleLocked = ExtResource("3_ysarm")

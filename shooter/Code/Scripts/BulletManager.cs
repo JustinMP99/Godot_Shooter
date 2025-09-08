@@ -35,7 +35,7 @@ public partial class BulletManager : Node
     
     public override void _Process(double delta)
     {
-        if (!Global.gamePaused)
+        if (!Global.GamePaused)
         {
             //move all active bullets
             MoveActiveBullets(delta);
