@@ -23,7 +23,6 @@ public partial class SceneManager : Node
     private PlayerController player;
 
     [ExportCategory("Gameplay Values")]
-    
     [Export] private int round;
     [Export] private int score;
     [Export] private float powerUpTimeMax;
@@ -146,15 +145,28 @@ public partial class SceneManager : Node
     
     private void StartNewRound()
     {
+
+        Global.Round++;
+
+        if (Global.Round == 1)
+        {
+            enemiesLeftMax = 5;
+        }
+        else if(enemiesLeftMax != 80)
+        {
+            enemiesLeftMax += 5;
+        }
+
+        if (Global.Round % 5 == 0)
+        {
+            enemySpawner.DecrementTimer();
+        }
         
-        round++;
-        enemiesLeftMax += (int)GD.RandRange(1.0, 20.0);
         enemiesLeft = enemiesLeftMax;
-        interfaceManager.Game_SetRoundLabelText(round);
+        interfaceManager.Game_SetRoundLabelText(Global.Round);
         interfaceManager.Game_SetRoundLabelState(true);
         GD.Print("Enemies Left: " + enemiesLeft);
         roundTimer.Start();
-        
     }
 
     #endregion
@@ -171,7 +183,6 @@ public partial class SceneManager : Node
     
     private void IntroTimerTimeout()
     {
-        
         //End round timer
         introCount--;
         if (introCount <= 0)
@@ -184,7 +195,6 @@ public partial class SceneManager : Node
             interfaceManager.Game_SetCountDownLabelText(introCount);
             introTimer.Start();
         }
-        
     }
 
     private void RoundTimerTimeout()
@@ -222,6 +232,21 @@ public partial class SceneManager : Node
         interfaceManager.SetPauseUIState(true);
 
         Global.GamePaused = true;
+        
+        //Pause all timers
+        powerUpManager.PauseTimer();
+        enemySpawner.PauseTimer();
+
+        if (!roundTimer.Paused)
+        {
+            roundTimer.Paused = true;
+        }
+
+        if (!introTimer.Paused)
+        {
+            introTimer.Paused = true;
+        }
+        
 
         player.SetTakingInput(false);
     }

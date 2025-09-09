@@ -13,8 +13,10 @@ public partial class SceneManager
         
         //Reset temp game values
         score = 0;
-        round = 0;
+        Global.Round = 0;
         enemiesLeft = 0;
+        
+        enemySpawner.ResetTimerValue();
 
         //Configure Player data
         player.Position = startPosition.Position;
@@ -193,13 +195,23 @@ public partial class SceneManager
         interfaceManager.SetPauseUIState(false);
         interfaceManager.SetGameUIState(true);
         Global.GamePaused = false;
+        enemySpawner.ResumeTimer();
+        powerUpManager.ResumeTimer();
+        if (roundTimer.Paused)
+        {
+            roundTimer.Paused = false;
+        }
+
+        if (introTimer.Paused)
+        {
+            introTimer.Paused = false;
+        }
         player.SetTakingInput(true);
     }
 
     private void Pause_QuitButtonFunction()
     {
-        //Destroy Player Object
-        //PlayerController.Instance.QueueFree();
+
         player.Position = new Vector3(0.0f, 0.0f, 100.0f);
         //Destroy all enemies
 

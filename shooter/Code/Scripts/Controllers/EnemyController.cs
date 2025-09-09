@@ -60,6 +60,10 @@ public partial class EnemyController : RigidBody3D
         isActive = false;
         Visible = false;
         Position = new Vector3(10.0f, 10.0f, 10.0f);
+        if (Stats != null)
+        {
+            Stats.Dispose();
+        }
     }
     
     public bool TakeDamage(int bulletDamage)

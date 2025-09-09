@@ -10,12 +10,9 @@ public partial class PowerUpManager : Node
     
     [ExportCategory("Power Up Data")]
     [Export] private int desiredPowerUps;
-    
-    
     private PackedScene powerUpsPrefab ;
     private PowerUpStats_Health healthPowerUp ;
     private PowerUpStats_ShootType shootTypePowerUp;
-
     private Material healthMaterial;
     private Material shootTypeMaterial;
     
@@ -88,14 +85,10 @@ public partial class PowerUpManager : Node
             switch (type)
             {
                 case 0:
-                    powerUp.Stats = healthPowerUp;
-                    powerUp.SetMaterial(healthMaterial);
+                    SpawnHealthPowerUp(powerUp);
                     break;
                 case 1:
-                    PowerUpStats_ShootType newStats = shootTypePowerUp.Duplicate(false) as PowerUpStats_ShootType;
-                    
-                    powerUp.Stats = newStats as PowerUpStats_ShootType;
-                    powerUp.SetMaterial(shootTypeMaterial);
+                    SpawnShootTypePowerUp(powerUp);
                     break;
             }
             
@@ -109,16 +102,32 @@ public partial class PowerUpManager : Node
             }
         }
     }
-
-
-    private void SpawnHealthPowerUp()
-    {
-
-    }
-
-    private void SpawnShootTypePowerUp()
+    
+    private void SpawnHealthPowerUp(PowerUp powerUp)
     {
         
+        PowerUpStats_Health newStats = healthPowerUp.Duplicate(false) as PowerUpStats_Health;
+
+        switch (Global.Round)
+        {
+            case 0:
+                newStats.healthRestoreAmount = 50;
+                break;
+            case 1:
+                
+                break;
+            
+        }
+        
+        powerUp.Stats = newStats;
+        powerUp.SetMaterial(healthMaterial);
+    }
+
+    private void SpawnShootTypePowerUp( PowerUp powerUp)
+    {
+        PowerUpStats_ShootType newStats = shootTypePowerUp.Duplicate(false) as PowerUpStats_ShootType;
+        powerUp.Stats = newStats as PowerUpStats_ShootType;
+        powerUp.SetMaterial(shootTypeMaterial);
     }
 
     public void StartTimer()

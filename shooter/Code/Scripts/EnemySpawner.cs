@@ -16,6 +16,11 @@ public partial class EnemySpawner : Node
     [Export] private EnemyStats tankStats;
     [Export] private EnemyStats speedstrStats;
     [Export] private EnemyStats baseStats;
+
+    [ExportCategory("Enemy Materials")]
+    [Export] private Material baseEnemyMaterial;
+    [Export] private Material speedstrEnemyMaterial;
+    [Export] private Material tankEnemyMaterial;
     
     //Pool Data
     private List<EnemyController> enemyPool;
@@ -37,32 +42,6 @@ public partial class EnemySpawner : Node
         for (int i = 0; i < desiredEnemies; i++)
         {
             EnemyController enemy = enemyPrefab.Instantiate() as EnemyController;
-
-            int value = (int)GD.RandRange(1.0, 4.0);
-
-            switch (value)
-            {
-                
-                case 1:
-                    
-                    enemy.Stats = baseStats.Duplicate() as EnemyStats;
-
-                    break;
-                    
-                case 2:
-
-                    enemy.Stats = speedstrStats.Duplicate() as EnemyStats;
-                    
-                    break;
-                
-                case 3:
-
-                    enemy.Stats = tankStats.Duplicate() as EnemyStats;
-                    
-                    break;
-                
-            }
-            
             enemy.Disable();
             enemyPool.Add(enemy);
             AddChild(enemy);
@@ -99,27 +78,78 @@ public partial class EnemySpawner : Node
     
     private void OnTimerTimeout()
     {
-        //TODO: Fix this! All timers should pause when game is paused. This check should be irrelevant/redundant!
-        if (!Global.GamePaused)
+
+        EnemyController enemy = enemyPool[poolIter];
+
+        if (!enemy.GetIsActive())
         {
-            if (desiredEnemies > 0) //TODO: Remove this check, it is a holdover from when enemies were spawned during runtime. Now it is always true
+            
+            SpawnEnemy(enemy);
+            poolIter++;
+            if (poolIter >= poolIterMax)
             {
-                if (!enemyPool[poolIter].GetIsActive())
-                {
-                    enemyPool[poolIter].Enable();
-                    enemyPool[poolIter].Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
-                    activeEnemies.Add(enemyPool[poolIter]);
-                    
-                    poolIter++;
-                    if (poolIter >= poolIterMax)
-                    {
-                        poolIter = 0;
-                    }
-                }
+                poolIter = 0;
             }
+            
+        }
+        
+    }
+
+    private void SpawnEnemy(EnemyController enemy)
+    {
+        //determine stats
+        int value = 1;
+            
+        if (Global.Round > 5 && Global.Round <= 10)
+        {
+            value = (int)GD.RandRange(1.0, 2.0);
+        }
+        else if (Global.Round > 10  && Global.Round <= 20 )
+        {
+            value = (int)GD.RandRange(1.0, 3.0);
+        }
+
+        switch (value)
+        {
+            case 1:
+                enemy.Stats = baseStats.Duplicate() as EnemyStats;
+                break;
+            case 2:
+                enemy.Stats = speedstrStats.Duplicate() as EnemyStats;
+                break;
+            case 3:
+                enemy.Stats = tankStats.Duplicate() as EnemyStats;
+                break;
+        }
+        
+        enemy.Enable();
+        enemy.Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
+        activeEnemies.Add(enemy);
+    }
+
+    public void SetTimerValue(double newWaitTime)
+    {
+        spawnTimer.WaitTime = newWaitTime;
+    }
+
+    public double GetTimerWaitTime()
+    {
+        return spawnTimer.WaitTime;
+    }
+
+    public void DecrementTimer()
+    {
+        if (spawnTimer.WaitTime > 0.25)
+        {
+            spawnTimer.WaitTime -= 0.25;
         }
     }
 
+    public void ResetTimerValue()
+    {
+        spawnTimer.WaitTime = 2.0;
+    }
+    
     public void StartTimer()
     {
         spawnTimer.Start();
