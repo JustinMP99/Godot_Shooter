@@ -31,7 +31,6 @@ public partial class EnemySpawner : Node
     /// <summary>
     /// creates pool of enemies and generates enemy stats
     /// </summary>
-    /// TODO: Maybe moving stat setting to when the enemy is spawned would allow for better difficulty control
     public void Startup()
     {
         enemyPool = new List<EnemyController>();

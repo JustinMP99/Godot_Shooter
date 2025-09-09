@@ -114,6 +114,7 @@ bulletManager = NodePath("../Bullet Manager")
 powerUpManager = NodePath("../PowerUp Manager")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
+powerUpTimeMax = 10.0
 
 [node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
 one_shot = true

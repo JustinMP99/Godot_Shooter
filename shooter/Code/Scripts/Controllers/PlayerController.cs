@@ -282,7 +282,7 @@ public partial class PlayerController : CharacterBody3D
 
     #endregion
 
-    #region PowerUp Functions
+    #region Signal Functions
 
     public void Heal(int healAmount)
     {
@@ -313,7 +313,12 @@ public partial class PlayerController : CharacterBody3D
                 break;
         }
     }
-    
+
+    public void UpdateFireRate(double newTime)
+    {
+        shootTimer.WaitTime = newTime;
+    }
+
     private void EnemyDefeat()
     {
         EmitSignal(SignalName.EnemyDefeated);

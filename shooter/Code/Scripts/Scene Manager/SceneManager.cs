@@ -212,6 +212,7 @@ public partial class SceneManager : Node
         {
             interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
             player.SwitchShootType(ShootType.Single);
+            player.UpdateFireRate(0.15f);
         }
         else
         {
@@ -294,15 +295,11 @@ public partial class SceneManager : Node
 
     public void ShootTypeSwitchEvent(PowerUpStats_ShootType shootStats)
     {
-
         powerUpTimeCurrent = powerUpTimeMax;
-        
         //start power up timer
         powerUpTimer.Start();
-        
-        //set shoot type
         player.SwitchShootType(shootStats.ShootType);
-        //player.SwitchShootType(ShootType.Spread_Random);
+        player.UpdateFireRate(shootStats.FireRate);
         
     }
 

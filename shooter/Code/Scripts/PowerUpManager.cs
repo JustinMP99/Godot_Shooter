@@ -126,7 +126,21 @@ public partial class PowerUpManager : Node
     private void SpawnShootTypePowerUp( PowerUp powerUp)
     {
         PowerUpStats_ShootType newStats = shootTypePowerUp.Duplicate(false) as PowerUpStats_ShootType;
-        powerUp.Stats = newStats as PowerUpStats_ShootType;
+
+        int type = GD.RandRange(1, 2);
+
+        if (type == 1)
+        {
+            newStats.ShootType = ShootType.Shotgun;
+            newStats.FireRate = 0.50f;
+        }
+        else if(type == 2)
+        {
+            newStats.ShootType = ShootType.Spread_Random;
+            newStats.FireRate = 0.10f;
+        }
+        
+        powerUp.Stats = newStats;
         powerUp.SetMaterial(shootTypeMaterial);
     }
 
