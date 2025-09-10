@@ -127,12 +127,13 @@ public partial class PowerUpManager : Node
     {
         PowerUpStats_ShootType newStats = shootTypePowerUp.Duplicate(false) as PowerUpStats_ShootType;
 
-        int type = GD.RandRange(1, 2);
+       // int type = GD.RandRange(1, 2);
+        int type = 1;
 
         if (type == 1)
         {
             newStats.ShootType = ShootType.Shotgun;
-            newStats.FireRate = 0.50f;
+            newStats.FireRate = 0.25f;
         }
         else if(type == 2)
         {

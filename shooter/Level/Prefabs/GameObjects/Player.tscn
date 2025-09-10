@@ -52,12 +52,12 @@ surface_material_override/0 = ExtResource("4_20vac")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
 
 [node name="Bullet Left" type="Node3D" parent="BulletPositions"]
-transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 0, 0, 0)
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0, 0, 0)
 
 [node name="Bullet Center" type="Node3D" parent="BulletPositions"]
 
 [node name="Bullet Right" type="Node3D" parent="BulletPositions"]
-transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0, 0)
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 0, 0)
 
 [node name="Object Colliders" type="Area3D" parent="."]
 collision_mask = 18

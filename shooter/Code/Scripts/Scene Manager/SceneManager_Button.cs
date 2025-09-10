@@ -218,8 +218,21 @@ public partial class SceneManager
         //Set UI States
         interfaceManager.SetPauseUIState(false);
         interfaceManager.SetMainUIState(true);
+        
+        if (roundTimer.Paused)
+        {
+            roundTimer.Paused = false;
+        }
 
+        if (introTimer.Paused)
+        {
+            introTimer.Paused = false;
+        }
+        
+        introTimer.Stop();
+        roundTimer.Stop();
         enemySpawner.StopTimer();
+        powerUpManager.StopTimer();
 
         //Reset game data
         Global.GamePaused = false;

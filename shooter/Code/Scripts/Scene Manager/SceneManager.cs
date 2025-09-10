@@ -300,7 +300,6 @@ public partial class SceneManager : Node
         powerUpTimer.Start();
         player.SwitchShootType(shootStats.ShootType);
         player.UpdateFireRate(shootStats.FireRate);
-        
     }
 
     #endregion
