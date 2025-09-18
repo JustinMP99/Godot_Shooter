@@ -136,7 +136,6 @@ public partial class SceneManager : Node
         {
             interfaceManager.SetDebugUIState(false);
         }
-        
     }
     
     #endregion
