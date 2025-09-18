@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c847sy10dc4na"]
+
+[ext_resource type="Script" uid="uid://ck888dthby4tf" path="res://Code/Scripts/ButtonAnimationController.gd" id="1_rqwhy"]
+
+[node name="ButtonAnimationController" type="Node"]
+script = ExtResource("1_rqwhy")
+hover_scale = Vector2(1.15, 1.15)
+transition_type = 9

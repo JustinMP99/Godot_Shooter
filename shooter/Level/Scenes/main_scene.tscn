@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=45 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -24,6 +24,7 @@
 [ext_resource type="StyleBox" uid="uid://r0iifhc8wqyl" path="res://Art/Styles/Button/button_normal_style.tres" id="15_s1w4x"]
 [ext_resource type="Script" uid="uid://ck888dthby4tf" path="res://Code/Scripts/ButtonAnimationController.gd" id="18_5i486"]
 [ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/UI/PlayerInfoBox.tscn" id="18_hcnd7"]
+[ext_resource type="PackedScene" uid="uid://c847sy10dc4na" path="res://Level/Prefabs/UI/button_animation_controller.tscn" id="18_iruui"]
 [ext_resource type="Texture2D" uid="uid://hijcvnqhb6xx" path="res://Art/Textures/HDR_blue_nebulae-1.hdr" id="19_52m5l"]
 [ext_resource type="LabelSettings" uid="uid://ceq2yuvm8cu28" path="res://Art/Label Settings/Upgrade Panel/upgrade_panel_label_settings.tres" id="22_vbeqq"]
 [ext_resource type="LabelSettings" uid="uid://1kmi4xg4t47v" path="res://Art/Label Settings/Upgrade Panel/upgrade_panel_description_label_settings.tres" id="23_dntb7"]
@@ -188,6 +189,7 @@ wait_time = 10.0
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -230,11 +232,7 @@ theme_override_styles/hover = ExtResource("14_ol1mp")
 theme_override_styles/disabled = ExtResource("13_wji82")
 text = "Start"
 
-[node name="ButtonAnimationController" type="Node" parent="=== UI ===/--- main ---/Button Container/Start Button"]
-script = ExtResource("18_5i486")
-hover_scale = Vector2(1.15, 1.15)
-transition_type = 9
-metadata/_custom_type_script = "uid://ck888dthby4tf"
+[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/Button Container/Start Button" instance=ExtResource("18_iruui")]
 
 [node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
 layout_mode = 2
@@ -246,33 +244,21 @@ theme_override_styles/hover = ExtResource("14_ol1mp")
 theme_override_styles/disabled = ExtResource("13_wji82")
 text = "Upgrades"
 
-[node name="ButtonAnimationController" type="Node" parent="=== UI ===/--- main ---/Button Container/Upgrades Button"]
-script = ExtResource("18_5i486")
-hover_scale = Vector2(1.15, 1.15)
-transition_type = 9
-metadata/_custom_type_script = "uid://ck888dthby4tf"
+[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/Button Container/Upgrades Button" instance=ExtResource("18_iruui")]
 
 [node name="Options Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
 layout_mode = 2
 theme = ExtResource("24_am5r7")
 text = "Options"
 
-[node name="ButtonAnimationController" type="Node" parent="=== UI ===/--- main ---/Button Container/Options Button"]
-script = ExtResource("18_5i486")
-hover_scale = Vector2(1.15, 1.15)
-transition_type = 9
-metadata/_custom_type_script = "uid://ck888dthby4tf"
+[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/Button Container/Options Button" instance=ExtResource("18_iruui")]
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
 layout_mode = 2
 theme = ExtResource("24_am5r7")
 text = "Quit"
 
-[node name="ButtonAnimationController" type="Node" parent="=== UI ===/--- main ---/Button Container/Quit Button"]
-script = ExtResource("18_5i486")
-hover_scale = Vector2(1.15, 1.15)
-transition_type = 9
-metadata/_custom_type_script = "uid://ck888dthby4tf"
+[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/Button Container/Quit Button" instance=ExtResource("18_iruui")]
 
 [node name="How to Play Button" type="Button" parent="=== UI ===/--- main ---"]
 visible = false
@@ -432,6 +418,8 @@ theme = ExtResource("24_am5r7")
 text = "Upgrade"
 icon = SubResource("ImageTexture_5rw63")
 
+[node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Health Panel/Button" instance=ExtResource("18_iruui")]
+
 [node name="Back Button" type="Button" parent="=== UI ===/--- upgrade ---"]
 anchors_preset = -1
 anchor_left = 0.433
@@ -446,6 +434,8 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("24_am5r7")
 text = "Go Back"
+
+[node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Back Button" instance=ExtResource("18_iruui")]
 
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -623,6 +613,8 @@ theme_override_styles/hover = ExtResource("14_ol1mp")
 theme_override_styles/disabled = ExtResource("13_wji82")
 text = "Back"
 
+[node name="ButtonAnimationController" parent="=== UI ===/--- options ---/Back Button" instance=ExtResource("18_iruui")]
+
 [node name="Label" type="Label" parent="=== UI ===/--- options ---"]
 anchors_preset = 7
 anchor_left = 0.5
@@ -687,6 +679,8 @@ grow_vertical = 2
 theme = ExtResource("24_am5r7")
 text = "Yeah, delete my data"
 
+[node name="ButtonAnimationController" parent="=== UI ===/--- options ---/Delete Save Panel/Yes Delete Button" instance=ExtResource("18_iruui")]
+
 [node name="No Delete Button" type="Button" parent="=== UI ===/--- options ---/Delete Save Panel"]
 layout_mode = 1
 anchors_preset = 8
@@ -702,6 +696,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("24_am5r7")
 text = "No, wait!"
+
+[node name="ButtonAnimationController" parent="=== UI ===/--- options ---/Delete Save Panel/No Delete Button" instance=ExtResource("18_iruui")]
 
 [node name="--- help ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -744,6 +740,11 @@ theme = ExtResource("24_am5r7")
 theme_override_fonts/font = ExtResource("10_odk2k")
 theme_override_font_sizes/font_size = 25
 text = "Quit"
+
+[node name="ButtonAnimationController" type="Node" parent="=== UI ===/--- pause ---/Quit Button"]
+script = ExtResource("18_5i486")
+hover_scale = Vector2(1.15, 1.15)
+metadata/_custom_type_script = "uid://ck888dthby4tf"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="=== UI ===/--- pause ---"]
 anchors_preset = 8
