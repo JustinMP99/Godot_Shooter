@@ -3,4 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://wt5stgo5wwt3" path="res://Art/Sprites/Buttons/button_pressed_4x.png" id="1_h0fnw"]
 
 [resource]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
 texture = ExtResource("1_h0fnw")

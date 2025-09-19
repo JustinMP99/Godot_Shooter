@@ -244,7 +244,7 @@ public partial class PlayerController : CharacterBody3D
             if (Stats.CurrentHealth <= 0)
             {
                 takingInput = false;
-                this.Position = new Vector3(0.0f, 0.0f, 10.0f);
+                this.Position = new Vector3(0.0f, 0.0f, 100.0f);
                 //Game Over
                 EmitSignal(SignalName.PlayerDied);
             }

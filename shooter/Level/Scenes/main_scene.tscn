@@ -16,13 +16,13 @@
 [ext_resource type="FontFile" uid="uid://m6gwub7yc2s" path="res://Art/Fonts/Quantico/Quantico-Regular.ttf" id="10_odk2k"]
 [ext_resource type="Script" uid="uid://b4hg8kuerxlj2" path="res://Code/Scripts/PowerUpManager.cs" id="11_am5r7"]
 [ext_resource type="LabelSettings" uid="uid://buiblni7vvcgk" path="res://Art/Label Settings/CountdownLabelSettings.tres" id="11_tw4tw"]
+[ext_resource type="Theme" uid="uid://bvaafpupjdhl" path="res://Art/Themes/Main Menu/main_menu_theme.tres" id="12_iruui"]
 [ext_resource type="StyleBox" uid="uid://c4hvvsty1tj6t" path="res://Art/Styles/Button/button_disabled_style.tres" id="13_wji82"]
 [ext_resource type="LabelSettings" uid="uid://co0s16g826nsh" path="res://Art/Label Settings/score_text_setting.tres" id="14_1nw18"]
 [ext_resource type="StyleBox" uid="uid://b7ajyoyic761p" path="res://Art/Styles/Button/button_hover_style.tres" id="14_ol1mp"]
 [ext_resource type="StyleBox" uid="uid://cyyx3iig3k7xj" path="res://Art/Styles/Button/button_pressed_style.tres" id="15_3nb0g"]
 [ext_resource type="PackedScene" uid="uid://pubk2l5mqbvp" path="res://Level/Prefabs/UI/volume_slider.tscn" id="15_5nx6i"]
 [ext_resource type="StyleBox" uid="uid://r0iifhc8wqyl" path="res://Art/Styles/Button/button_normal_style.tres" id="15_s1w4x"]
-[ext_resource type="Script" uid="uid://ck888dthby4tf" path="res://Code/Scripts/ButtonAnimationController.gd" id="18_5i486"]
 [ext_resource type="PackedScene" uid="uid://cqqhlhhc0id28" path="res://Level/Prefabs/UI/PlayerInfoBox.tscn" id="18_hcnd7"]
 [ext_resource type="PackedScene" uid="uid://c847sy10dc4na" path="res://Level/Prefabs/UI/button_animation_controller.tscn" id="18_iruui"]
 [ext_resource type="Texture2D" uid="uid://hijcvnqhb6xx" path="res://Art/Textures/HDR_blue_nebulae-1.hdr" id="19_52m5l"]
@@ -32,6 +32,7 @@
 [ext_resource type="LabelSettings" uid="uid://oif2dqgge5k6" path="res://Art/Label Settings/Options/options_title_settings.tres" id="24_dntb7"]
 [ext_resource type="LabelSettings" uid="uid://c0u6ehyxmf4wq" path="res://Art/Label Settings/Options/options_selection_label_settings.tres" id="25_dntb7"]
 [ext_resource type="Theme" uid="uid://d06vuqaeaves3" path="res://Art/Themes/options_theme.tres" id="27_5i486"]
+[ext_resource type="Theme" uid="uid://ds2felkr0rjtc" path="res://Art/Themes/Result/result_theme.tres" id="32_2w1o7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
 bg_color = Color(1, 1, 1, 0.607843)
@@ -52,10 +53,8 @@ corner_radius_bottom_left = 55
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52m5l"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.760784)
 
-[sub_resource type="LabelSettings" id="LabelSettings_y7ox6"]
-font_size = 56
-
 [sub_resource type="LabelSettings" id="LabelSettings_0o8l2"]
+font_size = 41
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lojpb"]
 panorama = ExtResource("19_52m5l")
@@ -151,9 +150,9 @@ countdownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
 roundLabel = NodePath("../../=== UI ===/--- game ---/Round Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
 resultUIGroup = NodePath("../../=== UI ===/--- result ---")
-resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Score Label")
-resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Credits Earned Label")
-resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Total Credits Label")
+resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Score Label")
+resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Credits Earned Label")
+resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Total Credits Label")
 debugUIGroup = NodePath("../../=== UI ===/--- debug ---")
 FramerateLabel = NodePath("../../=== UI ===/--- debug ---/Framerate Label")
 
@@ -193,14 +192,10 @@ visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -408.0
-offset_top = 40.0
-offset_right = 408.0
-offset_bottom = 368.0
-grow_horizontal = 2
+offset_left = 447.0
+offset_top = 88.0
+offset_right = 1434.0
+offset_bottom = 318.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "infiniSpace"
@@ -208,82 +203,61 @@ label_settings = ExtResource("8_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Container" type="VBoxContainer" parent="=== UI ===/--- main ---"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -84.0
-offset_right = 119.089966
-offset_bottom = 225.0
+[node name="CenterContainer" type="CenterContainer" parent="=== UI ===/--- main ---"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 39
 
-[node name="Start Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
+[node name="PanelContainer" type="PanelContainer" parent="=== UI ===/--- main ---/CenterContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+theme = ExtResource("12_iruui")
+
+[node name="Button Container" type="VBoxContainer" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("12_iruui")
+
+[node name="Start Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Upgrades Button")
-theme = ExtResource("24_am5r7")
 theme_override_styles/normal = ExtResource("15_s1w4x")
 theme_override_styles/pressed = ExtResource("15_3nb0g")
 theme_override_styles/hover = ExtResource("14_ol1mp")
 theme_override_styles/disabled = ExtResource("13_wji82")
 text = "Start"
 
-[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/Button Container/Start Button" instance=ExtResource("18_iruui")]
+[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button" instance=ExtResource("18_iruui")]
 
-[node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
+[node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Start Button")
-theme = ExtResource("24_am5r7")
 theme_override_styles/normal = ExtResource("15_s1w4x")
 theme_override_styles/pressed = ExtResource("15_3nb0g")
 theme_override_styles/hover = ExtResource("14_ol1mp")
 theme_override_styles/disabled = ExtResource("13_wji82")
 text = "Upgrades"
 
-[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/Button Container/Upgrades Button" instance=ExtResource("18_iruui")]
+[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Upgrades Button" instance=ExtResource("18_iruui")]
 
-[node name="Options Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
+[node name="Options Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
-theme = ExtResource("24_am5r7")
 text = "Options"
 
-[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/Button Container/Options Button" instance=ExtResource("18_iruui")]
+[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Options Button" instance=ExtResource("18_iruui")]
 
-[node name="Quit Button" type="Button" parent="=== UI ===/--- main ---/Button Container"]
+[node name="Quit Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
-theme = ExtResource("24_am5r7")
 text = "Quit"
 
-[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/Button Container/Quit Button" instance=ExtResource("18_iruui")]
-
-[node name="How to Play Button" type="Button" parent="=== UI ===/--- main ---"]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = -88.0
-offset_right = 304.0
-offset_bottom = -16.0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 40
-text = "How to Play"
+[node name="ButtonAnimationController" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Quit Button" instance=ExtResource("18_iruui")]
 
 [node name="Credits Label" type="Label" parent="=== UI ===/--- main ---"]
-anchors_preset = -1
-anchor_left = 0.287
-anchor_top = 0.733
-anchor_right = 0.708
-anchor_bottom = 0.822
-offset_left = 0.960022
-offset_top = 128.36
-offset_right = 0.640015
-offset_bottom = 128.24
+offset_left = 466.0
+offset_top = 963.0
+offset_right = 1453.0
+offset_bottom = 999.0
 theme_override_font_sizes/font_size = 81
 text = "Credits: 0"
 label_settings = ExtResource("10_5d42l")
@@ -291,21 +265,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sub-title Label" type="Label" parent="=== UI ===/--- main ---"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -136.0
-offset_top = -40.0
-offset_right = 135.0
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = 466.0
+offset_top = 1032.0
+offset_right = 1453.0
+offset_bottom = 1068.0
 text = "Micro game created by Justin Philie"
 label_settings = ExtResource("10_5d42l")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="How to Play Button" type="Button" parent="=== UI ===/--- main ---"]
+visible = false
+offset_left = 810.0
+offset_top = 379.0
+offset_right = 1040.0
+offset_bottom = 445.0
+theme_override_fonts/font = ExtResource("10_odk2k")
+theme_override_font_sizes/font_size = 40
+text = "How to Play"
 
 [node name="--- upgrade ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -707,59 +684,53 @@ visible = false
 follow_viewport_enabled = true
 
 [node name="Pause Title" type="Label" parent="=== UI ===/--- pause ---"]
-anchors_preset = -1
-anchor_left = 0.233
-anchor_right = 0.767
-anchor_bottom = 0.346
-offset_left = -0.240021
-offset_right = 0.23999
-offset_bottom = -0.12001
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -343.0
+offset_top = 88.0
+offset_right = 341.0
+offset_bottom = 337.0
 grow_horizontal = 2
 text = "PAUSED"
 label_settings = ExtResource("11_tw4tw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Resume Button" type="Button" parent="=== UI ===/--- pause ---"]
-offset_left = 832.0
-offset_top = 416.0
-offset_right = 1088.0
-offset_bottom = 476.0
+[node name="CenterContainer" type="CenterContainer" parent="=== UI ===/--- pause ---"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="=== UI ===/--- pause ---/CenterContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+theme = ExtResource("12_iruui")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("12_iruui")
+
+[node name="Resume Button" type="Button" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("24_am5r7")
 theme_override_fonts/font = ExtResource("10_odk2k")
 theme_override_font_sizes/font_size = 25
 text = "Resume
 "
 
-[node name="Quit Button" type="Button" parent="=== UI ===/--- pause ---"]
-offset_left = 832.0
-offset_top = 504.0
-offset_right = 1088.0
-offset_bottom = 564.0
+[node name="ButtonAnimationController" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Resume Button" instance=ExtResource("18_iruui")]
+
+[node name="Quit Button" type="Button" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("24_am5r7")
 theme_override_fonts/font = ExtResource("10_odk2k")
 theme_override_font_sizes/font_size = 25
 text = "Quit"
 
-[node name="ButtonAnimationController" type="Node" parent="=== UI ===/--- pause ---/Quit Button"]
-script = ExtResource("18_5i486")
-hover_scale = Vector2(1.15, 1.15)
-metadata/_custom_type_script = "uid://ck888dthby4tf"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="=== UI ===/--- pause ---"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1296.0
-offset_top = -52.0
-offset_right = -1056.0
-offset_bottom = 182.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 19
-alignment = 1
+[node name="ButtonAnimationController" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Quit Button" instance=ExtResource("18_iruui")]
 
 [node name="--- game ---" type="CanvasLayer" parent="=== UI ==="]
 visible = false
@@ -837,101 +808,86 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="--- result ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 
 [node name="Game Over Title" type="Label" parent="=== UI ===/--- result ---"]
 anchors_preset = -1
-anchor_left = 0.262
+anchor_left = 0.24300002
 anchor_top = 0.133
-anchor_right = 0.737
-anchor_bottom = 0.333
-offset_left = 24.32
+anchor_right = 0.753
+anchor_bottom = 0.34600002
+offset_left = 60.799957
 offset_top = 0.16
-offset_right = -23.68
-offset_bottom = 0.160004
+offset_right = -54.400024
+offset_bottom = -13.880005
 grow_horizontal = 2
 text = "Game Over"
-label_settings = SubResource("LabelSettings_y7ox6")
+label_settings = ExtResource("8_i5qe8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Score Label" type="Label" parent="=== UI ===/--- result ---"]
+[node name="Data Center Container" type="CenterContainer" parent="=== UI ===/--- result ---"]
 anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.417
-anchor_right = 0.7
-anchor_bottom = 0.465
-offset_top = -0.160019
-offset_right = -3.05176e-05
-offset_bottom = -0.200012
+anchor_top = 0.34600002
+anchor_right = 1.0
+anchor_bottom = 0.74100006
+offset_top = 0.3199768
+offset_bottom = -0.28009033
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("32_2w1o7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="=== UI ===/--- result ---/Data Center Container"]
+layout_mode = 2
+
+[node name="Score Label" type="Label" parent="=== UI ===/--- result ---/Data Center Container/VBoxContainer"]
+layout_mode = 2
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_0o8l2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Credits Earned Label" type="Label" parent="=== UI ===/--- result ---"]
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.5
-anchor_right = 0.7
-anchor_bottom = 0.548
-offset_right = -6.10352e-05
-offset_bottom = -0.0400085
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Credits Earned Label" type="Label" parent="=== UI ===/--- result ---/Data Center Container/VBoxContainer"]
+layout_mode = 2
 text = "Credits Earned: 0"
 label_settings = SubResource("LabelSettings_0o8l2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Total Credits Label" type="Label" parent="=== UI ===/--- result ---"]
-anchors_preset = -1
-anchor_left = 0.3
-anchor_top = 0.583
-anchor_right = 0.7
-anchor_bottom = 0.631
-offset_top = 0.160004
-offset_right = -6.10352e-05
-offset_bottom = 0.119995
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Total Credits Label" type="Label" parent="=== UI ===/--- result ---/Data Center Container/VBoxContainer"]
+layout_mode = 2
 text = "Total Credits: 0"
 label_settings = SubResource("LabelSettings_0o8l2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Restart Button" type="Button" parent="=== UI ===/--- result ---"]
+[node name="Button Center Container" type="CenterContainer" parent="=== UI ===/--- result ---"]
 anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.867
-anchor_right = 0.35
-anchor_bottom = 0.933
-offset_top = -0.160034
-offset_right = -1.52588e-05
-offset_bottom = 0.159973
+anchor_top = 0.81100005
+anchor_right = 1.0
+anchor_bottom = 0.94400007
+offset_top = 2.119934
+offset_bottom = 0.47991943
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("32_2w1o7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="=== UI ===/--- result ---/Button Center Container"]
+layout_mode = 2
+theme = ExtResource("32_2w1o7")
+
+[node name="Restart Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("32_2w1o7")
 text = "Restart"
 
-[node name="Main Menu Button" type="Button" parent="=== UI ===/--- result ---"]
-anchors_preset = -1
-anchor_left = 0.45
-anchor_top = 0.867
-anchor_right = 0.6
-anchor_bottom = 0.933
-offset_top = -0.160034
-offset_bottom = 0.159973
+[node name="Main Menu Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("32_2w1o7")
 text = "Main Menu"
 
-[node name="Quit Button" type="Button" parent="=== UI ===/--- result ---"]
-anchors_preset = -1
-anchor_left = 0.7
-anchor_top = 0.867
-anchor_right = 0.85
-anchor_bottom = 0.933
-offset_left = -3.05176e-05
-offset_top = -0.160034
-offset_bottom = 0.159973
+[node name="Quit Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("32_2w1o7")
 text = "Quit"
 
 [node name="--- debug ---" type="CanvasLayer" parent="=== UI ==="]
@@ -1006,18 +962,18 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7, 
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Power Up Timer" to="=== MANAGER ===/Scene Manager" method="PowerUpTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/PowerUp Manager/Timer" to="=== MANAGER ===/PowerUp Manager" method="OnTimerTimeout"]
-[connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameHover"]
-[connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
-[connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_UpgradeHover"]
-[connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]
-[connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsHover"]
-[connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsButtonFunction"]
-[connection signal="mouse_entered" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameHover"]
-[connection signal="mouse_exited" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
-[connection signal="pressed" from="=== UI ===/--- main ---/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_UpgradeHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Upgrades Button" to="=== MANAGER ===/Scene Manager" method="Main_ShopButtonFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Options Button" to="=== MANAGER ===/Scene Manager" method="Main_OptionsButtonFunction"]
+[connection signal="mouse_entered" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameHover"]
+[connection signal="mouse_exited" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
+[connection signal="pressed" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
 [connection signal="toggled" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
@@ -1028,8 +984,8 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7, 
 [connection signal="pressed" from="=== UI ===/--- options ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Options_BackButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/Yes Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_YesDeleteButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- options ---/Delete Save Panel/No Delete Button" to="=== MANAGER ===/Scene Manager" method="Options_NoDeleteButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- pause ---/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- pause ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- result ---/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- result ---/Main Menu Button" to="=== MANAGER ===/Scene Manager" method="Result_MainMenuButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- result ---/Quit Button" to="=== MANAGER ===/Scene Manager" method="Result_QuitButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Resume Button" to="=== MANAGER ===/Scene Manager" method="Pause_ResumeButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Quit Button" to="=== MANAGER ===/Scene Manager" method="Pause_QuitButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Main Menu Button" to="=== MANAGER ===/Scene Manager" method="Result_MainMenuButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Quit Button" to="=== MANAGER ===/Scene Manager" method="Result_QuitButtonFunction"]
