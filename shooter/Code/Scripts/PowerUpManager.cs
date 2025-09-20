@@ -127,8 +127,8 @@ public partial class PowerUpManager : Node
     {
         PowerUpStats_ShootType newStats = shootTypePowerUp.Duplicate(false) as PowerUpStats_ShootType;
 
-       // int type = GD.RandRange(1, 2);
-        int type = 1;
+        int type = GD.RandRange(1, 2);
+        //int type = 1;
 
         if (type == 1)
         {

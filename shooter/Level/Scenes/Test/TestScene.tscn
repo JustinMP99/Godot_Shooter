@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://bqsrioh4pvqux" path="res://Code/Shaders/Cel-Shading-Test.gdshader" id="1_etr6r"]
 [ext_resource type="Shader" uid="uid://dbgdtv0u4hwxb" path="res://Code/Shaders/FresnelExample.gdshader" id="2_3eskm"]
-[ext_resource type="Shader" uid="uid://dhuctywvjj34f" path="res://Code/Shaders/DepthEdge.gdshader" id="3_735fc"]
+[ext_resource type="Shader" uid="uid://dhuctywvjj34f" path="res://Code/Shaders/normal_edge_outline.gdshader" id="3_735fc"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_s6d6b"]
 

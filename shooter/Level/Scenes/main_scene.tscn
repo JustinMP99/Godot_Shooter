@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=48 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -33,6 +33,7 @@
 [ext_resource type="LabelSettings" uid="uid://c0u6ehyxmf4wq" path="res://Art/Label Settings/Options/options_selection_label_settings.tres" id="25_dntb7"]
 [ext_resource type="Theme" uid="uid://d06vuqaeaves3" path="res://Art/Themes/options_theme.tres" id="27_5i486"]
 [ext_resource type="Theme" uid="uid://ds2felkr0rjtc" path="res://Art/Themes/Result/result_theme.tres" id="32_2w1o7"]
+[ext_resource type="Shader" uid="uid://cxe5nkut7sdab" path="res://Code/Shaders/fullscreen_outline.gdshader" id="33_lfhfm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54d8q"]
 bg_color = Color(1, 1, 1, 0.607843)
@@ -100,6 +101,16 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_2w1o7"]
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lfhfm"]
+render_priority = 0
+shader = ExtResource("33_lfhfm")
+shader_parameter/outline_thickness = 0.8499999810008
+shader_parameter/step_threshold = 1.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
 
 [node name="Main Scene" type="Node"]
 
@@ -733,7 +744,6 @@ text = "Quit"
 [node name="ButtonAnimationController" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Quit Button" instance=ExtResource("18_iruui")]
 
 [node name="--- game ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="PlayerInfoBox" parent="=== UI ===/--- game ---" instance=ExtResource("18_hcnd7")]
@@ -956,6 +966,15 @@ curve = SubResource("Curve3D_xj7ar")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7, 0, 0)
 
 [node name="Enemy Container" type="Node3D" parent="=== LEVEL ==="]
+
+[node name="Outline" type="Node3D" parent="=== LEVEL ==="]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="=== LEVEL ===/Outline"]
+transform = Transform3D(1, 0, 0, 0, 0.80564904, 0.59239304, 0, -0.59239304, 0.80564904, 0, -6.0083566, -7.222316)
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_2w1o7")
+skeleton = NodePath("../../Cam 1")
+surface_material_override/0 = SubResource("ShaderMaterial_lfhfm")
 
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Intro Timer" to="=== MANAGER ===/Scene Manager" method="IntroTimerTimeout"]
 [connection signal="timeout" from="=== MANAGER ===/Scene Manager/Round Timer" to="=== MANAGER ===/Scene Manager" method="RoundTimerTimeout"]
