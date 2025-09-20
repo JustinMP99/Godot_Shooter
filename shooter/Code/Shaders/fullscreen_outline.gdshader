@@ -14,12 +14,13 @@ float DepthVS(vec2 uv, mat4 inv_proj_mat)
 	return 1.0 / (depth * inv_proj_mat[2].w + inv_proj_mat[3].w);
 }
 
-
-void vertex() {
+void vertex() 
+{
 	POSITION = vec4(VERTEX.xy, 1,1);
 }
 
-void fragment() {
+void fragment() 
+{
 
 	float thickness = outline_thickness * 0.001;
 
