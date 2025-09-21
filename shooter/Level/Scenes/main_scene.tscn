@@ -295,10 +295,14 @@ wait_time = 10.0
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
-offset_left = 447.0
-offset_top = 88.0
-offset_right = 1434.0
-offset_bottom = 318.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -496.0
+offset_top = 32.0
+offset_right = 491.0
+offset_bottom = 262.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "infiniSpace"
@@ -325,6 +329,7 @@ theme = ExtResource("12_iruui")
 [node name="Start Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Upgrades Button")
+theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = ExtResource("15_s1w4x")
 theme_override_styles/pressed = ExtResource("15_3nb0g")
 theme_override_styles/hover = ExtResource("14_ol1mp")
@@ -336,6 +341,7 @@ text = "Start"
 [node name="Upgrades Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Start Button")
+theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = ExtResource("15_s1w4x")
 theme_override_styles/pressed = ExtResource("15_3nb0g")
 theme_override_styles/hover = ExtResource("14_ol1mp")
@@ -346,12 +352,14 @@ text = "Upgrades"
 
 [node name="Options Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 44
 text = "Options"
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Options Button" instance=ExtResource("18_iruui")]
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 44
 text = "Quit"
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Quit Button" instance=ExtResource("18_iruui")]
@@ -827,7 +835,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="=== UI ===/--- pause ---/CenterContainer"]
-custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 theme = ExtResource("12_iruui")
 
@@ -839,9 +846,10 @@ theme = ExtResource("12_iruui")
 layout_mode = 2
 theme = ExtResource("24_am5r7")
 theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 42
 text = "Resume
 "
+icon_alignment = 1
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Resume Button" instance=ExtResource("18_iruui")]
 
@@ -849,8 +857,9 @@ text = "Resume
 layout_mode = 2
 theme = ExtResource("24_am5r7")
 theme_override_fonts/font = ExtResource("10_odk2k")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 42
 text = "Quit"
+icon_alignment = 1
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Quit Button" instance=ExtResource("18_iruui")]
 
@@ -1001,17 +1010,26 @@ theme = ExtResource("32_2w1o7")
 [node name="Restart Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("32_2w1o7")
+theme_override_font_sizes/font_size = 42
 text = "Restart"
+
+[node name="ButtonAnimationController" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Restart Button" instance=ExtResource("18_iruui")]
 
 [node name="Main Menu Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("32_2w1o7")
+theme_override_font_sizes/font_size = 42
 text = "Main Menu"
+
+[node name="ButtonAnimationController" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Main Menu Button" instance=ExtResource("18_iruui")]
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("32_2w1o7")
+theme_override_font_sizes/font_size = 42
 text = "Quit"
+
+[node name="ButtonAnimationController" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Quit Button" instance=ExtResource("18_iruui")]
 
 [node name="--- debug ---" type="CanvasLayer" parent="=== UI ==="]
 
@@ -1083,7 +1101,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7, 
 [node name="Outline" type="Node3D" parent="=== LEVEL ==="]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="=== LEVEL ===/Outline"]
-transform = Transform3D(1, 0, 0, 0, 0.80564904, 0.59239304, 0, -0.59239304, 0.80564904, 0, -6.0083566, -7.222316)
+transform = Transform3D(1, 0, 0, 0, 0.80564904, 0.59239304, 0, -0.59239304, 0.80564904, 0, -6.0083566, 15.565195)
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_2w1o7")
 skeleton = NodePath("../../Cam 1")

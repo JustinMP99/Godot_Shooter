@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cclpg32mn8mhn"]
+[gd_scene load_steps=18 format=3 uid="uid://cclpg32mn8mhn"]
 
 [ext_resource type="Shader" uid="uid://bqsrioh4pvqux" path="res://Code/Shaders/Cel-Shading-Test.gdshader" id="1_etr6r"]
 [ext_resource type="Shader" uid="uid://dbgdtv0u4hwxb" path="res://Code/Shaders/FresnelExample.gdshader" id="2_3eskm"]
 [ext_resource type="Shader" uid="uid://dhuctywvjj34f" path="res://Code/Shaders/normal_edge_outline.gdshader" id="3_735fc"]
+[ext_resource type="Shader" uid="uid://cxe5nkut7sdab" path="res://Code/Shaders/fullscreen_outline.gdshader" id="4_ohh6y"]
+[ext_resource type="PackedScene" uid="uid://dkxf1nxnhw1a4" path="res://Art/Models/KeyframeChef_EllenJoe_Rig.blend" id="5_e35ij"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_s6d6b"]
 
@@ -43,7 +45,15 @@ shader_parameter/edge_threshold = 0.1
 shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/background_color = Color(0, 0, 0, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_735fc"]
+[sub_resource type="QuadMesh" id="QuadMesh_e35ij"]
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3kia"]
+render_priority = 0
+shader = ExtResource("4_ohh6y")
+shader_parameter/outline_thickness = 1.5
+shader_parameter/step_threshold = 0.999999977648
+shader_parameter/outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3eskm"]
 custom_aabb = AABB(0, 0, 0, 19.85, 19.885, 0)
@@ -54,7 +64,7 @@ size = Vector3(0.5, 0.5, 0.5)
 [node name="Cel Shading Example" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cel Shading Example"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0383598, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005033016, -0.030288972, -0.0021808147)
 mesh = SubResource("SphereMesh_s6d6b")
 surface_material_override/0 = SubResource("ShaderMaterial_3eskm")
 
@@ -69,15 +79,22 @@ surface_material_override/0 = SubResource("ShaderMaterial_735fc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.183048, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Depth Outline Example"]
+visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_3eskm")
 surface_material_override/0 = SubResource("ShaderMaterial_ohh6y")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Depth Outline Example"]
-mesh = SubResource("BoxMesh_735fc")
+[node name="Full Screen Outline" type="MeshInstance3D" parent="Depth Outline Example"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_e35ij")
+surface_material_override/0 = SubResource("ShaderMaterial_r3kia")
+
+[node name="KeyframeChef_EllenJoe_Rig" parent="." instance=ExtResource("5_e35ij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5135367, 0, 1.1844056)
+visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.332675, 0.537959, 0.79626)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.83792233, 0.537959, 0.79626)
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43622, 0, 0)
