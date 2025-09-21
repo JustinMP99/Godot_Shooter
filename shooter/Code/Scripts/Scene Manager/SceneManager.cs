@@ -91,7 +91,8 @@ public partial class SceneManager : Node
     {
         player = PlayerController.Instance;
 
-        player.Position = new Vector3(0.0f, 0.0f, 10.0f);
+        //player.Position = new Vector3(0.0f, 0.0f, 10.0f);
+        player.Position = startPosition.Position;
         player.SetTakingInput(false);
         
         //assign signal functions

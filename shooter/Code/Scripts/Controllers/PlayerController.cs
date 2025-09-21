@@ -36,6 +36,7 @@ public partial class PlayerController : CharacterBody3D
     [Export] private Node3D bulletRightPosition;
     [Export] private MeshInstance3D reticle;
     [Export] private MeshInstance3D playerMesh;
+    [Export] private AnimationTree animationTree;
     public BulletManager bulletManager;
     
     [ExportCategory("Shooting Variables")]
@@ -322,6 +323,20 @@ public partial class PlayerController : CharacterBody3D
     private void EnemyDefeat()
     {
         EmitSignal(SignalName.EnemyDefeated);
+    }
+
+    #endregion
+
+    #region Animation Functions
+
+    public void SetFlyInTrue()
+    {
+        animationTree.Set("parameters/conditions/Fly In", true);
+    }
+
+    private void SetFlyInFalse()
+    {
+        animationTree.Set("parameters/conditions/Fly In", false);
     }
 
     #endregion

@@ -31,6 +31,8 @@ public partial class SceneManager
         
         interfaceManager.Game_SetHudState(false);
         
+        player.SetFlyInTrue();
+        
         //Start timer
         StartIntroTimer();
         
