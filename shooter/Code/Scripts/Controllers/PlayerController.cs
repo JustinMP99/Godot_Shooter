@@ -36,8 +36,11 @@ public partial class PlayerController : CharacterBody3D
     [Export] private Node3D bulletRightPosition;
     [Export] private MeshInstance3D reticle;
     [Export] private MeshInstance3D playerMesh;
-    [Export] private AnimationTree animationTree;
     public BulletManager bulletManager;
+
+    [ExportCategory("Animators")]
+    [Export] private AnimationTree shipAnimationTree;
+    [Export] private AnimationTree reticleAnimationTree;
     
     [ExportCategory("Shooting Variables")]
     [Export] private ShootType shootType;
@@ -219,13 +222,17 @@ public partial class PlayerController : CharacterBody3D
         {
             Vector3 newReticlePosition =  result["position"].AsVector3();
             newReticlePosition.Z += 0.1f;
+            reticle.GetSurfaceOverrideMaterial(0).Set("albedo_texture", reticleLocked);
             //reticle.MaterialOverride.Set("albedo_texture", reticleLocked);
+            SetReticleLockOnTrue();
             reticle.GlobalPosition = newReticlePosition;
         }
         else
         {
             reticle.Position = new Vector3(0.0f, 0.0f, -10.0f);
+            reticle.GetSurfaceOverrideMaterial(0).Set("albedo_texture", reticleNormal);
             //reticle.MaterialOverride.Set("albedo_texture", reticleNormal);
+            SetReticleLockOnFalse();
         }
     }
 
@@ -329,16 +336,36 @@ public partial class PlayerController : CharacterBody3D
 
     #region Animation Functions
 
-    public void SetFlyInTrue()
+    public void SetShipFlyInTrue()
     {
-        animationTree.Set("parameters/conditions/Fly In", true);
+        shipAnimationTree.Set("parameters/conditions/Fly In", true);
     }
 
-    private void SetFlyInFalse()
+    public void SetShipFlyInFalse()
     {
-        animationTree.Set("parameters/conditions/Fly In", false);
+        shipAnimationTree.Set("parameters/conditions/Fly In", false);
     }
 
+    public void SetReticleFlyInTrue()
+    {
+        reticleAnimationTree.Set("parameters/conditions/Fly In", true);
+    }
+    
+    public void SetReticleFlyInFalse()
+    {
+        reticleAnimationTree.Set("parameters/conditions/Fly In", false);
+    }
+
+    public void SetReticleLockOnTrue()
+    {
+        reticleAnimationTree.Set("parameters/conditions/Lock On", true);
+    }
+
+    public void SetReticleLockOnFalse()
+    {
+        reticleAnimationTree.Set("parameters/conditions/Lock On", false);
+    }
+    
     #endregion
     
     #region Getter

@@ -31,7 +31,8 @@ public partial class SceneManager
         
         interfaceManager.Game_SetHudState(false);
         
-        player.SetFlyInTrue();
+        player.SetShipFlyInTrue();
+        player.SetReticleFlyInTrue();
         
         //Start timer
         StartIntroTimer();
