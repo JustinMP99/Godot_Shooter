@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dyraxlfot6oqf"]
+[gd_scene load_steps=43 format=3 uid="uid://dyraxlfot6oqf"]
 
 [ext_resource type="Script" uid="uid://6q2aq0nj86e3" path="res://Code/Scripts/Controllers/PlayerController.cs" id="1_0a5mx"]
 [ext_resource type="Resource" uid="uid://pj1g6ji0ofdn" path="res://Level/Resource Objects/Player Stats/PlayerStats.tres" id="2_ysarm"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://3p26ry74la75" path="res://Art/Sprites/Reticles/Reticle_Locked.png" id="3_ysarm"]
 [ext_resource type="Material" uid="uid://bskexlm6v02jx" path="res://Art/Materials/PlayerShipMaterial.tres" id="4_20vac"]
 [ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="5_6sk5c"]
-[ext_resource type="Texture2D" uid="uid://d0ut7fhayj13x" path="res://Art/Sprites/Reticles/Reticle_Vector.png" id="6_0a5mx"]
 [ext_resource type="Texture2D" uid="uid://dd5xbi8wjah3l" path="res://Art/Sprites/Reticles/Reticle_V2.png" id="7_p7s6k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
@@ -107,10 +106,9 @@ _data = {
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owh07"]
 transparency = 1
-albedo_color = Color(0, 0, 0, 1)
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0)
 albedo_texture = ExtResource("7_p7s6k")
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
 texture_filter = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6sk5c"]
@@ -145,30 +143,42 @@ advance_mode = 2
 advance_condition = &"Lock On"
 advance_expression = "true"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tfn58"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cxc8d"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_luawp"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tfn58"]
 advance_mode = 2
-advance_condition = &"Lock On"
-advance_expression = "false"
+advance_condition = &"Return To Idle"
+advance_expression = "true"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_p7s6k"]
 states/fly_in/node = SubResource("AnimationNodeAnimation_6sk5c")
-states/fly_in/position = Vector2(445, 100)
+states/fly_in/position = Vector2(503, 100)
 states/hidden_idle/node = SubResource("AnimationNodeAnimation_1fd0q")
-states/hidden_idle/position = Vector2(323, 100)
+states/hidden_idle/position = Vector2(340, 100)
 states/idle/node = SubResource("AnimationNodeAnimation_q31ju")
-states/idle/position = Vector2(564, 100)
+states/idle/position = Vector2(692, 100)
 states/lock_on/node = SubResource("AnimationNodeAnimation_etjia")
-states/lock_on/position = Vector2(650, 197)
+states/lock_on/position = Vector2(778, 197)
 states/lock_on_idle/node = SubResource("AnimationNodeAnimation_cxc8d")
-states/lock_on_idle/position = Vector2(524, 197)
-transitions = ["Start", "hidden_idle", SubResource("AnimationNodeStateMachineTransition_ysarm"), "hidden_idle", "fly_in", SubResource("AnimationNodeStateMachineTransition_1fd0q"), "fly_in", "idle", SubResource("AnimationNodeStateMachineTransition_q31ju"), "idle", "lock_on", SubResource("AnimationNodeStateMachineTransition_etjia"), "lock_on", "lock_on_idle", SubResource("AnimationNodeStateMachineTransition_tfn58"), "lock_on_idle", "idle", SubResource("AnimationNodeStateMachineTransition_luawp")]
+states/lock_on_idle/position = Vector2(613, 197)
+transitions = ["Start", "hidden_idle", SubResource("AnimationNodeStateMachineTransition_ysarm"), "hidden_idle", "fly_in", SubResource("AnimationNodeStateMachineTransition_1fd0q"), "fly_in", "idle", SubResource("AnimationNodeStateMachineTransition_q31ju"), "idle", "lock_on", SubResource("AnimationNodeStateMachineTransition_etjia"), "lock_on", "lock_on_idle", SubResource("AnimationNodeStateMachineTransition_cxc8d"), "lock_on_idle", "idle", SubResource("AnimationNodeStateMachineTransition_tfn58")]
 
 [sub_resource type="Animation" id="Animation_q31ju"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_etjia"]
 resource_name = "fly_in"
@@ -183,7 +193,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.61227727, 2.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ysarm"]
@@ -201,10 +211,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_cxc8d"]
 resource_name = "idle"
-loop_mode = 2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -215,7 +237,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.99),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_tfn58"]
@@ -245,10 +279,46 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 3.1415927), Vector3(0, 0, 0), Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_luawp"]
 resource_name = "lock_on_idle"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cxc8d"]
 _data = {
@@ -263,7 +333,7 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
 size = Vector3(1.2583, 1, 1.19141)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletLeftPosition", "bulletCenterPosition", "bulletRightPosition", "reticle", "playerMesh", "shipAnimationTree", "reticleAnimationTree", "shootTimer")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletLeftPosition", "bulletCenterPosition", "bulletRightPosition", "reticle", "playerMesh", "shipAnimationTree", "shipAnimationPlayer", "reticleAnimationTree", "reticleAnimationPlayer", "shootTimer")]
 rotation_order = 0
 collision_mask = 8
 script = ExtResource("1_0a5mx")
@@ -273,11 +343,12 @@ bulletRightPosition = NodePath("BulletPositions/Bullet Right")
 reticle = NodePath("Reticle")
 playerMesh = NodePath("Player Ship Mesh3D")
 shipAnimationTree = NodePath("Player Ship Mesh3D/AnimationTree")
+shipAnimationPlayer = NodePath("Player Ship Mesh3D/AnimationPlayer")
 reticleAnimationTree = NodePath("Reticle/AnimationTree")
+reticleAnimationPlayer = NodePath("Reticle/AnimationPlayer")
 shootTimer = NodePath("Shoot Timer")
-reticleNormal = ExtResource("6_0a5mx")
+reticleNormal = ExtResource("7_p7s6k")
 reticleLocked = ExtResource("3_ysarm")
-takingInput = true
 Stats = ExtResource("2_ysarm")
 
 [node name="Wall Collider" type="CollisionShape3D" parent="."]
@@ -304,7 +375,7 @@ libraries = {
 }
 
 [node name="Reticle" type="MeshInstance3D" parent="."]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 mesh = SubResource("QuadMesh_odanr")
 surface_material_override/0 = SubResource("StandardMaterial3D_owh07")
 
@@ -313,6 +384,7 @@ tree_root = SubResource("AnimationNodeStateMachine_p7s6k")
 anim_player = NodePath("../AnimationPlayer")
 "parameters/conditions/Fly In" = false
 "parameters/conditions/Lock On" = false
+"parameters/conditions/Return To Idle" = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Reticle"]
 libraries = {

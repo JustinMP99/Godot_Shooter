@@ -29,6 +29,8 @@ public partial class PlayerController : CharacterBody3D
     public delegate void ShootTypePowerUpEventHandler(PowerUpStats_ShootType shootStats);
     
     #endregion
+
+    public Node3D startPosition;
     
     [ExportCategory("Player Components")]
     [Export] private Node3D bulletLeftPosition;
@@ -40,7 +42,9 @@ public partial class PlayerController : CharacterBody3D
 
     [ExportCategory("Animators")]
     [Export] private AnimationTree shipAnimationTree;
+    [Export] private AnimationPlayer shipAnimationPlayer;
     [Export] private AnimationTree reticleAnimationTree;
+    [Export] private AnimationPlayer reticleAnimationPlayer;
     
     [ExportCategory("Shooting Variables")]
     [Export] private ShootType shootType;
@@ -51,6 +55,8 @@ public partial class PlayerController : CharacterBody3D
     private Bullet cachedBulletOne;
     private Bullet cachedBulletTwo;
     private Bullet cachedBulletThree;
+
+    private EnemyController prevEnemy;
     
     [ExportCategory("Player Stats")] 
     [Export] private bool takingInput;
@@ -71,6 +77,7 @@ public partial class PlayerController : CharacterBody3D
     {
         Instance = this;
         canShoot = true;
+        //retAnimationPlayer.Play("hidden_idle");
     }
 
     public override void _Process(double delta)
@@ -80,6 +87,7 @@ public partial class PlayerController : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        
         if (takingInput)
         {
             ReticleRaycast();
@@ -217,22 +225,33 @@ public partial class PlayerController : CharacterBody3D
         var query = PhysicsRayQueryParameters3D.Create(origin, end, collisionMask:2);
         
         var result = spaceState.IntersectRay(query);
-        
+        if (result.ContainsKey("collider"))
+        {
+
+            EnemyController enemy = result["collider"].As<EnemyController>();
+            if (prevEnemy != enemy || prevEnemy == null)
+            {
+                //reticle.GetSurfaceOverrideMaterial(0).Set("albedo_texture", reticleLocked);
+                SetReticleReturnToIdleFalse();
+                SetReticleLockOnTrue();
+            }
+        }
+        else
+        {
+            //reticle.GetSurfaceOverrideMaterial(0).Set("albedo_texture", reticleNormal);
+            prevEnemy = null;
+            SetReticleLockOnFalse();
+            SetReticleReturnToIdleTrue();
+        }
         if (result.ContainsKey("position"))
         {
             Vector3 newReticlePosition =  result["position"].AsVector3();
             newReticlePosition.Z += 0.1f;
-            reticle.GetSurfaceOverrideMaterial(0).Set("albedo_texture", reticleLocked);
-            //reticle.MaterialOverride.Set("albedo_texture", reticleLocked);
-            SetReticleLockOnTrue();
             reticle.GlobalPosition = newReticlePosition;
         }
         else
         {
             reticle.Position = new Vector3(0.0f, 0.0f, -10.0f);
-            reticle.GetSurfaceOverrideMaterial(0).Set("albedo_texture", reticleNormal);
-            //reticle.MaterialOverride.Set("albedo_texture", reticleNormal);
-            SetReticleLockOnFalse();
         }
     }
 
@@ -288,6 +307,24 @@ public partial class PlayerController : CharacterBody3D
         canShoot = true;
     }
 
+    /// <summary>
+    /// Resets all Player data (animations, shoot type, taking input state)
+    /// </summary>
+    public void Reset()
+    {
+
+        takingInput = false;
+        shootType = ShootType.Single;
+        Stats.CurrentHealth = Stats.MaxHealth;
+        
+        SetReticleFlyInFalse();
+        SetShipFlyInFalse();
+
+        shipAnimationTree.Active = false;
+        shipAnimationTree.Active = true;
+
+    }
+    
     #endregion
 
     #region Signal Functions
@@ -333,7 +370,7 @@ public partial class PlayerController : CharacterBody3D
     }
 
     #endregion
-
+    
     #region Animation Functions
 
     public void SetShipFlyInTrue()
@@ -364,6 +401,16 @@ public partial class PlayerController : CharacterBody3D
     public void SetReticleLockOnFalse()
     {
         reticleAnimationTree.Set("parameters/conditions/Lock On", false);
+    }
+    
+    public void SetReticleReturnToIdleTrue()
+    {
+        reticleAnimationTree.Set("parameters/conditions/Return To Idle", true);
+    }
+
+    public void SetReticleReturnToIdleFalse()
+    {
+        reticleAnimationTree.Set("parameters/conditions/Return To Idle", false);
     }
     
     #endregion

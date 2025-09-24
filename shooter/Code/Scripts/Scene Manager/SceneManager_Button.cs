@@ -19,10 +19,8 @@ public partial class SceneManager
         enemySpawner.ResetTimerValue();
 
         //Configure Player data
+        player.Reset();
         player.Position = startPosition.Position;
-        player.SetTakingInput(true);
-        player.SetCurrentHealth(player.GetMaxHealth());
-        player.Reparent(levelNode);
         
         //Set UI Data
         interfaceManager.PlayerInfoBox.SetHealthBarMax(player.GetMaxHealth());
@@ -256,8 +254,6 @@ public partial class SceneManager
     private void Result_MainMenuButtonFunction()
     {
         interfaceManager.Main_SetCreditsText(player.Credits);
-
-        player.Stats.CurrentHealth = player.Stats.MaxHealth;
 
         interfaceManager.SetResultUIState(false);
 

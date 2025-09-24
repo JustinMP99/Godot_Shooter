@@ -90,11 +90,7 @@ public partial class SceneManager : Node
     private void PlayerSetup()
     {
         player = PlayerController.Instance;
-
-        //player.Position = new Vector3(0.0f, 0.0f, 10.0f);
         player.Position = startPosition.Position;
-        player.SetTakingInput(false);
-        
         //assign signal functions
         player.PauseSignal += ActivatePause;
         player.PlayerHealed += UpdateGameUI;
@@ -187,6 +183,7 @@ public partial class SceneManager : Node
         introCount--;
         if (introCount <= 0)
         {
+            player.SetTakingInput(true);
             interfaceManager.Game_SetCountDownLabelState(false);
             StartNewRound();
         }
