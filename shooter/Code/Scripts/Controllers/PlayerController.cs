@@ -33,18 +33,18 @@ public partial class PlayerController : CharacterBody3D
     public Node3D startPosition;
     
     [ExportCategory("Player Components")]
-    [Export] private Node3D bulletLeftPosition;
-    [Export] private Node3D bulletCenterPosition;
-    [Export] private Node3D bulletRightPosition;
-    [Export] private MeshInstance3D reticle;
-    [Export] private MeshInstance3D playerMesh;
+    private Node3D bulletLeftPosition;
+    private Node3D bulletCenterPosition;
+    private Node3D bulletRightPosition;
+    private MeshInstance3D reticle;
+    private MeshInstance3D playerMesh;
     public BulletManager bulletManager;
 
     [ExportCategory("Animators")]
-    [Export] private AnimationTree shipAnimationTree;
-    [Export] private AnimationPlayer shipAnimationPlayer;
-    [Export] private AnimationTree reticleAnimationTree;
-    [Export] private AnimationPlayer reticleAnimationPlayer;
+    private AnimationTree shipAnimationTree;
+    private AnimationPlayer shipAnimationPlayer;
+    private AnimationTree reticleAnimationTree;
+    private AnimationPlayer reticleAnimationPlayer;
     
     [ExportCategory("Shooting Variables")]
     [Export] private ShootType shootType;
@@ -102,6 +102,28 @@ public partial class PlayerController : CharacterBody3D
         }
     }
 
+    /// <summary>
+    /// Assigns the variables of PlayerController
+    /// </summary>
+    public void Setup()
+    {
+
+        bulletLeftPosition = GetNode<Node3D> ("BulletPositions/Bullet Left");
+        bulletCenterPosition = GetNode<Node3D>("BulletPositions/Bullet Center");
+        bulletRightPosition = GetNode<Node3D>("BulletPositions/Bullet Right");
+
+        playerMesh = GetNode<MeshInstance3D>("Player Ship Mesh3D");
+        reticle = GetNode<MeshInstance3D>("Reticle");
+        
+        shipAnimationTree = GetNode<AnimationTree>("Player Ship Mesh3D/AnimationTree");
+        shipAnimationPlayer = GetNode<AnimationPlayer>("Player Ship Mesh3D/AnimationPlayer");
+        
+        reticleAnimationTree = GetNode<AnimationTree>("Reticle/AnimationTree");
+        reticleAnimationPlayer = GetNode<AnimationPlayer>("Reticle/AnimationPlayer");
+
+    }
+    
+    
     #region Input Functions
 
     private void CollectInput()

@@ -3,19 +3,19 @@ using System;
 
 public partial class SceneManager : Node
 {
-
     [ExportCategory("Debug")]
     [Export] private bool debugEnabled;
-    
+
     [ExportCategory("Managers")]
     [Export] private SaveManager saveManager;
     [Export] private UIManager interfaceManager;
     [Export] private EnemySpawner enemySpawner;
     [Export] private BulletManager bulletManager;
     [Export] private PowerUpManager powerUpManager;
-    
+
     [ExportCategory("Environment Variables")]
     [Export] private Node levelNode;
+
     [Export] private Node3D startPosition;
     private Timer introTimer; //Counts down from 3 when the player presses the start button
     private Timer roundTimer;
@@ -24,6 +24,7 @@ public partial class SceneManager : Node
 
     [ExportCategory("Gameplay Values")]
     [Export] private int round;
+
     [Export] private int score;
     [Export] private float powerUpTimeMax;
     private float powerUpTimeCurrent;
@@ -33,32 +34,30 @@ public partial class SceneManager : Node
 
     public override void _Ready()
     {
-
         introTimer = GetNode<Timer>("Intro Timer");
         roundTimer = GetNode<Timer>("Round Timer");
         powerUpTimer = GetNode<Timer>("Power Up Timer");
-        
+
         //load configuration file
         LoadConfig();
-        
+
         //load player data
         PlayerSetup();
-        
+
         //setup UI
         UISetup();
-        
+
         //additional startup calls
         enemySpawner.Startup();
         bulletManager.Startup();
         powerUpManager.Startup();
-        
     }
 
     public override void _Process(double delta)
     {
         interfaceManager.SetFramerateLabelText(Engine.GetFramesPerSecond());
     }
-    
+
     #region Startup Functions
 
     private void LoadConfig()
@@ -70,7 +69,7 @@ public partial class SceneManager : Node
             interfaceManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
             interfaceManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
             interfaceManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
-        
+
             SetResolution(GameData.Instance.ResolutionValue);
             SetFullscreen(GameData.Instance.Fullscreen);
         }
@@ -80,11 +79,10 @@ public partial class SceneManager : Node
             interfaceManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
             interfaceManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
             interfaceManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
-            
+
             SetResolution(3);
             SetFullscreen(false);
         }
-
     }
 
     private void PlayerSetup()
@@ -99,6 +97,8 @@ public partial class SceneManager : Node
         player.EnemyDefeated += DefeatedEnemy;
         player.ShootTypePowerUp += ShootTypeSwitchEvent;
         player.bulletManager = bulletManager;
+
+        player.Setup();
         
         bool loadResult = saveManager.load();
 
@@ -124,7 +124,7 @@ public partial class SceneManager : Node
 
         interfaceManager.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
         interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
-        
+
         if (debugEnabled)
         {
             interfaceManager.SetDebugUIState(true);
@@ -134,21 +134,20 @@ public partial class SceneManager : Node
             interfaceManager.SetDebugUIState(false);
         }
     }
-    
+
     #endregion
-    
+
     #region Round Functions
-    
+
     private void StartNewRound()
     {
-
         Global.Round++;
 
         if (Global.Round == 1)
         {
             enemiesLeftMax = 5;
         }
-        else if(enemiesLeftMax != 80)
+        else if (enemiesLeftMax != 80)
         {
             enemiesLeftMax += 5;
         }
@@ -157,7 +156,7 @@ public partial class SceneManager : Node
         {
             enemySpawner.DecrementTimer();
         }
-        
+
         enemiesLeft = enemiesLeftMax;
         interfaceManager.Game_SetRoundLabelText(Global.Round);
         interfaceManager.Game_SetRoundLabelState(true);
@@ -166,9 +165,9 @@ public partial class SceneManager : Node
     }
 
     #endregion
-    
+
     #region Timer Functions
-    
+
     private void StartIntroTimer()
     {
         interfaceManager.Game_SetCountDownLabelState(true);
@@ -176,7 +175,7 @@ public partial class SceneManager : Node
         interfaceManager.Game_SetCountDownLabelText(introCount);
         introTimer.Start();
     }
-    
+
     private void IntroTimerTimeout()
     {
         //End round timer
@@ -205,6 +204,7 @@ public partial class SceneManager : Node
     private void PowerUpTimerTimeout()
     {
         powerUpTimeCurrent -= 0.1f;
+
         if (powerUpTimeCurrent <= 1)
         {
             interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
@@ -216,13 +216,12 @@ public partial class SceneManager : Node
             interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(powerUpTimeCurrent);
             powerUpTimer.Start();
         }
-        
     }
 
     #endregion
 
     #region Signal Functions
-    
+
     public void ActivatePause()
     {
         interfaceManager.SetGameUIState(false);
@@ -230,7 +229,7 @@ public partial class SceneManager : Node
         interfaceManager.SetPauseUIState(true);
 
         Global.GamePaused = true;
-        
+
         //Pause all timers
         powerUpManager.PauseTimer();
         enemySpawner.PauseTimer();
@@ -244,7 +243,7 @@ public partial class SceneManager : Node
         {
             introTimer.Paused = true;
         }
-        
+
 
         player.SetTakingInput(false);
     }
@@ -281,11 +280,10 @@ public partial class SceneManager : Node
         {
             //End round
             StartNewRound();
-            
+
             enemySpawner.DisableAllEnemies();
-            
         }
-        
+
         //Update UI
         interfaceManager.Game_SetScoreValueText(score);
     }
@@ -302,16 +300,14 @@ public partial class SceneManager : Node
     #endregion
 
     #region Supporting Functions
-    
+
     private void SetResolution(int index)
     {
-        
         GameData.Instance.ResolutionValue = index;
         GD.Print("Resolution Index: " + index);
-        
+
         switch (index)
         {
-            
             case 0:
                 GetWindow().SetSize(new Vector2I(3840, 2160));
                 break;
@@ -324,13 +320,11 @@ public partial class SceneManager : Node
             case 3:
                 GetWindow().SetSize(new Vector2I(1280, 720));
                 break;
-            
         }
     }
 
     private void SetFullscreen(bool state)
     {
-
         GameData.Instance.Fullscreen = state;
         GD.Print("Fullscreen State: " + state);
         if (state)
@@ -344,5 +338,4 @@ public partial class SceneManager : Node
     }
 
     #endregion
- 
 }

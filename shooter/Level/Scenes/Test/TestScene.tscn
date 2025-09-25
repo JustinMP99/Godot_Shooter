@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://cclpg32mn8mhn"]
+[gd_scene load_steps=20 format=3 uid="uid://cclpg32mn8mhn"]
 
 [ext_resource type="Shader" uid="uid://bqsrioh4pvqux" path="res://Code/Shaders/Cel-Shading-Test.gdshader" id="1_etr6r"]
 [ext_resource type="Shader" uid="uid://dbgdtv0u4hwxb" path="res://Code/Shaders/FresnelExample.gdshader" id="2_3eskm"]
 [ext_resource type="Shader" uid="uid://dhuctywvjj34f" path="res://Code/Shaders/normal_edge_outline.gdshader" id="3_735fc"]
 [ext_resource type="Shader" uid="uid://cxe5nkut7sdab" path="res://Code/Shaders/fullscreen_outline.gdshader" id="4_ohh6y"]
 [ext_resource type="PackedScene" uid="uid://dkxf1nxnhw1a4" path="res://Art/Models/KeyframeChef_EllenJoe_Rig.blend" id="5_e35ij"]
+[ext_resource type="ArrayMesh" uid="uid://06756guur25v" path="res://Art/Models/PlayerShip_V4.obj" id="6_b8ck5"]
+[ext_resource type="Material" uid="uid://bskexlm6v02jx" path="res://Art/Materials/PlayerShipMaterial.tres" id="7_4smkm"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_s6d6b"]
 
@@ -53,7 +55,7 @@ render_priority = 0
 shader = ExtResource("4_ohh6y")
 shader_parameter/outline_thickness = 1.5
 shader_parameter/step_threshold = 0.999999977648
-shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(1, 1, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3eskm"]
 custom_aabb = AABB(0, 0, 0, 19.85, 19.885, 0)
@@ -105,3 +107,8 @@ emission_box_extents = Vector3(4.47, 0.32, 7.29)
 emission_colors = PackedColorArray(0.306686, 0.565826, 0.180413, 1)
 gravity = Vector3(0, 9.8, 4.9)
 scale_amount_min = 0.0
+
+[node name="PlayerShipV4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.99445057, 0, 0.10520533, 0, 1, 0, -0.10520533, 0, -0.99445057, 1.5498971, 0, -3.7575903)
+mesh = ExtResource("6_b8ck5")
+surface_material_override/0 = ExtResource("7_4smkm")

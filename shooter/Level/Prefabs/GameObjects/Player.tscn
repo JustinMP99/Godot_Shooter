@@ -107,7 +107,6 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owh07"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0, 0, 0, 0)
 albedo_texture = ExtResource("7_p7s6k")
 texture_filter = 0
 
@@ -170,14 +169,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:surface_material_override/0:albedo_color")
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_etjia"]
@@ -194,6 +193,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ysarm"]
@@ -333,19 +344,10 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
 size = Vector3(1.2583, 1, 1.19141)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("bulletLeftPosition", "bulletCenterPosition", "bulletRightPosition", "reticle", "playerMesh", "shipAnimationTree", "shipAnimationPlayer", "reticleAnimationTree", "reticleAnimationPlayer", "shootTimer")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shootTimer")]
 rotation_order = 0
 collision_mask = 8
 script = ExtResource("1_0a5mx")
-bulletLeftPosition = NodePath("BulletPositions/Bullet Left")
-bulletCenterPosition = NodePath("BulletPositions/Bullet Center")
-bulletRightPosition = NodePath("BulletPositions/Bullet Right")
-reticle = NodePath("Reticle")
-playerMesh = NodePath("Player Ship Mesh3D")
-shipAnimationTree = NodePath("Player Ship Mesh3D/AnimationTree")
-shipAnimationPlayer = NodePath("Player Ship Mesh3D/AnimationPlayer")
-reticleAnimationTree = NodePath("Reticle/AnimationTree")
-reticleAnimationPlayer = NodePath("Reticle/AnimationPlayer")
 shootTimer = NodePath("Shoot Timer")
 reticleNormal = ExtResource("7_p7s6k")
 reticleLocked = ExtResource("3_ysarm")
