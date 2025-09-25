@@ -235,6 +235,11 @@ public partial class UIManager : Node
         healthUpgradePanel.SetLevelLabel(currentLevel, maxLevel);
     }
 
+    public void Shop_SetHealthDescriptionText(int pointsNeeded)
+    {
+        healthUpgradePanel.SetDescription("Increase Health by " + pointsNeeded.ToString() + " points");
+    }
+
     #endregion
     
     #region Debug UI Functions

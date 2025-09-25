@@ -22,9 +22,13 @@ public partial class SceneManager : Node
     private Timer powerUpTimer;
     private PlayerController player;
 
+    [ExportCategory("Upgrade Values")]
+    [Export] private int healthUpgradeCost; //Cost of the Health upgrade
+    [Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
+    [Export] private int speedUpgradeValue;
+    
     [ExportCategory("Gameplay Values")]
     [Export] private int round;
-
     [Export] private int score;
     [Export] private float powerUpTimeMax;
     private float powerUpTimeCurrent;
@@ -44,6 +48,8 @@ public partial class SceneManager : Node
         //load player data
         PlayerSetup();
 
+        DataSetup();
+        
         //setup UI
         UISetup();
 
@@ -112,6 +118,17 @@ public partial class SceneManager : Node
         }
     }
 
+    /// <summary>
+    /// Sets game data based on Player information
+    /// </summary>
+    private void DataSetup()
+    {
+
+        RefreshHealthUpgradeValues(player.Stats.HealthLevel);
+
+    }
+    
+    
     private void UISetup()
     {
         interfaceManager.SetMainUIState(true);
@@ -301,6 +318,38 @@ public partial class SceneManager : Node
 
     #region Supporting Functions
 
+
+    /// <summary>
+    /// Based on the passed in level, Health upgrade cost and health points given are refreshed
+    /// </summary>
+    /// <param name="level"></param>
+    private void RefreshHealthUpgradeValues(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                healthUpgradeCost = 50;
+                healthUpgradeAmount = 100;
+                break;
+            case 2:
+                healthUpgradeCost = 100;
+                healthUpgradeAmount = 250;
+                break;
+            case 3:
+                healthUpgradeCost = 200;
+                healthUpgradeAmount = 400;
+                break;
+            case 4:
+                healthUpgradeCost = 400;
+                healthUpgradeAmount = 0;
+                break;
+            case 5:
+                healthUpgradeCost = 800;
+                healthUpgradeAmount = 100;
+                break;
+        }
+    }
+    
     private void SetResolution(int index)
     {
         GameData.Instance.ResolutionValue = index;

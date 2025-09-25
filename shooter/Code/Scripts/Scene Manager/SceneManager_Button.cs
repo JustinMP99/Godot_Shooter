@@ -58,7 +58,12 @@ public partial class SceneManager
         interfaceManager.SetMainUIState(false);
 
         //Set Shop UI Data
+        if (player.Stats.HealthLevel != 5)
+        {
+            
+        }
         interfaceManager.Shop_SetCreditsText(player.Credits);
+        interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeCost);
         interfaceManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
 
         //Set Shop UI State
@@ -290,15 +295,11 @@ public partial class SceneManager
             switch (player.Stats.HealthLevel)
             {
                 case 1:
-
                     player.Credits -= 50;
-
                     break;
-
                 case 2:
                     player.Credits -= 100;
                     break;
-
                 case 3:
                     player.Credits -= 150;
                     break;
@@ -306,11 +307,14 @@ public partial class SceneManager
                     player.Credits -= 200;
                     break;
             }
-
+            
             player.Stats.HealthLevel++;
-            player.SetMaxHealth(player.GetMaxHealth() + 50);
+            player.SetMaxHealth(player.GetMaxHealth() + healthUpgradeCost);
             player.SetCurrentHealth(player.GetMaxHealth());
+            
+            RefreshHealthUpgradeValues(player.Stats.HealthLevel);
             interfaceManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
+            interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeCost);
             interfaceManager.Shop_SetCreditsText(player.Credits);
             saveManager.Save();
         }

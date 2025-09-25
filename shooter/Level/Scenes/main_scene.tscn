@@ -212,7 +212,6 @@ shader_parameter/outline_color = Color(1, 1, 1, 1)
 [node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "interfaceManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition")]
 script = ExtResource("1_2yd7s")
 debugEnabled = true
-powerUpTimeMax = 10.0
 saveManager = NodePath("../SaveManager")
 interfaceManager = NodePath("../Interface Manager")
 enemySpawner = NodePath("../Enemy Spawner")
@@ -220,6 +219,7 @@ bulletManager = NodePath("../Bullet Manager")
 powerUpManager = NodePath("../PowerUp Manager")
 levelNode = NodePath("../../=== LEVEL ===")
 startPosition = NodePath("../../=== LEVEL ===/Start Position")
+powerUpTimeMax = 10.0
 
 [node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
 one_shot = true
@@ -262,13 +262,13 @@ FramerateLabel = NodePath("../../=== UI ===/--- debug ---/Framerate Label")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
+spawnTimer = NodePath("Timer")
 desiredEnemies = 300
 enemyPrefab = ExtResource("5_y7ox6")
+enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
 tankStats = ExtResource("5_5d42l")
 speedstrStats = ExtResource("6_tw4tw")
 baseStats = ExtResource("7_1nw18")
-spawnTimer = NodePath("Timer")
-enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
 wait_time = 2.0
@@ -283,8 +283,8 @@ bulletPrefab = ExtResource("10_3gthi")
 
 [node name="PowerUp Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer")]
 script = ExtResource("11_am5r7")
-desiredPowerUps = 10
 spawnTimer = NodePath("Timer")
+desiredPowerUps = 10
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/PowerUp Manager"]
 wait_time = 10.0
@@ -292,6 +292,7 @@ wait_time = 10.0
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -415,7 +416,6 @@ libraries = {
 autoplay = "fade_out_anim"
 
 [node name="--- upgrade ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Shop Title Label" type="Label" parent="=== UI ===/--- upgrade ---"]
@@ -433,13 +433,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Credits Label" type="Label" parent="=== UI ===/--- upgrade ---"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -128.0
-offset_top = 216.0
-offset_right = 136.0
-offset_bottom = 281.0
+anchors_preset = -1
+anchor_left = 0.43300003
+anchor_top = 0.2
+anchor_right = 0.57100004
+anchor_bottom = 0.26000002
+offset_left = 0.6399536
+offset_right = -0.32006836
+offset_bottom = 0.19998169
 grow_horizontal = 2
 text = "Credits: 0"
 label_settings = ExtResource("14_1nw18")
@@ -452,9 +453,10 @@ anchor_left = 0.05
 anchor_top = 0.278
 anchor_right = 0.312
 anchor_bottom = 0.811
-offset_top = -0.160034
-offset_right = 5.63995
-offset_bottom = 0.0799561
+offset_left = 4.0
+offset_top = -0.16000366
+offset_right = 9.639954
+offset_bottom = 0.079956055
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
@@ -492,7 +494,7 @@ offset_right = -0.0937195
 offset_bottom = 10.8819
 grow_horizontal = 2
 grow_vertical = 2
-text = "Increase Health by __ Points"
+text = "Increase Health by __ points"
 label_settings = ExtResource("23_dntb7")
 horizontal_alignment = 1
 
@@ -526,6 +528,168 @@ text = "Upgrade"
 icon = SubResource("ImageTexture_5rw63")
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Health Panel/Button" instance=ExtResource("18_iruui")]
+
+[node name="Fire Rate Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+anchors_preset = -1
+anchor_left = 0.36600003
+anchor_top = 0.27800003
+anchor_right = 0.63100004
+anchor_bottom = 0.811
+offset_left = -2.7200317
+offset_top = -0.24002075
+offset_right = -2.840332
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
+script = ExtResource("6_7j67u")
+titleLabel = NodePath("Title Label")
+descriptionLabel = NodePath("Description Label")
+levelLabel = NodePath("Level Label")
+upgradeButton = NodePath("Button")
+
+[node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Fire Rate Panel"]
+z_index = 3
+layout_mode = 0
+anchor_top = 0.104
+anchor_right = 1.0
+anchor_bottom = 0.359
+offset_top = -47.8915
+offset_right = -4.67999
+offset_bottom = 0.259079
+text = "Fire Rate"
+label_settings = ExtResource("22_vbeqq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description Label" type="Label" parent="=== UI ===/--- upgrade ---/Fire Rate Panel"]
+z_index = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.368
+anchor_right = 0.876
+anchor_bottom = 0.698
+offset_left = 0.415009
+offset_top = -0.00382996
+offset_right = -0.0937195
+offset_bottom = 10.8819
+grow_horizontal = 2
+grow_vertical = 2
+text = "Increase Fire Rate by __ points"
+label_settings = ExtResource("23_dntb7")
+horizontal_alignment = 1
+
+[node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Fire Rate Panel"]
+z_index = 3
+layout_mode = 0
+anchor_left = 0.025
+anchor_top = 0.744
+anchor_right = 0.975
+anchor_bottom = 0.814
+offset_top = 0.0639954
+offset_bottom = -0.0159912
+text = "0/0"
+label_settings = ExtResource("23_dntb7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="=== UI ===/--- upgrade ---/Fire Rate Panel"]
+z_index = 2
+layout_mode = 0
+anchor_left = 0.252
+anchor_top = 0.868
+anchor_right = 0.739
+anchor_bottom = 0.965
+offset_left = -0.187363
+offset_top = 0.136139
+offset_right = 2.08548
+offset_bottom = 0.275757
+theme = ExtResource("24_am5r7")
+text = "Upgrade"
+icon = SubResource("ImageTexture_5rw63")
+
+[node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Fire Rate Panel/Button" instance=ExtResource("18_iruui")]
+
+[node name="Speed Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+anchors_preset = -1
+anchor_left = 0.67700005
+anchor_top = 0.27800003
+anchor_right = 0.94200003
+anchor_bottom = 0.811
+offset_left = 0.15991211
+offset_top = -0.24002075
+offset_right = 0.03942871
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
+script = ExtResource("6_7j67u")
+titleLabel = NodePath("Title Label")
+descriptionLabel = NodePath("Description Label")
+levelLabel = NodePath("Level Label")
+upgradeButton = NodePath("Button")
+
+[node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Panel"]
+z_index = 3
+layout_mode = 0
+anchor_top = 0.104
+anchor_right = 1.0
+anchor_bottom = 0.359
+offset_top = -47.8915
+offset_right = -4.67999
+offset_bottom = 0.259079
+text = "Speed"
+label_settings = ExtResource("22_vbeqq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Panel"]
+z_index = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.368
+anchor_right = 0.876
+anchor_bottom = 0.698
+offset_left = 0.415009
+offset_top = -0.00382996
+offset_right = -0.0937195
+offset_bottom = 10.8819
+grow_horizontal = 2
+grow_vertical = 2
+text = "Increase movement Speed by __ points"
+label_settings = ExtResource("23_dntb7")
+horizontal_alignment = 1
+
+[node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Panel"]
+z_index = 3
+layout_mode = 0
+anchor_left = 0.025
+anchor_top = 0.744
+anchor_right = 0.975
+anchor_bottom = 0.814
+offset_top = 0.0639954
+offset_bottom = -0.0159912
+text = "0/0"
+label_settings = ExtResource("23_dntb7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="=== UI ===/--- upgrade ---/Speed Panel"]
+z_index = 2
+layout_mode = 0
+anchor_left = 0.252
+anchor_top = 0.868
+anchor_right = 0.739
+anchor_bottom = 0.965
+offset_left = -0.187363
+offset_top = 0.136139
+offset_right = 2.08548
+offset_bottom = 0.275757
+theme = ExtResource("24_am5r7")
+text = "Upgrade"
+icon = SubResource("ImageTexture_5rw63")
+
+[node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Speed Panel/Button" instance=ExtResource("18_iruui")]
 
 [node name="Back Button" type="Button" parent="=== UI ===/--- upgrade ---"]
 anchors_preset = -1
@@ -1128,6 +1292,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6993763, 0, 16.086449)
 [connection signal="mouse_exited" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
 [connection signal="pressed" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- upgrade ---/Fire Rate Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- upgrade ---/Speed Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
 [connection signal="toggled" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
 [connection signal="item_selected" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutionDropDown"]

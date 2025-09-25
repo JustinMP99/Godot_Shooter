@@ -21,6 +21,10 @@ public partial class UpgradePanel : Control
     {
         levelLabel.Text = currentLevel.ToString() + " / " + maxLevel.ToString();
     }
-    
+
+    public void SetDescription(string newDescription)
+    {
+        descriptionLabel.Text = newDescription;
+    }
     
 }
