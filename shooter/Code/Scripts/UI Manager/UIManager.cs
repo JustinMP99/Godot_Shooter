@@ -235,9 +235,9 @@ public partial class UIManager : Node
         healthUpgradePanel.SetLevelLabel(currentLevel, maxLevel);
     }
 
-    public void Shop_SetHealthDescriptionText(int pointsNeeded)
+    public void Shop_SetHealthDescriptionText(int points)
     {
-        healthUpgradePanel.SetDescription("Increase Health by " + pointsNeeded.ToString() + " points");
+        healthUpgradePanel.SetDescription("Increase Health by " + points.ToString() + " points");
     }
 
     #endregion

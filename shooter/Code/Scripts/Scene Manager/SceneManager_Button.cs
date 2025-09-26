@@ -44,9 +44,6 @@ public partial class SceneManager
 
     public void Main_OptionsButtonFunction()
     {
-        
-        //UIManager.SetMasterSliderValue(AudioServer.);
-        
         //set UI states
         interfaceManager.SetMainUIState(false);
         interfaceManager.SetOptionsUIState(true);
@@ -155,11 +152,8 @@ public partial class SceneManager
     
     private void Options_ResetSaveDataButtonFunction()
     {
-        
         //Enable Delete Save Panel
-        
         interfaceManager.SetDeleteSavePanelState(true);
-        
     }
 
     private void Options_YesDeleteButtonFunction()
@@ -290,34 +284,35 @@ public partial class SceneManager
 
     private void Shop_UpgradeHealthButtonFunction()
     {
-        if (player.Stats.HealthLevel != 5)
+        if (player.Stats.HealthLevel != 5 && player.Credits >= healthUpgradeCost)
         {
-            switch (player.Stats.HealthLevel)
-            {
-                case 1:
-                    player.Credits -= 50;
-                    break;
-                case 2:
-                    player.Credits -= 100;
-                    break;
-                case 3:
-                    player.Credits -= 150;
-                    break;
-                case 4:
-                    player.Credits -= 200;
-                    break;
-            }
             
+            //subtract credits
+            player.Credits -= healthUpgradeCost;
+            
+            //increase health level
             player.Stats.HealthLevel++;
-            player.SetMaxHealth(player.GetMaxHealth() + healthUpgradeCost);
+            //set max health
+            player.SetMaxHealth(player.GetMaxHealth() + healthUpgradeAmount);
+            //set current health
             player.SetCurrentHealth(player.GetMaxHealth());
             
+            //update health upgrade cost and amount based on the new health level
             RefreshHealthUpgradeValues(player.Stats.HealthLevel);
+            
+            //update UI
             interfaceManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
             interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeCost);
             interfaceManager.Shop_SetCreditsText(player.Credits);
+            
+            //save 
             saveManager.Save();
         }
+    }
+
+    private void Shop_UpgradeFireRateButtonFunction()
+    {
+        
     }
 
     #endregion

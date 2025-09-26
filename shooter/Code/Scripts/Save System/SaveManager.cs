@@ -23,6 +23,7 @@ public partial class SaveManager : Node
             { "HealthLevel", tempPlayer.Stats.HealthLevel },
             { "CurrentHealth", tempPlayer.Stats.CurrentHealth },
             { "MaxHealth", tempPlayer.Stats.MaxHealth },
+            {"FireRateLevel", tempPlayer.Stats.FireRateLevel},
         };
 
         //Convert data dictionary to string for json file
