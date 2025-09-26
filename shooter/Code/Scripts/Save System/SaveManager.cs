@@ -24,6 +24,8 @@ public partial class SaveManager : Node
             { "CurrentHealth", tempPlayer.Stats.CurrentHealth },
             { "MaxHealth", tempPlayer.Stats.MaxHealth },
             {"FireRateLevel", tempPlayer.Stats.FireRateLevel},
+            {"FireRate", tempPlayer.Stats.FireRate}
+            
         };
 
         //Convert data dictionary to string for json file
@@ -79,10 +81,17 @@ public partial class SaveManager : Node
         tempPlayer.Stats.MaxHealth = tempData["MaxHealth"].AsInt32();
         tempPlayer.Stats.CurrentHealth = tempPlayer.Stats.MaxHealth;
 
+        tempPlayer.Stats.FireRateLevel = tempData["FireRateLevel"].AsInt32();
+        tempPlayer.Stats.FireRate = tempData["FireRate"].AsDouble();
+            
         return true;
     }
 
-    public bool ResetSave()
+    /// <summary>
+    /// Creates a new save file with reset information
+    /// </summary>
+    /// <returns></returns>
+    public bool NewSave()
     {
         PlayerController tempPlayer = PlayerController.Instance;
         Godot.Collections.Dictionary tempData = new Dictionary();
@@ -92,6 +101,8 @@ public partial class SaveManager : Node
             { "HealthLevel", 1 },
             { "CurrentHealth", 50 },
             { "MaxHealth", 50 },
+            {"FireRateLevel", 1},
+            {"FireRate", 0.3}
         };
 
         //Convert data dictionary to string for json file

@@ -13,6 +13,7 @@ public partial class UIManager : Node
     [Export] private Label shopCreditsLabel;
     [Export] private Label shopHealthLevelLabel;
     [Export] private UpgradePanel healthUpgradePanel;
+    [Export] private UpgradePanel fireRateUpgradePanel;
 
     [ExportCategory("Options UI")] 
     [Export] private CanvasLayer optionsUIGroup;
@@ -238,6 +239,16 @@ public partial class UIManager : Node
     public void Shop_SetHealthDescriptionText(int points)
     {
         healthUpgradePanel.SetDescription("Increase Health by " + points.ToString() + " points");
+    }
+
+    public void Shop_SetFireRateLevelText(int currentLevel, int maxLevel)
+    {
+        fireRateUpgradePanel.SetLevelLabel(currentLevel, maxLevel);
+    }
+
+    public void Shop_SetFireRateDescriptionText(float points)
+    {
+        fireRateUpgradePanel.SetDescription("Decrease Fire Rate by " + points.ToString() + " seconds");
     }
 
     #endregion

@@ -25,6 +25,8 @@ public partial class SceneManager : Node
     [ExportCategory("Upgrade Values")]
     [Export] private int healthUpgradeCost; //Cost of the Health upgrade
     [Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
+    [Export] private int fireRateUpgradeCost;
+    [Export] private float fireRateUpgradeAmount;
     [Export] private int speedUpgradeValue;
     
     [ExportCategory("Gameplay Values")]
@@ -48,7 +50,8 @@ public partial class SceneManager : Node
         //load player data
         PlayerSetup();
 
-        DataSetup();
+        //Setup game data
+        GameDataSetup();
         
         //setup UI
         UISetup();
@@ -66,6 +69,9 @@ public partial class SceneManager : Node
 
     #region Startup Functions
 
+    /// <summary>
+    /// Loads settings config file
+    /// </summary>
     private void LoadConfig()
     {
         bool configLoaded = saveManager.LoadConfig();
@@ -103,31 +109,25 @@ public partial class SceneManager : Node
         player.EnemyDefeated += DefeatedEnemy;
         player.ShootTypePowerUp += ShootTypeSwitchEvent;
         player.bulletManager = bulletManager;
-
-        player.Setup();
         
         bool loadResult = saveManager.load();
 
         if (!loadResult)
         {
-            player.Credits = 0;
-            player.Stats.CurrentHealth = 50;
-            player.Stats.MaxHealth = 50;
-            player.Stats.HealthLevel = 1;
-            saveManager.Save();
+            saveManager.NewSave();
         }
+        
+        player.Setup();
     }
 
     /// <summary>
     /// Sets game data based on Player information
     /// </summary>
-    private void DataSetup()
+    private void GameDataSetup()
     {
-
         RefreshHealthUpgradeValues(player.Stats.HealthLevel);
-
+        RefreshFireRateUpgradeValues(player.Stats.FireRateLevel);
     }
-    
     
     private void UISetup()
     {
@@ -320,7 +320,7 @@ public partial class SceneManager : Node
 
 
     /// <summary>
-    /// Based on the passed in level, Health upgrade cost and health points given are refreshed
+    /// Refreshes the HealthUpgradeCost & HealthUpgradeAmount variables based on Players stat level
     /// </summary>
     /// <param name="level"></param>
     private void RefreshHealthUpgradeValues(int level)
@@ -329,23 +329,54 @@ public partial class SceneManager : Node
         {
             case 1:
                 healthUpgradeCost = 50;
-                healthUpgradeAmount = 100;
+                healthUpgradeAmount = 50;
                 break;
             case 2:
                 healthUpgradeCost = 100;
-                healthUpgradeAmount = 250;
+                healthUpgradeAmount = 100;
                 break;
             case 3:
                 healthUpgradeCost = 200;
-                healthUpgradeAmount = 400;
+                healthUpgradeAmount = 150;
                 break;
             case 4:
                 healthUpgradeCost = 400;
-                healthUpgradeAmount = 0;
+                healthUpgradeAmount = 200;
                 break;
             case 5:
                 healthUpgradeCost = 800;
-                healthUpgradeAmount = 100;
+                healthUpgradeAmount = 300;
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Refreshes the FireRateUpgradeCost & FireRateUpgradeAmount variables based on Players stat level
+    /// </summary>
+    /// <param name="level"> The current level of the Fire Rate</param>
+    private void RefreshFireRateUpgradeValues(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                fireRateUpgradeCost = 50;
+                fireRateUpgradeAmount = 0.05f;
+                break;
+            case 2:
+                fireRateUpgradeCost = 100;
+                fireRateUpgradeAmount = 0.05f;
+                break;
+            case 3:
+                fireRateUpgradeCost = 200;
+                fireRateUpgradeAmount = 0.05f;
+                break;
+            case 4:
+                fireRateUpgradeCost = 400;
+                fireRateUpgradeAmount = 0.05f;
+                break;
+            case 5:
+                fireRateUpgradeCost = 800;
+                fireRateUpgradeAmount = 0.05f;
                 break;
         }
     }

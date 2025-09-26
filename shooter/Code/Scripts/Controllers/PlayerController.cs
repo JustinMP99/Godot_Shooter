@@ -108,6 +108,8 @@ public partial class PlayerController : CharacterBody3D
     public void Setup()
     {
 
+        shootTimer.WaitTime = Stats.FireRate;
+        
         bulletLeftPosition = GetNode<Node3D> ("BulletPositions/Bullet Left");
         bulletCenterPosition = GetNode<Node3D>("BulletPositions/Bullet Center");
         bulletRightPosition = GetNode<Node3D>("BulletPositions/Bullet Right");
@@ -370,7 +372,7 @@ public partial class PlayerController : CharacterBody3D
         switch (shootType)
         {   
             case ShootType.Single:
-                shootTimer.WaitTime = 0.15f; 
+                shootTimer.WaitTime = Stats.FireRate; 
                 break;
             case ShootType.Shotgun:
                 shootTimer.WaitTime = 1.75;
@@ -449,6 +451,11 @@ public partial class PlayerController : CharacterBody3D
         return Stats.MaxHealth;
     }
 
+    public double GetCurrentFireRate()
+    {
+        return shootTimer.WaitTime;
+    }
+
     #endregion
 
     #region Setter
@@ -463,6 +470,12 @@ public partial class PlayerController : CharacterBody3D
         Stats.MaxHealth = newMax;
     }
 
+    public void SetFireRate(double newWait)
+    {
+        shootTimer.WaitTime = newWait;
+        GD.Print("Current Shoot Time: " + shootTimer.WaitTime);
+    }
+    
     public void SetTakingInput(bool state)
     {
         takingInput = state;
@@ -480,4 +493,5 @@ public partial class PlayerController : CharacterBody3D
     }
     
     #endregion
+    
 }

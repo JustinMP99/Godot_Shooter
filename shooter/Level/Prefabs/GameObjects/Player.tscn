@@ -107,6 +107,7 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owh07"]
 transparency = 1
 shading_mode = 0
+albedo_color = Color(0, 0, 0, 0)
 albedo_texture = ExtResource("7_p7s6k")
 texture_filter = 0
 
@@ -415,7 +416,7 @@ shape = SubResource("BoxShape3D_1gt8s")
 stream = ExtResource("5_6sk5c")
 
 [node name="Shoot Timer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.3
 
 [node name="Power Up Timer" type="Timer" parent="."]
 
