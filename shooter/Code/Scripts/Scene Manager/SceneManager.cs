@@ -8,6 +8,7 @@ public partial class SceneManager : Node
 
     [ExportCategory("Managers")]
     [Export] private SaveManager saveManager;
+
     [Export] private UIManager interfaceManager;
     [Export] private EnemySpawner enemySpawner;
     [Export] private BulletManager bulletManager;
@@ -24,13 +25,15 @@ public partial class SceneManager : Node
 
     [ExportCategory("Upgrade Values")]
     [Export] private int healthUpgradeCost; //Cost of the Health upgrade
+
     [Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
     [Export] private int fireRateUpgradeCost;
     [Export] private float fireRateUpgradeAmount;
     [Export] private int speedUpgradeValue;
-    
+
     [ExportCategory("Gameplay Values")]
     [Export] private int round;
+
     [Export] private int score;
     [Export] private float powerUpTimeMax;
     private float powerUpTimeCurrent;
@@ -47,12 +50,14 @@ public partial class SceneManager : Node
         //load configuration file
         LoadConfig();
 
+        LoadSave();
+
         //load player data
         PlayerSetup();
 
         //Setup game data
         GameDataSetup();
-        
+
         //setup UI
         UISetup();
 
@@ -97,6 +102,16 @@ public partial class SceneManager : Node
         }
     }
 
+    private void LoadSave()
+    {
+        bool loadResult = saveManager.load();
+
+        if (!loadResult)
+        {
+            saveManager.NewSave();
+        }
+    }
+
     private void PlayerSetup()
     {
         player = PlayerController.Instance;
@@ -109,14 +124,7 @@ public partial class SceneManager : Node
         player.EnemyDefeated += DefeatedEnemy;
         player.ShootTypePowerUp += ShootTypeSwitchEvent;
         player.bulletManager = bulletManager;
-        
-        bool loadResult = saveManager.load();
 
-        if (!loadResult)
-        {
-            saveManager.NewSave();
-        }
-        
         player.Setup();
     }
 
@@ -128,7 +136,7 @@ public partial class SceneManager : Node
         RefreshHealthUpgradeValues(player.Stats.HealthLevel);
         RefreshFireRateUpgradeValues(player.Stats.FireRateLevel);
     }
-    
+
     private void UISetup()
     {
         interfaceManager.SetMainUIState(true);
@@ -311,13 +319,12 @@ public partial class SceneManager : Node
         //start power up timer
         powerUpTimer.Start();
         player.SwitchShootType(shootStats.ShootType);
-        player.UpdateFireRate(shootStats.FireRate);
+        //player.UpdateFireRate(shootStats.FireRate);
     }
 
     #endregion
 
     #region Supporting Functions
-
 
     /// <summary>
     /// Refreshes the HealthUpgradeCost & HealthUpgradeAmount variables based on Players stat level
@@ -380,7 +387,7 @@ public partial class SceneManager : Node
                 break;
         }
     }
-    
+
     private void SetResolution(int index)
     {
         GameData.Instance.ResolutionValue = index;

@@ -232,7 +232,7 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "fireRateUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
@@ -240,7 +240,6 @@ subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
 shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
 shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
 healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
-fireRateUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Fire Rate Panel")
 optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
 cheatDescriptionLabel = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/Cheat Description Label")
 cheatIF = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/LineEdit")

@@ -107,7 +107,7 @@ public partial class PlayerController : CharacterBody3D
     /// </summary>
     public void Setup()
     {
-
+        GD.Print("Fire Rate: " + Stats.FireRate);
         shootTimer.WaitTime = Stats.FireRate;
         
         bulletLeftPosition = GetNode<Node3D> ("BulletPositions/Bullet Left");
@@ -124,7 +124,6 @@ public partial class PlayerController : CharacterBody3D
         reticleAnimationPlayer = GetNode<AnimationPlayer>("Reticle/AnimationPlayer");
 
     }
-    
     
     #region Input Functions
 
@@ -372,6 +371,7 @@ public partial class PlayerController : CharacterBody3D
         switch (shootType)
         {   
             case ShootType.Single:
+                GD.Print("Fire Rate: " + Stats.FireRate);
                 shootTimer.WaitTime = Stats.FireRate; 
                 break;
             case ShootType.Shotgun:
