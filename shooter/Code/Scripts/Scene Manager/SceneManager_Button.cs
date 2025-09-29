@@ -56,8 +56,21 @@ public partial class SceneManager
 
         //Set Shop UI Data
         interfaceManager.Shop_SetCreditsText(player.Credits);
-        interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeCost);
-        interfaceManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
+
+        if (player.Stats.HealthLevel == 5) 
+        {
+            interfaceManager.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
+            interfaceManager.HealthUpgradePanel.SetCostLabel(" ");
+            interfaceManager.HealthUpgradePanel.SetUpgradeButtonState(true);
+        }
+        else
+        {
+            interfaceManager.HealthUpgradePanel.SetDescription("Increase Health by " + healthUpgradeAmount.ToString() + " points");
+            //interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeAmount);
+            interfaceManager.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
+        }
+        
+        interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stats.HealthLevel, 5);
         interfaceManager.Shop_SetFireRateLevelText(player.Stats.FireRateLevel, 5);
         interfaceManager.Shop_SetFireRateDescriptionText(fireRateUpgradeAmount);
         
@@ -282,29 +295,40 @@ public partial class SceneManager
 
     private void Shop_UpgradeHealthButtonFunction()
     {
-        if (player.Stats.HealthLevel != 5 && player.Credits >= healthUpgradeCost)
+        if (player.Stats.HealthLevel != 5)
         {
-            
-            //subtract credits
-            player.Credits -= healthUpgradeCost;
-            
-            //increase health level
-            player.Stats.HealthLevel++;
-            //set max health
-            player.SetMaxHealth(player.Stats.MaxHealth + healthUpgradeAmount);
-            //set current health
-            player.SetCurrentHealth(player.GetMaxHealth());
-            
-            //update health upgrade cost and amount based on the new health level
-            RefreshHealthUpgradeValues(player.Stats.HealthLevel);
-            
-            //update UI
-            interfaceManager.Shop_SetHealthLevelText(player.Stats.HealthLevel, 5);
-            interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeCost);
-            interfaceManager.Shop_SetCreditsText(player.Credits);
-            
-            //save 
-            saveManager.Save();
+            if (player.Credits >= healthUpgradeCost)
+            {
+                //subtract credits
+                player.Credits -= healthUpgradeCost;
+                //increase health level
+                player.Stats.HealthLevel++;
+                //set max health
+                player.SetMaxHealth(player.Stats.MaxHealth + healthUpgradeAmount);
+                //set current health
+                player.SetCurrentHealth(player.GetMaxHealth());
+                //update health upgrade cost and amount based on the new health level
+                RefreshHealthUpgradeValues(player.Stats.HealthLevel);
+                //update UI
+                interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stats.HealthLevel, 5);
+                interfaceManager.HealthUpgradePanel.SetDescription("Increase Health by " + healthUpgradeAmount + " points");
+                interfaceManager.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
+                interfaceManager.Shop_SetCreditsText(player.Credits);
+                //save 
+                saveManager.Save();
+            }
+            else
+            {
+                //Notify player that they do not have enough credits
+            }
+        }
+
+        if (player.Stats.HealthLevel == 5)
+        {
+            //Disable health upgrade button
+            interfaceManager.HealthUpgradePanel.SetUpgradeButtonState(true);
+            //Set description text
+            interfaceManager.HealthUpgradePanel.SetDescription("Health has been full upgraded");
         }
     }
 
@@ -320,7 +344,8 @@ public partial class SceneManager
             
             //set fire rate
             player.Stats.FireRate -= fireRateUpgradeAmount;
-            player.SetFireRate(player.Stats.FireRate);
+            //Reset shoot timer
+            player.ResetShootTimer();
             GD.Print("Fire Rate Upgrade Amount: " + fireRateUpgradeAmount);
             
             //update health upgrade cost and amount based on the new health level
@@ -328,7 +353,7 @@ public partial class SceneManager
             
             //update UI
             interfaceManager.Shop_SetFireRateLevelText(player.Stats.FireRateLevel, 5);
-            interfaceManager.Shop_SetFireRateDescriptionText(fireRateUpgradeCost);
+            interfaceManager.Shop_SetFireRateDescriptionText(fireRateUpgradeAmount);
             interfaceManager.Shop_SetCreditsText(player.Credits);
             
             //save 

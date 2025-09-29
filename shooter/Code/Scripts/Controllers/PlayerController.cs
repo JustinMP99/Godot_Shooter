@@ -10,6 +10,9 @@ public enum ShootType
 
 public partial class PlayerController : CharacterBody3D
 {
+
+    [Export] private bool debug = false;
+    
     public static PlayerController Instance { get; private set; }
 
     #region Signals
@@ -77,7 +80,6 @@ public partial class PlayerController : CharacterBody3D
     {
         Instance = this;
         canShoot = true;
-        //retAnimationPlayer.Play("hidden_idle");
     }
 
     public override void _Process(double delta)
@@ -103,13 +105,10 @@ public partial class PlayerController : CharacterBody3D
     }
 
     /// <summary>
-    /// Assigns the variables of PlayerController
+    /// Finds children nodes and assigns them to PlayerController variables
     /// </summary>
-    public void Setup()
+    public void FindNodes()
     {
-        GD.Print("Fire Rate: " + Stats.FireRate);
-        shootTimer.WaitTime = Stats.FireRate;
-        
         bulletLeftPosition = GetNode<Node3D> ("BulletPositions/Bullet Left");
         bulletCenterPosition = GetNode<Node3D>("BulletPositions/Bullet Center");
         bulletRightPosition = GetNode<Node3D>("BulletPositions/Bullet Right");
@@ -122,7 +121,6 @@ public partial class PlayerController : CharacterBody3D
         
         reticleAnimationTree = GetNode<AnimationTree>("Reticle/AnimationTree");
         reticleAnimationPlayer = GetNode<AnimationPlayer>("Reticle/AnimationPlayer");
-
     }
     
     #region Input Functions
@@ -335,17 +333,22 @@ public partial class PlayerController : CharacterBody3D
     /// </summary>
     public void Reset()
     {
-
         takingInput = false;
         shootType = ShootType.Single;
         Stats.CurrentHealth = Stats.MaxHealth;
-        
+        ResetShootTimer();
         SetReticleFlyInFalse();
         SetShipFlyInFalse();
-
         shipAnimationTree.Active = false;
         shipAnimationTree.Active = true;
+    }
 
+    /// <summary>
+    /// Resets shoot timers Wait Time to the value stored in Stats.FireRate
+    /// </summary>
+    public void ResetShootTimer()
+    {
+        shootTimer.WaitTime = Stats.FireRate;
     }
     
     #endregion
@@ -375,17 +378,12 @@ public partial class PlayerController : CharacterBody3D
                 shootTimer.WaitTime = Stats.FireRate; 
                 break;
             case ShootType.Shotgun:
-                shootTimer.WaitTime = 1.75;
+                shootTimer.WaitTime = 0.75;
                 break;
             case ShootType.Spread_Random:
-                shootTimer.WaitTime = 1.0;
+                shootTimer.WaitTime = 0.1;
                 break;
         }
-    }
-
-    public void UpdateFireRate(double newTime)
-    {
-        shootTimer.WaitTime = newTime;
     }
 
     private void EnemyDefeat()
@@ -470,10 +468,14 @@ public partial class PlayerController : CharacterBody3D
         Stats.MaxHealth = newMax;
     }
 
-    public void SetFireRate(double newWait)
+    public void SetFireRate(double newRate)
+    {
+        Stats.FireRate = newRate;
+    }
+
+    public void SetShootTimerWait(double newWait)
     {
         shootTimer.WaitTime = newWait;
-        GD.Print("Current Shoot Time: " + shootTimer.WaitTime);
     }
     
     public void SetTakingInput(bool state)

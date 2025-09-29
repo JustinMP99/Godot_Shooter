@@ -24,8 +24,9 @@ public partial class SaveManager : Node
             { "CurrentHealth", tempPlayer.Stats.CurrentHealth },
             { "MaxHealth", tempPlayer.Stats.MaxHealth },
             {"FireRateLevel", tempPlayer.Stats.FireRateLevel},
-            {"FireRate", tempPlayer.Stats.FireRate}
-            
+            {"FireRate", tempPlayer.Stats.FireRate},
+            {"SpeedLevel", tempPlayer.Stats.SpeedLevel},
+            {"Speed", tempPlayer.Stats.Speed}
         };
 
         //Convert data dictionary to string for json file
@@ -83,6 +84,11 @@ public partial class SaveManager : Node
 
         tempPlayer.Stats.FireRateLevel = tempData["FireRateLevel"].AsInt32();
         tempPlayer.Stats.FireRate = tempData["FireRate"].AsDouble();
+
+        tempPlayer.Stats.SpeedLevel = tempData["SpeedLevel"].AsInt32();
+        tempPlayer.Stats.Speed = (float)tempData["Speed"];
+        
+        tempPlayer.SetShootTimerWait(tempPlayer.Stats.FireRate);
             
         return true;
     }
@@ -102,7 +108,9 @@ public partial class SaveManager : Node
             { "CurrentHealth", 50 },
             { "MaxHealth", 50 },
             {"FireRateLevel", 1},
-            {"FireRate", 0.3}
+            {"FireRate", 0.3},
+            {"SpeedLevel", 1},
+            {"Speed", 5.0f}
         };
 
         //Convert data dictionary to string for json file

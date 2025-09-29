@@ -4,11 +4,10 @@ using System;
 public partial class SceneManager : Node
 {
     [ExportCategory("Debug")]
-    [Export] private bool debugEnabled;
+    [Export] private bool debug;
 
     [ExportCategory("Managers")]
     [Export] private SaveManager saveManager;
-
     [Export] private UIManager interfaceManager;
     [Export] private EnemySpawner enemySpawner;
     [Export] private BulletManager bulletManager;
@@ -16,7 +15,6 @@ public partial class SceneManager : Node
 
     [ExportCategory("Environment Variables")]
     [Export] private Node levelNode;
-
     [Export] private Node3D startPosition;
     private Timer introTimer; //Counts down from 3 when the player presses the start button
     private Timer roundTimer;
@@ -25,7 +23,6 @@ public partial class SceneManager : Node
 
     [ExportCategory("Upgrade Values")]
     [Export] private int healthUpgradeCost; //Cost of the Health upgrade
-
     [Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
     [Export] private int fireRateUpgradeCost;
     [Export] private float fireRateUpgradeAmount;
@@ -33,7 +30,6 @@ public partial class SceneManager : Node
 
     [ExportCategory("Gameplay Values")]
     [Export] private int round;
-
     [Export] private int score;
     [Export] private float powerUpTimeMax;
     private float powerUpTimeCurrent;
@@ -47,9 +43,10 @@ public partial class SceneManager : Node
         roundTimer = GetNode<Timer>("Round Timer");
         powerUpTimer = GetNode<Timer>("Power Up Timer");
 
-        //load configuration file
+        //load setting configuration file
         LoadConfig();
 
+        //load player save data
         LoadSave();
 
         //load player data
@@ -116,16 +113,9 @@ public partial class SceneManager : Node
     {
         player = PlayerController.Instance;
         player.Position = startPosition.Position;
-        //assign signal functions
-        player.PauseSignal += ActivatePause;
-        player.PlayerHealed += UpdateGameUI;
-        player.PlayerHit += UpdateGameUI;
-        player.PlayerDied += GameOver;
-        player.EnemyDefeated += DefeatedEnemy;
-        player.ShootTypePowerUp += ShootTypeSwitchEvent;
         player.bulletManager = bulletManager;
-
-        player.Setup();
+        SetPlayerSignals();
+        player.FindNodes();
     }
 
     /// <summary>
@@ -150,7 +140,7 @@ public partial class SceneManager : Node
         interfaceManager.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
         interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
 
-        if (debugEnabled)
+        if (debug)
         {
             interfaceManager.SetDebugUIState(true);
         }
@@ -234,7 +224,7 @@ public partial class SceneManager : Node
         {
             interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
             player.SwitchShootType(ShootType.Single);
-            player.UpdateFireRate(0.15f);
+            player.ResetShootTimer();
         }
         else
         {
@@ -326,6 +316,16 @@ public partial class SceneManager : Node
 
     #region Supporting Functions
 
+    private void SetPlayerSignals()
+    {
+        player.PauseSignal += ActivatePause;
+        player.PlayerHealed += UpdateGameUI;
+        player.PlayerHit += UpdateGameUI;
+        player.PlayerDied += GameOver;
+        player.EnemyDefeated += DefeatedEnemy;
+        player.ShootTypePowerUp += ShootTypeSwitchEvent;
+    }
+    
     /// <summary>
     /// Refreshes the HealthUpgradeCost & HealthUpgradeAmount variables based on Players stat level
     /// </summary>

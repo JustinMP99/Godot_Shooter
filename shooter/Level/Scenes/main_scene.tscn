@@ -211,7 +211,6 @@ shader_parameter/outline_color = Color(1, 1, 1, 1)
 
 [node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "interfaceManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition")]
 script = ExtResource("1_2yd7s")
-debugEnabled = true
 saveManager = NodePath("../SaveManager")
 interfaceManager = NodePath("../Interface Manager")
 enemySpawner = NodePath("../Enemy Spawner")
@@ -232,14 +231,15 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "healthUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "fireRateUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
 subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
 shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
 shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
-healthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
+HealthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
+fireRateUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Fire Rate Panel")
 optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
 cheatDescriptionLabel = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/Cheat Description Label")
 cheatIF = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/LineEdit")
@@ -447,7 +447,7 @@ label_settings = ExtResource("14_1nw18")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Health Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+[node name="Health Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "costLabel", "levelLabel", "upgradeButton")]
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.278
@@ -463,17 +463,19 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
 script = ExtResource("6_7j67u")
 titleLabel = NodePath("Title Label")
 descriptionLabel = NodePath("Description Label")
+costLabel = NodePath("Cost Label")
 levelLabel = NodePath("Level Label")
 upgradeButton = NodePath("Button")
 
 [node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Panel"]
 z_index = 3
-layout_mode = 0
-anchor_top = 0.104
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.021000002
 anchor_right = 1.0
 anchor_bottom = 0.359
-offset_top = -47.8915
-offset_right = -4.67999
+offset_top = -0.093458176
+offset_right = -4.6799927
 offset_bottom = 0.259079
 text = "Health"
 label_settings = ExtResource("22_vbeqq")
@@ -486,17 +488,36 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
 anchor_top = 0.368
-anchor_right = 0.876
-anchor_bottom = 0.698
-offset_left = 0.415009
-offset_top = -0.00382996
-offset_right = -0.0937195
-offset_bottom = 10.8819
+anchor_right = 0.87600005
+anchor_bottom = 0.514
+offset_left = 0.41500854
+offset_top = -0.003829956
+offset_right = -0.09375
+offset_bottom = -0.08230591
 grow_horizontal = 2
 grow_vertical = 2
 text = "Increase Health by __ points"
 label_settings = ExtResource("23_dntb7")
 horizontal_alignment = 1
+
+[node name="Cost Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.26900002
+anchor_top = 0.528
+anchor_right = 0.72900003
+anchor_bottom = 0.634
+offset_left = 0.16506958
+offset_top = -0.1446228
+offset_right = 0.1722107
+offset_bottom = -0.18789673
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Cost: "
+label_settings = ExtResource("23_dntb7")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Health Panel"]
 z_index = 3
