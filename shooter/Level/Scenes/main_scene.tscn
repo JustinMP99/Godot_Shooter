@@ -453,9 +453,9 @@ anchor_left = 0.05
 anchor_top = 0.278
 anchor_right = 0.312
 anchor_bottom = 0.811
-offset_left = 4.0
+offset_left = 3.0
 offset_top = -0.16000366
-offset_right = 9.639954
+offset_right = 8.639954
 offset_bottom = 0.079956055
 grow_horizontal = 2
 grow_vertical = 2
@@ -550,32 +550,34 @@ icon = SubResource("ImageTexture_5rw63")
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Health Panel/Button" instance=ExtResource("18_iruui")]
 
-[node name="Fire Rate Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+[node name="Fire Rate Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "costLabel", "levelLabel", "upgradeButton")]
 anchors_preset = -1
-anchor_left = 0.36600003
-anchor_top = 0.27800003
-anchor_right = 0.63100004
+anchor_left = 0.05
+anchor_top = 0.278
+anchor_right = 0.312
 anchor_bottom = 0.811
-offset_left = -2.7200317
-offset_top = -0.24002075
-offset_right = -2.840332
+offset_left = 604.0
+offset_top = -0.23999023
+offset_right = 609.6399
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
 script = ExtResource("6_7j67u")
 titleLabel = NodePath("Title Label")
 descriptionLabel = NodePath("Description Label")
+costLabel = NodePath("Cost Label")
 levelLabel = NodePath("Level Label")
 upgradeButton = NodePath("Button")
 
 [node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Fire Rate Panel"]
 z_index = 3
-layout_mode = 0
-anchor_top = 0.104
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.021000002
 anchor_right = 1.0
 anchor_bottom = 0.359
-offset_top = -47.8915
-offset_right = -4.67999
+offset_top = -0.093458176
+offset_right = -4.6799927
 offset_bottom = 0.259079
 text = "Fire Rate"
 label_settings = ExtResource("22_vbeqq")
@@ -588,17 +590,36 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
 anchor_top = 0.368
-anchor_right = 0.876
-anchor_bottom = 0.698
-offset_left = 0.415009
-offset_top = -0.00382996
-offset_right = -0.0937195
-offset_bottom = 10.8819
+anchor_right = 0.87600005
+anchor_bottom = 0.514
+offset_left = 0.41500854
+offset_top = 0.076156616
+offset_right = -0.09375
+offset_bottom = -0.002319336
 grow_horizontal = 2
 grow_vertical = 2
 text = "Increase Fire Rate by __ points"
 label_settings = ExtResource("23_dntb7")
 horizontal_alignment = 1
+
+[node name="Cost Label" type="Label" parent="=== UI ===/--- upgrade ---/Fire Rate Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.26900002
+anchor_top = 0.528
+anchor_right = 0.72900003
+anchor_bottom = 0.634
+offset_left = 0.16506958
+offset_top = -0.1446228
+offset_right = 0.1722107
+offset_bottom = -0.18789673
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Cost: "
+label_settings = ExtResource("23_dntb7")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Fire Rate Panel"]
 z_index = 3
@@ -631,32 +652,34 @@ icon = SubResource("ImageTexture_5rw63")
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Fire Rate Panel/Button" instance=ExtResource("18_iruui")]
 
-[node name="Speed Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+[node name="Speed Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "costLabel", "levelLabel", "upgradeButton")]
 anchors_preset = -1
-anchor_left = 0.67700005
-anchor_top = 0.27800003
-anchor_right = 0.94200003
+anchor_left = 0.05
+anchor_top = 0.278
+anchor_right = 0.312
 anchor_bottom = 0.811
-offset_left = 0.15991211
-offset_top = -0.24002075
-offset_right = 0.03942871
+offset_left = 1204.0
+offset_top = -0.23999023
+offset_right = 1209.6399
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
 script = ExtResource("6_7j67u")
 titleLabel = NodePath("Title Label")
 descriptionLabel = NodePath("Description Label")
+costLabel = NodePath("Cost Label")
 levelLabel = NodePath("Level Label")
 upgradeButton = NodePath("Button")
 
 [node name="Title Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Panel"]
 z_index = 3
-layout_mode = 0
-anchor_top = 0.104
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.021000002
 anchor_right = 1.0
 anchor_bottom = 0.359
-offset_top = -47.8915
-offset_right = -4.67999
+offset_top = -0.093458176
+offset_right = -4.6799927
 offset_bottom = 0.259079
 text = "Speed"
 label_settings = ExtResource("22_vbeqq")
@@ -669,17 +692,36 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
 anchor_top = 0.368
-anchor_right = 0.876
-anchor_bottom = 0.698
-offset_left = 0.415009
-offset_top = -0.00382996
-offset_right = -0.0937195
-offset_bottom = 10.8819
+anchor_right = 0.87600005
+anchor_bottom = 0.514
+offset_left = 0.41500854
+offset_top = 0.076156616
+offset_right = -0.09375
+offset_bottom = -0.002319336
 grow_horizontal = 2
 grow_vertical = 2
 text = "Increase movement Speed by __ points"
 label_settings = ExtResource("23_dntb7")
 horizontal_alignment = 1
+
+[node name="Cost Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.26900002
+anchor_top = 0.528
+anchor_right = 0.72900003
+anchor_bottom = 0.634
+offset_left = 0.16506958
+offset_top = -0.1446228
+offset_right = 0.1722107
+offset_bottom = -0.18789673
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Cost: "
+label_settings = ExtResource("23_dntb7")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Level Label" type="Label" parent="=== UI ===/--- upgrade ---/Speed Panel"]
 z_index = 3

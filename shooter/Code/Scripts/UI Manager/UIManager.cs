@@ -13,7 +13,7 @@ public partial class UIManager : Node
     [Export] private Label shopCreditsLabel;
     [Export] private Label shopHealthLevelLabel;
     [Export] public UpgradePanel HealthUpgradePanel;
-    [Export] public UpgradePanel fireRateUpgradePanel;
+    [Export] public UpgradePanel FireRateUpgradePanel;
 
     [ExportCategory("Options UI")] 
     [Export] private CanvasLayer optionsUIGroup;
@@ -229,21 +229,6 @@ public partial class UIManager : Node
     public void Shop_SetCreditsText(int newCredits)
     {
         shopCreditsLabel.Text = "Credits: " + newCredits.ToString();
-    }
-
-    public void Shop_SetHealthCostText(int cost)
-    {
-        HealthUpgradePanel.SetCostLabel("Cost: " + cost );
-    }
-
-    public void Shop_SetFireRateLevelText(int currentLevel, int maxLevel)
-    {
-        fireRateUpgradePanel.SetLevelLabel(currentLevel, maxLevel);
-    }
-
-    public void Shop_SetFireRateDescriptionText(float points)
-    {
-        fireRateUpgradePanel.SetDescription("Increases Fire Rate by " + points.ToString() + " seconds");
     }
 
     #endregion

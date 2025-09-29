@@ -69,10 +69,21 @@ public partial class SceneManager
             //interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeAmount);
             interfaceManager.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
         }
-        
         interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stats.HealthLevel, 5);
-        interfaceManager.Shop_SetFireRateLevelText(player.Stats.FireRateLevel, 5);
-        interfaceManager.Shop_SetFireRateDescriptionText(fireRateUpgradeAmount);
+
+        if (player.Stats.FireRateLevel == 5)
+        {
+            interfaceManager.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
+            interfaceManager.FireRateUpgradePanel.SetCostLabel(" ");
+            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonState(true);
+        }
+        else
+        {
+            interfaceManager.FireRateUpgradePanel.SetDescription("Increase Fire Rate by" + fireRateUpgradeAmount + " points");
+            //interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeAmount);
+            interfaceManager.FireRateUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
+        }
+        interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stats.FireRateLevel, 5);
         
         //Set Shop UI State
         interfaceManager.SetShopUIState(true);
@@ -328,36 +339,57 @@ public partial class SceneManager
             //Disable health upgrade button
             interfaceManager.HealthUpgradePanel.SetUpgradeButtonState(true);
             //Set description text
-            interfaceManager.HealthUpgradePanel.SetDescription("Health has been full upgraded");
+            interfaceManager.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
+            interfaceManager.HealthUpgradePanel.SetCostLabel(" ");
+            interfaceManager.HealthUpgradePanel.SetUpgradeButtonState(true);
         }
     }
 
     private void Shop_UpgradeFireRateButtonFunction()
     {
-        if (player.Stats.FireRateLevel != 5 && player.Credits >= fireRateUpgradeCost)
+        if (player.Stats.FireRateLevel != 5)
         {
-            //subtract credits
-            player.Credits -= fireRateUpgradeCost;
+
+            if (player.Credits >= fireRateUpgradeCost)
+            {
+                //subtract credits
+                player.Credits -= fireRateUpgradeCost;
             
-            //increase fire rate level
-            player.Stats.FireRateLevel++;
+                //increase fire rate level
+                player.Stats.FireRateLevel++;
             
-            //set fire rate
-            player.Stats.FireRate -= fireRateUpgradeAmount;
-            //Reset shoot timer
-            player.ResetShootTimer();
-            GD.Print("Fire Rate Upgrade Amount: " + fireRateUpgradeAmount);
+                //set fire rate
+                player.Stats.FireRate -= fireRateUpgradeAmount;
+                //Reset shoot timer
+                player.ResetShootTimer();
+                GD.Print("Fire Rate Upgrade Amount: " + fireRateUpgradeAmount);
             
-            //update health upgrade cost and amount based on the new health level
-            RefreshFireRateUpgradeValues(player.Stats.FireRateLevel);
+                //update health upgrade cost and amount based on the new health level
+                RefreshFireRateUpgradeValues(player.Stats.FireRateLevel);
             
-            //update UI
-            interfaceManager.Shop_SetFireRateLevelText(player.Stats.FireRateLevel, 5);
-            interfaceManager.Shop_SetFireRateDescriptionText(fireRateUpgradeAmount);
-            interfaceManager.Shop_SetCreditsText(player.Credits);
+                //update UI
+                interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stats.FireRateLevel, 5);
+                interfaceManager.FireRateUpgradePanel.SetDescription("Increase Fire Rate by" + fireRateUpgradeAmount + " points");
+                interfaceManager.FireRateUpgradePanel.SetCostLabel("Cost: " + fireRateUpgradeCost.ToString());
+                interfaceManager.Shop_SetCreditsText(player.Credits);
             
-            //save 
-            saveManager.Save();
+                //save 
+                saveManager.Save();
+            }
+            else
+            {
+                //notify player that they do not have enough credits
+            }
+        }
+        
+        if (player.Stats.FireRateLevel == 5)
+        {
+            //Disable health upgrade button
+            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonState(true);
+            //Set description text
+            interfaceManager.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
+            interfaceManager.FireRateUpgradePanel.SetCostLabel(" ");
+            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonState(true);
         }
     }
 
