@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cclpg32mn8mhn"]
+[gd_scene load_steps=22 format=3 uid="uid://cclpg32mn8mhn"]
 
 [ext_resource type="Shader" uid="uid://bqsrioh4pvqux" path="res://Code/Shaders/Cel-Shading-Test.gdshader" id="1_etr6r"]
 [ext_resource type="Shader" uid="uid://dbgdtv0u4hwxb" path="res://Code/Shaders/FresnelExample.gdshader" id="2_3eskm"]
@@ -61,6 +61,10 @@ shader_parameter/outline_color = Color(1, 1, 1, 1)
 custom_aabb = AABB(0, 0, 0, 19.85, 19.885, 0)
 size = Vector3(0.5, 0.5, 0.5)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b8ck5"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_4smkm"]
+
 [node name="TestScene" type="Node"]
 
 [node name="Cel Shading Example" type="Node3D" parent="."]
@@ -112,3 +116,11 @@ scale_amount_min = 0.0
 transform = Transform3D(-0.99445057, 0, 0.10520533, 0, 1, 0, -0.10520533, 0, -0.99445057, 1.5498971, 0, -3.7575903)
 mesh = ExtResource("6_b8ck5")
 surface_material_override/0 = ExtResource("7_4smkm")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.96822, 0, 0)
+amount = 4
+trail_enabled = true
+trail_lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_b8ck5")
+draw_pass_1 = SubResource("QuadMesh_4smkm")

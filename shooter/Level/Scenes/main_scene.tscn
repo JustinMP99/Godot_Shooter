@@ -231,7 +231,7 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "fireRateUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "FireRateUpgradePanel", "SpeedUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
@@ -239,7 +239,8 @@ subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
 shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
 shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
 HealthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
-fireRateUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Fire Rate Panel")
+FireRateUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Fire Rate Panel")
+SpeedUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Speed Panel")
 optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
 cheatDescriptionLabel = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/Cheat Description Label")
 cheatIF = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/LineEdit")
@@ -654,13 +655,13 @@ icon = SubResource("ImageTexture_5rw63")
 
 [node name="Speed Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "costLabel", "levelLabel", "upgradeButton")]
 anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.278
-anchor_right = 0.312
+anchor_left = 0.67700005
+anchor_top = 0.27800003
+anchor_right = 0.94200003
 anchor_bottom = 0.811
-offset_left = 1204.0
-offset_top = -0.23999023
-offset_right = 1209.6399
+offset_left = 0.15991211
+offset_top = -0.24002075
+offset_right = 0.039916992
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")

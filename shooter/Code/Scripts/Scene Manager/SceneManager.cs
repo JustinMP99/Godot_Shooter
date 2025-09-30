@@ -26,8 +26,9 @@ public partial class SceneManager : Node
     [Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
     [Export] private int fireRateUpgradeCost;
     [Export] private float fireRateUpgradeAmount;
-    [Export] private int speedUpgradeValue;
-
+    [Export] private int speedUpgradeCost;
+    [Export] private float speedUpgradeAmount;
+    
     [ExportCategory("Gameplay Values")]
     [Export] private int round;
     [Export] private int score;
@@ -125,6 +126,7 @@ public partial class SceneManager : Node
     {
         RefreshHealthUpgradeValues(player.Stats.HealthLevel);
         RefreshFireRateUpgradeValues(player.Stats.FireRateLevel);
+        RefreshSpeedUpgradeValues(player.Stats.SpeedLevel);
     }
 
     private void UISetup()
@@ -272,6 +274,7 @@ public partial class SceneManager : Node
     {
         //Stop Spawning Enemies
         enemySpawner.StopTimer();
+        powerUpManager.StopTimer();
 
         int tempCredits = score / 10;
         player.Credits += tempCredits;
@@ -388,6 +391,33 @@ public partial class SceneManager : Node
         }
     }
 
+    private void RefreshSpeedUpgradeValues(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                speedUpgradeCost = 50;
+                speedUpgradeAmount = 1.0f;
+                break;
+            case 2:
+                speedUpgradeCost = 100;
+                speedUpgradeAmount = 1.0f;
+                break;
+            case 3:
+                speedUpgradeCost = 200;
+                speedUpgradeAmount = 1.0f;
+                break;
+            case 4:
+                speedUpgradeCost = 400;
+                speedUpgradeAmount = 1.0f;
+                break;
+            case 5:
+                speedUpgradeCost = 800;
+                speedUpgradeAmount = 1.0f;
+                break;
+        }
+    }
+    
     private void SetResolution(int index)
     {
         GameData.Instance.ResolutionValue = index;

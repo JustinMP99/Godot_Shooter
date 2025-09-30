@@ -61,7 +61,7 @@ public partial class SceneManager
         {
             interfaceManager.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
             interfaceManager.HealthUpgradePanel.SetCostLabel(" ");
-            interfaceManager.HealthUpgradePanel.SetUpgradeButtonState(true);
+            interfaceManager.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
         else
         {
@@ -75,15 +75,28 @@ public partial class SceneManager
         {
             interfaceManager.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
             interfaceManager.FireRateUpgradePanel.SetCostLabel(" ");
-            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonState(true);
+            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
         else
         {
-            interfaceManager.FireRateUpgradePanel.SetDescription("Increase Fire Rate by" + fireRateUpgradeAmount + " points");
+            interfaceManager.FireRateUpgradePanel.SetDescription("Increase Fire Rate by " + fireRateUpgradeAmount + " points");
             //interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeAmount);
             interfaceManager.FireRateUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
         }
         interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stats.FireRateLevel, 5);
+
+        if (player.Stats.SpeedLevel == 5)
+        {
+            interfaceManager.SpeedUpgradePanel.SetDescription("Speed has been fully upgraded");
+            interfaceManager.SpeedUpgradePanel.SetCostLabel(" ");
+            interfaceManager.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
+        }
+        else
+        {
+            interfaceManager.SpeedUpgradePanel.SetDescription("Increase Speed by " + speedUpgradeAmount + " point");
+            interfaceManager.SpeedUpgradePanel.SetCostLabel("Cost: " + speedUpgradeCost);
+        }
+        interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.SpeedLevel, 5);
         
         //Set Shop UI State
         interfaceManager.SetShopUIState(true);
@@ -337,11 +350,11 @@ public partial class SceneManager
         if (player.Stats.HealthLevel == 5)
         {
             //Disable health upgrade button
-            interfaceManager.HealthUpgradePanel.SetUpgradeButtonState(true);
+            interfaceManager.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
             //Set description text
             interfaceManager.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
             interfaceManager.HealthUpgradePanel.SetCostLabel(" ");
-            interfaceManager.HealthUpgradePanel.SetUpgradeButtonState(true);
+            interfaceManager.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
     }
 
@@ -385,13 +398,61 @@ public partial class SceneManager
         if (player.Stats.FireRateLevel == 5)
         {
             //Disable health upgrade button
-            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonState(true);
+            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
             //Set description text
             interfaceManager.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
             interfaceManager.FireRateUpgradePanel.SetCostLabel(" ");
-            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonState(true);
+            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
     }
 
+    private void Shop_UpgradeSpeedButtonFunction()
+    {
+        if (player.Stats.SpeedLevel != 5)
+        {
+
+            if (player.Credits >= speedUpgradeCost)
+            {
+                //subtract credits
+                player.Credits -= speedUpgradeCost;
+            
+                //increase fire rate level
+                player.Stats.SpeedLevel++;
+            
+                //set fire rate
+                player.Stats.Speed-= speedUpgradeAmount;
+                //Reset shoot timer
+                player.ResetShootTimer();
+                GD.Print("Speed Upgrade Amount: " + speedUpgradeAmount);
+            
+                //update health upgrade cost and amount based on the new health level
+                RefreshFireRateUpgradeValues(player.Stats.SpeedLevel);
+            
+                //update UI
+                interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.SpeedLevel, 5);
+                interfaceManager.SpeedUpgradePanel.SetDescription("Increase Speed by" + speedUpgradeAmount + " point");
+                interfaceManager.SpeedUpgradePanel.SetCostLabel("Cost: " + speedUpgradeCost.ToString());
+                interfaceManager.Shop_SetCreditsText(player.Credits);
+            
+                //save 
+                saveManager.Save();
+            }
+            else
+            {
+                //notify player that they do not have enough credits
+            }
+        }
+        
+        if (player.Stats.SpeedLevel == 5)
+        {
+            //Disable health upgrade button
+            interfaceManager.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
+            //Set description text
+            interfaceManager.SpeedUpgradePanel.SetDescription("Speed has been fully upgraded");
+            interfaceManager.SpeedUpgradePanel.SetCostLabel(" ");
+            interfaceManager.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
+        }
+    }
+    
     #endregion
 }

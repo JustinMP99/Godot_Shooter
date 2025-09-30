@@ -14,6 +14,7 @@ public partial class UIManager : Node
     [Export] private Label shopHealthLevelLabel;
     [Export] public UpgradePanel HealthUpgradePanel;
     [Export] public UpgradePanel FireRateUpgradePanel;
+    [Export] public UpgradePanel SpeedUpgradePanel;
 
     [ExportCategory("Options UI")] 
     [Export] private CanvasLayer optionsUIGroup;

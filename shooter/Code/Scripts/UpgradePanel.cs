@@ -11,7 +11,7 @@ public partial class UpgradePanel : Control
     [Export] private Button upgradeButton;
 
 
-    public void SetUpgradeButtonState(bool state)
+    public void SetUpgradeButtonDisabledState(bool state)
     {
         upgradeButton.Disabled = state;
     }
