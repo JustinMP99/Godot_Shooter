@@ -1357,7 +1357,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6993763, 0, 16.086449)
 [connection signal="pressed" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Quit Button" to="=== MANAGER ===/Scene Manager" method="Main_QuitGameFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Health Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Fire Rate Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeFireRateButtonFunction"]
-[connection signal="pressed" from="=== UI ===/--- upgrade ---/Speed Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeHealthButtonFunction"]
+[connection signal="pressed" from="=== UI ===/--- upgrade ---/Speed Panel/Button" to="=== MANAGER ===/Scene Manager" method="Shop_UpgradeSpeedButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- upgrade ---/Back Button" to="=== MANAGER ===/Scene Manager" method="Shop_BackButtonFunction"]
 [connection signal="toggled" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Fullscreen Toggle" to="=== MANAGER ===/Scene Manager" method="Options_FullscreenToggleFunction"]
 [connection signal="item_selected" from="=== UI ===/--- options ---/Settings Panel/Core Settings/Resolution Option" to="=== MANAGER ===/Scene Manager" method="Options_ResolutionDropDown"]
