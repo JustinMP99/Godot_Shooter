@@ -8,6 +8,12 @@ public enum ShootType
     Spread_Random
 }
 
+public enum InputState
+{
+    Game,
+    Menu,
+}
+
 public partial class PlayerController : CharacterBody3D
 {
 
@@ -34,6 +40,11 @@ public partial class PlayerController : CharacterBody3D
     #endregion
 
     public Node3D startPosition;
+
+    [ExportCategory("Input Variables")]
+    [Export] private InputState inputState;
+    [Export] private int currentMenuIter = 0;
+    [Export] private int maxMenuIter = 0;
     
     [ExportCategory("Player Components")]
     private Node3D bulletLeftPosition;
@@ -80,6 +91,7 @@ public partial class PlayerController : CharacterBody3D
     {
         Instance = this;
         canShoot = true;
+        inputState = InputState.Game;
     }
 
     public override void _Process(double delta)
@@ -127,6 +139,21 @@ public partial class PlayerController : CharacterBody3D
 
     private void CollectInput()
     {
+
+        switch (inputState) 
+        {
+            case InputState.Menu:
+
+                break;
+            case InputState.Game:
+            GameInput();
+                break;
+            
+        }
+    }
+
+    private void GameInput()
+    {
         direction = Vector3.Zero;
         rotation = Vector3.Zero;
         
@@ -141,7 +168,7 @@ public partial class PlayerController : CharacterBody3D
             direction.X += 1.0f;
             rotation.Z -= 0.25f;
         }
-
+        
         if (Input.IsActionPressed("Shoot"))
         {
             ShootFunction();
@@ -156,6 +183,11 @@ public partial class PlayerController : CharacterBody3D
         {
             direction = direction.Normalized();
         }
+    }
+
+    private void MenuInput()
+    {
+         
     }
 
     private void PauseFunction()
