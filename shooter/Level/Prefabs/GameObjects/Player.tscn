@@ -8,8 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="5_6sk5c"]
 [ext_resource type="Texture2D" uid="uid://dd5xbi8wjah3l" path="res://Art/Sprites/Reticles/Reticle_V2.png" id="7_p7s6k"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ysarm"]
 animation = &"fly_in"
 
@@ -50,14 +48,14 @@ length = 2.5
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Player Ship Mesh3D")
+tracks/0/path = NodePath("Mesh/Player Ship Mesh3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array()
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Player Ship Mesh3D:position")
+tracks/1/path = NodePath("Mesh/Player Ship Mesh3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -73,14 +71,14 @@ loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Player Ship Mesh3D")
+tracks/0/path = NodePath("Mesh/Player Ship Mesh3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array()
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Player Ship Mesh3D:position")
+tracks/1/path = NodePath("Mesh/Player Ship Mesh3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -345,54 +343,78 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_1gt8s"]
 size = Vector3(1.2583, 1, 1.19141)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mprxd"]
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shootTimer")]
 rotation_order = 0
 collision_mask = 8
 script = ExtResource("1_0a5mx")
-shootTimer = NodePath("Shoot Timer")
+shootTimer = NodePath("Timers/Shoot Timer")
 reticleNormal = ExtResource("7_p7s6k")
 reticleLocked = ExtResource("3_ysarm")
 Stats = ExtResource("2_ysarm")
 
-[node name="Wall Collider" type="CollisionShape3D" parent="."]
-visible = false
-shape = SubResource("BoxShape3D_mprxd")
+[node name="Components" type="Node" parent="."]
 
-[node name="Player Ship Mesh3D" type="MeshInstance3D" parent="."]
+[node name="Input Component" type="Node" parent="Components"]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Shoot Timer" type="Timer" parent="Timers"]
+wait_time = 0.3
+
+[node name="Mesh" type="Node" parent="."]
+
+[node name="Player Ship Mesh3D" type="MeshInstance3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 rotation_order = 0
 mesh = ExtResource("3_p7s6k")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_20vac")
 
-[node name="AnimationTree" type="AnimationTree" parent="Player Ship Mesh3D"]
-root_node = NodePath("../..")
+[node name="AnimationTree" type="AnimationTree" parent="Mesh/Player Ship Mesh3D"]
+root_node = NodePath("../../..")
 tree_root = SubResource("AnimationNodeStateMachine_ysarm")
 anim_player = NodePath("../AnimationPlayer")
 "parameters/conditions/Fly In" = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player Ship Mesh3D"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mesh/Player Ship Mesh3D"]
+root_node = NodePath("../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_q31ju")
 }
 
-[node name="Reticle" type="MeshInstance3D" parent="."]
+[node name="Reticle" type="MeshInstance3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 mesh = SubResource("QuadMesh_odanr")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_owh07")
 
-[node name="AnimationTree" type="AnimationTree" parent="Reticle"]
+[node name="AnimationTree" type="AnimationTree" parent="Mesh/Reticle"]
 tree_root = SubResource("AnimationNodeStateMachine_p7s6k")
 anim_player = NodePath("../AnimationPlayer")
 "parameters/conditions/Fly In" = false
 "parameters/conditions/Lock On" = false
 "parameters/conditions/Return To Idle" = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Reticle"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mesh/Reticle"]
 libraries = {
 &"": SubResource("AnimationLibrary_cxc8d")
 }
+
+[node name="Colliders" type="Node" parent="."]
+
+[node name="Object Colliders" type="Area3D" parent="Colliders"]
+collision_mask = 18
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/Object Colliders"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.00322265, 0, -0.114844)
+shape = SubResource("BoxShape3D_1gt8s")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Shoot Audio Player" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_6sk5c")
 
 [node name="BulletPositions" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
@@ -405,20 +427,9 @@ transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 
 [node name="Bullet Right" type="Node3D" parent="BulletPositions"]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 0, 0)
 
-[node name="Object Colliders" type="Area3D" parent="."]
-collision_mask = 18
+[node name="Wall Collider" type="CollisionShape3D" parent="."]
+visible = false
+shape = SubResource("BoxShape3D_mprxd")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Object Colliders"]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.00322265, 0, -0.114844)
-shape = SubResource("BoxShape3D_1gt8s")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_6sk5c")
-
-[node name="Shoot Timer" type="Timer" parent="."]
-wait_time = 0.3
-
-[node name="Power Up Timer" type="Timer" parent="."]
-
-[connection signal="body_entered" from="Object Colliders" to="." method="OnBodyEntered"]
-[connection signal="timeout" from="Shoot Timer" to="." method="ReadyToShoot"]
+[connection signal="timeout" from="Timers/Shoot Timer" to="." method="ReadyToShoot"]
+[connection signal="body_entered" from="Colliders/Object Colliders" to="." method="OnBodyEntered"]
