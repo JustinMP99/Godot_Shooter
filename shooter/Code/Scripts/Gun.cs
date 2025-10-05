@@ -31,5 +31,4 @@ public partial class Gun : Node3D
 //         EmitSignal(SignalName.EnemyDefeated);
 //     }
 //     
-
 }

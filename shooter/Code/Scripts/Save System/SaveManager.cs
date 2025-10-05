@@ -12,21 +12,21 @@ public partial class SaveManager : Node
 {
     private string savePath => "user://savegame.json";
     private string configPath = "user://settings.cfg";
-    
+
     public void Save()
     {
         PlayerController tempPlayer = PlayerController.Instance;
         Godot.Collections.Dictionary tempData = new Dictionary();
         tempData = new Dictionary()
         {
-            { "Credits", tempPlayer.Credits },
-            { "HealthLevel", tempPlayer.Stats.HealthLevel },
-            { "CurrentHealth", tempPlayer.Stats.CurrentHealth },
-            { "MaxHealth", tempPlayer.Stats.MaxHealth },
-            {"FireRateLevel", tempPlayer.Stats.FireRateLevel},
-            {"FireRate", tempPlayer.Stats.FireRate},
-            {"SpeedLevel", tempPlayer.Stats.SpeedLevel},
-            {"Speed", tempPlayer.Stats.Speed}
+            { "Credits", tempPlayer.Stat.GetCredits() },
+            { "HealthLevel", tempPlayer.Stat.GetHealthLevel() },
+            { "CurrentHealth", tempPlayer.Stat.GetCurrentHealth() },
+            { "MaxHealth", tempPlayer.Stat.GetMaxHealth() },
+            { "FireRateLevel", tempPlayer.Stat.GetFireRateLevel() },
+            { "FireRate", tempPlayer.Stat.GetFireRate() },
+            { "SpeedLevel", tempPlayer.Stat.GetSpeedLevel() },
+            { "Speed", tempPlayer.Stat.GetSpeed() }
         };
 
         //Convert data dictionary to string for json file
@@ -68,28 +68,29 @@ public partial class SaveManager : Node
 
         Error error = jsonLoader.Parse(data);
 
-        // if (error != Error.Ok)
-        // {
-        //     GD.Print(error);
-        //     return false;
-        // }
+        if (error != Error.Ok)
+        {
+            GD.Print(error);
+            return false;
+        }
 
         Godot.Collections.Dictionary tempData = (Godot.Collections.Dictionary)jsonLoader.Data;
 
         //GameData.Instance.data = tempData;
-        tempPlayer.Credits = tempData["Credits"].AsInt32();
-        tempPlayer.Stats.HealthLevel = tempData["HealthLevel"].AsInt32();
-        tempPlayer.Stats.MaxHealth = tempData["MaxHealth"].AsInt32();
-        tempPlayer.Stats.CurrentHealth = tempPlayer.Stats.MaxHealth;
+        tempPlayer.Stat.SetCredits(tempData["Credits"].AsInt32());
 
-        tempPlayer.Stats.FireRateLevel = tempData["FireRateLevel"].AsInt32();
-        tempPlayer.Stats.FireRate = tempData["FireRate"].AsDouble();
+        tempPlayer.Stat.SetHealthLevel(tempData["HealthLevel"].AsInt32());
+        tempPlayer.Stat.SetCurrentHealth(tempData["MaxHealth"].AsInt32());
+        tempPlayer.Stat.SetMaxHealth(tempData["MaxHealth"].AsInt32());
 
-        tempPlayer.Stats.SpeedLevel = tempData["SpeedLevel"].AsInt32();
-        tempPlayer.Stats.Speed = (float)tempData["Speed"];
-        
-        tempPlayer.SetShootTimerWait(tempPlayer.Stats.FireRate);
-            
+        tempPlayer.Stat.SetFireRateLevel(tempData["FireRateLevel"].AsInt32());
+        tempPlayer.Stat.SetFireRate(tempData["FireRate"].AsDouble());
+
+        tempPlayer.Stat.SetSpeedLevel(tempData["SpeedLevel"].AsInt32());
+        tempPlayer.Stat.SetSpeed((float)tempData["Speed"]);
+
+        //tempPlayer.SetShootTimerWait(tempPlayer.Stat.GetFireRate());
+
         return true;
     }
 
@@ -107,15 +108,15 @@ public partial class SaveManager : Node
             { "HealthLevel", 1 },
             { "CurrentHealth", 50 },
             { "MaxHealth", 50 },
-            {"FireRateLevel", 1},
-            {"FireRate", 0.3},
-            {"SpeedLevel", 1},
-            {"Speed", 5.0f}
+            { "FireRateLevel", 1 },
+            { "FireRate", 0.3 },
+            { "SpeedLevel", 1 },
+            { "Speed", 5.0f }
         };
 
         //Convert data dictionary to string for json file
         string json = Json.Stringify(tempData);
-        
+
         //Get the global path for the User directory
         string path = ProjectSettings.GlobalizePath("user://");
 
@@ -132,32 +133,30 @@ public partial class SaveManager : Node
 
         return true;
     }
-    
+
     #region Config Save
 
     public void SaveConfig()
     {
-
         var config = new ConfigFile();
 
         float masterVolume = AudioServer.GetBusVolumeLinear(0);
         float sfxVolume = AudioServer.GetBusVolumeLinear(1);
         float musicVolume = AudioServer.GetBusVolumeLinear(2);
-        
-        config.SetValue("Audio", "MasterLevel",  masterVolume);
-        config.SetValue("Audio", "SFXLevel",  sfxVolume);
-        config.SetValue("Audio", "MusicLevel",  musicVolume);
+
+        config.SetValue("Audio", "MasterLevel", masterVolume);
+        config.SetValue("Audio", "SFXLevel", sfxVolume);
+        config.SetValue("Audio", "MusicLevel", musicVolume);
         config.SetValue("Screen", "Fullscreen", GameData.Instance.Fullscreen);
         config.SetValue("Screen", "ResolutionValue", GameData.Instance.ResolutionValue);
-        
-        config.Save(configPath);
 
+        config.Save(configPath);
     }
 
     public bool LoadConfig()
     {
         var config = new ConfigFile();
-        
+
         Error err = config.Load(configPath);
         if (err != Error.Ok)
         {
@@ -171,14 +170,13 @@ public partial class SaveManager : Node
         float musicLevel = (float)config.GetValue("Audio", "MusicLevel");
         GameData.Instance.Fullscreen = (bool)config.GetValue("Screen", "Fullscreen");
         GameData.Instance.ResolutionValue = (int)config.GetValue("Screen", "ResolutionValue");
-        
-        AudioServer.SetBusVolumeLinear(0, masterLevel );
-        AudioServer.SetBusVolumeLinear(1, sfxLevel );
-        AudioServer.SetBusVolumeLinear(2, musicLevel );
+
+        AudioServer.SetBusVolumeLinear(0, masterLevel);
+        AudioServer.SetBusVolumeLinear(1, sfxLevel);
+        AudioServer.SetBusVolumeLinear(2, musicLevel);
 
         return true;
     }
 
     #endregion
-    
 }

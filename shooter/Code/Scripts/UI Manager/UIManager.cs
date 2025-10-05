@@ -3,48 +3,54 @@ using System;
 
 public partial class UIManager : Node
 {
-    [ExportCategory("Main UI")] 
+    [ExportCategory("Main UI")]
     [Export] private CanvasLayer mainUIGroup;
+
     [Export] private Label mainCreditsLabel;
     [Export] private Label subTitleLabel;
-    
-    [ExportCategory("Shop UI")] 
+
+    [ExportCategory("Shop UI")]
     [Export] private CanvasLayer shopUIGroup;
+
     [Export] private Label shopCreditsLabel;
     [Export] private Label shopHealthLevelLabel;
     [Export] public UpgradePanel HealthUpgradePanel;
     [Export] public UpgradePanel FireRateUpgradePanel;
     [Export] public UpgradePanel SpeedUpgradePanel;
 
-    [ExportCategory("Options UI")] 
+    [ExportCategory("Options UI")]
     [Export] private CanvasLayer optionsUIGroup;
+
     [Export] private Label cheatDescriptionLabel;
     [Export] private LineEdit cheatIF;
     [Export] private Slider masterVolumeSlider;
     [Export] private Slider sfxVolumeSlider;
     [Export] private Slider musicVolumeSlider;
     [Export] private Panel deleteSavePanel;
-    
+
     [ExportCategory("Game UI")]
     [Export] public PlayerInfoBox PlayerInfoBox;
+
     [Export] private CanvasLayer gameUIGroup;
     [Export] private Label gameScoreValueLabel;
     [Export] private Label countdownLabel;
     [Export] private Label roundLabel;
-    
+
     [ExportCategory("Pause UI")]
     [Export] private CanvasLayer pauseUIGroup;
-    
-    [ExportCategory("Result UI")] 
+
+    [ExportCategory("Result UI")]
     [Export] private CanvasLayer resultUIGroup;
+
     [Export] private Label resultScoreLabel;
     [Export] private Label resultCreditsEarnedLabel;
     [Export] private Label resultTotalCreditsLabel;
 
     [ExportCategory("Debug UI")]
     [Export] private CanvasLayer debugUIGroup;
+
     [Export] private Label FramerateLabel;
-    
+
     public override void _Ready()
     {
     }
@@ -89,7 +95,7 @@ public partial class UIManager : Node
     {
         sfxVolumeSlider.Value = value;
     }
-    
+
     public void SetMusicSliderValue(float value)
     {
         musicVolumeSlider.Value = value;
@@ -99,7 +105,7 @@ public partial class UIManager : Node
     // {
     //     fullscreenToggle.ToggleMode = state;
     // }
-    
+
     // public void SetResolutionOptionButtonValue(int value)
     // {
     //     resolutionOptionButton.Selected = value;
@@ -109,12 +115,12 @@ public partial class UIManager : Node
     {
         cheatDescriptionLabel.Text = description;
     }
-    
+
     public string GetCheatIFString()
     {
         return cheatIF.Text;
     }
-    
+
     #endregion
 
     #region Game UI functions
@@ -126,44 +132,40 @@ public partial class UIManager : Node
 
     public void Game_ShowRound()
     {
-        
         //Hide healthbar, credits, etc
         PlayerInfoBox.Visible = false;
         gameScoreValueLabel.Visible = false;
-        
+
         //Show countdown/round label
         //countdownLabel.Visible = true;
-
     }
-    
+
     public void Game_HideRound()
     {
-        
         //Hide countdown/round label
         countdownLabel.Visible = false;
-        
+
         //Show healthbar, credits, etc
-        
+
         PlayerInfoBox.Visible = true;
         gameScoreValueLabel.Visible = true;
-        
     }
-    
+
     public void Game_SetScoreValueText(int newScore)
     {
         gameScoreValueLabel.Text = newScore.ToString();
     }
-    
+
     public void Game_SetCountDownLabelText(string timeVal)
     {
         countdownLabel.Text = timeVal;
     }
-    
+
     public void Game_SetCountDownLabelText(int timeVal)
     {
         countdownLabel.Text = timeVal.ToString();
     }
-    
+
     public void Game_SetCountDownLabelState(bool state)
     {
         countdownLabel.Visible = state;
@@ -184,7 +186,7 @@ public partial class UIManager : Node
         PlayerInfoBox.Visible = state;
         gameScoreValueLabel.Visible = state;
     }
-    
+
     #endregion
 
     #region Pause UI Functions
@@ -233,7 +235,7 @@ public partial class UIManager : Node
     }
 
     #endregion
-    
+
     #region Debug UI Functions
 
     public void SetDebugUIState(bool state)
@@ -245,9 +247,9 @@ public partial class UIManager : Node
     {
         FramerateLabel.Text = "FPS: " + value;
     }
-    
+
     #endregion
-    
+
     #region Getter
 
     #endregion

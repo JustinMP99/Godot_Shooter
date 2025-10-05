@@ -4,11 +4,10 @@ using System.Collections.Generic;
 
 public partial class SoundPool : Node
 {
-
     private List<SoundQueue> sounds = new List<SoundQueue>();
     private RandomNumberGenerator randNumber = new RandomNumberGenerator();
     private int lastIndex = -1;
-    
+
     public override void _Ready()
     {
         foreach (var child in GetChildren())
@@ -32,6 +31,4 @@ public partial class SoundPool : Node
         lastIndex = index;
         sounds[index].PlaySound();
     }
-    
-    
 }

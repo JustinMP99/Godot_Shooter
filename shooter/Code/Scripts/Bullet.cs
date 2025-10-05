@@ -3,15 +3,16 @@ using System;
 
 public partial class Bullet : RigidBody3D
 {
- 
     [ExportCategory("Bullet Stats")]
     //TODO: Move this stat data to a resource
     [Export] private float speed;
+
     [Export] private int damage;
     public bool InstaKill;
 
     [ExportCategory("Lifetime Variables")]
     public bool isActive;
+
     //[Export] private float lifetime;
     //[Export] private float maxLifetime;
     [Signal] public delegate void FinalShotEventHandler();
@@ -19,7 +20,7 @@ public partial class Bullet : RigidBody3D
     public override void _Ready()
     {
     }
-    
+
     public override void _PhysicsProcess(double delta)
     {
         // if (!Global.gamePaused)
@@ -44,7 +45,7 @@ public partial class Bullet : RigidBody3D
         // Move the bullet forward along its local Z axis.
         MoveAndCollide(-Transform.Basis.Z * (float)delta * speed);
 
-        
+
         // Increment the bullet's lifetime.
         //lifetime += 0.1f;
 
@@ -54,12 +55,11 @@ public partial class Bullet : RigidBody3D
             Disable();
         }
     }
-    
+
     public void OnBodyEntered(Node3D node)
     {
         if (node is EnemyController enemy)
         {
-        
             if (!InstaKill)
             {
                 bool KilledEnemy = enemy.TakeDamage(damage);
@@ -74,7 +74,7 @@ public partial class Bullet : RigidBody3D
                 enemy.Disable();
                 EmitSignal(SignalName.FinalShot);
             }
-            
+
             Position = new Vector3(-100.0f, 0.0f, 0.0f);
             Disable();
         }
@@ -86,13 +86,12 @@ public partial class Bullet : RigidBody3D
         Visible = true;
         //lifetime = 0.0f;
     }
-    
-    
+
+
     public void Disable()
-    { 
+    {
         isActive = false;
         Visible = false;
         FinalShot += null;
     }
-    
 }

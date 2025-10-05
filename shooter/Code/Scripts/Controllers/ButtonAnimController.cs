@@ -3,23 +3,20 @@ using System;
 
 public partial class ButtonAnimController : Node
 {
-
     [Export] private bool fromCenter;
     [Export] private Vector2 hoverScale = new Vector2(1, 1);
     [Export] private float time = 0.1f;
     [Export] private Tween.TransitionType transitionType;
-    
+
     private Control target;
     private Vector2 defaultScale;
 
 
     public override void _Ready()
     {
-
         target = GetParent() as Control;
         ConnectSignals();
         CallDeferred("Setup");
-
     }
 
     private void Setup()
@@ -31,7 +28,7 @@ public partial class ButtonAnimController : Node
 
         defaultScale = target.Scale;
     }
-    
+
     private void ConnectSignals()
     {
         target.MouseEntered += OnMouseEnter;
@@ -56,5 +53,4 @@ public partial class ButtonAnimController : Node
             tween.TweenProperty(target, property, value, seconds).SetTrans(transitionType);
         }
     }
-    
 }

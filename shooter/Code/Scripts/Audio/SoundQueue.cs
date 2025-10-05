@@ -5,8 +5,6 @@ using System.Collections.Generic;
 [Tool]
 public partial class SoundQueue : Node
 {
-
-    
     [Export] public int instanceCount { get; set; } = 1;
 
     private int next = 0;
@@ -15,12 +13,12 @@ public partial class SoundQueue : Node
 
     public override void _Ready()
     {
-
         if (GetChildCount() == 0)
         {
             GD.Print("No AudioStreamPlayer child found!");
             return;
         }
+
         var child = GetChild(0);
         if (child is AudioStreamPlayer audioStreamPlayer)
         {
@@ -57,5 +55,4 @@ public partial class SoundQueue : Node
             next %= audioStreamPlayers.Count;
         }
     }
-    
 }

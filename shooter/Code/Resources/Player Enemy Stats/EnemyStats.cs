@@ -12,7 +12,5 @@ public enum EnemyClass
 [GlobalClass]
 public partial class EnemyStats : BaseStats
 {
-
     [Export] public EnemyClass Class { get; set; }
-
 }

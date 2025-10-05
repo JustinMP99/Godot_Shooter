@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 public partial class EnemySpawner : Node
 {
-    
     [ExportCategory("Spawner Components")]
     [Export] private Timer spawnTimer;
+
     [Export] private PathFollow3D spawnPath;
-    
-    [ExportCategory("Enemy Data")] 
+
+    [ExportCategory("Enemy Data")]
     [Export] private int desiredEnemies;
+
     [Export] private PackedScene enemyPrefab;
     [Export] private Node3D enemyContainer;
     [Export] private EnemyStats tankStats;
@@ -19,15 +20,16 @@ public partial class EnemySpawner : Node
 
     [ExportCategory("Enemy Materials")]
     [Export] private Material baseEnemyMaterial;
+
     [Export] private Material speedstrEnemyMaterial;
     [Export] private Material tankEnemyMaterial;
-    
+
     //Pool Data
     private List<EnemyController> enemyPool;
     private List<EnemyController> activeEnemies;
     private int poolIter;
     private int poolIterMax;
-    
+
     /// <summary>
     /// creates pool of enemies and generates enemy stats
     /// </summary>
@@ -57,16 +59,15 @@ public partial class EnemySpawner : Node
 
     private void MoveActiveEnemies(double delta)
     {
-
         for (int i = 0; i < activeEnemies.Count; i++)
         {
             activeEnemies[i].MoveEnemy(delta);
         }
+
         //Remove
         activeEnemies.RemoveAll(e => !e.GetIsActive());
-
     }
-    
+
     public void DisableAllEnemies()
     {
         for (int i = 0; i < enemyPool.Count; i++)
@@ -74,36 +75,32 @@ public partial class EnemySpawner : Node
             enemyPool[i].Disable();
         }
     }
-    
+
     private void OnTimerTimeout()
     {
-
         EnemyController enemy = enemyPool[poolIter];
 
         if (!enemy.GetIsActive())
         {
-            
             SpawnEnemy(enemy);
             poolIter++;
             if (poolIter >= poolIterMax)
             {
                 poolIter = 0;
             }
-            
         }
-        
     }
 
     private void SpawnEnemy(EnemyController enemy)
     {
         //determine stats
         int value = 1;
-            
+
         if (Global.Round > 5 && Global.Round <= 10)
         {
             value = (int)GD.RandRange(1.0, 2.0);
         }
-        else if (Global.Round > 10  && Global.Round <= 20 )
+        else if (Global.Round > 10 && Global.Round <= 20)
         {
             value = (int)GD.RandRange(1.0, 3.0);
         }
@@ -120,7 +117,7 @@ public partial class EnemySpawner : Node
                 enemy.Stats = tankStats.Duplicate() as EnemyStats;
                 break;
         }
-        
+
         enemy.Enable();
         enemy.Position = new Vector3((float)GD.RandRange(-6.0, 6.0), 0.0f, -20.0f);
         activeEnemies.Add(enemy);
@@ -148,22 +145,24 @@ public partial class EnemySpawner : Node
     {
         spawnTimer.WaitTime = 2.0;
     }
-    
+
     public void StartTimer()
     {
         spawnTimer.Start();
     }
+
     public void StopTimer()
     {
         spawnTimer.Stop();
     }
+
     public void PauseTimer()
     {
         spawnTimer.Paused = true;
     }
+
     public void ResumeTimer()
     {
         spawnTimer.Paused = false;
     }
-    
 }

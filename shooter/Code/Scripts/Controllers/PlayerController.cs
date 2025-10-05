@@ -16,38 +16,48 @@ public enum InputState
 
 public partial class PlayerController : CharacterBody3D
 {
-
     [Export] private bool debug = false;
-    
+
     public static PlayerController Instance { get; private set; }
 
     #region Signals
 
-    [Signal] 
+    [Signal]
     public delegate void PauseSignalEventHandler();
-    [Signal] 
+
+    [Signal]
     public delegate void PlayerHitEventHandler();
-    [Signal] 
+
+    [Signal]
     public delegate void PlayerDiedEventHandler();
-    [Signal] 
+
+    [Signal]
     public delegate void PlayerHealedEventHandler();
-    [Signal] 
+
+    [Signal]
     public delegate void EnemyDefeatedEventHandler();
 
     [Signal]
     public delegate void ShootTypePowerUpEventHandler(PowerUpStats_ShootType shootStats);
-    
+
     #endregion
 
     public Node3D startPosition;
 
+    
+    // TODO: REMOVE THIS SECTION
     [ExportCategory("Input Variables")]
     [Export] private InputState inputState;
+
     [Export] private int currentMenuIter = 0;
     [Export] private int maxMenuIter = 0;
-    
+
     [ExportCategory("Player Components")]
-    [Export] private InputComponent inputComponent;
+    [Export] public InputComponent Input;
+
+    [Export] public StatComponent Stat;
+
+    //TODO: MOVE TO GUN COMPONENT
     private Node3D bulletLeftPosition;
     private Node3D bulletCenterPosition;
     private Node3D bulletRightPosition;
@@ -60,9 +70,12 @@ public partial class PlayerController : CharacterBody3D
     private AnimationPlayer shipAnimationPlayer;
     private AnimationTree reticleAnimationTree;
     private AnimationPlayer reticleAnimationPlayer;
+
     
+    //TODO: MOVE MOST DATA HERE TO GUN COMPONENT
     [ExportCategory("Shooting Variables")]
     [Export] private ShootType shootType;
+
     [Export] private Timer shootTimer;
     [Export] private bool canShoot;
     [Export] private Texture reticleNormal;
@@ -72,42 +85,46 @@ public partial class PlayerController : CharacterBody3D
     private Bullet cachedBulletThree;
 
     private EnemyController prevEnemy;
-    
-    [ExportCategory("Player Stats")] 
+
+    //TODO: REMOVE VARIABLES THAT ARE PRESENT IN INPUT COMPONENT
+    [ExportCategory("Player Stats")]
     [Export] private bool takingInput;
-    [Export] public int Credits;
-    [Export] public PlayerStats Stats;
+
+    //[Export] public int Credits;
+    //[Export] public PlayerStats Stats;
     [Export] private Gun playerGun;
     private Vector3 targetVelocity = Vector3.Zero;
+
     private Vector3 targetRotation = Vector3.Zero;
+
     // private Vector3 direction;
     // private Vector3 rotation;
     private float rotationSpeed = 1.25f;
-    
+
     [ExportCategory("Cheat Settings")]
     public bool Invincible = false;
+
     public bool simpleShoot;
-    
+
     public override void _Ready()
     {
         Instance = this;
         canShoot = true;
         inputState = InputState.Game;
     }
-    
+
     public override void _PhysicsProcess(double delta)
     {
-        
         if (takingInput)
         {
             ReticleRaycast();
-            //CollectInput();
             //velocity calculation
-            targetVelocity.X = inputComponent.direction.X * Stats.Speed;
+            targetVelocity.X = Input.direction.X * Stat.GetSpeed();
             Velocity = Velocity.Lerp(targetVelocity, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
             //rotation calculation
-            targetRotation.Z = inputComponent.rotation.Z * rotationSpeed;
-            playerMesh.Rotation = playerMesh.Rotation.Lerp(targetRotation, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
+            targetRotation.Z = Input.rotation.Z * rotationSpeed;
+            playerMesh.Rotation =
+                playerMesh.Rotation.Lerp(targetRotation, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
             MoveAndSlide();
         }
     }
@@ -117,45 +134,44 @@ public partial class PlayerController : CharacterBody3D
     /// </summary>
     public void FindNodes()
     {
-        bulletLeftPosition = GetNode<Node3D> ("BulletPositions/Bullet Left");
+        Input = GetNode<InputComponent>("Components/Input");
+        Stat = GetNode<StatComponent>("Components/Stats");
+
+        bulletLeftPosition = GetNode<Node3D>("BulletPositions/Bullet Left");
         bulletCenterPosition = GetNode<Node3D>("BulletPositions/Bullet Center");
         bulletRightPosition = GetNode<Node3D>("BulletPositions/Bullet Right");
 
         playerMesh = GetNode<MeshInstance3D>("Player Ship Mesh3D");
         reticle = GetNode<MeshInstance3D>("Reticle");
-        
+
         shipAnimationTree = GetNode<AnimationTree>("Player Ship Mesh3D/AnimationTree");
         shipAnimationPlayer = GetNode<AnimationPlayer>("Player Ship Mesh3D/AnimationPlayer");
-        
+
         reticleAnimationTree = GetNode<AnimationTree>("Reticle/AnimationTree");
         reticleAnimationPlayer = GetNode<AnimationPlayer>("Reticle/AnimationPlayer");
     }
-    
+
     #region Input Functions
 
     private void CollectInput()
     {
-
-        switch (inputState) 
+        switch (inputState)
         {
             case InputState.Menu:
 
                 break;
             case InputState.Game:
-            GameInput();
+                GameInput();
                 break;
-            
         }
     }
 
     private void GameInput()
     {
-       
     }
 
     private void MenuInput()
     {
-         
     }
 
     private void PauseFunction()
@@ -168,10 +184,8 @@ public partial class PlayerController : CharacterBody3D
     {
         if (canShoot)
         {
-
             switch (shootType)
             {
-                
                 case ShootType.Single:
                     cachedBulletOne = bulletManager.RequestBullet();
                     cachedBulletOne.Position = bulletCenterPosition.GlobalPosition;
@@ -188,47 +202,45 @@ public partial class PlayerController : CharacterBody3D
                     cachedBulletOne = bulletManager.RequestBullet();
                     cachedBulletTwo = bulletManager.RequestBullet();
                     cachedBulletThree = bulletManager.RequestBullet();
-                    
+
                     cachedBulletOne.Position = bulletCenterPosition.GlobalPosition;
                     cachedBulletOne.Rotation = bulletLeftPosition.GlobalRotation;
                     cachedBulletOne.FinalShot += EnemyDefeat;
-                    
+
                     cachedBulletTwo.Position = bulletCenterPosition.GlobalPosition;
                     cachedBulletTwo.Rotation = bulletCenterPosition.GlobalRotation;
                     cachedBulletTwo.FinalShot += EnemyDefeat;
-                    
+
                     cachedBulletThree.Position = bulletCenterPosition.GlobalPosition;
                     cachedBulletThree.Rotation = bulletRightPosition.GlobalRotation;
                     cachedBulletThree.FinalShot += EnemyDefeat;
-                    
+
                     cachedBulletOne.Enable();
                     cachedBulletTwo.Enable();
                     cachedBulletThree.Enable();
-                    
+
                     AudioManager.Instance.PlayShootSound();
                     //Start Timer
                     canShoot = false;
                     shootTimer.Start();
-                    
+
                     break;
                 case ShootType.Spread_Random:
-                    
+
                     cachedBulletOne = bulletManager.RequestBullet();
-                    
+
                     cachedBulletOne.Position = bulletCenterPosition.GlobalPosition;
-                    
-                    cachedBulletOne.GlobalRotation =  new Vector3(0.0f, (float)GD.RandRange(-1.0f, 1.0f), 0.0f);
-                    
+
+                    cachedBulletOne.GlobalRotation = new Vector3(0.0f, (float)GD.RandRange(-1.0f, 1.0f), 0.0f);
+
                     cachedBulletOne.FinalShot += EnemyDefeat;
-                    
+
                     cachedBulletOne.Enable();
-                    
+
                     AudioManager.Instance.PlayShootSound();
-                    
+
                     break;
-                
             }
-           
         }
     }
 
@@ -238,17 +250,15 @@ public partial class PlayerController : CharacterBody3D
 
     private void ReticleRaycast()
     {
-        
         var spaceState = GetWorld3D().DirectSpaceState;
-        
+
         var origin = bulletCenterPosition.GlobalPosition;
         var end = origin + new Vector3(0.0f, 0.0f, -100.0f);
-        var query = PhysicsRayQueryParameters3D.Create(origin, end, collisionMask:2);
-        
+        var query = PhysicsRayQueryParameters3D.Create(origin, end, collisionMask: 2);
+
         var result = spaceState.IntersectRay(query);
         if (result.ContainsKey("collider"))
         {
-
             EnemyController enemy = result["collider"].As<EnemyController>();
             if (prevEnemy != enemy || prevEnemy == null)
             {
@@ -264,9 +274,10 @@ public partial class PlayerController : CharacterBody3D
             SetReticleLockOnFalse();
             SetReticleReturnToIdleTrue();
         }
+
         if (result.ContainsKey("position"))
         {
-            Vector3 newReticlePosition =  result["position"].AsVector3();
+            Vector3 newReticlePosition = result["position"].AsVector3();
             newReticlePosition.Z += 0.1f;
             reticle.GlobalPosition = newReticlePosition;
         }
@@ -285,11 +296,11 @@ public partial class PlayerController : CharacterBody3D
             //take damage
             if (!Invincible)
             {
-                Stats.CurrentHealth -= 10;
+                Stat.DecreaseHealth(10);
             }
-            
+
             //Check currentHealth
-            if (Stats.CurrentHealth <= 0)
+            if (Stat.GetCurrentHealth() <= 0)
             {
                 takingInput = false;
                 this.Position = new Vector3(0.0f, 0.0f, 100.0f);
@@ -311,7 +322,7 @@ public partial class PlayerController : CharacterBody3D
                     PowerUpStats_Health healthStats = powerUp.Stats as PowerUpStats_Health;
                     powerUp.Disable();
                     Heal(healthStats.healthRestoreAmount);
-                break;
+                    break;
                 case PowerUpType.Shoot_Type:
                     GD.Print("Changing Shoot Type!");
                     powerUp.Disable();
@@ -335,7 +346,7 @@ public partial class PlayerController : CharacterBody3D
     {
         takingInput = false;
         shootType = ShootType.Single;
-        Stats.CurrentHealth = Stats.MaxHealth;
+        Stat.SetCurrentHealth(Stat.GetMaxHealth());
         ResetShootTimer();
         SetReticleFlyInFalse();
         SetShipFlyInFalse();
@@ -348,9 +359,9 @@ public partial class PlayerController : CharacterBody3D
     /// </summary>
     public void ResetShootTimer()
     {
-        shootTimer.WaitTime = Stats.FireRate;
+        shootTimer.WaitTime = Stat.GetFireRate();
     }
-    
+
     #endregion
 
     #region Signal Functions
@@ -358,12 +369,12 @@ public partial class PlayerController : CharacterBody3D
     public void Heal(int healAmount)
     {
         GD.Print("player has been healed for " + healAmount + " points");
-        Stats.CurrentHealth += healAmount;
-        if (Stats.CurrentHealth > Stats.MaxHealth)
+        Stat.SetCurrentHealth(Stat.GetCurrentHealth() + healAmount);
+        if (Stat.GetCurrentHealth() > Stat.GetMaxHealth())
         {
-            Stats.CurrentHealth = Stats.MaxHealth;
+            Stat.SetCurrentHealth(Stat.GetMaxHealth());
         }
-        
+
         EmitSignal(SignalName.PlayerHealed);
     }
 
@@ -372,10 +383,10 @@ public partial class PlayerController : CharacterBody3D
         shootType = newType;
 
         switch (shootType)
-        {   
+        {
             case ShootType.Single:
-                GD.Print("Fire Rate: " + Stats.FireRate);
-                shootTimer.WaitTime = Stats.FireRate; 
+                GD.Print("Fire Rate: " + Stat.GetFireRate());
+                shootTimer.WaitTime = Stat.GetFireRate();
                 break;
             case ShootType.Shotgun:
                 shootTimer.WaitTime = 0.75;
@@ -392,7 +403,7 @@ public partial class PlayerController : CharacterBody3D
     }
 
     #endregion
-    
+
     #region Animation Functions
 
     public void SetShipFlyInTrue()
@@ -409,7 +420,7 @@ public partial class PlayerController : CharacterBody3D
     {
         reticleAnimationTree.Set("parameters/conditions/Fly In", true);
     }
-    
+
     public void SetReticleFlyInFalse()
     {
         reticleAnimationTree.Set("parameters/conditions/Fly In", false);
@@ -424,7 +435,7 @@ public partial class PlayerController : CharacterBody3D
     {
         reticleAnimationTree.Set("parameters/conditions/Lock On", false);
     }
-    
+
     public void SetReticleReturnToIdleTrue()
     {
         reticleAnimationTree.Set("parameters/conditions/Return To Idle", true);
@@ -434,66 +445,16 @@ public partial class PlayerController : CharacterBody3D
     {
         reticleAnimationTree.Set("parameters/conditions/Return To Idle", false);
     }
-    
-    #endregion
-    
-    #region Getter
-
-    public int GetCurrentHealth()
-    {
-        return Stats.CurrentHealth;
-    }
-
-    public int GetMaxHealth()
-    {
-        return Stats.MaxHealth;
-    }
-
-    public double GetCurrentFireRate()
-    {
-        return shootTimer.WaitTime;
-    }
 
     #endregion
 
     #region Setter
-
-    public void SetCurrentHealth(int newCurrent)
-    {
-        Stats.CurrentHealth = newCurrent;
-    }
-
-    public void SetMaxHealth(int newMax)
-    {
-        Stats.MaxHealth = newMax;
-    }
-
-    public void SetFireRate(double newRate)
-    {
-        Stats.FireRate = newRate;
-    }
-
-    public void SetShootTimerWait(double newWait)
-    {
-        shootTimer.WaitTime = newWait;
-    }
-    
-    public void SetTakingInput(bool state)
-    {
-        takingInput = state;
-    }
-
-    public void SetSpeed(float newSpeed)
-    {
-        Stats.Speed = newSpeed;
-    }
 
     public bool SetInvincibleState()
     {
         Invincible = !Invincible;
         return Invincible;
     }
-    
+
     #endregion
-    
 }

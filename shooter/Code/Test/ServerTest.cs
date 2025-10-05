@@ -8,11 +8,11 @@ public partial class ServerTest : Node3D
 
     private List<Rid> instances;
     private float z;
+
     public override void _Ready()
     {
-
         instances = new List<Rid>();
-        
+
         // //create visual instance
         // Rid instance = RenderingServer.InstanceCreate();
         //
@@ -32,11 +32,11 @@ public partial class ServerTest : Node3D
         {
             //create visual instance
             Rid instance = RenderingServer.InstanceCreate();
-        
+
             //set the scenario from the world, ensures the instance appears with the other objects in the scene
             Rid scenario = GetWorld3D().Scenario;
             RenderingServer.InstanceSetScenario(instance, scenario);
-        
+
             //set base mesh
             mesh = new BoxMesh();
             RenderingServer.InstanceSetBase(instance, mesh.GetRid());

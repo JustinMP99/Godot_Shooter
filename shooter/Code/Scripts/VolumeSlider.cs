@@ -3,7 +3,6 @@ using System;
 
 public partial class VolumeSlider : HSlider
 {
-
     [Export] private string audioBus;
     [Export] private int busIndex;
 
@@ -17,5 +16,4 @@ public partial class VolumeSlider : HSlider
     {
         AudioServer.SetBusVolumeDb(busIndex, Mathf.LinearToDb((float)value));
     }
-    
 }

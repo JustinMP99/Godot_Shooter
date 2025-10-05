@@ -347,11 +347,10 @@ _data = {
 &"lock_on_idle": SubResource("Animation_luawp")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("inputComponent", "shootTimer")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("shootTimer")]
 rotation_order = 0
 collision_mask = 8
 script = ExtResource("1_0a5mx")
-inputComponent = NodePath("Components/Input")
 shootTimer = NodePath("Timers/Shoot Timer")
 reticleNormal = ExtResource("7_p7s6k")
 reticleLocked = ExtResource("3_ysarm")
@@ -365,6 +364,7 @@ debug = true
 
 [node name="Stats" type="Node" parent="Components"]
 script = ExtResource("6_20vac")
+stats = ExtResource("2_ysarm")
 
 [node name="Timers" type="Node" parent="."]
 
@@ -401,6 +401,7 @@ visible = false
 shape = SubResource("BoxShape3D_mprxd")
 
 [node name="Player Ship Mesh3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 rotation_order = 0
 mesh = ExtResource("3_p7s6k")
 skeleton = NodePath("")

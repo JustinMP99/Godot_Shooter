@@ -5,19 +5,22 @@ using System;
 public partial class EnemyController : RigidBody3D
 {
     private bool isActive;
+
     [ExportCategory("Enemy Stats")]
     [Export] public EnemyStats Stats;
 
     [ExportCategory("Enemy Components")]
     [Export] private Area3D area;
+
     [Export] private CollisionShape3D collider;
     [Export] private MeshInstance3D meshRef;
     [Export] private Timer hitTimer;
 
     [ExportCategory("Materials")]
     [Export] private Material normalMaterial;
+
     [Export] private Material hitMaterial;
-    
+
     public override void _Ready()
     {
     }
@@ -28,7 +31,6 @@ public partial class EnemyController : RigidBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-
     }
 
     public void MoveEnemy(double delta)
@@ -40,7 +42,7 @@ public partial class EnemyController : RigidBody3D
             Disable();
         }
     }
-    
+
     public void Release()
     {
     }
@@ -65,10 +67,9 @@ public partial class EnemyController : RigidBody3D
             Stats.Dispose();
         }
     }
-    
+
     public bool TakeDamage(int bulletDamage)
     {
-
         Stats.CurrentHealth -= bulletDamage;
         if (Stats.CurrentHealth <= 0)
         {
@@ -77,7 +78,7 @@ public partial class EnemyController : RigidBody3D
 
         meshRef.MaterialOverride = hitMaterial;
         hitTimer.Start();
-        
+
         return false;
     }
 
@@ -85,12 +86,12 @@ public partial class EnemyController : RigidBody3D
     {
         meshRef.MaterialOverride = normalMaterial;
     }
-    
+
     public void ResetHealth()
     {
         Stats.CurrentHealth = Stats.MaxHealth;
     }
-    
+
     #region Getter
 
     public bool GetIsActive()

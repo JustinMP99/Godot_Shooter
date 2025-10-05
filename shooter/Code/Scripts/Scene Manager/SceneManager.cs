@@ -8,6 +8,7 @@ public partial class SceneManager : Node
 
     [ExportCategory("Managers")]
     [Export] private SaveManager saveManager;
+
     [Export] private UIManager interfaceManager;
     [Export] private EnemySpawner enemySpawner;
     [Export] private BulletManager bulletManager;
@@ -15,6 +16,7 @@ public partial class SceneManager : Node
 
     [ExportCategory("Environment Variables")]
     [Export] private Node levelNode;
+
     [Export] private Node3D startPosition;
     private Timer introTimer; //Counts down from 3 when the player presses the start button
     private Timer roundTimer;
@@ -23,14 +25,16 @@ public partial class SceneManager : Node
 
     [ExportCategory("Upgrade Values")]
     [Export] private int healthUpgradeCost; //Cost of the Health upgrade
+
     [Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
     [Export] private int fireRateUpgradeCost;
     [Export] private float fireRateUpgradeAmount;
     [Export] private int speedUpgradeCost;
     [Export] private float speedUpgradeAmount;
-    
+
     [ExportCategory("Gameplay Values")]
     [Export] private int round;
+
     [Export] private int score;
     [Export] private float powerUpTimeMax;
     private float powerUpTimeCurrent;
@@ -199,7 +203,7 @@ public partial class SceneManager : Node
         introCount--;
         if (introCount <= 0)
         {
-            player.SetTakingInput(true);
+            player.Input.SetTakingInput(true);
             interfaceManager.Game_SetCountDownLabelState(false);
             StartNewRound();
         }
@@ -261,8 +265,7 @@ public partial class SceneManager : Node
             introTimer.Paused = true;
         }
 
-
-        player.SetTakingInput(false);
+        player.Input.SetTakingInput(false);
     }
 
     public void UpdateGameUI()
@@ -328,7 +331,7 @@ public partial class SceneManager : Node
         player.EnemyDefeated += DefeatedEnemy;
         player.ShootTypePowerUp += ShootTypeSwitchEvent;
     }
-    
+
     /// <summary>
     /// Refreshes the HealthUpgradeCost & HealthUpgradeAmount variables based on Players stat level
     /// </summary>
@@ -417,7 +420,7 @@ public partial class SceneManager : Node
                 break;
         }
     }
-    
+
     private void SetResolution(int index)
     {
         GameData.Instance.ResolutionValue = index;
