@@ -47,6 +47,7 @@ public partial class PlayerController : CharacterBody3D
     [Export] private int maxMenuIter = 0;
     
     [ExportCategory("Player Components")]
+    [Export] private InputComponent inputComponent;
     private Node3D bulletLeftPosition;
     private Node3D bulletCenterPosition;
     private Node3D bulletRightPosition;
@@ -79,8 +80,8 @@ public partial class PlayerController : CharacterBody3D
     [Export] private Gun playerGun;
     private Vector3 targetVelocity = Vector3.Zero;
     private Vector3 targetRotation = Vector3.Zero;
-    private Vector3 direction;
-    private Vector3 rotation;
+    // private Vector3 direction;
+    // private Vector3 rotation;
     private float rotationSpeed = 1.25f;
     
     [ExportCategory("Cheat Settings")]
@@ -93,24 +94,19 @@ public partial class PlayerController : CharacterBody3D
         canShoot = true;
         inputState = InputState.Game;
     }
-
-    public override void _Process(double delta)
-    {
-        
-    }
-
+    
     public override void _PhysicsProcess(double delta)
     {
         
         if (takingInput)
         {
             ReticleRaycast();
-            CollectInput();
+            //CollectInput();
             //velocity calculation
-            targetVelocity.X = direction.X * Stats.Speed;
+            targetVelocity.X = inputComponent.direction.X * Stats.Speed;
             Velocity = Velocity.Lerp(targetVelocity, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
             //rotation calculation
-            targetRotation.Z = rotation.Z * rotationSpeed;
+            targetRotation.Z = inputComponent.rotation.Z * rotationSpeed;
             playerMesh.Rotation = playerMesh.Rotation.Lerp(targetRotation, 1.0f - float.Exp(-20.0f * (float)GetProcessDeltaTime()));
             MoveAndSlide();
         }
@@ -154,35 +150,7 @@ public partial class PlayerController : CharacterBody3D
 
     private void GameInput()
     {
-        direction = Vector3.Zero;
-        rotation = Vector3.Zero;
-        
-        if (Input.IsActionPressed("Move_Left"))
-        {
-            direction.X -= 1.0f;
-            //rotation.Z += 0.25f;
-            rotation.Z += 0.25f;
-        }
-        if (Input.IsActionPressed("Move_Right"))
-        {
-            direction.X += 1.0f;
-            rotation.Z -= 0.25f;
-        }
-        
-        if (Input.IsActionPressed("Shoot"))
-        {
-            ShootFunction();
-        }
-    
-        if (Input.IsActionJustPressed("Pause"))
-        {
-            PauseFunction();
-        }
-        
-        if (direction != Vector3.Zero)
-        {
-            direction = direction.Normalized();
-        }
+       
     }
 
     private void MenuInput()
