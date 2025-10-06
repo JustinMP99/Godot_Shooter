@@ -19,14 +19,14 @@ public partial class SaveManager : Node
         Godot.Collections.Dictionary tempData = new Dictionary();
         tempData = new Dictionary()
         {
-            { "Credits", tempPlayer.Stat.GetCredits() },
-            { "HealthLevel", tempPlayer.Stat.GetHealthLevel() },
-            { "CurrentHealth", tempPlayer.Stat.GetCurrentHealth() },
-            { "MaxHealth", tempPlayer.Stat.GetMaxHealth() },
-            { "FireRateLevel", tempPlayer.Stat.GetFireRateLevel() },
-            { "FireRate", tempPlayer.Stat.GetFireRate() },
-            { "SpeedLevel", tempPlayer.Stat.GetSpeedLevel() },
-            { "Speed", tempPlayer.Stat.GetSpeed() }
+            { "Credits", tempPlayer.Stats.GetCredits() },
+            { "HealthLevel", tempPlayer.Stats.GetHealthLevel() },
+            { "CurrentHealth", tempPlayer.Stats.GetCurrentHealth() },
+            { "MaxHealth", tempPlayer.Stats.GetMaxHealth() },
+            { "FireRateLevel", tempPlayer.Stats.GetFireRateLevel() },
+            { "FireRate", tempPlayer.Stats.GetFireRate() },
+            { "SpeedLevel", tempPlayer.Stats.GetSpeedLevel() },
+            { "Speed", tempPlayer.Stats.GetSpeed() }
         };
 
         //Convert data dictionary to string for json file
@@ -77,17 +77,17 @@ public partial class SaveManager : Node
         Godot.Collections.Dictionary tempData = (Godot.Collections.Dictionary)jsonLoader.Data;
 
         //GameData.Instance.data = tempData;
-        tempPlayer.Stat.SetCredits(tempData["Credits"].AsInt32());
+        tempPlayer.Stats.SetCredits(tempData["Credits"].AsInt32());
 
-        tempPlayer.Stat.SetHealthLevel(tempData["HealthLevel"].AsInt32());
-        tempPlayer.Stat.SetCurrentHealth(tempData["MaxHealth"].AsInt32());
-        tempPlayer.Stat.SetMaxHealth(tempData["MaxHealth"].AsInt32());
+        tempPlayer.Stats.SetHealthLevel(tempData["HealthLevel"].AsInt32());
+        tempPlayer.Stats.SetCurrentHealth(tempData["MaxHealth"].AsInt32());
+        tempPlayer.Stats.SetMaxHealth(tempData["MaxHealth"].AsInt32());
 
-        tempPlayer.Stat.SetFireRateLevel(tempData["FireRateLevel"].AsInt32());
-        tempPlayer.Stat.SetFireRate(tempData["FireRate"].AsDouble());
+        tempPlayer.Stats.SetFireRateLevel(tempData["FireRateLevel"].AsInt32());
+        tempPlayer.Stats.SetFireRate(tempData["FireRate"].AsDouble());
 
-        tempPlayer.Stat.SetSpeedLevel(tempData["SpeedLevel"].AsInt32());
-        tempPlayer.Stat.SetSpeed((float)tempData["Speed"]);
+        tempPlayer.Stats.SetSpeedLevel(tempData["SpeedLevel"].AsInt32());
+        tempPlayer.Stats.SetSpeed((float)tempData["Speed"]);
 
         //tempPlayer.SetShootTimerWait(tempPlayer.Stat.GetFireRate());
 

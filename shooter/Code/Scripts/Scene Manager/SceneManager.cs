@@ -118,9 +118,9 @@ public partial class SceneManager : Node
     {
         player = PlayerController.Instance;
         player.Position = startPosition.Position;
-        player.bulletManager = bulletManager;
+        player.Gun.bulletManager = bulletManager;
         SetPlayerSignals();
-        player.FindNodes();
+        //player.FindNodes();
     }
 
     /// <summary>
@@ -128,9 +128,9 @@ public partial class SceneManager : Node
     /// </summary>
     private void GameDataSetup()
     {
-        RefreshHealthUpgradeValues(player.Stats.HealthLevel);
-        RefreshFireRateUpgradeValues(player.Stats.FireRateLevel);
-        RefreshSpeedUpgradeValues(player.Stats.SpeedLevel);
+        RefreshHealthUpgradeValues(player.Stats.GetHealthLevel());
+        RefreshFireRateUpgradeValues(player.Stats.GetFireRateLevel());
+        RefreshSpeedUpgradeValues(player.Stats.GetSpeedLevel());
     }
 
     private void UISetup()
@@ -141,7 +141,7 @@ public partial class SceneManager : Node
         interfaceManager.SetGameUIState(false);
         interfaceManager.SetResultUIState(false);
         interfaceManager.SetShopUIState(false);
-        interfaceManager.Main_SetCreditsText(player.Credits);
+        interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
 
         interfaceManager.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
         interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
@@ -204,6 +204,7 @@ public partial class SceneManager : Node
         if (introCount <= 0)
         {
             player.Input.SetTakingInput(true);
+            player.Gun.SetCanShoot(true);
             interfaceManager.Game_SetCountDownLabelState(false);
             StartNewRound();
         }
@@ -230,7 +231,7 @@ public partial class SceneManager : Node
         {
             interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
             player.SwitchShootType(ShootType.Single);
-            player.ResetShootTimer();
+            player.Gun.UpdateShootTimer(player.Stats.GetFireRate());
         }
         else
         {
@@ -270,7 +271,7 @@ public partial class SceneManager : Node
 
     public void UpdateGameUI()
     {
-        interfaceManager.PlayerInfoBox.SetHealthBarCurrent(player.GetCurrentHealth());
+        interfaceManager.PlayerInfoBox.SetHealthBarCurrent(player.Stats.GetCurrentHealth());
     }
 
     public void GameOver()
@@ -280,7 +281,7 @@ public partial class SceneManager : Node
         powerUpManager.StopTimer();
 
         int tempCredits = score / 10;
-        player.Credits += tempCredits;
+        player.Stats.IncreaseCredits(tempCredits);
 
         //Update UI
         interfaceManager.SetGameUIState(false);
@@ -288,7 +289,7 @@ public partial class SceneManager : Node
 
         interfaceManager.Result_SetScoreText(score);
         interfaceManager.Result_SetCreditsEarnedText(tempCredits);
-        interfaceManager.Result_SetTotalCreditsText(player.Credits);
+        interfaceManager.Result_SetTotalCreditsText(player.Stats.GetCredits());
     }
 
     public void DefeatedEnemy()
@@ -324,11 +325,12 @@ public partial class SceneManager : Node
 
     private void SetPlayerSignals()
     {
-        player.PauseSignal += ActivatePause;
+        player.Input.PauseSignal += ActivatePause;
+        player.Gun.EnemyDefeated += DefeatedEnemy;
+        player.Input.ShootSignal += player.Gun.Shoot;
         player.PlayerHealed += UpdateGameUI;
         player.PlayerHit += UpdateGameUI;
         player.PlayerDied += GameOver;
-        player.EnemyDefeated += DefeatedEnemy;
         player.ShootTypePowerUp += ShootTypeSwitchEvent;
     }
 

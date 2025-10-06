@@ -89,7 +89,7 @@ public partial class StatComponent : Node
     #endregion
 
     #region Setter
-
+    
     public void SetCredits(int newValue)
     {
         Credits = newValue;

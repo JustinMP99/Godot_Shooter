@@ -20,19 +20,7 @@ public partial class EnemyController : RigidBody3D
     [Export] private Material normalMaterial;
 
     [Export] private Material hitMaterial;
-
-    public override void _Ready()
-    {
-    }
-
-    public void _Process(double delta)
-    {
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-    }
-
+    
     public void MoveEnemy(double delta)
     {
         MoveAndCollide(Transform.Basis.Z * (float)delta * Stats.Speed);

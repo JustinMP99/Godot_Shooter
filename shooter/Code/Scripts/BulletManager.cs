@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class BulletManager : Node
 {
+    
     [ExportCategory("Bullet Data")]
     [Export] private int desiredBullets;
 

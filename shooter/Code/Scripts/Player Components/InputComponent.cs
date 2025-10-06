@@ -3,12 +3,14 @@ using System;
 
 public partial class InputComponent : Node
 {
+    [Signal] public delegate void PauseSignalEventHandler();
+    [Signal] public delegate void ShootSignalEventHandler();
+    
     [ExportCategory("Debug")]
     [Export] private bool debug = false;
 
     [ExportCategory("Core Input Data")]
-    public bool takingInput;
-
+    private bool takingInput;
     public Vector3 direction;
     public Vector3 rotation;
 
@@ -34,10 +36,14 @@ public partial class InputComponent : Node
 
             if (Input.IsActionPressed("Shoot"))
             {
+                EmitSignal(SignalName.ShootSignal);
             }
 
             if (Input.IsActionJustPressed("Pause"))
             {
+
+                EmitSignal(SignalName.PauseSignal);
+
             }
 
             if (direction != Vector3.Zero)
@@ -53,6 +59,11 @@ public partial class InputComponent : Node
     }
 
     #region Getter
+
+    public bool GetTakingInput()
+    {
+        return takingInput;
+    }
 
     #endregion
 

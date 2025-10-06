@@ -23,14 +23,14 @@ public partial class SceneManager
         player.Position = startPosition.Position;
 
         //Set UI Data
-        interfaceManager.PlayerInfoBox.SetHealthBarMax(player.Stat.GetMaxHealth());
-        interfaceManager.PlayerInfoBox.SetHealthBarCurrent(player.Stat.GetCurrentHealth());
+        interfaceManager.PlayerInfoBox.SetHealthBarMax(player.Stats.GetMaxHealth());
+        interfaceManager.PlayerInfoBox.SetHealthBarCurrent(player.Stats.GetCurrentHealth());
         interfaceManager.Game_SetScoreValueText(score);
 
         interfaceManager.Game_SetHudState(false);
 
-        player.SetShipFlyInTrue();
-        player.SetReticleFlyInTrue();
+        player.animController.SetShipFlyInTrue();
+        player.animController.SetReticleFlyInTrue();
 
         //Start timer
         StartIntroTimer();
@@ -54,9 +54,9 @@ public partial class SceneManager
         interfaceManager.SetMainUIState(false);
 
         //Set Shop UI Data
-        interfaceManager.Shop_SetCreditsText(player.Stat.GetCredits());
+        interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
 
-        if (player.Stat.GetHealthLevel() == 5)
+        if (player.Stats.GetHealthLevel() == 5)
         {
             interfaceManager.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
             interfaceManager.HealthUpgradePanel.SetCostLabel(" ");
@@ -70,9 +70,9 @@ public partial class SceneManager
             interfaceManager.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
         }
 
-        interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stat.GetHealthLevel(), 5);
+        interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stats.GetHealthLevel(), 5);
 
-        if (player.Stat.GetFireRateLevel() == 5)
+        if (player.Stats.GetFireRateLevel() == 5)
         {
             interfaceManager.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
             interfaceManager.FireRateUpgradePanel.SetCostLabel(" ");
@@ -86,9 +86,9 @@ public partial class SceneManager
             interfaceManager.FireRateUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
         }
 
-        interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stat.GetFireRateLevel(), 5);
+        interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stats.GetFireRateLevel(), 5);
 
-        if (player.Stat.GetSpeedLevel() == 5)
+        if (player.Stats.GetSpeedLevel() == 5)
         {
             interfaceManager.SpeedUpgradePanel.SetDescription("Speed has been fully upgraded");
             interfaceManager.SpeedUpgradePanel.SetCostLabel(" ");
@@ -100,7 +100,7 @@ public partial class SceneManager
             interfaceManager.SpeedUpgradePanel.SetCostLabel("Cost: " + speedUpgradeCost);
         }
 
-        interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stat.GetSpeedLevel(), 5);
+        interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.GetSpeedLevel(), 5);
 
         //Set Shop UI State
         interfaceManager.SetShopUIState(true);
@@ -197,7 +197,7 @@ public partial class SceneManager
         saveManager.NewSave();
         saveManager.load();
         //Refresh Credits UI
-        interfaceManager.Main_SetCreditsText(player.Stat.GetCredits());
+        interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
         interfaceManager.SetDeleteSavePanelState(false);
     }
 
@@ -281,14 +281,14 @@ public partial class SceneManager
 
     private void Result_RestartButtonFunction()
     {
-        player.Stat.SetCurrentHealth(player.Stat.GetMaxHealth());
+        player.Stats.SetCurrentHealth(player.Stats.GetMaxHealth());
 
         saveManager.Save();
     }
 
     private void Result_MainMenuButtonFunction()
     {
-        interfaceManager.Main_SetCreditsText(player.Stat.GetCredits());
+        interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
 
         interfaceManager.SetResultUIState(false);
 
@@ -313,33 +313,33 @@ public partial class SceneManager
     {
         interfaceManager.SetShopUIState(false);
 
-        interfaceManager.Main_SetCreditsText(player.Stat.GetCredits());
+        interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
 
         interfaceManager.SetMainUIState(true);
     }
 
     private void Shop_UpgradeHealthButtonFunction()
     {
-        if (player.Stat.GetHealthLevel() != 5)
+        if (player.Stats.GetHealthLevel() != 5)
         {
-            if (player.Stat.GetCredits() >= healthUpgradeCost)
+            if (player.Stats.GetCredits() >= healthUpgradeCost)
             {
                 //subtract credits
-                player.Stat.DecreaseCredits(healthUpgradeCost);
+                player.Stats.DecreaseCredits(healthUpgradeCost);
                 //increase health level
-                player.Stat.IncrementHealthLevel();
+                player.Stats.IncrementHealthLevel();
                 //set max health
-                player.Stat.SetMaxHealth(player.Stat.GetMaxHealth() + healthUpgradeAmount);
+                player.Stats.SetMaxHealth(player.Stats.GetMaxHealth() + healthUpgradeAmount);
                 //set current health
-                player.Stat.SetCurrentHealth(player.Stat.GetMaxHealth());
+                player.Stats.SetCurrentHealth(player.Stats.GetMaxHealth());
                 //update health upgrade cost and amount based on the new health level
-                RefreshHealthUpgradeValues(player.Stat.GetHealthLevel());
+                RefreshHealthUpgradeValues(player.Stats.GetHealthLevel());
                 //update UI
-                interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stat.GetHealthLevel(), 5);
+                interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stats.GetHealthLevel(), 5);
                 interfaceManager.HealthUpgradePanel.SetDescription("Increase Health by " + healthUpgradeAmount +
                                                                    " points");
                 interfaceManager.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
-                interfaceManager.Shop_SetCreditsText(player.Stat.GetCredits());
+                interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
                 //save 
                 saveManager.Save();
             }
@@ -349,7 +349,7 @@ public partial class SceneManager
             }
         }
 
-        if (player.Stat.GetHealthLevel() == 5)
+        if (player.Stats.GetHealthLevel() == 5)
         {
             //Disable health upgrade button
             interfaceManager.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
@@ -362,31 +362,31 @@ public partial class SceneManager
 
     private void Shop_UpgradeFireRateButtonFunction()
     {
-        if (player.Stat.GetFireRateLevel()!= 5)
+        if (player.Stats.GetFireRateLevel()!= 5)
         {
-            if (player.Stat.GetCredits() >= fireRateUpgradeCost)
+            if (player.Stats.GetCredits() >= fireRateUpgradeCost)
             {
                 //subtract credits
-                player.Stat.DecreaseCredits(fireRateUpgradeCost);
+                player.Stats.DecreaseCredits(fireRateUpgradeCost);
              
                 //increase fire rate level
-                player.Stat.IncrementFireRateLevel();
+                player.Stats.IncrementFireRateLevel();
 
                 //set fire rate
-                player.Stat.SetFireRate(player.Stat.GetFireRate() - fireRateUpgradeAmount);
+                player.Stats.SetFireRate(player.Stats.GetFireRate() - fireRateUpgradeAmount);
                 //Reset shoot timer
-                player.ResetShootTimer();
+                player.Gun.UpdateShootTimer(player.Stats.GetFireRate());
                 GD.Print("Fire Rate Upgrade Amount: " + fireRateUpgradeAmount);
 
                 //update health upgrade cost and amount based on the new health level
-                RefreshFireRateUpgradeValues(player.Stat.GetFireRateLevel());
+                RefreshFireRateUpgradeValues(player.Stats.GetFireRateLevel());
 
                 //update UI
-                interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stat.GetFireRateLevel(), 5);
+                interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stats.GetFireRateLevel(), 5);
                 interfaceManager.FireRateUpgradePanel.SetDescription("Increase Fire Rate by" + fireRateUpgradeAmount +
                                                                      " points");
                 interfaceManager.FireRateUpgradePanel.SetCostLabel("Cost: " + fireRateUpgradeCost.ToString());
-                interfaceManager.Shop_SetCreditsText(player.Stat.GetCredits());
+                interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
 
                 //save 
                 saveManager.Save();
@@ -397,7 +397,7 @@ public partial class SceneManager
             }
         }
 
-        if (player.Stat.GetFireRateLevel() == 5)
+        if (player.Stats.GetFireRateLevel() == 5)
         {
             //Disable health upgrade button
             interfaceManager.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
@@ -410,30 +410,30 @@ public partial class SceneManager
 
     private void Shop_UpgradeSpeedButtonFunction()
     {
-        if (player.Stat.GetSpeedLevel() != 5)
+        if (player.Stats.GetSpeedLevel() != 5)
         {
-            if (player.Stat.GetCredits() >= speedUpgradeCost)
+            if (player.Stats.GetCredits() >= speedUpgradeCost)
             {
                 //subtract credits
-                player.Credits -= speedUpgradeCost;
+                player.Stats.DecreaseCredits(speedUpgradeCost);
 
                 //increase fire rate level
-                player.Stats.SpeedLevel++;
-
+                player.Stats.IncrementSpeedLevel();
+                
                 //set fire rate
-                player.Stats.Speed -= speedUpgradeAmount;
+                player.Stats.SetSpeed(player.Stats.GetSpeed() - speedUpgradeAmount);
                 //Reset shoot timer
-                player.ResetShootTimer();
+                player.Gun.UpdateShootTimer(player.Stats.GetFireRate());
                 GD.Print("Speed Upgrade Amount: " + speedUpgradeAmount);
 
                 //update health upgrade cost and amount based on the new health level
-                RefreshFireRateUpgradeValues(player.Stats.SpeedLevel);
+                RefreshFireRateUpgradeValues(player.Stats.GetSpeedLevel());
 
                 //update UI
-                interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.SpeedLevel, 5);
+                interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.GetSpeedLevel(), 5);
                 interfaceManager.SpeedUpgradePanel.SetDescription("Increase Speed by" + speedUpgradeAmount + " point");
                 interfaceManager.SpeedUpgradePanel.SetCostLabel("Cost: " + speedUpgradeCost.ToString());
-                interfaceManager.Shop_SetCreditsText(player.Credits);
+                interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
 
                 //save 
                 saveManager.Save();
@@ -444,7 +444,7 @@ public partial class SceneManager
             }
         }
 
-        if (player.Stats.SpeedLevel == 5)
+        if (player.Stats.GetSpeedLevel() == 5)
         {
             //Disable health upgrade button
             interfaceManager.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
