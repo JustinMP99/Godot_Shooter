@@ -53,6 +53,8 @@ public partial class SceneManager
         //Set Main UI State
         interfaceManager.SetMainUIState(false);
 
+        interfaceManager.BackButton.GrabFocus();
+        
         //Set Shop UI Data
         interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
 
@@ -316,6 +318,8 @@ public partial class SceneManager
         interfaceManager.SetShopUIState(false);
 
         interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
+        
+        interfaceManager.StartButton.GrabFocus();
 
         interfaceManager.SetMainUIState(true);
     }

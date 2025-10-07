@@ -16,6 +16,7 @@ public partial class UIManager : Node
     [Export] public UpgradePanel HealthUpgradePanel;
     [Export] public UpgradePanel FireRateUpgradePanel;
     [Export] public UpgradePanel SpeedUpgradePanel;
+    [Export] public Button BackButton;
 
     [ExportCategory("Options UI")]
     [Export] private CanvasLayer optionsUIGroup;
@@ -39,14 +40,12 @@ public partial class UIManager : Node
 
     [ExportCategory("Result UI")]
     [Export] private CanvasLayer resultUIGroup;
-
     [Export] private Label resultScoreLabel;
     [Export] private Label resultCreditsEarnedLabel;
     [Export] private Label resultTotalCreditsLabel;
 
     [ExportCategory("Debug UI")]
     [Export] private CanvasLayer debugUIGroup;
-
     [Export] private Label FramerateLabel;
 
     public override void _Ready()

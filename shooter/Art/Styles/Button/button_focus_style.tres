@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b3a3id1obwq1"]
+
+[ext_resource type="Texture2D" uid="uid://c5luw2k8sqjmf" path="res://Art/Sprites/Buttons New/button_hover.png" id="1_n5lpu"]
+
+[resource]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_n5lpu")

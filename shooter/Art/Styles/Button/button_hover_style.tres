@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b7ajyoyic761p"]
 
-[ext_resource type="Texture2D" uid="uid://b104xdfubwb52" path="res://Art/Sprites/Buttons/button_hover_4x.png" id="1_6flql"]
+[ext_resource type="Texture2D" uid="uid://c5luw2k8sqjmf" path="res://Art/Sprites/Buttons New/button_hover.png" id="1_6flql"]
 
 [resource]
 content_margin_left = 10.0

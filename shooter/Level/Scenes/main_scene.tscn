@@ -231,7 +231,7 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "StartButton", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "FireRateUpgradePanel", "SpeedUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "pauseResumeButton", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "StartButton", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "FireRateUpgradePanel", "SpeedUpgradePanel", "BackButton", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "pauseResumeButton", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
@@ -242,6 +242,7 @@ shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
 HealthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
 FireRateUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Fire Rate Panel")
 SpeedUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Speed Panel")
+BackButton = NodePath("../../=== UI ===/--- upgrade ---/Back Button")
 optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
 cheatDescriptionLabel = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/Cheat Description Label")
 cheatIF = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/LineEdit")
@@ -547,6 +548,9 @@ offset_left = -0.187363
 offset_top = 0.136139
 offset_right = 2.08548
 offset_bottom = 0.275757
+focus_neighbor_left = NodePath("../../Speed Panel/Button")
+focus_neighbor_right = NodePath("../../Fire Rate Panel/Button")
+focus_neighbor_bottom = NodePath("../../Back Button")
 theme = ExtResource("24_am5r7")
 text = "Upgrade"
 icon = SubResource("ImageTexture_5rw63")
@@ -649,6 +653,9 @@ offset_left = -0.187363
 offset_top = 0.136139
 offset_right = 2.08548
 offset_bottom = 0.275757
+focus_neighbor_left = NodePath("../../Health Panel/Button")
+focus_neighbor_right = NodePath("../../Speed Panel/Button")
+focus_neighbor_bottom = NodePath("../../Back Button")
 theme = ExtResource("24_am5r7")
 text = "Upgrade"
 icon = SubResource("ImageTexture_5rw63")
@@ -751,6 +758,9 @@ offset_left = -0.187363
 offset_top = 0.136139
 offset_right = 2.08548
 offset_bottom = 0.275757
+focus_neighbor_left = NodePath("../../Fire Rate Panel/Button")
+focus_neighbor_right = NodePath("../../Health Panel/Button")
+focus_neighbor_bottom = NodePath("../../Back Button")
 theme = ExtResource("24_am5r7")
 text = "Upgrade"
 icon = SubResource("ImageTexture_5rw63")
@@ -769,6 +779,7 @@ offset_right = -0.640015
 offset_bottom = -0.400024
 grow_horizontal = 2
 grow_vertical = 0
+focus_neighbor_top = NodePath("../Health Panel/Button")
 theme = ExtResource("24_am5r7")
 text = "Go Back"
 
