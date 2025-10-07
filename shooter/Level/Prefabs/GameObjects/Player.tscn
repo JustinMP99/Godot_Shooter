@@ -357,6 +357,7 @@ script = ExtResource("1_0a5mx")
 
 [node name="Input" type="Node" parent="Components"]
 script = ExtResource("5_p7s6k")
+debug = true
 
 [node name="Stats" type="Node" parent="Components"]
 script = ExtResource("6_20vac")

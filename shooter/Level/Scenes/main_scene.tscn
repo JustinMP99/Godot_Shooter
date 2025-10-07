@@ -333,6 +333,7 @@ theme = ExtResource("12_iruui")
 
 [node name="Start Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Quit Button")
 focus_neighbor_bottom = NodePath("../Upgrades Button")
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = ExtResource("15_s1w4x")

@@ -122,6 +122,9 @@ public partial class SceneManager : Node
         player.Position = startPosition.Position;
         player.Gun.bulletManager = bulletManager;
         SetPlayerSignals();
+        player.Input.SwitchInputState(InputState.Menu);
+        player.Input.CurrentButton = interfaceManager.StartButton;
+        player.Input.SetTakingInput(true);
         //player.FindNodes();
     }
 
@@ -205,6 +208,7 @@ public partial class SceneManager : Node
         introCount--;
         if (introCount <= 0)
         {
+            player.Input.SwitchInputState(InputState.Game);
             player.Input.SetTakingInput(true);
             player.Gun.SetCanShoot(true);
             interfaceManager.Game_SetCountDownLabelState(false);
