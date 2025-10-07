@@ -234,7 +234,7 @@ public partial class PlayerController : CharacterBody3D
                 Gun.UpdateShootTimer(Stats.GetFireRate());
                 break;
             case ShootType.Shotgun:
-                Gun.UpdateShootTimer(0.75);
+                Gun.UpdateShootTimer(0.5);
                 break;
             case ShootType.Spread_Random:
                 Gun.UpdateShootTimer(0.1);

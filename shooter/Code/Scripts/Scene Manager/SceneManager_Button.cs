@@ -273,6 +273,8 @@ public partial class SceneManager
         //Reset game data
         Global.GamePaused = false;
         score = 0;
+        
+        interfaceManager.StartButton.GrabFocus();
     }
 
     #endregion
@@ -421,7 +423,7 @@ public partial class SceneManager
                 player.Stats.IncrementSpeedLevel();
                 
                 //set fire rate
-                player.Stats.SetSpeed(player.Stats.GetSpeed() - speedUpgradeAmount);
+                player.Stats.SetSpeed(player.Stats.GetSpeed() + speedUpgradeAmount);
                 //Reset shoot timer
                 player.Gun.UpdateShootTimer(player.Stats.GetFireRate());
                 GD.Print("Speed Upgrade Amount: " + speedUpgradeAmount);

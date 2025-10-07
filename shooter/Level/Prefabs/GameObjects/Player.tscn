@@ -1,9 +1,8 @@
-[gd_scene load_steps=47 format=3 uid="uid://dyraxlfot6oqf"]
+[gd_scene load_steps=46 format=3 uid="uid://dyraxlfot6oqf"]
 
 [ext_resource type="Script" uid="uid://6q2aq0nj86e3" path="res://Code/Scripts/Controllers/PlayerController.cs" id="1_0a5mx"]
 [ext_resource type="Resource" uid="uid://pj1g6ji0ofdn" path="res://Level/Resource Objects/Player Stats/PlayerStats.tres" id="2_ysarm"]
 [ext_resource type="ArrayMesh" uid="uid://06756guur25v" path="res://Art/Models/PlayerShip_V4.obj" id="3_p7s6k"]
-[ext_resource type="Texture2D" uid="uid://3p26ry74la75" path="res://Art/Sprites/Reticles/Reticle_Locked.png" id="3_ysarm"]
 [ext_resource type="Material" uid="uid://bskexlm6v02jx" path="res://Art/Materials/PlayerShipMaterial.tres" id="4_20vac"]
 [ext_resource type="AudioStream" uid="uid://dvwi0nil1466d" path="res://Art/Audio/sfx/Shoot.wav" id="5_6sk5c"]
 [ext_resource type="Script" uid="uid://cijlo8u0c8fkk" path="res://Code/Scripts/Player Components/InputComponent.cs" id="5_p7s6k"]
@@ -353,14 +352,11 @@ size = Vector3(1.2583, 1, 1.19141)
 rotation_order = 0
 collision_mask = 8
 script = ExtResource("1_0a5mx")
-reticleNormal = ExtResource("7_p7s6k")
-reticleLocked = ExtResource("3_ysarm")
 
 [node name="Components" type="Node3D" parent="."]
 
 [node name="Input" type="Node" parent="Components"]
 script = ExtResource("5_p7s6k")
-debug = true
 
 [node name="Stats" type="Node" parent="Components"]
 script = ExtResource("6_20vac")

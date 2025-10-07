@@ -231,11 +231,12 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "FireRateUpgradePanel", "SpeedUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "StartButton", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "FireRateUpgradePanel", "SpeedUpgradePanel", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "pauseResumeButton", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
 mainUIGroup = NodePath("../../=== UI ===/--- main ---")
 mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
 subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
+StartButton = NodePath("../../=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button")
 shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
 shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
 HealthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
@@ -254,6 +255,7 @@ gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label"
 countdownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
 roundLabel = NodePath("../../=== UI ===/--- game ---/Round Label")
 pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
+pauseResumeButton = NodePath("../../=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Resume Button")
 resultUIGroup = NodePath("../../=== UI ===/--- result ---")
 resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Score Label")
 resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Credits Earned Label")

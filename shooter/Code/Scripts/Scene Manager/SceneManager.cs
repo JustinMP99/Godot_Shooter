@@ -67,6 +67,8 @@ public partial class SceneManager : Node
         enemySpawner.Startup();
         bulletManager.Startup();
         powerUpManager.Startup();
+        
+        interfaceManager.StartButton.GrabFocus();
     }
 
     public override void _Process(double delta)
@@ -267,6 +269,9 @@ public partial class SceneManager : Node
         }
 
         player.Input.SetTakingInput(false);
+        
+        interfaceManager.pauseResumeButton.GrabFocus();
+        
     }
 
     public void UpdateGameUI()
@@ -316,7 +321,6 @@ public partial class SceneManager : Node
         //start power up timer
         powerUpTimer.Start();
         player.SwitchShootType(shootStats.ShootType);
-        //player.UpdateFireRate(shootStats.FireRate);
     }
 
     #endregion

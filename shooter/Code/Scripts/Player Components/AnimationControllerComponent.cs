@@ -8,8 +8,7 @@ public partial class AnimationControllerComponent : Node
     [Export] private AnimationPlayer shipAnimationPlayer;
     [Export] private AnimationTree reticleAnimationTree;
     [Export] private AnimationPlayer reticleAnimationPlayer;
-
-
+    
     public void SetShipFlyInTrue()
     {
         shipAnimationTree.Set("parameters/conditions/Fly In", true);

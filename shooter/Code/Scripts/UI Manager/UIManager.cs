@@ -5,13 +5,12 @@ public partial class UIManager : Node
 {
     [ExportCategory("Main UI")]
     [Export] private CanvasLayer mainUIGroup;
-
     [Export] private Label mainCreditsLabel;
     [Export] private Label subTitleLabel;
-
+    [Export] public Button StartButton;
+    
     [ExportCategory("Shop UI")]
     [Export] private CanvasLayer shopUIGroup;
-
     [Export] private Label shopCreditsLabel;
     [Export] private Label shopHealthLevelLabel;
     [Export] public UpgradePanel HealthUpgradePanel;
@@ -20,7 +19,6 @@ public partial class UIManager : Node
 
     [ExportCategory("Options UI")]
     [Export] private CanvasLayer optionsUIGroup;
-
     [Export] private Label cheatDescriptionLabel;
     [Export] private LineEdit cheatIF;
     [Export] private Slider masterVolumeSlider;
@@ -30,7 +28,6 @@ public partial class UIManager : Node
 
     [ExportCategory("Game UI")]
     [Export] public PlayerInfoBox PlayerInfoBox;
-
     [Export] private CanvasLayer gameUIGroup;
     [Export] private Label gameScoreValueLabel;
     [Export] private Label countdownLabel;
@@ -38,6 +35,7 @@ public partial class UIManager : Node
 
     [ExportCategory("Pause UI")]
     [Export] private CanvasLayer pauseUIGroup;
+    [Export] public Button pauseResumeButton;
 
     [ExportCategory("Result UI")]
     [Export] private CanvasLayer resultUIGroup;
