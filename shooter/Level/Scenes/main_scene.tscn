@@ -1086,6 +1086,8 @@ theme = ExtResource("12_iruui")
 
 [node name="Resume Button" type="Button" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Quit Button")
+focus_neighbor_bottom = NodePath("../Quit Button")
 theme = ExtResource("24_am5r7")
 theme_override_fonts/font = ExtResource("10_odk2k")
 theme_override_font_sizes/font_size = 42
@@ -1097,6 +1099,8 @@ icon_alignment = 1
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Resume Button")
+focus_neighbor_bottom = NodePath("../Resume Button")
 theme = ExtResource("24_am5r7")
 theme_override_fonts/font = ExtResource("10_odk2k")
 theme_override_font_sizes/font_size = 42

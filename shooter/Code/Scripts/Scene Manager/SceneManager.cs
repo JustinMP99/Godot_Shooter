@@ -8,7 +8,6 @@ public partial class SceneManager : Node
 
     [ExportCategory("Managers")]
     [Export] private SaveManager saveManager;
-
     [Export] private UIManager interfaceManager;
     [Export] private EnemySpawner enemySpawner;
     [Export] private BulletManager bulletManager;
@@ -25,7 +24,6 @@ public partial class SceneManager : Node
 
     [ExportCategory("Upgrade Values")]
     [Export] private int healthUpgradeCost; //Cost of the Health upgrade
-
     [Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
     [Export] private int fireRateUpgradeCost;
     [Export] private float fireRateUpgradeAmount;
@@ -34,7 +32,6 @@ public partial class SceneManager : Node
 
     [ExportCategory("Gameplay Values")]
     [Export] private int round;
-
     [Export] private int score;
     [Export] private float powerUpTimeMax;
     private float powerUpTimeCurrent;
@@ -272,10 +269,10 @@ public partial class SceneManager : Node
             introTimer.Paused = true;
         }
 
-        player.Input.SetTakingInput(false);
+        //player.Input.SetTakingInput(false);
+        player.Input.SwitchInputState(InputState.Menu);
         
         interfaceManager.pauseResumeButton.GrabFocus();
-        
     }
 
     public void UpdateGameUI()

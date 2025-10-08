@@ -9,6 +9,8 @@ public partial class InputComponent : Node
     
     [ExportCategory("Debug")]
     [Export] private bool debug = false;
+    [ExportGroup("Specific Debug")]
+    [Export] private bool stateSwitchDebug;
 
     [ExportCategory("Core Input Data")]
     [Export] private InputState inputState;
@@ -87,10 +89,8 @@ public partial class InputComponent : Node
             var control = CurrentButton.FindValidFocusNeighbor(Side.Top);
             if (debug)
             {
-                GD.Print("Menu Down");
-                //GD.Print("Node Path: " + path);
+                GD.Print("Menu Up");
             }
-            //var node = GetNode(path);
             if (control == null)
             {
                 GD.Print("Control is null");
@@ -128,6 +128,10 @@ public partial class InputComponent : Node
     public void SwitchInputState(InputState newState)
     {
         inputState = newState;
+        if (debug && stateSwitchDebug)
+        {
+            GD.Print("New Input State: " + inputState.ToString());
+        }
     }
     
     #region Getter
