@@ -11,6 +11,7 @@ public partial class InputComponent : Node
     [Export] private bool debug = false;
     [ExportGroup("Specific Debug")]
     [Export] private bool stateSwitchDebug;
+    [Export] private bool inputPressedDebug;
 
     [ExportCategory("Core Input Data")]
     [Export] private InputState inputState;
@@ -82,7 +83,7 @@ public partial class InputComponent : Node
         if (Input.IsActionJustPressed("menu_up"))
         {
             var control = CurrentButton.FindValidFocusNeighbor(Side.Top);
-            if (debug)
+            if (debug && inputPressedDebug)
             {
                 GD.Print("Menu Up");
             }
@@ -105,7 +106,7 @@ public partial class InputComponent : Node
         if (Input.IsActionJustPressed("menu_down"))
         {
             var control = CurrentButton.FindValidFocusNeighbor(Side.Bottom);
-            if (debug)
+            if (debug && inputPressedDebug)
             {
                 GD.Print("Menu Down");
                 //GD.Print("Node Path: " + path);
@@ -131,7 +132,7 @@ public partial class InputComponent : Node
         if (Input.IsActionJustPressed("menu_left"))
         {
             var control = CurrentButton.FindValidFocusNeighbor(Side.Left);
-            if (debug)
+            if (debug && inputPressedDebug)
             {
                 GD.Print("Menu Left");
                 //GD.Print("Node Path: " + path);
@@ -156,7 +157,7 @@ public partial class InputComponent : Node
         if (Input.IsActionJustPressed("menu_right"))
         {
             var control = CurrentButton.FindValidFocusNeighbor(Side.Right);
-            if (debug)
+            if (debug && inputPressedDebug)
             {
                 GD.Print("Menu Right");
                 //GD.Print("Node Path: " + path);
@@ -181,6 +182,10 @@ public partial class InputComponent : Node
         }
         if (Input.IsActionJustPressed("menu_accept"))
         {
+            if (debug && inputPressedDebug)
+            {
+                GD.Print("Calling attached button functionality");
+            }
             CurrentButton.EmitSignal(Button.SignalName.Pressed);
         }
     }

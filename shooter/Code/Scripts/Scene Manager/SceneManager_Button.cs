@@ -9,7 +9,7 @@ public partial class SceneManager
     {
         //Set UI states
         interfaceManager.MainMenu.SetUIState(false);
-        interfaceManager.SetGameUIState(true);
+        interfaceManager.Game.SetUIState(true);
 
         //Reset temp game values
         score = 0;
@@ -23,11 +23,11 @@ public partial class SceneManager
         player.Position = startPosition.Position;
 
         //Set UI Data
-        interfaceManager.PlayerInfoBox.SetHealthBarMax(player.Stats.GetMaxHealth());
-        interfaceManager.PlayerInfoBox.SetHealthBarCurrent(player.Stats.GetCurrentHealth());
-        interfaceManager.Game_SetScoreValueText(score);
+        interfaceManager.Game.PlayerInfoBox.SetHealthBarMax(player.Stats.GetMaxHealth());
+        interfaceManager.Game.PlayerInfoBox.SetHealthBarCurrent(player.Stats.GetCurrentHealth());
+        interfaceManager.Game.SetScoreValueText(score);
 
-        interfaceManager.Game_SetHudState(false);
+        interfaceManager.Game.SetHudState(false);
 
         player.animController.SetShipFlyInTrue();
         player.animController.SetReticleFlyInTrue();
@@ -45,69 +45,67 @@ public partial class SceneManager
     {
         //set UI states
         interfaceManager.MainMenu.SetUIState(false);
-        interfaceManager.SetOptionsUIState(true);
+        interfaceManager.Options.SetUIState(true);
     }
 
     public void Main_ShopButtonFunction()
     {
         //Set Main UI State
         interfaceManager.MainMenu.SetUIState(false);
-
-        interfaceManager.BackButton.GrabFocus();
         
         //Set Shop UI Data
-        interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
-
+        interfaceManager.Upgrade.SetCreditsText(player.Stats.GetCredits());
+        
         if (player.Stats.GetHealthLevel() == 5)
         {
-            interfaceManager.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
-            interfaceManager.HealthUpgradePanel.SetCostLabel(" ");
-            interfaceManager.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
+            interfaceManager.Upgrade.HealthUpgradePanel.SetCostLabel(" ");
+            interfaceManager.Upgrade.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
         else
         {
-            interfaceManager.HealthUpgradePanel.SetDescription("Increase Health by " + healthUpgradeAmount.ToString() +
+            interfaceManager.Upgrade.HealthUpgradePanel.SetDescription("Increase Health by " + healthUpgradeAmount.ToString() +
                                                                " points");
             //interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeAmount);
-            interfaceManager.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
+            interfaceManager.Upgrade.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
         }
 
-        interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stats.GetHealthLevel(), 5);
+        interfaceManager.Upgrade.HealthUpgradePanel.SetLevelLabel(player.Stats.GetHealthLevel(), 5);
 
         if (player.Stats.GetFireRateLevel() == 5)
         {
-            interfaceManager.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
-            interfaceManager.FireRateUpgradePanel.SetCostLabel(" ");
-            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetCostLabel(" ");
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
         else
         {
-            interfaceManager.FireRateUpgradePanel.SetDescription("Increase Fire Rate by " + fireRateUpgradeAmount +
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetDescription("Increase Fire Rate by " + fireRateUpgradeAmount +
                                                                  " points");
             //interfaceManager.Shop_SetHealthDescriptionText(healthUpgradeAmount);
-            interfaceManager.FireRateUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
         }
 
-        interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stats.GetFireRateLevel(), 5);
+        interfaceManager.Upgrade.FireRateUpgradePanel.SetLevelLabel(player.Stats.GetFireRateLevel(), 5);
 
         if (player.Stats.GetSpeedLevel() == 5)
         {
-            interfaceManager.SpeedUpgradePanel.SetDescription("Speed has been fully upgraded");
-            interfaceManager.SpeedUpgradePanel.SetCostLabel(" ");
-            interfaceManager.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetDescription("Speed has been fully upgraded");
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetCostLabel(" ");
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
         else
         {
-            interfaceManager.SpeedUpgradePanel.SetDescription("Increase Speed by " + speedUpgradeAmount + " point");
-            interfaceManager.SpeedUpgradePanel.SetCostLabel("Cost: " + speedUpgradeCost);
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetDescription("Increase Speed by " + speedUpgradeAmount + " point");
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetCostLabel("Cost: " + speedUpgradeCost);
         }
 
-        interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.GetSpeedLevel(), 5);
+        interfaceManager.Upgrade.SpeedUpgradePanel.SetLevelLabel(player.Stats.GetSpeedLevel(), 5);
 
-        player.Input.MenuSwitch(interfaceManager.BackButton);
+        player.Input.MenuSwitch(interfaceManager.Upgrade.BackButton);
         
         //Set Shop UI State
-        interfaceManager.SetShopUIState(true);
+        interfaceManager.Upgrade.SetUIState(true);
     }
 
     public void Main_StartGameHover()
@@ -158,7 +156,7 @@ public partial class SceneManager
     private void Options_EnterCheatButtonFunction()
     {
         //Get string from input field
-        string cheatCode = interfaceManager.GetCheatIFString();
+        string cheatCode = interfaceManager.Options.GetCheatIFString();
 
         //make player invincible
         if (cheatCode.Contains("UNBEATABLE"))
@@ -166,11 +164,11 @@ public partial class SceneManager
             bool result = player.SetInvincibleState();
             if (player.Invincible)
             {
-                interfaceManager.SetCheatDescriptionLabelText("You are now invincible");
+                interfaceManager.Options.SetCheatDescriptionLabelText("You are now invincible");
             }
             else
             {
-                interfaceManager.SetCheatDescriptionLabelText("You are now vincible");
+                interfaceManager.Options.SetCheatDescriptionLabelText("You are now vincible");
             }
         }
 
@@ -181,11 +179,11 @@ public partial class SceneManager
             //print out result
             if (result)
             {
-                interfaceManager.SetCheatDescriptionLabelText("Enabled oneshot bullets");
+                interfaceManager.Options.SetCheatDescriptionLabelText("Enabled oneshot bullets");
             }
             else
             {
-                interfaceManager.SetCheatDescriptionLabelText("Disabled oneshot bullets");
+                interfaceManager.Options.SetCheatDescriptionLabelText("Disabled oneshot bullets");
             }
         }
     }
@@ -193,7 +191,7 @@ public partial class SceneManager
     private void Options_ResetSaveDataButtonFunction()
     {
         //Enable Delete Save Panel
-        interfaceManager.SetDeleteSavePanelState(true);
+        interfaceManager.Options.SetDeleteSavePanelState(true);
     }
 
     private void Options_YesDeleteButtonFunction()
@@ -202,13 +200,13 @@ public partial class SceneManager
         saveManager.load();
         //Refresh Credits UI
         interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
-        interfaceManager.SetDeleteSavePanelState(false);
+        interfaceManager.Options.SetDeleteSavePanelState(false);
     }
 
     private void Options_NoDeleteButtonFunction()
     {
         //Disable Delete Save Panel
-        interfaceManager.SetDeleteSavePanelState(false);
+        interfaceManager.Options.SetDeleteSavePanelState(false);
     }
 
     private void Options_BackButtonFunction()
@@ -216,7 +214,7 @@ public partial class SceneManager
         GD.Print("Resolution Setting: " + GameData.Instance.ResolutionValue);
         GD.Print("Fullscreen Setting: " + GameData.Instance.Fullscreen);
         //set ui state
-        interfaceManager.SetOptionsUIState(false);
+        interfaceManager.Options.SetUIState(false);
         interfaceManager.MainMenu.SetUIState(true);
         saveManager.SaveConfig();
     }
@@ -233,7 +231,7 @@ public partial class SceneManager
     {
         //Set UI States
         interfaceManager.SetPauseUIState(false);
-        interfaceManager.SetGameUIState(true);
+        interfaceManager.Game.SetUIState(true);
         Global.GamePaused = false;
         enemySpawner.ResumeTimer();
         powerUpManager.ResumeTimer();
@@ -318,14 +316,10 @@ public partial class SceneManager
 
     private void Shop_BackButtonFunction()
     {
-        interfaceManager.SetShopUIState(false);
-
+        interfaceManager.Upgrade.SetUIState(false);
         interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
-
         interfaceManager.MainMenu.SetUIState(true);
-        
         player.Input.MenuSwitch(interfaceManager.MainMenu.StartButton);
-        
     }
 
     private void Shop_UpgradeHealthButtonFunction()
@@ -345,11 +339,11 @@ public partial class SceneManager
                 //update health upgrade cost and amount based on the new health level
                 RefreshHealthUpgradeValues(player.Stats.GetHealthLevel());
                 //update UI
-                interfaceManager.HealthUpgradePanel.SetLevelLabel(player.Stats.GetHealthLevel(), 5);
-                interfaceManager.HealthUpgradePanel.SetDescription("Increase Health by " + healthUpgradeAmount +
+                interfaceManager.Upgrade.HealthUpgradePanel.SetLevelLabel(player.Stats.GetHealthLevel(), 5);
+                interfaceManager.Upgrade.HealthUpgradePanel.SetDescription("Increase Health by " + healthUpgradeAmount +
                                                                    " points");
-                interfaceManager.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
-                interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
+                interfaceManager.Upgrade.HealthUpgradePanel.SetCostLabel("Cost: " + healthUpgradeCost.ToString());
+                interfaceManager.Upgrade.SetCreditsText(player.Stats.GetCredits());
                 //save 
                 saveManager.Save();
             }
@@ -362,11 +356,11 @@ public partial class SceneManager
         if (player.Stats.GetHealthLevel() == 5)
         {
             //Disable health upgrade button
-            interfaceManager.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
             //Set description text
-            interfaceManager.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
-            interfaceManager.HealthUpgradePanel.SetCostLabel(" ");
-            interfaceManager.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.HealthUpgradePanel.SetDescription("Health has been fully upgraded");
+            interfaceManager.Upgrade.HealthUpgradePanel.SetCostLabel(" ");
+            interfaceManager.Upgrade.HealthUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
     }
 
@@ -392,11 +386,11 @@ public partial class SceneManager
                 RefreshFireRateUpgradeValues(player.Stats.GetFireRateLevel());
 
                 //update UI
-                interfaceManager.FireRateUpgradePanel.SetLevelLabel(player.Stats.GetFireRateLevel(), 5);
-                interfaceManager.FireRateUpgradePanel.SetDescription("Increase Fire Rate by" + fireRateUpgradeAmount +
+                interfaceManager.Upgrade.FireRateUpgradePanel.SetLevelLabel(player.Stats.GetFireRateLevel(), 5);
+                interfaceManager.Upgrade.FireRateUpgradePanel.SetDescription("Increase Fire Rate by" + fireRateUpgradeAmount +
                                                                      " points");
-                interfaceManager.FireRateUpgradePanel.SetCostLabel("Cost: " + fireRateUpgradeCost.ToString());
-                interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
+                interfaceManager.Upgrade.FireRateUpgradePanel.SetCostLabel("Cost: " + fireRateUpgradeCost.ToString());
+                interfaceManager.Upgrade.SetCreditsText(player.Stats.GetCredits());
 
                 //save 
                 saveManager.Save();
@@ -410,11 +404,11 @@ public partial class SceneManager
         if (player.Stats.GetFireRateLevel() == 5)
         {
             //Disable health upgrade button
-            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
             //Set description text
-            interfaceManager.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
-            interfaceManager.FireRateUpgradePanel.SetCostLabel(" ");
-            interfaceManager.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetDescription("Fire Rate has been fully upgraded");
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetCostLabel(" ");
+            interfaceManager.Upgrade.FireRateUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
     }
 
@@ -440,10 +434,10 @@ public partial class SceneManager
                 RefreshFireRateUpgradeValues(player.Stats.GetSpeedLevel());
 
                 //update UI
-                interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.GetSpeedLevel(), 5);
-                interfaceManager.SpeedUpgradePanel.SetDescription("Increase Speed by" + speedUpgradeAmount + " point");
-                interfaceManager.SpeedUpgradePanel.SetCostLabel("Cost: " + speedUpgradeCost.ToString());
-                interfaceManager.Shop_SetCreditsText(player.Stats.GetCredits());
+                interfaceManager.Upgrade.SpeedUpgradePanel.SetLevelLabel(player.Stats.GetSpeedLevel(), 5);
+                interfaceManager.Upgrade.SpeedUpgradePanel.SetDescription("Increase Speed by" + speedUpgradeAmount + " point");
+                interfaceManager.Upgrade.SpeedUpgradePanel.SetCostLabel("Cost: " + speedUpgradeCost.ToString());
+                interfaceManager.Upgrade.SetCreditsText(player.Stats.GetCredits());
 
                 //save 
                 saveManager.Save();
@@ -457,11 +451,11 @@ public partial class SceneManager
         if (player.Stats.GetSpeedLevel() == 5)
         {
             //Disable health upgrade button
-            interfaceManager.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
             //Set description text
-            interfaceManager.SpeedUpgradePanel.SetDescription("Speed has been fully upgraded");
-            interfaceManager.SpeedUpgradePanel.SetCostLabel(" ");
-            interfaceManager.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetDescription("Speed has been fully upgraded");
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetCostLabel(" ");
+            interfaceManager.Upgrade.SpeedUpgradePanel.SetUpgradeButtonDisabledState(true);
         }
     }
 

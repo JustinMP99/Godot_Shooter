@@ -51,15 +51,15 @@ public partial class SceneManager : Node
         //load player save data
         LoadSave();
 
+        //setup UI
+        UISetup();
+        
         //load player data
         PlayerSetup();
 
         //Setup game data
         GameDataSetup();
-
-        //setup UI
-        UISetup();
-
+        
         //additional startup calls
         enemySpawner.Startup();
         bulletManager.Startup();
@@ -83,9 +83,9 @@ public partial class SceneManager : Node
 
         if (configLoaded)
         {
-            interfaceManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
-            interfaceManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
-            interfaceManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
+            interfaceManager.Options.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
+            interfaceManager.Options.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
+            interfaceManager.Options.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
 
             SetResolution(GameData.Instance.ResolutionValue);
             SetFullscreen(GameData.Instance.Fullscreen);
@@ -93,9 +93,9 @@ public partial class SceneManager : Node
         else
         {
             GD.Print("Creating new config file");
-            interfaceManager.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
-            interfaceManager.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
-            interfaceManager.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
+            interfaceManager.Options.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
+            interfaceManager.Options.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
+            interfaceManager.Options.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
 
             SetResolution(3);
             SetFullscreen(false);
@@ -136,16 +136,21 @@ public partial class SceneManager : Node
 
     private void UISetup()
     {
-        interfaceManager.MainMenu.SetUIState(true);
-        interfaceManager.SetOptionsUIState(false);
+        interfaceManager.MainMenu.FindNodes();
+        interfaceManager.Upgrade.FindNodes();
+        interfaceManager.Game.FindNodes();
+        interfaceManager.Options.FindNodes();
+        
+        interfaceManager.Options.SetUIState(false);
         interfaceManager.SetPauseUIState(false);
-        interfaceManager.SetGameUIState(false);
+        interfaceManager.Game.SetUIState(false);
         interfaceManager.SetResultUIState(false);
-        interfaceManager.SetShopUIState(false);
-        interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
+        interfaceManager.Upgrade.SetUIState(false);
+        //interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
+        interfaceManager.MainMenu.SetUIState(true);
 
-        interfaceManager.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
-        interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
+        interfaceManager.Game.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
+        interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
 
         if (debug)
         {
@@ -180,8 +185,8 @@ public partial class SceneManager : Node
         }
 
         enemiesLeft = enemiesLeftMax;
-        interfaceManager.Game_SetRoundLabelText(Global.Round);
-        interfaceManager.Game_SetRoundLabelState(true);
+        interfaceManager.Game.SetRoundLabelText(Global.Round);
+        interfaceManager.Game.SetRoundLabelState(true);
         GD.Print("Enemies Left: " + enemiesLeft);
         roundTimer.Start();
     }
@@ -192,9 +197,9 @@ public partial class SceneManager : Node
 
     private void StartIntroTimer()
     {
-        interfaceManager.Game_SetCountDownLabelState(true);
+        interfaceManager.Game.SetCountDownLabelState(true);
         introCount = 3;
-        interfaceManager.Game_SetCountDownLabelText(introCount);
+        interfaceManager.Game.SetCountDownLabelText(introCount);
         introTimer.Start();
     }
 
@@ -207,20 +212,20 @@ public partial class SceneManager : Node
             player.Input.SwitchInputState(InputState.Game);
             player.Input.SetTakingInput(true);
             player.Gun.SetCanShoot(true);
-            interfaceManager.Game_SetCountDownLabelState(false);
+            interfaceManager.Game.SetCountDownLabelState(false);
             StartNewRound();
         }
         else
         {
-            interfaceManager.Game_SetCountDownLabelText(introCount);
+            interfaceManager.Game.SetCountDownLabelText(introCount);
             introTimer.Start();
         }
     }
 
     private void RoundTimerTimeout()
     {
-        interfaceManager.Game_SetRoundLabelState(false);
-        interfaceManager.Game_SetHudState(true);
+        interfaceManager.Game.SetRoundLabelState(false);
+        interfaceManager.Game.SetHudState(true);
         enemySpawner.StartTimer();
         powerUpManager.StartTimer();
     }
@@ -231,13 +236,13 @@ public partial class SceneManager : Node
 
         if (powerUpTimeCurrent <= 1)
         {
-            interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
+            interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
             player.SwitchShootType(ShootType.Single);
             player.Gun.UpdateShootTimer(player.Stats.GetFireRate());
         }
         else
         {
-            interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(powerUpTimeCurrent);
+            interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(powerUpTimeCurrent);
             powerUpTimer.Start();
         }
     }
@@ -248,7 +253,7 @@ public partial class SceneManager : Node
 
     public void ActivatePause()
     {
-        interfaceManager.SetGameUIState(false);
+        interfaceManager.Game.SetUIState(false);
 
         interfaceManager.SetPauseUIState(true);
 
@@ -273,7 +278,7 @@ public partial class SceneManager : Node
 
     public void UpdateGameUI()
     {
-        interfaceManager.PlayerInfoBox.SetHealthBarCurrent(player.Stats.GetCurrentHealth());
+        interfaceManager.Game.PlayerInfoBox.SetHealthBarCurrent(player.Stats.GetCurrentHealth());
     }
 
     public void GameOver()
@@ -286,7 +291,7 @@ public partial class SceneManager : Node
         player.Stats.IncreaseCredits(tempCredits);
 
         //Update UI
-        interfaceManager.SetGameUIState(false);
+        interfaceManager.Game.SetUIState(false);
         interfaceManager.SetResultUIState(true);
 
         interfaceManager.Result_SetScoreText(score);
@@ -309,7 +314,7 @@ public partial class SceneManager : Node
         }
 
         //Update UI
-        interfaceManager.Game_SetScoreValueText(score);
+        interfaceManager.Game.SetScoreValueText(score);
     }
 
     public void ShootTypeSwitchEvent(PowerUpStats_ShootType shootStats)
