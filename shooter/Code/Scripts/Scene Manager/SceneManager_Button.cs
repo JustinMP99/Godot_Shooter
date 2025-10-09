@@ -8,7 +8,7 @@ public partial class SceneManager
     public void Main_StartGameFunction()
     {
         //Set UI states
-        interfaceManager.SetMainUIState(false);
+        interfaceManager.MainMenu.SetUIState(false);
         interfaceManager.SetGameUIState(true);
 
         //Reset temp game values
@@ -44,14 +44,14 @@ public partial class SceneManager
     public void Main_OptionsButtonFunction()
     {
         //set UI states
-        interfaceManager.SetMainUIState(false);
+        interfaceManager.MainMenu.SetUIState(false);
         interfaceManager.SetOptionsUIState(true);
     }
 
     public void Main_ShopButtonFunction()
     {
         //Set Main UI State
-        interfaceManager.SetMainUIState(false);
+        interfaceManager.MainMenu.SetUIState(false);
 
         interfaceManager.BackButton.GrabFocus();
         
@@ -104,9 +104,7 @@ public partial class SceneManager
 
         interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.GetSpeedLevel(), 5);
 
-        player.Input.CurrentButton = interfaceManager.BackButton;
-        interfaceManager.BackButton.GrabFocus();
-        
+        player.Input.MenuSwitch(interfaceManager.BackButton);
         
         //Set Shop UI State
         interfaceManager.SetShopUIState(true);
@@ -114,27 +112,27 @@ public partial class SceneManager
 
     public void Main_StartGameHover()
     {
-        interfaceManager.Main_SetSubTitleText("Start the game and see how many waves you can survive!");
+        interfaceManager.MainMenu.SetSubTitleText("Start the game and see how many waves you can survive!");
     }
 
     public void Main_QuitGameHover()
     {
-        interfaceManager.Main_SetSubTitleText("Close the game");
+        interfaceManager.MainMenu.SetSubTitleText("Close the game");
     }
 
     public void Main_UpgradeHover()
     {
-        interfaceManager.Main_SetSubTitleText("Use the credits you've earned to upgrade your ship");
+        interfaceManager.MainMenu.SetSubTitleText("Use the credits you've earned to upgrade your ship");
     }
 
     public void Main_OptionsHover()
     {
-        interfaceManager.Main_SetSubTitleText("Change audio level and more");
+        interfaceManager.MainMenu.SetSubTitleText("Change audio level and more");
     }
 
     public void Main_ButtonHoverExit()
     {
-        interfaceManager.Main_SetSubTitleText("Micro game created by Justin Philie");
+        interfaceManager.MainMenu.SetSubTitleText("Micro game created by Justin Philie");
     }
 
     #endregion
@@ -203,7 +201,7 @@ public partial class SceneManager
         saveManager.NewSave();
         saveManager.load();
         //Refresh Credits UI
-        interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
+        interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
         interfaceManager.SetDeleteSavePanelState(false);
     }
 
@@ -219,7 +217,7 @@ public partial class SceneManager
         GD.Print("Fullscreen Setting: " + GameData.Instance.Fullscreen);
         //set ui state
         interfaceManager.SetOptionsUIState(false);
-        interfaceManager.SetMainUIState(true);
+        interfaceManager.MainMenu.SetUIState(true);
         saveManager.SaveConfig();
     }
 
@@ -261,7 +259,7 @@ public partial class SceneManager
 
         //Set UI States
         interfaceManager.SetPauseUIState(false);
-        interfaceManager.SetMainUIState(true);
+        interfaceManager.MainMenu.SetUIState(true);
 
         if (roundTimer.Paused)
         {
@@ -281,9 +279,7 @@ public partial class SceneManager
         //Reset game data
         Global.GamePaused = false;
         score = 0;
-
-        player.Input.CurrentButton = interfaceManager.StartButton;
-        interfaceManager.StartButton.GrabFocus();
+        player.Input.MenuSwitch(interfaceManager.MainMenu.StartButton);
     }
 
     #endregion
@@ -299,11 +295,11 @@ public partial class SceneManager
 
     private void Result_MainMenuButtonFunction()
     {
-        interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
+        interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
 
         interfaceManager.SetResultUIState(false);
 
-        interfaceManager.SetMainUIState(true);
+        interfaceManager.MainMenu.SetUIState(true);
 
         saveManager.Save();
     }
@@ -324,13 +320,12 @@ public partial class SceneManager
     {
         interfaceManager.SetShopUIState(false);
 
-        interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
+        interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
 
-        player.Input.CurrentButton = interfaceManager.StartButton;
+        interfaceManager.MainMenu.SetUIState(true);
         
-        interfaceManager.StartButton.GrabFocus();
-
-        interfaceManager.SetMainUIState(true);
+        player.Input.MenuSwitch(interfaceManager.MainMenu.StartButton);
+        
     }
 
     private void Shop_UpgradeHealthButtonFunction()

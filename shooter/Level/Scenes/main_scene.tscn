@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=58 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -30,6 +30,7 @@
 [ext_resource type="LabelSettings" uid="uid://1kmi4xg4t47v" path="res://Art/Label Settings/Upgrade Panel/upgrade_panel_description_label_settings.tres" id="23_dntb7"]
 [ext_resource type="Theme" uid="uid://70sbutqju5io" path="res://Art/Themes/button_theme.tres" id="24_am5r7"]
 [ext_resource type="LabelSettings" uid="uid://oif2dqgge5k6" path="res://Art/Label Settings/Options/options_title_settings.tres" id="24_dntb7"]
+[ext_resource type="Script" uid="uid://dncy2i1c48l6t" path="res://Code/Scripts/Interface Components/MainMenu_UIComponent.cs" id="24_ey6qw"]
 [ext_resource type="LabelSettings" uid="uid://c0u6ehyxmf4wq" path="res://Art/Label Settings/Options/options_selection_label_settings.tres" id="25_dntb7"]
 [ext_resource type="Theme" uid="uid://d06vuqaeaves3" path="res://Art/Themes/options_theme.tres" id="27_5i486"]
 [ext_resource type="Theme" uid="uid://ds2felkr0rjtc" path="res://Art/Themes/Result/result_theme.tres" id="32_2w1o7"]
@@ -206,92 +207,6 @@ shader_parameter/step_threshold = 1.0
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 
 [node name="Main Scene" type="Node"]
-
-[node name="=== MANAGER ===" type="Node" parent="."]
-
-[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "interfaceManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition")]
-script = ExtResource("1_2yd7s")
-saveManager = NodePath("../SaveManager")
-interfaceManager = NodePath("../Interface Manager")
-enemySpawner = NodePath("../Enemy Spawner")
-bulletManager = NodePath("../Bullet Manager")
-powerUpManager = NodePath("../PowerUp Manager")
-levelNode = NodePath("../../=== LEVEL ===")
-startPosition = NodePath("../../=== LEVEL ===/Start Position")
-powerUpTimeMax = 10.0
-
-[node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
-one_shot = true
-
-[node name="Round Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
-wait_time = 1.5
-one_shot = true
-
-[node name="Power Up Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
-wait_time = 0.1
-one_shot = true
-
-[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("mainUIGroup", "mainCreditsLabel", "subTitleLabel", "StartButton", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "FireRateUpgradePanel", "SpeedUpgradePanel", "BackButton", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "pauseResumeButton", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
-script = ExtResource("2_xj7ar")
-mainUIGroup = NodePath("../../=== UI ===/--- main ---")
-mainCreditsLabel = NodePath("../../=== UI ===/--- main ---/Credits Label")
-subTitleLabel = NodePath("../../=== UI ===/--- main ---/Sub-title Label")
-StartButton = NodePath("../../=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button")
-shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
-shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
-HealthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
-FireRateUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Fire Rate Panel")
-SpeedUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Speed Panel")
-BackButton = NodePath("../../=== UI ===/--- upgrade ---/Back Button")
-optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
-cheatDescriptionLabel = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/Cheat Description Label")
-cheatIF = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/LineEdit")
-masterVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Master Slider")
-sfxVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/SFX Slider")
-musicVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Music Slider")
-deleteSavePanel = NodePath("../../=== UI ===/--- options ---/Delete Save Panel")
-PlayerInfoBox = NodePath("../../=== UI ===/--- game ---/PlayerInfoBox")
-gameUIGroup = NodePath("../../=== UI ===/--- game ---")
-gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
-countdownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
-roundLabel = NodePath("../../=== UI ===/--- game ---/Round Label")
-pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
-pauseResumeButton = NodePath("../../=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Resume Button")
-resultUIGroup = NodePath("../../=== UI ===/--- result ---")
-resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Score Label")
-resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Credits Earned Label")
-resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Total Credits Label")
-debugUIGroup = NodePath("../../=== UI ===/--- debug ---")
-FramerateLabel = NodePath("../../=== UI ===/--- debug ---/Framerate Label")
-
-[node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
-script = ExtResource("4_73044")
-spawnTimer = NodePath("Timer")
-desiredEnemies = 300
-enemyPrefab = ExtResource("5_y7ox6")
-enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
-tankStats = ExtResource("5_5d42l")
-speedstrStats = ExtResource("6_tw4tw")
-baseStats = ExtResource("7_1nw18")
-
-[node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
-wait_time = 2.0
-
-[node name="SaveManager" type="Node" parent="=== MANAGER ==="]
-script = ExtResource("6_0o8l2")
-
-[node name="Bullet Manager" type="Node" parent="=== MANAGER ==="]
-script = ExtResource("9_lojpb")
-desiredBullets = 1000
-bulletPrefab = ExtResource("10_3gthi")
-
-[node name="PowerUp Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer")]
-script = ExtResource("11_am5r7")
-spawnTimer = NodePath("Timer")
-desiredPowerUps = 10
-
-[node name="Timer" type="Timer" parent="=== MANAGER ===/PowerUp Manager"]
-wait_time = 10.0
 
 [node name="=== UI ===" type="Node" parent="."]
 
@@ -1292,6 +1207,96 @@ text = "FPS: 0"
 label_settings = ExtResource("10_5d42l")
 horizontal_alignment = 2
 
+[node name="=== MANAGER ===" type="Node" parent="."]
+
+[node name="Scene Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("saveManager", "interfaceManager", "enemySpawner", "bulletManager", "powerUpManager", "levelNode", "startPosition")]
+script = ExtResource("1_2yd7s")
+saveManager = NodePath("../SaveManager")
+interfaceManager = NodePath("../Interface Manager")
+enemySpawner = NodePath("../Enemy Spawner")
+bulletManager = NodePath("../Bullet Manager")
+powerUpManager = NodePath("../PowerUp Manager")
+levelNode = NodePath("../../=== LEVEL ===")
+startPosition = NodePath("../../=== LEVEL ===/Start Position")
+powerUpTimeMax = 10.0
+
+[node name="Intro Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
+one_shot = true
+
+[node name="Round Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Power Up Timer" type="Timer" parent="=== MANAGER ===/Scene Manager"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("MainMenu", "shopUIGroup", "shopCreditsLabel", "HealthUpgradePanel", "FireRateUpgradePanel", "SpeedUpgradePanel", "BackButton", "optionsUIGroup", "cheatDescriptionLabel", "cheatIF", "masterVolumeSlider", "sfxVolumeSlider", "musicVolumeSlider", "deleteSavePanel", "PlayerInfoBox", "gameUIGroup", "gameScoreValueLabel", "countdownLabel", "roundLabel", "pauseUIGroup", "pauseResumeButton", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
+script = ExtResource("2_xj7ar")
+MainMenu = NodePath("Main Menu Component")
+shopUIGroup = NodePath("../../=== UI ===/--- upgrade ---")
+shopCreditsLabel = NodePath("../../=== UI ===/--- upgrade ---/Credits Label")
+HealthUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Health Panel")
+FireRateUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Fire Rate Panel")
+SpeedUpgradePanel = NodePath("../../=== UI ===/--- upgrade ---/Speed Panel")
+BackButton = NodePath("../../=== UI ===/--- upgrade ---/Back Button")
+optionsUIGroup = NodePath("../../=== UI ===/--- options ---")
+cheatDescriptionLabel = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/Cheat Description Label")
+cheatIF = NodePath("../../=== UI ===/--- options ---/Settings Panel/Cheat Box/LineEdit")
+masterVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Master Slider")
+sfxVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/SFX Slider")
+musicVolumeSlider = NodePath("../../=== UI ===/--- options ---/Settings Panel/Core Settings/Music Slider")
+deleteSavePanel = NodePath("../../=== UI ===/--- options ---/Delete Save Panel")
+PlayerInfoBox = NodePath("../../=== UI ===/--- game ---/PlayerInfoBox")
+gameUIGroup = NodePath("../../=== UI ===/--- game ---")
+gameScoreValueLabel = NodePath("../../=== UI ===/--- game ---/Score Value Label")
+countdownLabel = NodePath("../../=== UI ===/--- game ---/Countdown Label")
+roundLabel = NodePath("../../=== UI ===/--- game ---/Round Label")
+pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
+pauseResumeButton = NodePath("../../=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Resume Button")
+resultUIGroup = NodePath("../../=== UI ===/--- result ---")
+resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Score Label")
+resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Credits Earned Label")
+resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Total Credits Label")
+debugUIGroup = NodePath("../../=== UI ===/--- debug ---")
+FramerateLabel = NodePath("../../=== UI ===/--- debug ---/Framerate Label")
+
+[node name="Main Menu Component" type="Node" parent="=== MANAGER ===/Interface Manager" node_paths=PackedStringArray("mainUI", "mainCreditsLabel", "subTitleLabel", "StartButton")]
+script = ExtResource("24_ey6qw")
+mainUI = NodePath("../../../=== UI ===/--- main ---")
+mainCreditsLabel = NodePath("../../../=== UI ===/--- main ---/Credits Label")
+subTitleLabel = NodePath("../../../=== UI ===/--- main ---/Sub-title Label")
+StartButton = NodePath("../../../=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button")
+
+[node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
+script = ExtResource("4_73044")
+spawnTimer = NodePath("Timer")
+desiredEnemies = 300
+enemyPrefab = ExtResource("5_y7ox6")
+enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
+tankStats = ExtResource("5_5d42l")
+speedstrStats = ExtResource("6_tw4tw")
+baseStats = ExtResource("7_1nw18")
+
+[node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
+wait_time = 2.0
+
+[node name="SaveManager" type="Node" parent="=== MANAGER ==="]
+script = ExtResource("6_0o8l2")
+
+[node name="Bullet Manager" type="Node" parent="=== MANAGER ==="]
+script = ExtResource("9_lojpb")
+desiredBullets = 1000
+bulletPrefab = ExtResource("10_3gthi")
+
+[node name="PowerUp Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer")]
+script = ExtResource("11_am5r7")
+spawnTimer = NodePath("Timer")
+desiredPowerUps = 10
+
+[node name="Timer" type="Timer" parent="=== MANAGER ===/PowerUp Manager"]
+wait_time = 10.0
+
 [node name="=== LEVEL ===" type="Node" parent="."]
 
 [node name="Camera Position Main" type="Node3D" parent="=== LEVEL ==="]
@@ -1358,11 +1363,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_lfhfm")
 [node name="KeyframeChef_LowPoly_Base_FBX" parent="." instance=ExtResource("35_2tti7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6993763, 0, 16.086449)
 
-[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Intro Timer" to="=== MANAGER ===/Scene Manager" method="IntroTimerTimeout"]
-[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Round Timer" to="=== MANAGER ===/Scene Manager" method="RoundTimerTimeout"]
-[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Power Up Timer" to="=== MANAGER ===/Scene Manager" method="PowerUpTimerTimeout"]
-[connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
-[connection signal="timeout" from="=== MANAGER ===/PowerUp Manager/Timer" to="=== MANAGER ===/PowerUp Manager" method="OnTimerTimeout"]
 [connection signal="mouse_entered" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameHover"]
 [connection signal="mouse_exited" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_ButtonHoverExit"]
 [connection signal="pressed" from="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container/Start Button" to="=== MANAGER ===/Scene Manager" method="Main_StartGameFunction"]
@@ -1392,3 +1392,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6993763, 0, 16.086449)
 [connection signal="pressed" from="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Restart Button" to="=== MANAGER ===/Scene Manager" method="Result_RestartButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Main Menu Button" to="=== MANAGER ===/Scene Manager" method="Result_MainMenuButtonFunction"]
 [connection signal="pressed" from="=== UI ===/--- result ---/Button Center Container/HBoxContainer/Quit Button" to="=== MANAGER ===/Scene Manager" method="Result_QuitButtonFunction"]
+[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Intro Timer" to="=== MANAGER ===/Scene Manager" method="IntroTimerTimeout"]
+[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Round Timer" to="=== MANAGER ===/Scene Manager" method="RoundTimerTimeout"]
+[connection signal="timeout" from="=== MANAGER ===/Scene Manager/Power Up Timer" to="=== MANAGER ===/Scene Manager" method="PowerUpTimerTimeout"]
+[connection signal="timeout" from="=== MANAGER ===/Enemy Spawner/Timer" to="=== MANAGER ===/Enemy Spawner" method="OnTimerTimeout"]
+[connection signal="timeout" from="=== MANAGER ===/PowerUp Manager/Timer" to="=== MANAGER ===/PowerUp Manager" method="OnTimerTimeout"]

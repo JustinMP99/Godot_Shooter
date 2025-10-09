@@ -64,8 +64,7 @@ public partial class SceneManager : Node
         enemySpawner.Startup();
         bulletManager.Startup();
         powerUpManager.Startup();
-        
-        interfaceManager.StartButton.GrabFocus();
+        player.Input.CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
     }
 
     public override void _Process(double delta)
@@ -120,9 +119,9 @@ public partial class SceneManager : Node
         player.Gun.bulletManager = bulletManager;
         SetPlayerSignals();
         player.Input.SwitchInputState(InputState.Menu);
-        player.Input.CurrentButton = interfaceManager.StartButton;
+        player.Input.CurrentButton = interfaceManager.MainMenu.StartButton;
+        player.Input.CurrentButton.GrabFocus();
         player.Input.SetTakingInput(true);
-        //player.FindNodes();
     }
 
     /// <summary>
@@ -137,13 +136,13 @@ public partial class SceneManager : Node
 
     private void UISetup()
     {
-        interfaceManager.SetMainUIState(true);
+        interfaceManager.MainMenu.SetUIState(true);
         interfaceManager.SetOptionsUIState(false);
         interfaceManager.SetPauseUIState(false);
         interfaceManager.SetGameUIState(false);
         interfaceManager.SetResultUIState(false);
         interfaceManager.SetShopUIState(false);
-        interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
+        interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
 
         interfaceManager.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
         interfaceManager.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
@@ -268,12 +267,8 @@ public partial class SceneManager : Node
         {
             introTimer.Paused = true;
         }
-
-        //player.Input.SetTakingInput(false);
-        player.Input.CurrentButton = interfaceManager.pauseResumeButton;
+        player.Input.MenuSwitch(interfaceManager.pauseResumeButton);
         player.Input.SwitchInputState(InputState.Menu);
-        
-        interfaceManager.pauseResumeButton.GrabFocus();
     }
 
     public void UpdateGameUI()

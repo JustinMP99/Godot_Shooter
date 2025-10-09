@@ -18,7 +18,8 @@ public partial class InputComponent : Node
     public Vector3 direction;
     public Vector3 rotation;
     public Button CurrentButton;
-
+    private Button prevButton;
+    
     public override void _Process(double delta)
     {
         if (takingInput)
@@ -78,12 +79,6 @@ public partial class InputComponent : Node
 
     private void MenuInputCheck()
     {
-
-        // if (debug)
-        // {
-        //     GD.Print("Menu Input Check....");
-        // }
-        
         if (Input.IsActionJustPressed("menu_up"))
         {
             var control = CurrentButton.FindValidFocusNeighbor(Side.Top);
@@ -98,7 +93,12 @@ public partial class InputComponent : Node
             else
             {
                 GD.Print("Control is not null");
+                if (CurrentButton != null)
+                {
+                    CurrentButton.EmitSignal(Button.SignalName.MouseExited);
+                }
                 CurrentButton = control as Button;
+                CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
                 CurrentButton.GrabFocus();
             }
         }
@@ -118,12 +118,16 @@ public partial class InputComponent : Node
             else
             {
                 GD.Print("Control is not null");
+                if (CurrentButton != null)
+                {
+                    CurrentButton.EmitSignal(Button.SignalName.MouseExited);
+                }
                 CurrentButton = control as Button;
+                CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
                 CurrentButton.GrabFocus();
             }
             //CurrentButton.GrabFocus();
         }
-
         if (Input.IsActionJustPressed("menu_left"))
         {
             var control = CurrentButton.FindValidFocusNeighbor(Side.Left);
@@ -140,7 +144,12 @@ public partial class InputComponent : Node
             else
             {
                 GD.Print("Control is not null");
+                if (CurrentButton != null)
+                {
+                    CurrentButton.EmitSignal(Button.SignalName.MouseExited);
+                }
                 CurrentButton = control as Button;
+                CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
                 CurrentButton.GrabFocus();
             }
         }
@@ -160,9 +169,19 @@ public partial class InputComponent : Node
             else
             {
                 GD.Print("Control is not null");
+                if (CurrentButton != null)
+                {
+                    CurrentButton.EmitSignal(Button.SignalName.MouseExited);
+                }
+                CurrentButton = control as Button;
+                CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
                 CurrentButton = control as Button;
                 CurrentButton.GrabFocus();
             }
+        }
+        if (Input.IsActionJustPressed("menu_accept"))
+        {
+            CurrentButton.EmitSignal(Button.SignalName.Pressed);
         }
     }
 
@@ -173,6 +192,21 @@ public partial class InputComponent : Node
         {
             GD.Print("New Input State: " + inputState.ToString());
         }
+    }
+
+    /// <summary>
+    /// Called whenever a menu switch occurs
+    /// Sets previous button, current button, grabs focus and calls MouseEntered signal
+    /// </summary>
+    /// <param name="newButton"></param>
+    public void MenuSwitch(Button newButton)
+    {
+
+        prevButton = CurrentButton;
+        CurrentButton = newButton;
+        CurrentButton.GrabFocus();
+        CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
+
     }
     
     #region Getter

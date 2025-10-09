@@ -3,11 +3,10 @@ using System;
 
 public partial class UIManager : Node
 {
-    [ExportCategory("Main UI")]
-    [Export] private CanvasLayer mainUIGroup;
-    [Export] private Label mainCreditsLabel;
-    [Export] private Label subTitleLabel;
-    [Export] public Button StartButton;
+    //[ExportCategory("Main UI")]
+
+    [ExportCategory("Interface Components")]
+    [Export] public MainMenu_UIComponent MainMenu;
     
     [ExportCategory("Shop UI")]
     [Export] private CanvasLayer shopUIGroup;
@@ -52,24 +51,6 @@ public partial class UIManager : Node
     {
     }
 
-    #region Main UI Functions
-
-    public void SetMainUIState(bool state)
-    {
-        mainUIGroup.Visible = state;
-    }
-
-    public void Main_SetCreditsText(int newCredits)
-    {
-        mainCreditsLabel.Text = "Credits: " + newCredits.ToString();
-    }
-
-    public void Main_SetSubTitleText(string newSubTitle)
-    {
-        subTitleLabel.Text = newSubTitle;
-    }
-
-    #endregion
 
     #region Options UI Functions
 
