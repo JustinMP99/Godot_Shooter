@@ -79,10 +79,10 @@ public partial class InputComponent : Node
     private void MenuInputCheck()
     {
 
-        if (debug)
-        {
-            GD.Print("Menu Input Check....");
-        }
+        // if (debug)
+        // {
+        //     GD.Print("Menu Input Check....");
+        // }
         
         if (Input.IsActionJustPressed("menu_up"))
         {
@@ -122,6 +122,47 @@ public partial class InputComponent : Node
                 CurrentButton.GrabFocus();
             }
             //CurrentButton.GrabFocus();
+        }
+
+        if (Input.IsActionJustPressed("menu_left"))
+        {
+            var control = CurrentButton.FindValidFocusNeighbor(Side.Left);
+            if (debug)
+            {
+                GD.Print("Menu Left");
+                //GD.Print("Node Path: " + path);
+            }
+            //var node = GetNode(path);
+            if (control == null)
+            {
+                GD.Print("Control is null");
+            }
+            else
+            {
+                GD.Print("Control is not null");
+                CurrentButton = control as Button;
+                CurrentButton.GrabFocus();
+            }
+        }
+        if (Input.IsActionJustPressed("menu_right"))
+        {
+            var control = CurrentButton.FindValidFocusNeighbor(Side.Right);
+            if (debug)
+            {
+                GD.Print("Menu Right");
+                //GD.Print("Node Path: " + path);
+            }
+            //var node = GetNode(path);
+            if (control == null)
+            {
+                GD.Print("Control is null");
+            }
+            else
+            {
+                GD.Print("Control is not null");
+                CurrentButton = control as Button;
+                CurrentButton.GrabFocus();
+            }
         }
     }
 

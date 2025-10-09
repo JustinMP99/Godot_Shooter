@@ -104,6 +104,10 @@ public partial class SceneManager
 
         interfaceManager.SpeedUpgradePanel.SetLevelLabel(player.Stats.GetSpeedLevel(), 5);
 
+        player.Input.CurrentButton = interfaceManager.BackButton;
+        interfaceManager.BackButton.GrabFocus();
+        
+        
         //Set Shop UI State
         interfaceManager.SetShopUIState(true);
     }
@@ -246,6 +250,8 @@ public partial class SceneManager
         }
 
         player.Input.SetTakingInput(true);
+        
+        player.Input.SwitchInputState(InputState.Game);
     }
 
     private void Pause_QuitButtonFunction()
@@ -275,7 +281,8 @@ public partial class SceneManager
         //Reset game data
         Global.GamePaused = false;
         score = 0;
-        
+
+        player.Input.CurrentButton = interfaceManager.StartButton;
         interfaceManager.StartButton.GrabFocus();
     }
 
@@ -318,6 +325,8 @@ public partial class SceneManager
         interfaceManager.SetShopUIState(false);
 
         interfaceManager.Main_SetCreditsText(player.Stats.GetCredits());
+
+        player.Input.CurrentButton = interfaceManager.StartButton;
         
         interfaceManager.StartButton.GrabFocus();
 

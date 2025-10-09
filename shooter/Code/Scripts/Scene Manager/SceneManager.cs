@@ -270,6 +270,7 @@ public partial class SceneManager : Node
         }
 
         //player.Input.SetTakingInput(false);
+        player.Input.CurrentButton = interfaceManager.pauseResumeButton;
         player.Input.SwitchInputState(InputState.Menu);
         
         interfaceManager.pauseResumeButton.GrabFocus();

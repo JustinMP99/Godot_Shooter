@@ -365,6 +365,8 @@ text = "Options"
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- main ---/CenterContainer/PanelContainer/Button Container"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Options Button")
+focus_neighbor_bottom = NodePath("../Start Button")
 theme_override_font_sizes/font_size = 44
 text = "Quit"
 
