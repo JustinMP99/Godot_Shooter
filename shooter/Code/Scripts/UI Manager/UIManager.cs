@@ -15,7 +15,6 @@ public enum InterfaceGroup
 
 public partial class UIManager : Node
 {
-
     [ExportGroup("Interface Components")]
     [Export] public MainMenu_IC MainMenu;
     [Export] public Upgrade_IC Upgrade;

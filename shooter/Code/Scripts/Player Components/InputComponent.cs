@@ -109,9 +109,7 @@ public partial class InputComponent : Node
             if (debug && inputPressedDebug)
             {
                 GD.Print("Menu Down");
-                //GD.Print("Node Path: " + path);
             }
-            //var node = GetNode(path);
             if (control == null)
             {
                 GD.Print("Control is null");
@@ -127,7 +125,6 @@ public partial class InputComponent : Node
                 CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
                 CurrentButton.GrabFocus();
             }
-            //CurrentButton.GrabFocus();
         }
         if (Input.IsActionJustPressed("menu_left"))
         {
@@ -135,9 +132,7 @@ public partial class InputComponent : Node
             if (debug && inputPressedDebug)
             {
                 GD.Print("Menu Left");
-                //GD.Print("Node Path: " + path);
             }
-            //var node = GetNode(path);
             if (control == null)
             {
                 GD.Print("Control is null");
@@ -160,9 +155,7 @@ public partial class InputComponent : Node
             if (debug && inputPressedDebug)
             {
                 GD.Print("Menu Right");
-                //GD.Print("Node Path: " + path);
             }
-            //var node = GetNode(path);
             if (control == null)
             {
                 GD.Print("Control is null");
@@ -206,12 +199,10 @@ public partial class InputComponent : Node
     /// <param name="newButton"></param>
     public void MenuSwitch(Button newButton)
     {
-
         prevButton = CurrentButton;
         CurrentButton = newButton;
         CurrentButton.GrabFocus();
         CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
-
     }
     
     #region Getter

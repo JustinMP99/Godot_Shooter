@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=66 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -165,10 +165,8 @@ sky_material = SubResource("PanoramaSkyMaterial_lojpb")
 
 [sub_resource type="Environment" id="Environment_2yd7s"]
 background_mode = 1
-background_color = Color(0.774165, 0.873684, 0.936415, 1)
 sky = SubResource("Sky_0o8l2")
 ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
 ssao_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_energy = 28.705
@@ -210,6 +208,16 @@ shader = ExtResource("33_lfhfm")
 shader_parameter/outline_thickness = 1.38999996893072
 shader_parameter/step_threshold = 1.0
 shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpfgl"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j7iwb"]
+emission_shape = 3
+emission_box_extents = Vector3(71.27, 24.285, 6.21)
+gravity = Vector3(0, 0, 9.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y3shl"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Main Scene" type="Node"]
 
@@ -1354,6 +1362,16 @@ extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_2w1o7")
 skeleton = NodePath("../../Cam 1")
 surface_material_override/0 = SubResource("ShaderMaterial_lfhfm")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="=== LEVEL ==="]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -171.56175)
+material_override = SubResource("StandardMaterial3D_cpfgl")
+amount = 1955
+lifetime = 120.0
+speed_scale = 0.75
+trail_lifetime = 8.25
+process_material = SubResource("ParticleProcessMaterial_j7iwb")
+draw_pass_1 = SubResource("BoxMesh_y3shl")
 
 [node name="KeyframeChef_LowPoly_Base_FBX" parent="." instance=ExtResource("35_2tti7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6993763, 0, 16.086449)
