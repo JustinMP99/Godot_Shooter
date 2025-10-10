@@ -12,7 +12,7 @@ config_version=5
 
 config/name="infiniSpace"
 config/description="A simple top-down shooter made in the Godot engine."
-config/version="0.3.23"
+config/version="0.3.24"
 run/main_scene="uid://b7eyggjoqoow4"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 run/max_fps=165

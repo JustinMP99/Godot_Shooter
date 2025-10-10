@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://fdrgiae10hx8"]
+[gd_scene load_steps=7 format=4 uid="uid://fdrgiae10hx8"]
 
 [ext_resource type="Script" uid="uid://b1yrkfdj44jly" path="res://Code/Scripts/Bullet.cs" id="1_gsyx3"]
 
@@ -34,6 +34,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vdqys")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cim2l"]
+albedo_color = Color(0.86861634, 0.48753107, 0, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyx3"]
 
 [node name="Bullet" type="RigidBody3D"]
@@ -48,6 +51,7 @@ damage = 25
 transform = Transform3D(0.732256, 0, 0, 0, 0.732256, 0, 0, 0, 0.732256, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ohqgd")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_cim2l")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 4
