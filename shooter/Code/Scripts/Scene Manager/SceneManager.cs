@@ -140,6 +140,7 @@ public partial class SceneManager : Node
         interfaceManager.Game.FindNodes();
         interfaceManager.Options.FindNodes();
         interfaceManager.Result.FindNodes();
+        interfaceManager.Pause.FindNodes();
         interfaceManager.Game.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
         interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
         if (debug)

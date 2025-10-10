@@ -167,6 +167,7 @@ sky_material = SubResource("PanoramaSkyMaterial_lojpb")
 background_mode = 1
 sky = SubResource("Sky_0o8l2")
 ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 ssao_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_energy = 28.705
