@@ -14,6 +14,7 @@ public partial class Options_IC : InterfaceComponent
     
     public override void FindNodes()
     {
+        
         cheatDescriptionLabel = interfaceGroup.GetNode<Label>("Cheat Description Label");
         cheatIF = interfaceGroup.GetNode<LineEdit>("Settings Panel/Cheat Box/Cheat Line Edit");
         masterVolumeSlider = interfaceGroup.GetNode<Slider>("Settings Panel/Core Settings/Master Slider");

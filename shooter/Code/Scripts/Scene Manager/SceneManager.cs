@@ -45,14 +45,14 @@ public partial class SceneManager : Node
         roundTimer = GetNode<Timer>("Round Timer");
         powerUpTimer = GetNode<Timer>("Power Up Timer");
 
+        //setup UI
+        UISetup();
+        
         //load setting configuration file
         LoadConfig();
 
         //load player save data
         LoadSave();
-
-        //setup UI
-        UISetup();
         
         //load player data
         PlayerSetup();
@@ -119,8 +119,7 @@ public partial class SceneManager : Node
         player.Gun.bulletManager = bulletManager;
         SetPlayerSignals();
         player.Input.SwitchInputState(InputState.Menu);
-        player.Input.CurrentButton = interfaceManager.MainMenu.StartButton;
-        player.Input.CurrentButton.GrabFocus();
+        player.Input.MenuSwitch(interfaceManager.MainMenu.StartButton);
         player.Input.SetTakingInput(true);
     }
 
@@ -140,18 +139,9 @@ public partial class SceneManager : Node
         interfaceManager.Upgrade.FindNodes();
         interfaceManager.Game.FindNodes();
         interfaceManager.Options.FindNodes();
-        
-        interfaceManager.Options.SetUIState(false);
-        interfaceManager.SetPauseUIState(false);
-        interfaceManager.Game.SetUIState(false);
-        interfaceManager.SetResultUIState(false);
-        interfaceManager.Upgrade.SetUIState(false);
-        //interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
-        interfaceManager.MainMenu.SetUIState(true);
-
+        interfaceManager.Result.FindNodes();
         interfaceManager.Game.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
         interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
-
         if (debug)
         {
             interfaceManager.SetDebugUIState(true);
@@ -160,6 +150,7 @@ public partial class SceneManager : Node
         {
             interfaceManager.SetDebugUIState(false);
         }
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Main);
     }
 
     #endregion
@@ -253,10 +244,9 @@ public partial class SceneManager : Node
 
     public void ActivatePause()
     {
-        interfaceManager.Game.SetUIState(false);
-
-        interfaceManager.SetPauseUIState(true);
-
+      
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Pause);
+        
         Global.GamePaused = true;
 
         //Pause all timers
@@ -272,7 +262,7 @@ public partial class SceneManager : Node
         {
             introTimer.Paused = true;
         }
-        player.Input.MenuSwitch(interfaceManager.pauseResumeButton);
+        player.Input.MenuSwitch(interfaceManager.Pause.ResumeButton);
         player.Input.SwitchInputState(InputState.Menu);
     }
 
@@ -291,12 +281,15 @@ public partial class SceneManager : Node
         player.Stats.IncreaseCredits(tempCredits);
 
         //Update UI
-        interfaceManager.Game.SetUIState(false);
-        interfaceManager.SetResultUIState(true);
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Result);
 
-        interfaceManager.Result_SetScoreText(score);
-        interfaceManager.Result_SetCreditsEarnedText(tempCredits);
-        interfaceManager.Result_SetTotalCreditsText(player.Stats.GetCredits());
+        interfaceManager.Result.SetScoreText(score);
+        interfaceManager.Result.SetCreditsEarnedText(tempCredits);
+        interfaceManager.Result.SetTotalCreditsText(player.Stats.GetCredits());
+        
+        player.Input.SwitchInputState(InputState.Menu);
+        player.Input.MenuSwitch(interfaceManager.Result.MainMenuButton);
+        
     }
 
     public void DefeatedEnemy()

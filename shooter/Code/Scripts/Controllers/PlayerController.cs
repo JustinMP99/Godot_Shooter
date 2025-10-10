@@ -162,7 +162,7 @@ public partial class PlayerController : CharacterBody3D
             //Check currentHealth
             if (Stats.GetCurrentHealth() <= 0)
             {
-                Input.SetTakingInput(false);
+                //Input.SetTakingInput(false);
                 this.Position = new Vector3(0.0f, 0.0f, 100.0f);
                 //Game Over
                 EmitSignal(SignalName.PlayerDied);

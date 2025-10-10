@@ -8,8 +8,7 @@ public partial class SceneManager
     public void Main_StartGameFunction()
     {
         //Set UI states
-        interfaceManager.MainMenu.SetUIState(false);
-        interfaceManager.Game.SetUIState(true);
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Game);
 
         //Reset temp game values
         score = 0;
@@ -213,25 +212,18 @@ public partial class SceneManager
     {
         GD.Print("Resolution Setting: " + GameData.Instance.ResolutionValue);
         GD.Print("Fullscreen Setting: " + GameData.Instance.Fullscreen);
-        //set ui state
-        interfaceManager.Options.SetUIState(false);
-        interfaceManager.MainMenu.SetUIState(true);
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Main);
         saveManager.SaveConfig();
     }
 
     #endregion
-
-    #region Game UI Button Functions
-
-    #endregion
-
+    
     #region Pause UI Button Functions
 
     private void Pause_ResumeButtonFunction()
     {
         //Set UI States
-        interfaceManager.SetPauseUIState(false);
-        interfaceManager.Game.SetUIState(true);
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Game);
         Global.GamePaused = false;
         enemySpawner.ResumeTimer();
         powerUpManager.ResumeTimer();
@@ -256,8 +248,7 @@ public partial class SceneManager
         //Destroy all enemies
 
         //Set UI States
-        interfaceManager.SetPauseUIState(false);
-        interfaceManager.MainMenu.SetUIState(true);
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Main);
 
         if (roundTimer.Paused)
         {
@@ -294,12 +285,9 @@ public partial class SceneManager
     private void Result_MainMenuButtonFunction()
     {
         interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
-
-        interfaceManager.SetResultUIState(false);
-
-        interfaceManager.MainMenu.SetUIState(true);
-
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Main);
         saveManager.Save();
+        player.Input.MenuSwitch(interfaceManager.MainMenu.StartButton);
     }
 
     private void Result_QuitButtonFunction()
@@ -316,9 +304,8 @@ public partial class SceneManager
 
     private void Shop_BackButtonFunction()
     {
-        interfaceManager.Upgrade.SetUIState(false);
         interfaceManager.MainMenu.SetCreditsText(player.Stats.GetCredits());
-        interfaceManager.MainMenu.SetUIState(true);
+        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Main);
         player.Input.MenuSwitch(interfaceManager.MainMenu.StartButton);
     }
 

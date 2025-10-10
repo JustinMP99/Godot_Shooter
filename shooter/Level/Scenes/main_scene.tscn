@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=63 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -36,6 +36,8 @@
 [ext_resource type="Script" uid="uid://c0103wd4o4jjw" path="res://Code/Scripts/Interface Components/Options_IC.cs" id="26_sp2vu"]
 [ext_resource type="Theme" uid="uid://d06vuqaeaves3" path="res://Art/Themes/options_theme.tres" id="27_5i486"]
 [ext_resource type="Script" uid="uid://urporjbbsek2" path="res://Code/Scripts/Interface Components/Game_IC.cs" id="27_tfwmr"]
+[ext_resource type="Script" uid="uid://dhie7as2rsbog" path="res://Code/Scripts/Interface Components/Result_IC.cs" id="28_tfwmr"]
+[ext_resource type="Script" uid="uid://0843apsjrp56" path="res://Code/Scripts/Interface Components/Pause_IC.cs" id="29_cpfgl"]
 [ext_resource type="Theme" uid="uid://ds2felkr0rjtc" path="res://Art/Themes/Result/result_theme.tres" id="32_2w1o7"]
 [ext_resource type="Shader" uid="uid://cxe5nkut7sdab" path="res://Code/Shaders/fullscreen_outline.gdshader" id="33_lfhfm"]
 [ext_resource type="PackedScene" uid="uid://cpqw8kwegd6kp" path="res://Art/Models/KeyframeChef_LowPoly_Base_FBX.fbx" id="35_2tti7"]
@@ -708,6 +710,7 @@ text = "Go Back"
 [node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Back Button" instance=ExtResource("18_iruui")]
 
 [node name="--- options ---" type="CanvasLayer" parent="=== UI ==="]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Title" type="Label" parent="=== UI ===/--- options ---"]
@@ -1160,7 +1163,9 @@ theme = ExtResource("32_2w1o7")
 
 [node name="Restart Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("32_2w1o7")
+focus_neighbor_left = NodePath("../Quit Button")
+focus_neighbor_right = NodePath("../Main Menu Button")
+theme = ExtResource("12_iruui")
 theme_override_font_sizes/font_size = 42
 text = "Restart"
 
@@ -1168,7 +1173,9 @@ text = "Restart"
 
 [node name="Main Menu Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("32_2w1o7")
+focus_neighbor_left = NodePath("../Restart Button")
+focus_neighbor_right = NodePath("../Quit Button")
+theme = ExtResource("12_iruui")
 theme_override_font_sizes/font_size = 42
 text = "Main Menu"
 
@@ -1176,7 +1183,9 @@ text = "Main Menu"
 
 [node name="Quit Button" type="Button" parent="=== UI ===/--- result ---/Button Center Container/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("32_2w1o7")
+focus_neighbor_left = NodePath("../Main Menu Button")
+focus_neighbor_right = NodePath("../Restart Button")
+theme = ExtResource("12_iruui")
 theme_override_font_sizes/font_size = 42
 text = "Quit"
 
@@ -1219,18 +1228,14 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("MainMenu", "Upgrade", "Options", "Game", "pauseUIGroup", "pauseResumeButton", "resultUIGroup", "resultScoreLabel", "resultCreditsEarnedLabel", "resultTotalCreditsLabel", "debugUIGroup", "FramerateLabel")]
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("MainMenu", "Upgrade", "Options", "Game", "Result", "Pause", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
 MainMenu = NodePath("Main Menu Component")
 Upgrade = NodePath("Upgrade Component")
 Options = NodePath("Options Component")
 Game = NodePath("Game Component")
-pauseUIGroup = NodePath("../../=== UI ===/--- pause ---")
-pauseResumeButton = NodePath("../../=== UI ===/--- pause ---/CenterContainer/PanelContainer/VBoxContainer/Resume Button")
-resultUIGroup = NodePath("../../=== UI ===/--- result ---")
-resultScoreLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Score Label")
-resultCreditsEarnedLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Credits Earned Label")
-resultTotalCreditsLabel = NodePath("../../=== UI ===/--- result ---/Data Center Container/VBoxContainer/Total Credits Label")
+Result = NodePath("Result Component")
+Pause = NodePath("Pause Component")
 debugUIGroup = NodePath("../../=== UI ===/--- debug ---")
 FramerateLabel = NodePath("../../=== UI ===/--- debug ---/Framerate Label")
 
@@ -1249,6 +1254,14 @@ interfaceGroup = NodePath("../../../=== UI ===/--- options ---")
 [node name="Game Component" type="Node" parent="=== MANAGER ===/Interface Manager" node_paths=PackedStringArray("interfaceGroup")]
 script = ExtResource("27_tfwmr")
 interfaceGroup = NodePath("../../../=== UI ===/--- game ---")
+
+[node name="Result Component" type="Node" parent="=== MANAGER ===/Interface Manager" node_paths=PackedStringArray("interfaceGroup")]
+script = ExtResource("28_tfwmr")
+interfaceGroup = NodePath("../../../=== UI ===/--- result ---")
+
+[node name="Pause Component" type="Node" parent="=== MANAGER ===/Interface Manager" node_paths=PackedStringArray("interfaceGroup")]
+script = ExtResource("29_cpfgl")
+interfaceGroup = NodePath("../../../=== UI ===/--- pause ---")
 
 [node name="Enemy Spawner" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("spawnTimer", "enemyContainer")]
 script = ExtResource("4_73044")
