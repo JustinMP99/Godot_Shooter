@@ -3,461 +3,461 @@ using System;
 
 public partial class SceneManager : Node
 {
-    [ExportCategory("Debug")]
-    [Export] private bool debug;
+	[ExportCategory("Debug")]
+	[Export] private bool debug;
 
-    [ExportCategory("Managers")]
-    [Export] private SaveManager saveManager;
-    [Export] private UIManager interfaceManager;
-    [Export] private EnemySpawner enemySpawner;
-    [Export] private BulletManager bulletManager;
-    [Export] private PowerUpManager powerUpManager;
+	[ExportCategory("Managers")]
+	[Export] private SaveManager saveManager;
+	[Export] private UIManager interfaceManager;
+	[Export] private EnemySpawner enemySpawner;
+	[Export] private BulletManager bulletManager;
+	[Export] private PowerUpManager powerUpManager;
 
-    [ExportCategory("Environment Variables")]
-    [Export] private Node levelNode;
+	[ExportCategory("Environment Variables")]
+	[Export] private Node levelNode;
 
-    [Export] private Node3D startPosition;
-    private Timer introTimer; //Counts down from 3 when the player presses the start button
-    private Timer roundTimer;
-    private Timer powerUpTimer;
-    private PlayerController player;
+	[Export] private Node3D startPosition;
+	private Timer introTimer; //Counts down from 3 when the player presses the start button
+	private Timer roundTimer;
+	private Timer powerUpTimer;
+	private PlayerController player;
 
-    [ExportCategory("Upgrade Values")]
-    [Export] private int healthUpgradeCost; //Cost of the Health upgrade
-    [Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
-    [Export] private int fireRateUpgradeCost;
-    [Export] private float fireRateUpgradeAmount;
-    [Export] private int speedUpgradeCost;
-    [Export] private float speedUpgradeAmount;
+	[ExportCategory("Upgrade Values")]
+	[Export] private int healthUpgradeCost; //Cost of the Health upgrade
+	[Export] private int healthUpgradeAmount; //Amount of Health points added upon upgrade
+	[Export] private int fireRateUpgradeCost;
+	[Export] private float fireRateUpgradeAmount;
+	[Export] private int speedUpgradeCost;
+	[Export] private float speedUpgradeAmount;
 
-    [ExportCategory("Gameplay Values")]
-    [Export] private int round;
-    [Export] private int score;
-    [Export] private float powerUpTimeMax;
-    private float powerUpTimeCurrent;
-    private int enemiesLeft; //the amount of enemies that must be defeated to end the round
-    private int enemiesLeftMax = 10;
-    private int introCount; // Counts the seconds on the intro timer
+	[ExportCategory("Gameplay Values")]
+	[Export] private int round;
+	[Export] private int score;
+	[Export] private float powerUpTimeMax;
+	private float powerUpTimeCurrent;
+	private int enemiesLeft; //the amount of enemies that must be defeated to end the round
+	private int enemiesLeftMax = 10;
+	private int introCount; // Counts the seconds on the intro timer
 
-    public override void _Ready()
-    {
-        introTimer = GetNode<Timer>("Intro Timer");
-        roundTimer = GetNode<Timer>("Round Timer");
-        powerUpTimer = GetNode<Timer>("Power Up Timer");
+	public override void _Ready()
+	{
+		introTimer = GetNode<Timer>("Intro Timer");
+		roundTimer = GetNode<Timer>("Round Timer");
+		powerUpTimer = GetNode<Timer>("Power Up Timer");
 
-        //setup UI
-        UISetup();
-        
-        //load setting configuration file
-        LoadConfig();
+		//setup UI
+		UISetup();
+		
+		//load setting configuration file
+		LoadConfig();
 
-        //load player save data
-        LoadSave();
-        
-        //load player data
-        PlayerSetup();
+		//load player save data
+		LoadSave();
+		
+		//load player data
+		PlayerSetup();
 
-        //Setup game data
-        GameDataSetup();
-        
-        //additional startup calls
-        enemySpawner.Startup();
-        bulletManager.Startup();
-        powerUpManager.Startup();
-        player.Input.CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
-    }
+		//Setup game data
+		GameDataSetup();
+		
+		//additional startup calls
+		enemySpawner.Startup();
+		bulletManager.Startup();
+		powerUpManager.Startup();
+		player.Input.CurrentButton.EmitSignal(Button.SignalName.MouseEntered);
+	}
 
-    public override void _Process(double delta)
-    {
-        interfaceManager.SetFramerateLabelText(Engine.GetFramesPerSecond());
-    }
+	public override void _Process(double delta)
+	{
+		interfaceManager.SetFramerateLabelText(Engine.GetFramesPerSecond());
+	}
 
-    #region Startup Functions
+	#region Startup Functions
 
-    /// <summary>
-    /// Loads settings config file
-    /// </summary>
-    private void LoadConfig()
-    {
-        bool configLoaded = saveManager.LoadConfig();
+	/// <summary>
+	/// Loads settings config file
+	/// </summary>
+	private void LoadConfig()
+	{
+		bool configLoaded = saveManager.LoadConfig();
 
-        if (configLoaded)
-        {
-            interfaceManager.Options.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
-            interfaceManager.Options.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
-            interfaceManager.Options.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
+		if (configLoaded)
+		{
+			interfaceManager.Options.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
+			interfaceManager.Options.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
+			interfaceManager.Options.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
 
-            SetResolution(GameData.Instance.ResolutionValue);
-            SetFullscreen(GameData.Instance.Fullscreen);
-        }
-        else
-        {
-            GD.Print("Creating new config file");
-            interfaceManager.Options.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
-            interfaceManager.Options.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
-            interfaceManager.Options.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
+			SetResolution(GameData.Instance.ResolutionValue);
+			SetFullscreen(GameData.Instance.Fullscreen);
+		}
+		else
+		{
+			GD.Print("Creating new config file");
+			interfaceManager.Options.SetMasterSliderValue(AudioServer.GetBusVolumeLinear(0));
+			interfaceManager.Options.SetSFXSliderValue(AudioServer.GetBusVolumeLinear(1));
+			interfaceManager.Options.SetMusicSliderValue(AudioServer.GetBusVolumeLinear(2));
 
-            SetResolution(3);
-            SetFullscreen(false);
-        }
-    }
+			SetResolution(3);
+			SetFullscreen(false);
+		}
+	}
 
-    private void LoadSave()
-    {
-        bool loadResult = saveManager.load();
+	private void LoadSave()
+	{
+		bool loadResult = saveManager.load();
 
-        if (!loadResult)
-        {
-            saveManager.NewSave();
-        }
-    }
+		if (!loadResult)
+		{
+			saveManager.NewSave();
+		}
+	}
 
-    private void PlayerSetup()
-    {
-        player = PlayerController.Instance;
-        player.Position = startPosition.Position;
-        player.Gun.bulletManager = bulletManager;
-        SetPlayerSignals();
-        player.Input.SwitchInputState(InputState.Menu);
-        player.Input.MenuSwitch(interfaceManager.MainMenu.StartButton);
-        player.Input.SetTakingInput(true);
-    }
+	private void PlayerSetup()
+	{
+		player = PlayerController.Instance;
+		player.Position = startPosition.Position;
+		player.Gun.bulletManager = bulletManager;
+		SetPlayerSignals();
+		player.Input.SwitchInputState(InputState.Menu);
+		player.Input.MenuSwitch(interfaceManager.MainMenu.StartButton);
+		player.Input.SetTakingInput(true);
+	}
 
-    /// <summary>
-    /// Sets game data based on Player information
-    /// </summary>
-    private void GameDataSetup()
-    {
-        RefreshHealthUpgradeValues(player.Stats.GetHealthLevel());
-        RefreshFireRateUpgradeValues(player.Stats.GetFireRateLevel());
-        RefreshSpeedUpgradeValues(player.Stats.GetSpeedLevel());
-    }
+	/// <summary>
+	/// Sets game data based on Player information
+	/// </summary>
+	private void GameDataSetup()
+	{
+		RefreshHealthUpgradeValues(player.Stats.GetHealthLevel());
+		RefreshFireRateUpgradeValues(player.Stats.GetFireRateLevel());
+		RefreshSpeedUpgradeValues(player.Stats.GetSpeedLevel());
+	}
 
-    private void UISetup()
-    {
-        interfaceManager.MainMenu.FindNodes();
-        interfaceManager.Upgrade.FindNodes();
-        interfaceManager.Game.FindNodes();
-        interfaceManager.Options.FindNodes();
-        interfaceManager.Result.FindNodes();
-        interfaceManager.Pause.FindNodes();
-        interfaceManager.Game.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
-        interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
-        if (debug)
-        {
-            interfaceManager.SetDebugUIState(true);
-        }
-        else
-        {
-            interfaceManager.SetDebugUIState(false);
-        }
-        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Main);
-    }
+	private void UISetup()
+	{
+		interfaceManager.MainMenu.FindNodes();
+		interfaceManager.Upgrade.FindNodes();
+		interfaceManager.Game.FindNodes();
+		interfaceManager.Options.FindNodes();
+		interfaceManager.Result.FindNodes();
+		interfaceManager.Pause.FindNodes();
+		interfaceManager.Game.PlayerInfoBox.SetPowerUpBarMax((int)powerUpTimeMax);
+		interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
+		if (debug)
+		{
+			interfaceManager.SetDebugUIState(true);
+		}
+		else
+		{
+			interfaceManager.SetDebugUIState(false);
+		}
+		interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Main);
+	}
 
-    #endregion
+	#endregion
 
-    #region Round Functions
+	#region Round Functions
 
-    private void StartNewRound()
-    {
-        Global.Round++;
+	private void StartNewRound()
+	{
+		Global.Round++;
 
-        if (Global.Round == 1)
-        {
-            enemiesLeftMax = 5;
-        }
-        else if (enemiesLeftMax != 80)
-        {
-            enemiesLeftMax += 5;
-        }
+		if (Global.Round == 1)
+		{
+			enemiesLeftMax = 5;
+		}
+		else if (enemiesLeftMax != 80)
+		{
+			enemiesLeftMax += 5;
+		}
 
-        if (Global.Round % 5 == 0)
-        {
-            enemySpawner.DecrementTimer();
-        }
+		if (Global.Round % 5 == 0)
+		{
+			enemySpawner.DecrementTimer();
+		}
 
-        enemiesLeft = enemiesLeftMax;
-        interfaceManager.Game.SetRoundLabelText(Global.Round);
-        interfaceManager.Game.SetRoundLabelState(true);
-        GD.Print("Enemies Left: " + enemiesLeft);
-        roundTimer.Start();
-    }
+		enemiesLeft = enemiesLeftMax;
+		interfaceManager.Game.SetRoundLabelText(Global.Round);
+		interfaceManager.Game.SetRoundLabelState(true);
+		GD.Print("Enemies Left: " + enemiesLeft);
+		roundTimer.Start();
+	}
 
-    #endregion
+	#endregion
 
-    #region Timer Functions
+	#region Timer Functions
 
-    private void StartIntroTimer()
-    {
-        interfaceManager.Game.SetCountDownLabelState(true);
-        introCount = 3;
-        interfaceManager.Game.SetCountDownLabelText(introCount);
-        introTimer.Start();
-    }
+	private void StartIntroTimer()
+	{
+		interfaceManager.Game.SetCountDownLabelState(true);
+		introCount = 3;
+		interfaceManager.Game.SetCountDownLabelText(introCount);
+		introTimer.Start();
+	}
 
-    private void IntroTimerTimeout()
-    {
-        //End round timer
-        introCount--;
-        if (introCount <= 0)
-        {
-            player.Input.SwitchInputState(InputState.Game);
-            player.Input.SetTakingInput(true);
-            player.Gun.SetCanShoot(true);
-            interfaceManager.Game.SetCountDownLabelState(false);
-            StartNewRound();
-        }
-        else
-        {
-            interfaceManager.Game.SetCountDownLabelText(introCount);
-            introTimer.Start();
-        }
-    }
+	private void IntroTimerTimeout()
+	{
+		//End round timer
+		introCount--;
+		if (introCount <= 0)
+		{
+			player.Input.SwitchInputState(InputState.Game);
+			player.Input.SetTakingInput(true);
+			player.Gun.SetCanShoot(true);
+			interfaceManager.Game.SetCountDownLabelState(false);
+			StartNewRound();
+		}
+		else
+		{
+			interfaceManager.Game.SetCountDownLabelText(introCount);
+			introTimer.Start();
+		}
+	}
 
-    private void RoundTimerTimeout()
-    {
-        interfaceManager.Game.SetRoundLabelState(false);
-        interfaceManager.Game.SetHudState(true);
-        enemySpawner.StartTimer();
-        powerUpManager.StartTimer();
-    }
+	private void RoundTimerTimeout()
+	{
+		interfaceManager.Game.SetRoundLabelState(false);
+		interfaceManager.Game.SetHudState(true);
+		enemySpawner.StartTimer();
+		powerUpManager.StartTimer();
+	}
 
-    private void PowerUpTimerTimeout()
-    {
-        powerUpTimeCurrent -= 0.1f;
+	private void PowerUpTimerTimeout()
+	{
+		powerUpTimeCurrent -= 0.1f;
 
-        if (powerUpTimeCurrent <= 1)
-        {
-            interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
-            player.SwitchShootType(ShootType.Single);
-            player.Gun.UpdateShootTimer(player.Stats.GetFireRate());
-        }
-        else
-        {
-            interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(powerUpTimeCurrent);
-            powerUpTimer.Start();
-        }
-    }
+		if (powerUpTimeCurrent <= 1)
+		{
+			interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(0.0f);
+			player.SwitchShootType(ShootType.Single);
+			player.Gun.UpdateShootTimer(player.Stats.GetFireRate());
+		}
+		else
+		{
+			interfaceManager.Game.PlayerInfoBox.SetPowerUpBarCurrent(powerUpTimeCurrent);
+			powerUpTimer.Start();
+		}
+	}
 
-    #endregion
+	#endregion
 
-    #region Signal Functions
+	#region Signal Functions
 
-    public void ActivatePause()
-    {
-      
-        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Pause);
-        
-        Global.GamePaused = true;
+	public void ActivatePause()
+	{
+	  
+		interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Pause);
+		
+		Global.GamePaused = true;
 
-        //Pause all timers
-        powerUpManager.PauseTimer();
-        enemySpawner.PauseTimer();
+		//Pause all timers
+		powerUpManager.PauseTimer();
+		enemySpawner.PauseTimer();
 
-        if (!roundTimer.Paused)
-        {
-            roundTimer.Paused = true;
-        }
+		if (!roundTimer.Paused)
+		{
+			roundTimer.Paused = true;
+		}
 
-        if (!introTimer.Paused)
-        {
-            introTimer.Paused = true;
-        }
-        player.Input.MenuSwitch(interfaceManager.Pause.ResumeButton);
-        player.Input.SwitchInputState(InputState.Menu);
-    }
+		if (!introTimer.Paused)
+		{
+			introTimer.Paused = true;
+		}
+		player.Input.MenuSwitch(interfaceManager.Pause.ResumeButton);
+		player.Input.SwitchInputState(InputState.Menu);
+	}
 
-    public void UpdateGameUI()
-    {
-        interfaceManager.Game.PlayerInfoBox.SetHealthBarCurrent(player.Stats.GetCurrentHealth());
-    }
+	public void UpdateGameUI()
+	{
+		interfaceManager.Game.PlayerInfoBox.SetHealthBarCurrent(player.Stats.GetCurrentHealth());
+	}
 
-    public void GameOver()
-    {
-        //Stop Spawning Enemies
-        enemySpawner.StopTimer();
-        powerUpManager.StopTimer();
+	public void GameOver()
+	{
+		//Stop Spawning Enemies
+		enemySpawner.StopTimer();
+		powerUpManager.StopTimer();
 
-        int tempCredits = score / 10;
-        player.Stats.IncreaseCredits(tempCredits);
+		int tempCredits = score / 10;
+		player.Stats.IncreaseCredits(tempCredits);
 
-        //Update UI
-        interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Result);
+		//Update UI
+		interfaceManager.SwitchInterfaceGroup(InterfaceGroup.Result);
 
-        interfaceManager.Result.SetScoreText(score);
-        interfaceManager.Result.SetCreditsEarnedText(tempCredits);
-        interfaceManager.Result.SetTotalCreditsText(player.Stats.GetCredits());
-        
-        player.Input.SwitchInputState(InputState.Menu);
-        player.Input.MenuSwitch(interfaceManager.Result.MainMenuButton);
-        
-    }
+		interfaceManager.Result.SetScoreText(score);
+		interfaceManager.Result.SetCreditsEarnedText(tempCredits);
+		interfaceManager.Result.SetTotalCreditsText(player.Stats.GetCredits());
+		
+		player.Input.SwitchInputState(InputState.Menu);
+		player.Input.MenuSwitch(interfaceManager.Result.MainMenuButton);
+		
+	}
 
-    public void DefeatedEnemy()
-    {
-        //Increase Score
-        score += 100;
+	public void DefeatedEnemy()
+	{
+		//Increase Score
+		score += 100;
 
-        enemiesLeft--;
-        if (enemiesLeft <= 0)
-        {
-            //End round
-            StartNewRound();
+		enemiesLeft--;
+		if (enemiesLeft <= 0)
+		{
+			//End round
+			StartNewRound();
 
-            enemySpawner.DisableAllEnemies();
-        }
+			enemySpawner.DisableAllEnemies();
+		}
 
-        //Update UI
-        interfaceManager.Game.SetScoreValueText(score);
-    }
+		//Update UI
+		interfaceManager.Game.SetScoreValueText(score);
+	}
 
-    public void ShootTypeSwitchEvent(PowerUpStats_ShootType shootStats)
-    {
-        powerUpTimeCurrent = powerUpTimeMax;
-        //start power up timer
-        powerUpTimer.Start();
-        player.SwitchShootType(shootStats.ShootType);
-    }
+	public void ShootTypeSwitchEvent(PowerUpStats_ShootType shootStats)
+	{
+		powerUpTimeCurrent = powerUpTimeMax;
+		//start power up timer
+		powerUpTimer.Start();
+		player.SwitchShootType(shootStats.ShootType);
+	}
 
-    #endregion
+	#endregion
 
-    #region Supporting Functions
+	#region Supporting Functions
 
-    private void SetPlayerSignals()
-    {
-        player.Input.PauseSignal += ActivatePause;
-        player.Gun.EnemyDefeated += DefeatedEnemy;
-        player.Input.ShootSignal += player.Gun.Shoot;
-        player.PlayerHealed += UpdateGameUI;
-        player.PlayerHit += UpdateGameUI;
-        player.PlayerDied += GameOver;
-        player.ShootTypePowerUp += ShootTypeSwitchEvent;
-    }
+	private void SetPlayerSignals()
+	{
+		player.Input.PauseSignal += ActivatePause;
+		player.Gun.EnemyDefeated += DefeatedEnemy;
+		player.Input.ShootSignal += player.Gun.Shoot;
+		player.PlayerHealed += UpdateGameUI;
+		player.PlayerHit += UpdateGameUI;
+		player.PlayerDied += GameOver;
+		player.ShootTypePowerUp += ShootTypeSwitchEvent;
+	}
 
-    /// <summary>
-    /// Refreshes the HealthUpgradeCost & HealthUpgradeAmount variables based on Players stat level
-    /// </summary>
-    /// <param name="level"></param>
-    private void RefreshHealthUpgradeValues(int level)
-    {
-        switch (level)
-        {
-            case 1:
-                healthUpgradeCost = 50;
-                healthUpgradeAmount = 50;
-                break;
-            case 2:
-                healthUpgradeCost = 100;
-                healthUpgradeAmount = 100;
-                break;
-            case 3:
-                healthUpgradeCost = 200;
-                healthUpgradeAmount = 150;
-                break;
-            case 4:
-                healthUpgradeCost = 400;
-                healthUpgradeAmount = 200;
-                break;
-            case 5:
-                healthUpgradeCost = 800;
-                healthUpgradeAmount = 300;
-                break;
-        }
-    }
+	/// <summary>
+	/// Refreshes the HealthUpgradeCost & HealthUpgradeAmount variables based on Players stat level
+	/// </summary>
+	/// <param name="level"></param>
+	private void RefreshHealthUpgradeValues(int level)
+	{
+		switch (level)
+		{
+			case 1:
+				healthUpgradeCost = 50;
+				healthUpgradeAmount = 50;
+				break;
+			case 2:
+				healthUpgradeCost = 100;
+				healthUpgradeAmount = 100;
+				break;
+			case 3:
+				healthUpgradeCost = 200;
+				healthUpgradeAmount = 150;
+				break;
+			case 4:
+				healthUpgradeCost = 400;
+				healthUpgradeAmount = 200;
+				break;
+			case 5:
+				healthUpgradeCost = 800;
+				healthUpgradeAmount = 300;
+				break;
+		}
+	}
 
-    /// <summary>
-    /// Refreshes the FireRateUpgradeCost & FireRateUpgradeAmount variables based on Players stat level
-    /// </summary>
-    /// <param name="level"> The current level of the Fire Rate</param>
-    private void RefreshFireRateUpgradeValues(int level)
-    {
-        switch (level)
-        {
-            case 1:
-                fireRateUpgradeCost = 50;
-                fireRateUpgradeAmount = 0.05f;
-                break;
-            case 2:
-                fireRateUpgradeCost = 100;
-                fireRateUpgradeAmount = 0.05f;
-                break;
-            case 3:
-                fireRateUpgradeCost = 200;
-                fireRateUpgradeAmount = 0.05f;
-                break;
-            case 4:
-                fireRateUpgradeCost = 400;
-                fireRateUpgradeAmount = 0.05f;
-                break;
-            case 5:
-                fireRateUpgradeCost = 800;
-                fireRateUpgradeAmount = 0.05f;
-                break;
-        }
-    }
+	/// <summary>
+	/// Refreshes the FireRateUpgradeCost & FireRateUpgradeAmount variables based on Players stat level
+	/// </summary>
+	/// <param name="level"> The current level of the Fire Rate</param>
+	private void RefreshFireRateUpgradeValues(int level)
+	{
+		switch (level)
+		{
+			case 1:
+				fireRateUpgradeCost = 50;
+				fireRateUpgradeAmount = 0.05f;
+				break;
+			case 2:
+				fireRateUpgradeCost = 100;
+				fireRateUpgradeAmount = 0.05f;
+				break;
+			case 3:
+				fireRateUpgradeCost = 200;
+				fireRateUpgradeAmount = 0.05f;
+				break;
+			case 4:
+				fireRateUpgradeCost = 400;
+				fireRateUpgradeAmount = 0.05f;
+				break;
+			case 5:
+				fireRateUpgradeCost = 800;
+				fireRateUpgradeAmount = 0.05f;
+				break;
+		}
+	}
 
-    private void RefreshSpeedUpgradeValues(int level)
-    {
-        switch (level)
-        {
-            case 1:
-                speedUpgradeCost = 50;
-                speedUpgradeAmount = 1.0f;
-                break;
-            case 2:
-                speedUpgradeCost = 100;
-                speedUpgradeAmount = 1.0f;
-                break;
-            case 3:
-                speedUpgradeCost = 200;
-                speedUpgradeAmount = 1.0f;
-                break;
-            case 4:
-                speedUpgradeCost = 400;
-                speedUpgradeAmount = 1.0f;
-                break;
-            case 5:
-                speedUpgradeCost = 800;
-                speedUpgradeAmount = 1.0f;
-                break;
-        }
-    }
+	private void RefreshSpeedUpgradeValues(int level)
+	{
+		switch (level)
+		{
+			case 1:
+				speedUpgradeCost = 50;
+				speedUpgradeAmount = 1.0f;
+				break;
+			case 2:
+				speedUpgradeCost = 100;
+				speedUpgradeAmount = 1.0f;
+				break;
+			case 3:
+				speedUpgradeCost = 200;
+				speedUpgradeAmount = 1.0f;
+				break;
+			case 4:
+				speedUpgradeCost = 400;
+				speedUpgradeAmount = 1.0f;
+				break;
+			case 5:
+				speedUpgradeCost = 800;
+				speedUpgradeAmount = 1.0f;
+				break;
+		}
+	}
 
-    private void SetResolution(int index)
-    {
-        GameData.Instance.ResolutionValue = index;
-        GD.Print("Resolution Index: " + index);
+	private void SetResolution(int index)
+	{
+		GameData.Instance.ResolutionValue = index;
+		GD.Print("Resolution Index: " + index);
 
-        switch (index)
-        {
-            case 0:
-                GetWindow().SetSize(new Vector2I(3840, 2160));
-                break;
-            case 1:
-                GetWindow().SetSize(new Vector2I(2560, 1440));
-                break;
-            case 2:
-                GetWindow().SetSize(new Vector2I(1920, 1080));
-                break;
-            case 3:
-                GetWindow().SetSize(new Vector2I(1280, 720));
-                break;
-        }
-    }
+		switch (index)
+		{
+			case 0:
+				GetWindow().SetSize(new Vector2I(3840, 2160));
+				break;
+			case 1:
+				GetWindow().SetSize(new Vector2I(2560, 1440));
+				break;
+			case 2:
+				GetWindow().SetSize(new Vector2I(1920, 1080));
+				break;
+			case 3:
+				GetWindow().SetSize(new Vector2I(1280, 720));
+				break;
+		}
+	}
 
-    private void SetFullscreen(bool state)
-    {
-        GameData.Instance.Fullscreen = state;
-        GD.Print("Fullscreen State: " + state);
-        if (state)
-        {
-            DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
-        }
-        else
-        {
-            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
-        }
-    }
+	private void SetFullscreen(bool state)
+	{
+		GameData.Instance.Fullscreen = state;
+		GD.Print("Fullscreen State: " + state);
+		if (state)
+		{
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
+		}
+		else
+		{
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+		}
+	}
 
-    #endregion
+	#endregion
 }

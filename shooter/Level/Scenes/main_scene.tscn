@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://b7eyggjoqoow4"]
+[gd_scene load_steps=67 format=3 uid="uid://b7eyggjoqoow4"]
 
 [ext_resource type="Script" uid="uid://jls4p4k7dm15" path="res://Code/Scripts/Scene Manager/SceneManager.cs" id="1_2yd7s"]
 [ext_resource type="Script" uid="uid://bwwl7y2bk0nvi" path="res://Code/Scripts/UI Manager/UIManager.cs" id="2_xj7ar"]
@@ -41,6 +41,7 @@
 [ext_resource type="Theme" uid="uid://ds2felkr0rjtc" path="res://Art/Themes/Result/result_theme.tres" id="32_2w1o7"]
 [ext_resource type="Shader" uid="uid://cxe5nkut7sdab" path="res://Code/Shaders/fullscreen_outline.gdshader" id="33_lfhfm"]
 [ext_resource type="PackedScene" uid="uid://cpqw8kwegd6kp" path="res://Art/Models/KeyframeChef_LowPoly_Base_FBX.fbx" id="35_2tti7"]
+[ext_resource type="Material" uid="uid://dooakmcxnot8e" path="res://Art/Materials/enemy_normal_material.tres" id="35_j7iwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tti7"]
 content_margin_left = 0.0
@@ -225,7 +226,6 @@ size = Vector3(0.5, 0.5, 0.5)
 [node name="=== UI ===" type="Node" parent="."]
 
 [node name="--- main ---" type="CanvasLayer" parent="=== UI ==="]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Game Title Label" type="Label" parent="=== UI ===/--- main ---"]
@@ -384,7 +384,7 @@ label_settings = ExtResource("14_1nw18")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Health Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+[node name="Health Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "costLabel", "levelLabel", "upgradeButton")]
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.278
@@ -400,6 +400,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
 script = ExtResource("6_7j67u")
 titleLabel = NodePath("Title Label")
 descriptionLabel = NodePath("Description Label")
+costLabel = NodePath("Cost Label")
 levelLabel = NodePath("Level Label")
 upgradeButton = NodePath("Button")
 
@@ -489,7 +490,7 @@ icon = SubResource("ImageTexture_5rw63")
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Health Panel/Button" instance=ExtResource("18_iruui")]
 
-[node name="Fire Rate Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+[node name="Fire Rate Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "costLabel", "levelLabel", "upgradeButton")]
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.278
@@ -504,6 +505,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
 script = ExtResource("6_7j67u")
 titleLabel = NodePath("Title Label")
 descriptionLabel = NodePath("Description Label")
+costLabel = NodePath("Cost Label")
 levelLabel = NodePath("Level Label")
 upgradeButton = NodePath("Button")
 
@@ -593,7 +595,7 @@ icon = SubResource("ImageTexture_5rw63")
 
 [node name="ButtonAnimationController" parent="=== UI ===/--- upgrade ---/Fire Rate Panel/Button" instance=ExtResource("18_iruui")]
 
-[node name="Speed Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "levelLabel", "upgradeButton")]
+[node name="Speed Panel" type="Panel" parent="=== UI ===/--- upgrade ---" node_paths=PackedStringArray("titleLabel", "descriptionLabel", "costLabel", "levelLabel", "upgradeButton")]
 anchors_preset = -1
 anchor_left = 0.67700005
 anchor_top = 0.27800003
@@ -608,6 +610,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_54d8q")
 script = ExtResource("6_7j67u")
 titleLabel = NodePath("Title Label")
 descriptionLabel = NodePath("Description Label")
+costLabel = NodePath("Cost Label")
 levelLabel = NodePath("Level Label")
 upgradeButton = NodePath("Button")
 
@@ -1234,8 +1237,14 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("debugUIGroup", "FramerateLabel")]
+[node name="Interface Manager" type="Node" parent="=== MANAGER ===" node_paths=PackedStringArray("MainMenu", "Upgrade", "Options", "Game", "Result", "Pause", "debugUIGroup", "FramerateLabel")]
 script = ExtResource("2_xj7ar")
+MainMenu = NodePath("Main Menu Component")
+Upgrade = NodePath("Upgrade Component")
+Options = NodePath("Options Component")
+Game = NodePath("Game Component")
+Result = NodePath("Result Component")
+Pause = NodePath("Pause Component")
 debugUIGroup = NodePath("../../=== UI ===/--- debug ---")
 FramerateLabel = NodePath("../../=== UI ===/--- debug ---/Framerate Label")
 
@@ -1272,6 +1281,9 @@ enemyContainer = NodePath("../../=== LEVEL ===/Enemy Container")
 tankStats = ExtResource("5_5d42l")
 speedstrStats = ExtResource("6_tw4tw")
 baseStats = ExtResource("7_1nw18")
+baseEnemyMaterial = ExtResource("35_j7iwb")
+speedstrEnemyMaterial = ExtResource("35_j7iwb")
+tankEnemyMaterial = ExtResource("35_j7iwb")
 
 [node name="Timer" type="Timer" parent="=== MANAGER ===/Enemy Spawner"]
 wait_time = 2.0
