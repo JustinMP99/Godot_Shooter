@@ -383,7 +383,7 @@ transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 0, 0)
 
 [node name="Shoot Timer" type="Timer" parent="Components/Gun"]
-wait_time = 0.3
+wait_time = 0.2
 
 [node name="Mesh" type="Node3D" parent="."]
 

@@ -178,7 +178,7 @@ glow_intensity = 2.2
 glow_blend_mode = 0
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.822848, 0.840703, 0.868766, 1)
+fog_light_color = Color(0, 0, 0, 1)
 fog_sun_scatter = 0.5
 fog_density = 1.0
 fog_sky_affect = 0.7
@@ -1367,10 +1367,10 @@ mesh = SubResource("QuadMesh_2w1o7")
 skeleton = NodePath("../../Cam 1")
 surface_material_override/0 = SubResource("ShaderMaterial_lfhfm")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="=== LEVEL ==="]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -171.56175)
+[node name="Star Particles" type="GPUParticles3D" parent="=== LEVEL ==="]
+transform = Transform3D(2.5383205, 0, 0, 0, 1, 0, 0, 0, 1, 0, -72.99226, -171.56175)
 material_override = SubResource("StandardMaterial3D_cpfgl")
-amount = 1955
+amount = 3000
 lifetime = 120.0
 speed_scale = 0.75
 trail_lifetime = 8.25

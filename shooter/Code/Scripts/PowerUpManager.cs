@@ -126,7 +126,7 @@ public partial class PowerUpManager : Node
 		if (type == 1)
 		{
 			newStats.ShootType = ShootType.Shotgun;
-			newStats.FireRate = 0.25f;
+			newStats.FireRate = 0.15f;
 		}
 		else if (type == 2)
 		{
